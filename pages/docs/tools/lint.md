@@ -1,8 +1,4 @@
----
-title: "Lint"
----
-
-# Mix Lint
+# mix_lint
 
 Mix Lint is a powerful tool that helps you enforce coding standards and best practices in your Flutter apps using Mix.
 
@@ -43,7 +39,7 @@ custom_lint:
 
 ## Rules
 
-### mix_attributes_ordering 
+### mix_attributes_ordering
 
 Ensure that the attributes are ordered in groups of the same category in the Style constructor. It makes the code easier to read and understand the Style.
 
