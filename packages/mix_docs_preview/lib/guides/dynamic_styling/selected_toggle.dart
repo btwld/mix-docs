@@ -28,7 +28,7 @@ class _ExampleState extends State<Example> {
     final style = BoxStyler()
         .height(60)
         .width(120)
-        .borderRounded(30)
+        .borderRadius(.circular(30))
         .color(Colors.grey.shade200)
         .border(.all(.color(Colors.grey.shade300).width(2)))
         .animate(.spring(300.ms))

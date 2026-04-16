@@ -23,7 +23,7 @@ class ImplicitVariantHoverExample extends StatelessWidget {
     final box = BoxStyler()
         .color(Colors.black)
         .size(100, 100)
-        .borderRounded(10)
+        .borderRadius(.circular(10))
         .scale(1)
         .onHovered(.color(Colors.blue).scale(1.5))
         .animate(.spring(800.ms));

@@ -37,7 +37,7 @@ class Example extends StatelessWidget {
               .color(Colors.blueAccent)
               .paddingX(24)
               .paddingY(12)
-              .borderRounded(8),
+              .borderRadius(.circular(8)),
           TextStyler().color(Colors.white).fontSize(16).fontWeight(.w500),
         ),
         const SizedBox(height: 12),
@@ -48,7 +48,7 @@ class Example extends StatelessWidget {
               .border(.all(.color(Colors.blueAccent).width(1.5)))
               .paddingX(24)
               .paddingY(12)
-              .borderRounded(8),
+              .borderRadius(.circular(8)),
           TextStyler().color(Colors.blueAccent).fontSize(16).fontWeight(.w500),
         ),
         const SizedBox(height: 12),
@@ -58,7 +58,7 @@ class Example extends StatelessWidget {
               .color(Colors.blueAccent)
               .paddingX(24)
               .paddingY(12)
-              .borderRounded(8)
+              .borderRadius(.circular(8))
               .shadow(
                 .color(
                   Colors.blueAccent.shade700.withValues(alpha: 0.5),
@@ -73,7 +73,7 @@ class Example extends StatelessWidget {
               .color(Colors.transparent)
               .paddingX(24)
               .paddingY(12)
-              .borderRounded(8),
+              .borderRadius(.circular(8)),
           TextStyler()
               .color(Colors.blueAccent)
               .fontSize(16)
@@ -88,7 +88,7 @@ class Example extends StatelessWidget {
                 .color(Colors.blueGrey.shade100)
                 .paddingX(24)
                 .paddingY(12)
-                .borderRounded(8),
+                .borderRadius(.circular(8)),
             child: StyledText(
               'Disabled',
               style: TextStyler()

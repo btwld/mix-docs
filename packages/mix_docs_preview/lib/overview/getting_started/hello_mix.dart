@@ -20,7 +20,7 @@ class Example extends StatelessWidget {
       .size(240, 100)
       .color(Colors.blue)
       .alignment(.center)
-      .borderRounded(12)
+      .borderRadius(.circular(12))
       .border(.all(.color(Colors.black).width(1).style(BorderStyle.solid)));
 
   TextStyler get _text => TextStyler().color(Colors.white).fontSize(18);

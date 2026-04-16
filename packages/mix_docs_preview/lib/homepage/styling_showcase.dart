@@ -17,7 +17,7 @@ class Example extends StatelessWidget {
     // #docregion showcase
     final boxStyle = BoxStyler()
         .size(120, 120)
-        .borderRounded(16)
+        .borderRadius(.circular(16))
         .color(Colors.deepPurple);
 
     return boxStyle();

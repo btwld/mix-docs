@@ -165,8 +165,8 @@ export const HomeContent = () => {
                 <HighlightedCode code={`// Style can live outside the widget
 final cardStyle = BoxStyler()
     .color(Colors.blue)
-    .paddingAll(16)
-    .borderRounded(8);
+    .padding(.all(16))
+    .borderRadius(.circular(8));
 
 // Widget stays clean
 Box(style: cardStyle, child: ...)`} />
