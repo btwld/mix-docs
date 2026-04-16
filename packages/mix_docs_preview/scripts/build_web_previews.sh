@@ -73,7 +73,7 @@ echo "Flutter version: $(flutter --version | head -1)"
 
 rm -rf "$BUILD_DIR"
 
-flutter build web --release --pwa-strategy=none --base-href=/previews/
+flutter build web --release --wasm --base-href=/previews/
 
 rm -rf "$BUILD_DIR/canvaskit"
 
@@ -112,6 +112,12 @@ if [ -f "$BOOTSTRAP_JS" ]; then
 {
   "engineRevision": "$ENGINE_REVISION",
   "builds": [
+    {
+      "compileTarget": "dart2wasm",
+      "renderer": "skwasm",
+      "mainWasmPath": "main.dart.wasm",
+      "jsSupportRuntimePath": "main.dart.mjs"
+    },
     {
       "compileTarget": "dart2js",
       "renderer": "canvaskit",
