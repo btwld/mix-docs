@@ -35,8 +35,7 @@ class Example extends StatelessWidget {
           'Filled',
           BoxStyler()
               .color(Colors.blueAccent)
-              .paddingX(24)
-              .paddingY(12)
+              .padding(.horizontal(24).vertical(12))
               .borderRadius(.circular(8)),
           TextStyler().color(Colors.white).fontSize(16).fontWeight(.w500),
         ),
@@ -46,8 +45,7 @@ class Example extends StatelessWidget {
           BoxStyler()
               .color(Colors.transparent)
               .border(.all(.color(Colors.blueAccent).width(1.5)))
-              .paddingX(24)
-              .paddingY(12)
+              .padding(.horizontal(24).vertical(12))
               .borderRadius(.circular(8)),
           TextStyler().color(Colors.blueAccent).fontSize(16).fontWeight(.w500),
         ),
@@ -56,8 +54,7 @@ class Example extends StatelessWidget {
           'Elevated',
           BoxStyler()
               .color(Colors.blueAccent)
-              .paddingX(24)
-              .paddingY(12)
+              .padding(.horizontal(24).vertical(12))
               .borderRadius(.circular(8))
               .shadow(
                 .color(
@@ -71,8 +68,7 @@ class Example extends StatelessWidget {
           'Link',
           BoxStyler()
               .color(Colors.transparent)
-              .paddingX(24)
-              .paddingY(12)
+              .padding(.horizontal(24).vertical(12))
               .borderRadius(.circular(8)),
           TextStyler()
               .color(Colors.blueAccent)
@@ -86,8 +82,7 @@ class Example extends StatelessWidget {
           child: Box(
             style: BoxStyler()
                 .color(Colors.blueGrey.shade100)
-                .paddingX(24)
-                .paddingY(12)
+                .padding(.horizontal(24).vertical(12))
                 .borderRadius(.circular(8)),
             child: StyledText(
               'Disabled',

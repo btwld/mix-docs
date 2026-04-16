@@ -19,8 +19,7 @@ class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final base = BoxStyler()
-        .paddingX(16)
-        .paddingY(8)
+        .padding(.horizontal(16).vertical(8))
         .borderRadius(.circular(8))
         .color(Colors.black);
 

@@ -16,7 +16,7 @@ class Example extends StatelessWidget {
     // #docregion showcase
     final buttonStyle = BoxStyler()
         .height(40)
-        .paddingX(14)
+        .padding(.horizontal(14))
         .borderRadius(.circular(10))
         .alignment(.center)
         .animate(.easeInOut(180.ms))
