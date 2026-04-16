@@ -11,10 +11,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
-  mix:
-    path: ../mix
-  mix_tailwinds:
-    path: ../mix_tailwinds
+  mix: ^2.0.1
+  mix_tailwinds: ^0.0.1-alpha.1
 
 dev_dependencies:
   flutter_test:

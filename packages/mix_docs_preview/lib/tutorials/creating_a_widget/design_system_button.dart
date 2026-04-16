@@ -45,7 +45,7 @@ class Example extends StatelessWidget {
           'Outlined',
           BoxStyler()
               .color(Colors.transparent)
-              .border(.color(Colors.blueAccent).width(1.5))
+              .border(.all(.color(Colors.blueAccent).width(1.5)))
               .paddingX(24)
               .paddingY(12)
               .borderRounded(8),
