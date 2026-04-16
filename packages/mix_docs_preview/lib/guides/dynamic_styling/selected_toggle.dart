@@ -30,12 +30,12 @@ class _ExampleState extends State<Example> {
         .width(120)
         .borderRounded(30)
         .color(Colors.grey.shade200)
-        .border(.color(Colors.grey.shade300).width(2))
+        .border(.all(.color(Colors.grey.shade300).width(2)))
         .animate(.spring(300.ms))
         .variant(
           ContextVariant.widgetState(.selected),
           .color(Colors.blue.shade500)
-              .border(.color(Colors.blue.shade600).width(2))
+              .border(.all(.color(Colors.blue.shade600).width(2)))
               .shadow(
                 .color(Colors.blue.shade200).blurRadius(10).spreadRadius(2),
               ),
