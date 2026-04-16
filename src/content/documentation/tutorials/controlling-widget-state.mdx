@@ -77,7 +77,7 @@ class _SelectableBoxState extends State<SelectableBox> {
         .color(Colors.red)
         .height(100)
         .width(100)
-        .borderRounded(10)
+        .borderRadius(.all(10))
         .variant(ContextVariant.widgetState(.selected), .color(Colors.blue));
 
     return Pressable(
@@ -139,7 +139,7 @@ class _ToggleButtonState extends State<ToggleButton> {
     final boxStyle = BoxStyler()
         .height(60)
         .width(120)
-        .borderRounded(30)
+        .borderRadius(.all(30))
         .color(Colors.grey.shade200)
         .border(.color(Colors.grey.shade300).width(2))
         .animate(.spring(300.ms))
@@ -231,7 +231,7 @@ class _ExternallyControlledBoxState extends State<ExternallyControlledBox> {
         .color(Colors.grey)
         .height(60)
         .width(120)
-        .borderRounded(8)
+        .borderRadius(.all(8))
         .animate(.easeInOut(300.ms))
         .variant(ContextVariant.widgetState(.selected), .color(Colors.black));
 

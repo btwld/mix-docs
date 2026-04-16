@@ -22,7 +22,7 @@ This approach promotes:
 final boxStyle = BoxStyler()
     .color(Colors.red)
     .size(100, 100)
-    .borderRounded(10);
+    .borderRadius(.all(10));
 ```
 
 Each method adds a style property and returns the styler, so you can chain as many as you need.
@@ -39,8 +39,8 @@ BoxStyler().alignment(.centerRight);
 
 // Spacing helpers
 BoxStyler().padding(.all(16));
-BoxStyler().padding(.symmetric(horizontal: 12, vertical: 8));
-BoxStyler().paddingOnly(left: 12, top: 8);
+BoxStyler().padding(.horizontal(12).vertical(8));
+BoxStyler().padding(.left(12).top(8));
 ```
 
 ## Built-in Border Helpers
@@ -52,7 +52,7 @@ Direct border methods are available on the styler:
 BoxStyler().border(.color(Colors.red));
 
 // Top border only with custom width
-BoxStyler().borderTop(color: Colors.red, width: 2);
+BoxStyler().border(.top(color: Colors.red, width: 2));
 ```
 
 ## Custom Helpers
@@ -61,14 +61,14 @@ You can create your own shorthand by defining helper functions or extending `Box
 
 ```dart
 // Custom helper function
-BoxStyler accentBorder(Color color) => BoxStyler().borderTop(color: color, width: 2);
+BoxStyler accentBorder(Color color) => BoxStyler().border(.top(color: color, width: 2));
 
 // Use the helper
 accentBorder(Colors.red);
 
 // Extension method
 extension on BoxStyler {
-  BoxStyler borderRedTop() => borderTop(color: Colors.red);
+  BoxStyler borderRedTop() => border(.top(color: Colors.red));
 }
 
 // Use the extension method
