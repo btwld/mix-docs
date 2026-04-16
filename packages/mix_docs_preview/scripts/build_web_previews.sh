@@ -73,7 +73,7 @@ echo "Flutter version: $(flutter --version | head -1)"
 
 rm -rf "$BUILD_DIR"
 
-flutter build web --release --pwa-strategy=none --base-href=/previews/
+flutter build web --release --wasm --base-href=/previews/
 
 rm -rf "$BUILD_DIR/canvaskit"
 
@@ -113,6 +113,12 @@ if [ -f "$BOOTSTRAP_JS" ]; then
   "engineRevision": "$ENGINE_REVISION",
   "builds": [
     {
+      "compileTarget": "dart2wasm",
+      "renderer": "skwasm",
+      "mainWasmPath": "main.dart.wasm",
+      "jsSupportRuntimePath": "main.dart.mjs"
+    },
+    {
       "compileTarget": "dart2js",
       "renderer": "canvaskit",
       "mainJsPath": "main.dart.js"
@@ -128,9 +134,24 @@ fi
 
 BOOTSTRAP_FILE="$BUILD_DIR/flutter_bootstrap.js"
 if [ -f "$BOOTSTRAP_FILE" ]; then
-    if grep -q "_flutter\.loader\.load();" "$BOOTSTRAP_FILE"; then
-        sed -i.bak 's/_flutter\.loader\.load();$/\/\/ Auto-load disabled for multi-view embedding/' "$BOOTSTRAP_FILE"
-        rm -f "$BOOTSTRAP_FILE.bak"
+    # Remove the auto-load call for multi-view embedding.
+    # Flutter may generate either a simple `_flutter.loader.load();` or a
+    # multi-line `_flutter.loader.load({...});` block. Handle both.
+    if grep -q "_flutter\.loader\.load(" "$BOOTSTRAP_FILE"; then
+        # Replace the entire _flutter.loader.load(...); block (single or multi-line)
+        python3 -c "
+import re, sys
+with open(sys.argv[1], 'r') as f:
+    content = f.read()
+patched = re.sub(
+    r'_flutter\.loader\.load\([^)]*\);',
+    '// Auto-load disabled for multi-view embedding',
+    content,
+    flags=re.DOTALL
+)
+with open(sys.argv[1], 'w') as f:
+    f.write(patched)
+" "$BOOTSTRAP_FILE"
 
         if grep -q "Auto-load disabled" "$BOOTSTRAP_FILE"; then
             echo "Patched flutter_bootstrap.js for multi-view embedding"
