@@ -1,5 +1,7 @@
 library;
 
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:mix/mix.dart';
 import 'package:mix_docs_preview/helpers.dart';
@@ -8,64 +10,67 @@ void main() {
   runMixApp(const Example());
 }
 
-class Example extends StatefulWidget {
+class Example extends StatelessWidget {
   const Example({super.key});
-
-  @override
-  State<Example> createState() => _ExampleState();
-}
-
-class _ExampleState extends State<Example> {
-  final _trigger = ValueNotifier(false);
-
-  @override
-  void dispose() {
-    _trigger.dispose();
-    super.dispose();
-  }
-
-  void _toggleAnimation() {
-    _trigger.value = !_trigger.value;
-  }
 
   @override
   Widget build(BuildContext context) {
     // #docregion showcase
-    final heartFrameStyle = BoxStyler()
-        .paddingAll(20)
-        .color(Colors.red)
-        .shapeCircle()
+    final box = BoxStyler()
+        .size(100, 100)
+        .borderRadius(.all(.circular(5)))
         .keyframeAnimation(
-          trigger: _trigger,
           timeline: [
-            KeyframeTrack('scale', [
-              .easeOutSine(0.84, 90.ms),
-              .ease(1.16, 180.ms),
-              .elasticOut(1.0, 500.ms),
+            KeyframeTrack<double>('scale', [
+              .springWithBounce(1.5, 750.ms, bounce: 0.45),
+              .linear(1.5, 750.ms),
+              .springWithBounce(1.0, 1050.ms, bounce: 0.35),
+              .linear(1.0, 450.ms),
+              .linear(1.0, 600.ms),
             ], initial: 1.0),
-            KeyframeTrack<double>('y', [
-              .ease(-56.0, 140.ms),
-              .decelerate(0.0, 280.ms),
+            KeyframeTrack<double>('rotate', [
+              .linear(0.0, 600.ms),
+              .springWithBounce(180.0, 900.ms, bounce: 0.4),
+              .linear(180.0, 900.ms),
+              .springWithBounce(0.0, 600.ms, bounce: 0.4),
+              .linear(0.0, 600.ms),
             ], initial: 0.0),
+            KeyframeTrack<double>('radius', [
+              .linear(5.0, 600.ms),
+              .springWithBounce(50.0, 900.ms, bounce: 0.3),
+              .linear(50.0, 900.ms),
+              .springWithBounce(5.0, 600.ms, bounce: 0.3),
+              .linear(5.0, 600.ms),
+            ], initial: 5.0),
+            KeyframeTrack<Color>(
+              'color',
+              [
+                .easeInOut(Colors.deepPurple.shade900, 750.ms),
+                .linear(Colors.deepPurple.shade900, 750.ms),
+                .easeInOut(Colors.deepPurple.shade300, 1050.ms),
+                .linear(Colors.deepPurple.shade300, 450.ms),
+                .linear(Colors.deepPurple.shade300, 600.ms),
+              ],
+              initial: Colors.deepPurple.shade300,
+              tweenBuilder: ColorTween.new,
+            ),
           ],
-          styleBuilder: (values, style) => style.transform(
-            Matrix4.identity()
-              ..scaleByDouble(values.get('scale'), values.get('scale'), 1.0, 1)
-              ..translateByDouble(0, values.get('y'), 1, 1),
-          ),
+          styleBuilder: (values, style) {
+            final scale = values.get('scale');
+            final rotate = values.get('rotate');
+            final radius = values.get('radius');
+            return style
+                .color(values.get('color'))
+                .transform(
+                  Matrix4.identity()
+                    ..scaleByDouble(scale, scale, 1.0, 1)
+                    ..rotateZ(rotate * math.pi / 180),
+                )
+                .borderRadius(.all(.circular(radius)));
+          },
         );
 
-    final heartStyle = IconStyler().size(80).color(Colors.white);
-    // #enddocregion showcase
-
-    // #docregion showcase
-    return Pressable(
-      onPress: _toggleAnimation,
-      child: Box(
-        style: heartFrameStyle,
-        child: StyledIcon(icon: Icons.favorite, style: heartStyle),
-      ),
-    );
+    return box();
     // #enddocregion showcase
   }
 }
