@@ -37,7 +37,7 @@ Define styles using a fluent, chainable API with `Styler` classes:
 final boxStyle = BoxStyler()
     .color(Colors.red)
     .size(100, 100)
-    .borderRadius(.all(10));
+    .borderRadius(.circular(10));
 ```
 
 <FlutterPreview previewId="overview/introduction.0" height={200} />
@@ -62,7 +62,7 @@ Styles can adapt to interactions and context (hover, press, dark mode):
 ```dart
 final buttonStyle = BoxStyler()
     .height(50)
-    .borderRadius(.all(25))
+    .borderRadius(.circular(25))
     .color(Colors.blue)
     .onHovered(.color(Colors.blue.shade700))
     .onDark(.color(Colors.blue.shade200));

@@ -19,7 +19,7 @@ PressableBox(
   onPress: () => print('tapped'),
   style: BoxStyler()
       .padding(.horizontal(24).vertical(12))
-      .borderRadius(.all(8))
+      .borderRadius(.circular(8))
       .color(Colors.blue)
       .onHovered(.color(Colors.blue.shade700))
       .onPressed(.color(Colors.blue.shade900).scale(0.97))
@@ -58,7 +58,7 @@ final title = TextStyler()
 final card = BoxStyler()
     .padding(.all(16))
     .color(Colors.white)
-    .borderRadius(.all(12))
+    .borderRadius(.circular(12))
     .shadow(blurRadius: 8, color: Colors.black12);
 ```
 
@@ -83,7 +83,7 @@ Define shared structure once, then branch into variations by chaining overrides.
 ```dart
 final baseButton = BoxStyler()
     .padding(.horizontal(20).vertical(10))
-    .borderRadius(.all(8))
+    .borderRadius(.circular(8))
     .animate(.ease(150.ms));
 
 final primaryButton = baseButton
@@ -191,7 +191,7 @@ final layout = BoxStyler()
 
 final appearance = BoxStyler()
     .color(Colors.white)
-    .borderRadius(.all(12))
+    .borderRadius(.circular(12))
     .shadow(blurRadius: 8, color: Colors.black12);
 
 final interaction = BoxStyler()

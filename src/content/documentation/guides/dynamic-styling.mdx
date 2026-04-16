@@ -17,7 +17,7 @@ final style = BoxStyler()
     .color(Colors.red)
     .height(100)
     .width(100)
-    .borderRadius(.all(10))
+    .borderRadius(.circular(10))
     .onHovered(.color(Colors.blue));
 ```
 
@@ -37,7 +37,7 @@ final styleA = BoxStyler()
   .color(Colors.red)
   .height(100)
   .width(100)
-  .borderRadius(.all(10))
+  .borderRadius(.circular(10))
   .onHovered(
     .color(Colors.blue)
       .width(200)
@@ -53,7 +53,7 @@ BoxStyler()
   .color(Colors.green)
   .height(100)
   .width(200)
-  .borderRadius(.all(10));
+  .borderRadius(.circular(10));
 ```
 
 Hover over each box below to see the difference — `styleA` turns blue while `styleB` turns green, but both expand to 200 width:
@@ -76,7 +76,7 @@ final style = BoxStyler()
   .color(Colors.red)
   .height(100)
   .width(100)
-  .borderRadius(.all(10))
+  .borderRadius(.circular(10))
   .onHovered(hoverStyle);
 ```
 

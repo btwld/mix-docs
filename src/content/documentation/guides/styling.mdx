@@ -65,7 +65,7 @@ Build new styles on top of existing ones. Define a base once, then create variat
 ```dart
 final base = BoxStyler()
     .padding(.horizontal(16).vertical(8))
-    .borderRadius(.all(8))
+    .borderRadius(.circular(8))
     .color(Colors.black);
 
 final solid = base.color(Colors.blue);
@@ -88,7 +88,7 @@ final b = a.color(Colors.blue);
 You can also merge two separate stylers explicitly:
 
 ```dart
-final layout = BoxStyler().padding(.all(16)).borderRadius(.all(12));
+final layout = BoxStyler().padding(.all(16)).borderRadius(.circular(12));
 final visual = BoxStyler().color(Colors.blue).shadow(blurRadius: 10);
 
 final card = layout.merge(visual); // combines both

@@ -54,7 +54,7 @@ class Example extends StatelessWidget {
       .size(240, 100)
       .color(Colors.blue)
       .alignment(.center)
-      .borderRadius(.all(12))
+      .borderRadius(.circular(12))
       .border(.color(Colors.black).width(1).style(.solid));
 
   TextStyler get _text => TextStyler().color(Colors.white).fontSize(18);
@@ -75,7 +75,7 @@ Extract styles into top-level variables and reuse them across widgets. You can a
 ```dart
 final primaryCard = BoxStyler()
   .color(Colors.blue)
-  .borderRadius(.all(12));
+  .borderRadius(.circular(12));
 
 final box = Box(style: primaryCard, child: StyledText('Primary'));
 
