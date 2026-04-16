@@ -39,7 +39,7 @@ StyledIcon(icon: Icons.favorite, style: iconStyle);
 final rowStyle = FlexBoxStyler()
     .direction(.horizontal)
     .spacing(12)
-    .paddingAll(16)
+    .padding(.all(16))
     .color(Colors.grey.shade100);
 FlexBox(style: rowStyle, children: [...]);
 ```
@@ -64,9 +64,8 @@ Build new styles on top of existing ones. Define a base once, then create variat
 
 ```dart
 final base = BoxStyler()
-    .paddingX(16)
-    .paddingY(8)
-    .borderRounded(8)
+    .padding(.horizontal(16).vertical(8))
+    .borderRadius(.all(8))
     .color(Colors.black);
 
 final solid = base.color(Colors.blue);
@@ -89,7 +88,7 @@ final b = a.color(Colors.blue);
 You can also merge two separate stylers explicitly:
 
 ```dart
-final layout = BoxStyler().padding(.all(16)).borderRounded(12);
+final layout = BoxStyler().padding(.all(16)).borderRadius(.all(12));
 final visual = BoxStyler().color(Colors.blue).shadow(blurRadius: 10);
 
 final card = layout.merge(visual); // combines both

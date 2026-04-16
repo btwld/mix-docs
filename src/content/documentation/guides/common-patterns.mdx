@@ -18,9 +18,8 @@ Making a styled container respond to taps, hovers, and focus in plain Flutter me
 PressableBox(
   onPress: () => print('tapped'),
   style: BoxStyler()
-      .paddingX(24)
-      .paddingY(12)
-      .borderRounded(8)
+      .padding(.horizontal(24).vertical(12))
+      .borderRadius(.all(8))
       .color(Colors.blue)
       .onHovered(.color(Colors.blue.shade700))
       .onPressed(.color(Colors.blue.shade900).scale(0.97))
@@ -57,9 +56,9 @@ final title = TextStyler()
     .color(Colors.black);
 
 final card = BoxStyler()
-    .paddingAll(16)
+    .padding(.all(16))
     .color(Colors.white)
-    .borderRounded(12)
+    .borderRadius(.all(12))
     .shadow(blurRadius: 8, color: Colors.black12);
 ```
 
@@ -83,9 +82,8 @@ Define shared structure once, then branch into variations by chaining overrides.
 
 ```dart
 final baseButton = BoxStyler()
-    .paddingX(20)
-    .paddingY(10)
-    .borderRounded(8)
+    .padding(.horizontal(20).vertical(10))
+    .borderRadius(.all(8))
     .animate(.ease(150.ms));
 
 final primaryButton = baseButton
@@ -120,7 +118,7 @@ final $radiusMd = RadiusToken('radius.md');
 // 2. Reference tokens in styles — call them like functions
 final cardStyle = BoxStyler()
     .color($surface())
-    .paddingAll($spacingMd())
+    .padding(.all($spacingMd()))
     .borderRadius(.all($radiusMd()));
 
 // 3. Provide values via MixScope
@@ -153,10 +151,10 @@ Breakpoint variants adapt styles to screen size without media-query boilerplate:
 
 ```dart
 final containerStyle = BoxStyler()
-    .paddingAll(16)
+    .padding(.all(16))
     .width(double.infinity)
-    .onTablet(.paddingAll(24).width(720))
-    .onDesktop(.paddingAll(32).width(960));
+    .onTablet(.padding(.all(24)).width(720))
+    .onDesktop(.padding(.all(32)).width(960));
 
 final gridStyle = FlexBoxStyler()
     .direction(.column)
@@ -187,13 +185,13 @@ When a single chain grows long, split it into focused groups and recombine with 
 
 ```dart
 final layout = BoxStyler()
-    .paddingAll(16)
+    .padding(.all(16))
     .width(double.infinity)
     .alignment(.center);
 
 final appearance = BoxStyler()
     .color(Colors.white)
-    .borderRounded(12)
+    .borderRadius(.all(12))
     .shadow(blurRadius: 8, color: Colors.black12);
 
 final interaction = BoxStyler()

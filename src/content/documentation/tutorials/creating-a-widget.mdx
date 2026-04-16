@@ -193,9 +193,7 @@ Beyond the generated `container()`, `icon()`, and `label()` setters, you can add
   ButtonStyler padding({required double x, required double y}) {
     return merge(
       ButtonStyler(
-        container: FlexBoxStyler().padding(
-          EdgeInsetsGeometryMix.symmetric(horizontal: x, vertical: y),
-        ),
+        container: FlexBoxStyler().padding(.horizontal(x).vertical(y)),
       ),
     );
   }
@@ -309,9 +307,8 @@ The `buttonStyle` function composes everything: base styles shared across all va
 ```dart
 ButtonStyler buttonStyle(ButtonStyler? style, ButtonVariant? variant) {
   final container = FlexBoxStyler()
-      .borderRounded(6)
-      .paddingX(8)
-      .paddingY(12)
+      .borderRadius(.all(6))
+      .padding(.horizontal(8).vertical(12))
       .spacing(8)
       .mainAxisAlignment(.center)
       .crossAxisAlignment(.center)
