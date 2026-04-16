@@ -27,7 +27,7 @@ class _ExampleState extends State<Example> {
         .color(Colors.red)
         .height(100)
         .width(100)
-        .borderRounded(10)
+        .borderRadius(.circular(10))
         .onHovered(hoverStyle);
 
     return MediaQuery(

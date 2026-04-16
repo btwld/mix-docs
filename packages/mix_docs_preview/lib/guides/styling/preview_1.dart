@@ -21,7 +21,7 @@ class Example extends StatelessWidget {
     final base = BoxStyler()
         .paddingX(16)
         .paddingY(8)
-        .borderRounded(8)
+        .borderRadius(.circular(8))
         .color(Colors.black);
 
     final solid = base.color(Colors.blue);

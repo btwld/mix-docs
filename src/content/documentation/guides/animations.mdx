@@ -105,7 +105,7 @@ Animations also work with variants. When the widget enters a variant (e.g. hover
 final box = BoxStyler()
     .color(Colors.black)
     .size(100, 100)
-    .borderRadius(.all(10))
+    .borderRadius(.circular(10))
     .scale(1)
     .onHovered(.color(Colors.blue).scale(1.5))
     .animate(.spring(800.ms));
@@ -136,7 +136,7 @@ final box = BoxStyler()
     .color(Colors.deepPurple)
     .height(100)
     .width(100)
-    .borderRadius(.all(40))
+    .borderRadius(.circular(40))
     .phaseAnimation(
       trigger: _isExpanded,
       phases: AnimationPhases.values,
@@ -144,7 +144,7 @@ final box = BoxStyler()
         .initial => style.scale(1),
         .compress => style.scale(0.75).color(Colors.red.shade800),
         .expanded =>
-          style.scale(1.25).borderRadius(.all(20)).color(Colors.yellow.shade300),
+          style.scale(1.25).borderRadius(.circular(20)).color(Colors.yellow.shade300),
       },
       configBuilder: (phase) => switch (phase) {
         .initial => .springWithDampingRatio(800.ms, ratio: 0.3),

@@ -16,7 +16,7 @@ class Example extends StatelessWidget {
     // #docregion showcase
     final cardStyle = BoxStyler()
         .size(120, 120)
-        .borderRounded(16)
+        .borderRadius(.circular(16))
         .color(Colors.cyan)
         .alignment(.center)
         .animate(.easeInOut(220.ms))

@@ -19,7 +19,7 @@ class Example extends StatelessWidget {
         .color(Colors.grey.shade50)
         .paddingX(12)
         .paddingY(10)
-        .borderRounded(10)
+        .borderRadius(.circular(10))
         .border(.all(.color(Colors.blueGrey.shade400).width(1)))
         .height(150)
         .width(120)

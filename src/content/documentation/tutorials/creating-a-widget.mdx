@@ -307,7 +307,7 @@ The `buttonStyle` function composes everything: base styles shared across all va
 ```dart
 ButtonStyler buttonStyle(ButtonStyler? style, ButtonVariant? variant) {
   final container = FlexBoxStyler()
-      .borderRadius(.all(6))
+      .borderRadius(.circular(6))
       .padding(.horizontal(8).vertical(12))
       .spacing(8)
       .mainAxisAlignment(.center)

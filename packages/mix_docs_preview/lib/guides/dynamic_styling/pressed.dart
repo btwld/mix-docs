@@ -16,7 +16,7 @@ class Example extends StatelessWidget {
         .color(Colors.red)
         .height(100)
         .width(100)
-        .borderRounded(10)
+        .borderRadius(.circular(10))
         .onPressed(.color(Colors.blue));
 
     return Pressable(

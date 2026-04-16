@@ -105,7 +105,7 @@ When `mouseCursor` is null, `Pressable` chooses `SystemMouseCursors.click` when 
     style: BoxStyler()
       .color(Colors.blue)
       .padding(.all(16))
-      .borderRadius(.all(8)),
+      .borderRadius(.circular(8)),
     onPress: () => print('PressableBox pressed'),
     child: StyledText('Styled Button'),
   );
@@ -136,7 +136,7 @@ PressableBox(
   style: BoxStyler()
       .color(Colors.blue)
       .padding(.all(16))
-      .borderRadius(.all(8))
+      .borderRadius(.circular(8))
       .onPressed(.color(Colors.red))
       .onHovered(.color(Colors.green))
       .onFocused(.border(.color(Colors.white).width(2)))

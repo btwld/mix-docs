@@ -38,7 +38,7 @@ class _ExampleState extends State<Example> {
         .color(Colors.red)
         .height(100)
         .width(100)
-        .borderRounded(10)
+        .borderRadius(.circular(10))
         .wrap(.new().opacity(0.4))
         .onFocused(
           .color(Colors.blue).border(.all(.color(Colors.blue.shade700).width(3))),

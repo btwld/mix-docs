@@ -52,7 +52,7 @@ class _ExampleState extends State<Example> {
           style: BoxStyler()
               .color(Colors.red)
               .size(100, 100)
-              .borderRounded(10)
+              .borderRadius(.circular(10))
               .variant(
                 ContextVariant('custom_flag', (context) {
                   return CustomInheritedWidget.of(context)?.flag ?? false;

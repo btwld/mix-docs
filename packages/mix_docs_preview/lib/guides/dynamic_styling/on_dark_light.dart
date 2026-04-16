@@ -23,7 +23,7 @@ class _ExampleState extends State<Example> {
     final buttonStyle = BoxStyler()
         .height(60)
         .width(60)
-        .borderRounded(30)
+        .borderRadius(.circular(30))
         .color(Colors.grey.shade200)
         .animate(.easeInOut(600.ms))
         .onDark(.color(Colors.grey.shade800))

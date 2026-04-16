@@ -20,7 +20,7 @@ class Example extends StatelessWidget {
     final boxStyle = BoxStyler()
         .color(Colors.red)
         .size(100, 100)
-        .borderRounded(10);
+        .borderRadius(.circular(10));
 
     return Box(style: boxStyle);
   }

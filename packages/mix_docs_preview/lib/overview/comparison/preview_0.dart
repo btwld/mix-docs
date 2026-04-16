@@ -31,7 +31,7 @@ class CustomMixWidget extends StatelessWidget {
 
   BoxStyler get customBoxStyle => BoxStyler()
       .padding(.symmetric(horizontal: 12, vertical: 8))
-      .borderRounded(10)
+      .borderRadius(.circular(10))
       .color(surfaceColor)
       .border(.all(.color(surfaceColor)))
       .animate(.easeInOut(100.ms))

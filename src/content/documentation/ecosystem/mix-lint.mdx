@@ -168,7 +168,7 @@ final layout = BoxStyler()
 
 final appearance = BoxStyler()
     .color(Colors.blue)
-    .borderRadius(.all(8))
+    .borderRadius(.circular(8))
     .width(200)
     .height(100)
     .opacity(0.9);
@@ -177,7 +177,7 @@ final hovered = BoxStyler()
     .color(Colors.red)
     .padding(.all(12))
     .margin(.all(6))
-    .borderRadius(.all(10))
+    .borderRadius(.circular(10))
     .width(220)
     .height(120)
     .opacity(1.0);
@@ -198,7 +198,7 @@ final style = BoxStyler()
     .color(Colors.red)
     .onHovered(.color(Colors.blue))
     .padding(.all(16))
-    .borderRadius(.all(8))
+    .borderRadius(.circular(8))
     .onPressed(.color(Colors.green));
 ```
 
@@ -208,7 +208,7 @@ final style = BoxStyler()
 final style = BoxStyler()
     .color(Colors.red)
     .padding(.all(16))
-    .borderRadius(.all(8))
+    .borderRadius(.circular(8))
     .onHovered(.color(Colors.blue))
     .onPressed(.color(Colors.green));
 ```

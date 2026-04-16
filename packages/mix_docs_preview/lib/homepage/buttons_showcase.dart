@@ -17,7 +17,7 @@ class Example extends StatelessWidget {
     final buttonStyle = BoxStyler()
         .height(40)
         .paddingX(14)
-        .borderRounded(10)
+        .borderRadius(.circular(10))
         .alignment(.center)
         .animate(.easeInOut(180.ms))
         .scale(1)
