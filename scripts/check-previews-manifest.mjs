@@ -35,7 +35,7 @@ function resolveDemosDir(inputDir) {
   const candidates = [
     path.resolve(path.join(process.cwd(), "public", "previews")),
     path.resolve(
-      path.join(process.cwd(), "..", "packages", "mix_docs_preview", "build", "web"),
+      path.join(process.cwd(), "packages", "mix_docs_preview", "build", "web"),
     ),
   ];
 

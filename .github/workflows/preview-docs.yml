@@ -1,0 +1,69 @@
+name: Preview Docs
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'packages/mix_docs_preview/**'
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - '.github/workflows/preview-docs.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/mix_docs_preview/**'
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - '.github/workflows/preview-docs.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview-docs:
+    name: Build Preview Artifacts + Website
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install Flutter Dependencies
+        run: |
+          cd packages/mix_docs_preview
+          flutter pub get
+
+      - name: Build Flutter Preview Bundle
+        run: bash packages/mix_docs_preview/scripts/build_web_previews.sh --local
+
+      - name: Copy Preview Bundle to Website
+        run: |
+          mkdir -p public/previews
+          cp -r packages/mix_docs_preview/build/web/* public/previews/
+
+      - name: Install Website Dependencies
+        run: pnpm install
+
+      - name: Validate Preview Manifest
+        run: pnpm run check:previews
+
+      - name: Build Website
+        run: pnpm run build

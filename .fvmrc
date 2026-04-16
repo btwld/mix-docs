@@ -1,0 +1,9 @@
+{
+  "flutter": "stable",
+  "flavors": {
+    "prod": "stable",
+    "mincompat": "3.41.0"
+  },
+  "runPubGetOnSdkChanges": true,
+  "updateGitIgnore": false
+}

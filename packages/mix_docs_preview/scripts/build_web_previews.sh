@@ -7,7 +7,7 @@
 #
 # Output:
 #   - Build artifacts in packages/mix_docs_preview/build/web/
-#   - Copied to website/public/previews/ (unless --local)
+#   - Copied to public/previews/ (unless --local)
 #
 # Run this script from the mix_docs_preview package directory, or from repo root.
 # In CI/CD, run from repo root so PROJECT_DIR is correct.
@@ -18,10 +18,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PREVIEWS_PKG_DIR="$(dirname "$SCRIPT_DIR")"
 PROJECT_DIR="$(cd "$PREVIEWS_PKG_DIR/../.." && pwd)"
 BUILD_DIR="$PREVIEWS_PKG_DIR/build/web"
-WEBSITE_PREVIEWS_DIR="$PROJECT_DIR/website/public/previews"
+WEBSITE_PREVIEWS_DIR="$PROJECT_DIR/public/previews"
 SOURCES_DIR="$BUILD_DIR/sources"
 PREVIEWS_MANIFEST="$BUILD_DIR/previews-manifest.json"
-PREVIEW_CHECK_SCRIPT="$PROJECT_DIR/website/scripts/check-previews-manifest.mjs"
+PREVIEW_CHECK_SCRIPT="$PROJECT_DIR/scripts/check-previews-manifest.mjs"
 
 LOCAL_ONLY=false
 if [ "$1" = "--local" ]; then
@@ -154,7 +154,7 @@ echo "Source bundle size: $(du -sh "$SOURCES_DIR" | cut -f1)"
 
 if [ "$LOCAL_ONLY" = false ]; then
     echo ""
-    echo "Copying to website/public/previews/..."
+    echo "Copying to public/previews/..."
     rm -rf "$WEBSITE_PREVIEWS_DIR"
     mkdir -p "$WEBSITE_PREVIEWS_DIR"
     cp -r "$BUILD_DIR"/* "$WEBSITE_PREVIEWS_DIR/"
@@ -163,5 +163,5 @@ fi
 
 echo ""
 echo "To test locally:"
-echo "  cd $PROJECT_DIR/website && pnpm dev"
+echo "  cd $PROJECT_DIR && pnpm dev"
 echo "  Open http://localhost:3000/documentation/widgets/box"
