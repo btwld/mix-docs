@@ -22,25 +22,25 @@ class Example extends StatelessWidget {
         .keyframeAnimation(
           timeline: [
             KeyframeTrack<double>('scale', [
-              .springWithBounce(2.0, 750.ms, bounce: 0.45),
-              .linear(2.0, 750.ms),
+              .springWithBounce(1.5, 750.ms, bounce: 0.45),
+              .linear(1.5, 750.ms),
               .springWithBounce(1.0, 1050.ms, bounce: 0.35),
               .linear(1.0, 450.ms),
-              .linear(1.0, 1500.ms),
+              .linear(1.0, 600.ms),
             ], initial: 1.0),
             KeyframeTrack<double>('rotate', [
               .linear(0.0, 600.ms),
               .springWithBounce(180.0, 900.ms, bounce: 0.4),
               .linear(180.0, 900.ms),
               .springWithBounce(0.0, 600.ms, bounce: 0.4),
-              .linear(0.0, 1500.ms),
+              .linear(0.0, 600.ms),
             ], initial: 0.0),
             KeyframeTrack<double>('radius', [
               .linear(5.0, 600.ms),
               .springWithBounce(50.0, 900.ms, bounce: 0.3),
               .linear(50.0, 900.ms),
               .springWithBounce(5.0, 600.ms, bounce: 0.3),
-              .linear(5.0, 1500.ms),
+              .linear(5.0, 600.ms),
             ], initial: 5.0),
             KeyframeTrack<Color>(
               'color',
@@ -49,7 +49,7 @@ class Example extends StatelessWidget {
                 .linear(Colors.deepPurple.shade900, 750.ms),
                 .easeInOut(Colors.deepPurple.shade300, 1050.ms),
                 .linear(Colors.deepPurple.shade300, 450.ms),
-                .linear(Colors.deepPurple.shade300, 1500.ms),
+                .linear(Colors.deepPurple.shade300, 600.ms),
               ],
               initial: Colors.deepPurple.shade300,
               tweenBuilder: ColorTween.new,
