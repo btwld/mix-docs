@@ -3,12 +3,12 @@
 
 You will style a widget from **runtime context**—for example data from an `InheritedWidget`, theme, or media query—without splitting your UI into separate widgets for each case.
 
-Context variants apply styles when a condition you define is true for the current `BuildContext`. They complement built-in variants (hover, dark mode, and similar); see [Dynamic Styling](/documentation/guides/dynamic-styling) for those.
+Context variants apply styles when a condition you define is true for the current `BuildContext`. They complement built-in variants (hover, dark mode, and similar); see [Dynamic Styling](/documentation/mix/guides/dynamic-styling) for those.
 
 ## Prerequisites
 
 - Flutter: `InheritedWidget` and how `BuildContext` depends on ancestors
-- Mix: [Styling](/documentation/guides/styling) (`BoxStyler`, chaining) and [Dynamic Styling](/documentation/guides/dynamic-styling) (the `.variant` API and built-in variants)
+- Mix: [Styling](/documentation/mix/guides/styling) (`BoxStyler`, chaining) and [Dynamic Styling](/documentation/mix/guides/dynamic-styling) (the `.variant` API and built-in variants)
 
 ## Understanding Context Variants
 
@@ -96,7 +96,7 @@ BoxStyler()
 
 ## Complete Example
 
-This matches the interactive preview: state toggles the flag, [`Pressable`](/documentation/widgets/pressable) handles the tap, and [`Box`](/documentation/widgets/box) applies the style.
+This matches the interactive preview: state toggles the flag, [`Pressable`](/documentation/mix/widgets/pressable) handles the tap, and [`Box`](/documentation/mix/widgets/box) applies the style.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -157,5 +157,5 @@ class _ExampleState extends State<Example> {
 
 ## Next steps
 
-- [Dynamic Styling](/documentation/guides/dynamic-styling) — built-in context variants (`onDark`, `onHovered`, breakpoints, and more)
-- [Controlling Widget State](/documentation/tutorials/controlling-widget-state) — manual state when automatic variants are not enough
+- [Dynamic Styling](/documentation/mix/guides/dynamic-styling) — built-in context variants (`onDark`, `onHovered`, breakpoints, and more)
+- [Controlling Widget State](/documentation/mix/tutorials/controlling-widget-state) — manual state when automatic variants are not enough

@@ -102,7 +102,7 @@ Use on **Styler** classes. In Mix 2, concrete box-like Stylers typically extend 
 See [`BoxStyler`](https://github.com/btwld/mix/blob/main/packages/mix/lib/src/specs/box/box_style.dart) in the Mix repository for a full reference implementation (imports, hand-written mixins, `const` `.create`, and `part` wiring).
 
 <Callout type="info">
-  Custom Stylers should follow the same constructor patterns as core Mix Stylers. The [mix_lint](/documentation/ecosystem/mix-lint) rule `mix_mixable_styler_has_create` enforces a `const` `.create` constructor for `@MixableStyler` classes.
+  Custom Stylers should follow the same constructor patterns as core Mix Stylers. The [mix_lint](/documentation/mix/ecosystem/mix-lint) rule `mix_mixable_styler_has_create` enforces a `const` `.create` constructor for `@MixableStyler` classes.
 </Callout>
 
 ### `@MixableField`
@@ -140,6 +140,6 @@ To step through generator code in this repository, use the VS Code **Debug build
 
 ## Related docs
 
-- [mix_lint](/documentation/ecosystem/mix-lint) — Mix-specific analyzer rules, including Styler structure
-- [Styling guide](/documentation/guides/styling) — how Spec, Styler, and widgets fit together
+- [mix_lint](/documentation/mix/ecosystem/mix-lint) — Mix-specific analyzer rules, including Styler structure
+- [Styling guide](/documentation/mix/guides/styling) — how Spec, Styler, and widgets fit together
 - [API composition guidelines](https://github.com/btwld/mix/blob/main/guides/api-composition-guidelines.md) — fluent chaining and merge patterns (repository guide)

@@ -7,7 +7,7 @@ This tutorial covers scenarios where Mix's automatic state management isn't enou
 
 Before starting, you should be familiar with:
 
-- [Dynamic Styling](/documentation/guides/dynamic-styling) — how `onHovered`, `onPressed`, `onFocused`, and other built-in variants work
+- [Dynamic Styling](/documentation/mix/guides/dynamic-styling) — how `onHovered`, `onPressed`, `onFocused`, and other built-in variants work
 - Flutter's `StatefulWidget` lifecycle and `WidgetStatesController`
 
 > The Dynamic Styling guide covers automatic state management — variants that work out of the box with any Mix widget. This tutorial picks up where that guide leaves off.
@@ -352,7 +352,7 @@ void dispose() {
 
 | Pattern | When to use |
 |---------|-------------|
-| `onHovered` / `onPressed` / `onFocused` on any widget | Standard interaction states — [covered in Dynamic Styling](/documentation/guides/dynamic-styling) |
+| `onHovered` / `onPressed` / `onFocused` on any widget | Standard interaction states — [covered in Dynamic Styling](/documentation/mix/guides/dynamic-styling) |
 | `Pressable` + `controller` | Toggle custom states (`selected`, `error`) while keeping automatic gesture handling |
 | `.variant(ContextVariant.widgetState(...))` | Style any `WidgetState` beyond the `on*` shortcuts |
 | `StyleBuilder` + `controller` | Full control over gesture detection and style resolution |
@@ -361,6 +361,6 @@ void dispose() {
 
 ## Next Steps
 
-- [Building a Design System Widget](/documentation/tutorials/creating-a-widget) — see `Pressable`, `StyleBuilder`, and variant enums used together in a full button component
-- [Creating Context Variants](/documentation/tutorials/creating-context-variants) — create custom `ContextVariant` instances based on `BuildContext`
-- [Animations](/documentation/guides/animations) — add implicit and spring animations to state transitions
+- [Building a Design System Widget](/documentation/mix/tutorials/creating-a-widget) — see `Pressable`, `StyleBuilder`, and variant enums used together in a full button component
+- [Creating Context Variants](/documentation/mix/tutorials/creating-context-variants) — create custom `ContextVariant` instances based on `BuildContext`
+- [Animations](/documentation/mix/guides/animations) — add implicit and spring animations to state transitions

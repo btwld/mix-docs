@@ -7,7 +7,7 @@ import { Callout } from "nextra/components";
 # Directives
 
 <Callout type="info">
-  **Prerequisites:** This is an advanced guide. You should be familiar with [Styling](/documentation/guides/styling) and [Design Tokens](/documentation/guides/design-token) before reading this.
+  **Prerequisites:** This is an advanced guide. You should be familiar with [Styling](/documentation/mix/guides/styling) and [Design Tokens](/documentation/mix/guides/design-token) before reading this.
 </Callout>
 
 You could transform text with `toUpperCase()` or compute sizes with `* 2` before passing them to a style — but those transformations live outside the style, so they get lost when styles merge or resolve tokens. Directives keep transformations *inside* the style, making them composable, merge-safe, and token-aware.
@@ -238,6 +238,6 @@ extension NegateNumberPropExt<T extends num> on Prop<T> {
 
 ## See Also
 
-- [Styling](/documentation/guides/styling) — core Styler pattern and fluent chaining
-- [Design Tokens](/documentation/guides/design-token) — tokens work with directives via `Prop.token()`
-- [Widget Modifiers](/documentation/guides/widget-modifiers) — widget wrappers (modifiers transform widgets, directives transform values)
+- [Styling](/documentation/mix/guides/styling) — core Styler pattern and fluent chaining
+- [Design Tokens](/documentation/mix/guides/design-token) — tokens work with directives via `Prop.token()`
+- [Widget Modifiers](/documentation/mix/guides/widget-modifiers) — widget wrappers (modifiers transform widgets, directives transform values)

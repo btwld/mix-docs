@@ -39,7 +39,7 @@ PressableBox(
 `.onHovered()` and `.onPressed()` work on any Styler. `.onFocused()` and `.onDisabled()` require a `PressableBox` (or a `Pressable` ancestor) to provide focus and disabled state — without that source, they won't activate.
 
 <Callout type="info">
-  `PressableBox` = `Pressable` + `Box`. If you need interaction tracking around a another widget instead of a `Box`, use just `Pressable` directly. See the [Pressable reference](/documentation/widgets/pressable).
+  `PressableBox` = `Pressable` + `Box`. If you need interaction tracking around a another widget instead of a `Box`, use just `Pressable` directly. See the [Pressable reference](/documentation/mix/widgets/pressable).
 </Callout>
 
 ---
@@ -140,7 +140,7 @@ MixScope(
 Swap the map in `MixScope` to switch themes — every style that references those tokens updates automatically.
 
 <Callout type="info">
-  The `$` prefix is a naming convention, not a language feature. It signals "this is a token that resolves at build time" rather than a concrete value. See the [Design Tokens guide](/documentation/guides/design-token) for custom token types, theme switching patterns, and programmatic resolution.
+  The `$` prefix is a naming convention, not a language feature. It signals "this is a token that resolves at build time" rather than a concrete value. See the [Design Tokens guide](/documentation/mix/guides/design-token) for custom token types, theme switching patterns, and programmatic resolution.
 </Callout>
 
 ---
@@ -208,8 +208,8 @@ Each group owns one concern — layout, appearance, interaction — so you can r
 
 ## See Also
 
-- [Styling](/documentation/guides/styling) — the Styler pattern and fluent chaining
-- [Dynamic Styling](/documentation/guides/dynamic-styling) — variants for interaction, theme, and context
-- [Design Tokens](/documentation/guides/design-token) — tokens, `MixScope`, and theming
-- [Animations](/documentation/guides/animations) — implicit, phase, and keyframe animations
-- [Widgets](/documentation/widgets/stylewidgets) — full widget reference
+- [Styling](/documentation/mix/guides/styling) — the Styler pattern and fluent chaining
+- [Dynamic Styling](/documentation/mix/guides/dynamic-styling) — variants for interaction, theme, and context
+- [Design Tokens](/documentation/mix/guides/design-token) — tokens, `MixScope`, and theming
+- [Animations](/documentation/mix/guides/animations) — implicit, phase, and keyframe animations
+- [Widgets](/documentation/mix/widgets/stylewidgets) — full widget reference
