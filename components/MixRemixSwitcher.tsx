@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -24,9 +25,14 @@ export default function MixRemixSwitcher() {
     const pathname = usePathname()
     const active = getActiveProduct(pathname)
 
+    useEffect(() => {
+        document.documentElement.setAttribute('data-product', active)
+    }, [active])
+
     return (
         <nav
             aria-label="Product"
+            data-mix-remix-switcher=""
             className="mix-remix-switcher flex flex-col gap-1 px-3 py-3 border-b border-[var(--mix-border,rgba(255,255,255,0.08))]"
         >
             {PRODUCTS.map(({ id, label, href }) => {

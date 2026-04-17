@@ -148,3 +148,10 @@ html[data-product="mix"] .nextra-sidebar li:has(> button[data-href="/documentati
 html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/mix"]) {
     display: none !important;
 }
+
+/* Strip Nextra's default separator padding/border around the switcher row
+   so the MixRemixSwitcher component can own its own spacing and divider. */
+.nextra-sidebar li:has(> .mix-remix-switcher) {
+    padding: 0 !important;
+    margin: 0 !important;
+}
