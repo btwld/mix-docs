@@ -135,30 +135,14 @@ const RemixBadge({
 ## Properties
 ### Widget Properties
 
-#### `style` → `RemixBadgeStyle`
-
-Optional. The style configuration for the badge. Customize colors, sizing, shape, and state-based styling.
-
-#### `styleSpec` → `RemixBadgeSpec?`
-
-Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
-
-#### `key` → `Key?`
-
-Optional. Controls how one widget replaces another widget in the tree.
-
-#### `label` → `String?`
-
-Optional. Optional text label rendered with the badge text style.
-
-#### `child` → `Widget?`
-
-Optional. Optional fully custom badge content. When provided the badge style is applied only to the container.
-
-#### `labelBuilder` → `RemixBadgeLabelBuilder?`
-
-Optional. Optional builder that receives the resolved [TextSpec] so callers can render text with custom widgets while preserving badge typography.
-
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `RemixBadgeStyle` | Optional. The style configuration for the badge. Customize colors, sizing, shape, and state-based styling. |
+| `styleSpec` | `RemixBadgeSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
+| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+| `label` | `String?` | Optional. Optional text label rendered with the badge text style. |
+| `child` | `Widget?` | Optional. Optional fully custom badge content. When provided the badge style is applied only to the container. |
+| `labelBuilder` | `RemixBadgeLabelBuilder?` | Optional. Optional builder that receives the resolved [TextSpec] so callers can render text with custom widgets while preserving badge typography. |
 
 ### Style Methods
 

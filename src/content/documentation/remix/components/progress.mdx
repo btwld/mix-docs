@@ -102,22 +102,12 @@ const RemixProgress({
 ## Properties
 ### Widget Properties
 
-#### `style` → `RemixProgressStyle`
-
-Optional. The style configuration for the progress indicator. Customize colors, sizing, and track appearance.
-
-#### `styleSpec` → `RemixProgressSpec?`
-
-Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
-
-#### `key` → `Key?`
-
-Optional. Controls how one widget replaces another widget in the tree.
-
-#### `value` → `double`
-
-**Required**. The progress value between 0 and 1.  This value determines how much of the progress bar is filled. A value of 0 means empty, while 1 means completely filled.
-
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `RemixProgressStyle` | Optional. The style configuration for the progress indicator. Customize colors, sizing, and track appearance. |
+| `styleSpec` | `RemixProgressSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
+| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+| `value` | `double` | **Required**. The progress value between 0 and 1. This value determines how much of the progress bar is filled. A value of 0 means empty, while 1 means completely filled. |
 
 ### Style Methods
 

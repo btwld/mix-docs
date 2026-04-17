@@ -198,90 +198,29 @@ const RemixButton({
 ## Properties
 ### Widget Properties
 
-#### `style` → `RemixButtonStyle`
-
-Optional. The style configuration for the button. Customize colors, sizing, spacing, and state-based styling.
-
-#### `styleSpec` → `RemixButtonSpec?`
-
-Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
-
-#### `key` → `Key?`
-
-Optional. Controls how one widget replaces another widget in the tree.
-
-#### `label` → `String`
-
-**Required**. The label text to display in the button. If [textBuilder] is provided, this is ignored.
-
-#### `leadingIcon` → `IconData?`
-
-Optional. The leading icon to display before the label. If [leadingIconBuilder] is provided, this is ignored.
-
-#### `trailingIcon` → `IconData?`
-
-Optional. The trailing icon to display after the label. If [trailingIconBuilder] is provided, this is ignored.
-
-#### `textBuilder` → `RemixButtonTextBuilder?`
-
-Optional. Builder for customizing the text rendering.
-
-#### `leadingIconBuilder` → `RemixButtonIconBuilder?`
-
-Optional. Builder for customizing the leading icon rendering.
-
-#### `trailingIconBuilder` → `RemixButtonIconBuilder?`
-
-Optional. Builder for customizing the trailing icon rendering.
-
-#### `loadingBuilder` → `RemixButtonLoadingBuilder?`
-
-Optional. Builder for customizing the loading state rendering.
-
-#### `autofocus` → `bool`
-
-Optional. Whether the button should automatically request focus when it is created.
-
-#### `loading` → `bool`
-
-Optional. Whether the button is in a loading state.  When true, the button will display a spinner and become non-interactive. The spinner can be customized via [spinnerBuilder].
-
-#### `enabled` → `bool`
-
-Optional. Whether the button is enabled.  When false, the button will be disabled regardless of other conditions. Defaults to true.
-
-#### `enableFeedback` → `bool`
-
-Optional. Whether to provide feedback when the button is pressed.  Defaults to true.
-
-#### `onPressed` → `VoidCallback?`
-
-**Required**. Callback function called when the button is pressed.  If null, the button will be considered disabled.
-
-#### `onLongPress` → `VoidCallback?`
-
-Optional. Callback function called when the button is long pressed.
-
-#### `focusNode` → `FocusNode?`
-
-Optional. Optional focus node to control the button's focus behavior.
-
-#### `semanticLabel` → `String?`
-
-Optional. The semantic label for the button.  Used by screen readers to describe the button.
-
-#### `semanticHint` → `String?`
-
-Optional. The semantic hint for the button.  Provides additional context about what will happen when the button is activated.
-
-#### `excludeSemantics` → `bool`
-
-Optional. Whether to exclude child semantics.  When true, the semantics of child widgets will be excluded. Defaults to false.
-
-#### `mouseCursor` → `MouseCursor`
-
-Optional. Cursor when hovering over the button.  Defaults to [SystemMouseCursors.click] when enabled.
-
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `RemixButtonStyle` | Optional. The style configuration for the button. Customize colors, sizing, spacing, and state-based styling. |
+| `styleSpec` | `RemixButtonSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
+| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+| `label` | `String` | **Required**. The label text to display in the button. If [textBuilder] is provided, this is ignored. |
+| `leadingIcon` | `IconData?` | Optional. The leading icon to display before the label. If [leadingIconBuilder] is provided, this is ignored. |
+| `trailingIcon` | `IconData?` | Optional. The trailing icon to display after the label. If [trailingIconBuilder] is provided, this is ignored. |
+| `textBuilder` | `RemixButtonTextBuilder?` | Optional. Builder for customizing the text rendering. |
+| `leadingIconBuilder` | `RemixButtonIconBuilder?` | Optional. Builder for customizing the leading icon rendering. |
+| `trailingIconBuilder` | `RemixButtonIconBuilder?` | Optional. Builder for customizing the trailing icon rendering. |
+| `loadingBuilder` | `RemixButtonLoadingBuilder?` | Optional. Builder for customizing the loading state rendering. |
+| `autofocus` | `bool` | Optional. Whether the button should automatically request focus when it is created. |
+| `loading` | `bool` | Optional. Whether the button is in a loading state. When true, the button will display a spinner and become non-interactive. The spinner can be customized via [spinnerBuilder]. |
+| `enabled` | `bool` | Optional. Whether the button is enabled. When false, the button will be disabled regardless of other conditions. Defaults to true. |
+| `enableFeedback` | `bool` | Optional. Whether to provide feedback when the button is pressed. Defaults to true. |
+| `onPressed` | `VoidCallback?` | **Required**. Callback function called when the button is pressed. If null, the button will be considered disabled. |
+| `onLongPress` | `VoidCallback?` | Optional. Callback function called when the button is long pressed. |
+| `focusNode` | `FocusNode?` | Optional. Optional focus node to control the button's focus behavior. |
+| `semanticLabel` | `String?` | Optional. The semantic label for the button. Used by screen readers to describe the button. |
+| `semanticHint` | `String?` | Optional. The semantic hint for the button. Provides additional context about what will happen when the button is activated. |
+| `excludeSemantics` | `bool` | Optional. Whether to exclude child semantics. When true, the semantics of child widgets will be excluded. Defaults to false. |
+| `mouseCursor` | `MouseCursor` | Optional. Cursor when hovering over the button. Defaults to [SystemMouseCursors.click] when enabled. |
 
 ### Style Methods
 

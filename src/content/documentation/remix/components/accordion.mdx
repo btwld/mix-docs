@@ -209,76 +209,24 @@ const RemixAccordion({
 ## Properties
 ### Widget Properties
 
-#### `key` → `Key?`
-
-Optional. Controls how one widget replaces another widget in the tree.
-
-#### `value` → `T`
-
-**Required**. Unique identifier tracked by the controller.
-
-#### `child` → `Widget`
-
-**Required**. Content rendered while expanded.
-
-#### `title` → `String?`
-
-Optional. Title text for the trigger.
-
-#### `leadingIcon` → `IconData?`
-
-Optional. Optional leading icon for the trigger.
-
-#### `trailingIcon` → `IconData?`
-
-Optional. Optional trailing icon for the trigger.
-
-#### `builder` → `NakedAccordionTriggerBuilder<T>?`
-
-Optional. Custom builder for the trigger.
-
-#### `enabled` → `bool`
-
-Optional. Whether the accordion item is interactive.
-
-#### `mouseCursor` → `MouseCursor`
-
-Optional. Mouse cursor to use when interactive.
-
-#### `enableFeedback` → `bool`
-
-Optional. Whether to provide platform feedback on interactions.
-
-#### `autofocus` → `bool`
-
-Optional. Whether the header should autofocus.
-
-#### `focusNode` → `FocusNode?`
-
-Optional. Focus node associated with the header.
-
-#### `onFocusChange` → `ValueChanged<bool>?`
-
-Optional. Called when the header's focus state changes.
-
-#### `onHoverChange` → `ValueChanged<bool>?`
-
-Optional. Called when the header's hover state changes.
-
-#### `onPressChange` → `ValueChanged<bool>?`
-
-Optional. Called when the header's pressed state changes.
-
-#### `semanticLabel` → `String?`
-
-Optional. Semantic label announced for the header.
-
-#### `style` → `RemixAccordionStyle<T>`
-
-Optional. The style configuration for the accordion item.
-
-#### `transitionBuilder` → `Widget Function(Widget, Animation<double>)`
-
-Optional. The transition builder for the accordion item.
-
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+| `value` | `T` | **Required**. Unique identifier tracked by the controller. |
+| `child` | `Widget` | **Required**. Content rendered while expanded. |
+| `title` | `String?` | Optional. Title text for the trigger. |
+| `leadingIcon` | `IconData?` | Optional. Optional leading icon for the trigger. |
+| `trailingIcon` | `IconData?` | Optional. Optional trailing icon for the trigger. |
+| `builder` | `NakedAccordionTriggerBuilder<T>?` | Optional. Custom builder for the trigger. |
+| `enabled` | `bool` | Optional. Whether the accordion item is interactive. |
+| `mouseCursor` | `MouseCursor` | Optional. Mouse cursor to use when interactive. |
+| `enableFeedback` | `bool` | Optional. Whether to provide platform feedback on interactions. |
+| `autofocus` | `bool` | Optional. Whether the header should autofocus. |
+| `focusNode` | `FocusNode?` | Optional. Focus node associated with the header. |
+| `onFocusChange` | `ValueChanged<bool>?` | Optional. Called when the header's focus state changes. |
+| `onHoverChange` | `ValueChanged<bool>?` | Optional. Called when the header's hover state changes. |
+| `onPressChange` | `ValueChanged<bool>?` | Optional. Called when the header's pressed state changes. |
+| `semanticLabel` | `String?` | Optional. Semantic label announced for the header. |
+| `style` | `RemixAccordionStyle<T>` | Optional. The style configuration for the accordion item. |
+| `transitionBuilder` | `Widget Function(Widget, Animation<double>)` | Optional. The transition builder for the accordion item. |
 

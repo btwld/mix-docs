@@ -176,54 +176,20 @@ const RemixSelect({
 ## Properties
 ### Widget Properties
 
-#### `key` → `Key?`
-
-Optional. Controls how one widget replaces another widget in the tree.
-
-#### `trigger` → `RemixSelectTrigger`
-
-**Required**. The trigger data that defines the select's button.
-
-#### `items` → `List<RemixSelectItem<T>>`
-
-**Required**. The list of selectable items.
-
-#### `selectedValue` → `T?`
-
-Optional. The currently selected value.
-
-#### `onChanged` → `ValueChanged<T?>?`
-
-Optional. Called when the selected value changes.
-
-#### `onOpen` → `VoidCallback?`
-
-Optional. Called when the dropdown opens.
-
-#### `onClose` → `VoidCallback?`
-
-Optional. Called when the dropdown closes.
-
-#### `enabled` → `bool`
-
-Optional. Whether the select is enabled and can be interacted with.
-
-#### `semanticLabel` → `String?`
-
-Optional. Semantic label for accessibility.
-
-#### `closeOnSelect` → `bool`
-
-Optional. Whether to automatically close the dropdown when an item is selected.
-
-#### `focusNode` → `FocusNode?`
-
-Optional. Optional focus node to control focus behavior.
-
-#### `style` → `RemixSelectStyle`
-
-Optional. The style configuration for the select.
-
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+| `trigger` | `RemixSelectTrigger` | **Required**. The trigger data that defines the select's button. |
+| `items` | `List<RemixSelectItem<T>>` | **Required**. The list of selectable items. |
+| `selectedValue` | `T?` | Optional. The currently selected value. |
+| `onChanged` | `ValueChanged<T?>?` | Optional. Called when the selected value changes. |
+| `onOpen` | `VoidCallback?` | Optional. Called when the dropdown opens. |
+| `onClose` | `VoidCallback?` | Optional. Called when the dropdown closes. |
+| `enabled` | `bool` | Optional. Whether the select is enabled and can be interacted with. |
+| `semanticLabel` | `String?` | Optional. Semantic label for accessibility. |
+| `closeOnSelect` | `bool` | Optional. Whether to automatically close the dropdown when an item is selected. |
+| `focusNode` | `FocusNode?` | Optional. Optional focus node to control focus behavior. |
+| `style` | `RemixSelectStyle` | Optional. The style configuration for the select. |
 
 ### Style Methods
 
