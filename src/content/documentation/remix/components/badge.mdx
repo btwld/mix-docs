@@ -1,0 +1,253 @@
+---
+title: Badge
+description: A compact indicator component for displaying counts, status, or labels
+keywords: [flutter, remix, badge, indicator, count, notification, status, label]
+---
+
+A compact component for displaying counts, status indicators, or labels.
+
+## When to use this
+
+- **Notification counts**: Show unread message or notification counts
+- **Status indicators**: Display online/offline status or alert levels
+- **Labels**: Attach categorical labels to other UI elements
+- **Counters**: Show numerical values in a compact format
+
+## Basic implementation
+
+<CodeGroup title="Basic implementation" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class BadgeExample extends StatelessWidget {
+  const BadgeExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 16,
+      children: [
+        RemixBadge(
+          label: '8',
+          style: styleLabel,
+        ),
+        RemixBadge(
+          style: styleIcon,
+          child: const Icon(Icons.camera_alt),
+        ),
+      ],
+    );
+  }
+
+  RemixBadgeStyle get styleLabel {
+    return RemixBadgeStyle()
+        .size(24, 24)
+        .wrapClipOval()
+        .label(
+          TextStyler()
+              .fontSize(15)
+              .wrapAlign(Alignment.center)
+              .fontFeatures([const FontFeature.tabularFigures()]),
+        )
+        .foregroundColor(Colors.greenAccent.shade700)
+        .labelColor(Colors.white)
+        .labelFontWeight(FontWeight.bold)
+        .labelFontSize(15);
+  }
+
+  RemixBadgeStyle get styleIcon {
+    return RemixBadgeStyle()
+        .size(24, 24)
+        .wrapClipOval()
+        .label(
+          TextStyler()
+              .fontSize(15)
+              .wrapAlign(Alignment.center)
+              .fontFeatures([const FontFeature.tabularFigures()]),
+        )
+        .foregroundColor(Colors.redAccent)
+        .wrapIconTheme(const IconThemeData(color: Colors.white, size: 15));
+  }
+}
+```
+</CodeGroup>
+
+## Fortal styles
+
+Remix includes Fortal-themed style helpers for this component:
+
+<CodeGroup title="Fortal variants" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class FortalBadgeExample extends StatelessWidget {
+  const FortalBadgeExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 16,
+      children: [
+        RemixBadge(
+          label: '5',
+          style: FortalBadgeStyle.solid(),
+        ),
+        RemixBadge(
+          label: 'New',
+          style: FortalBadgeStyle.soft(),
+        ),
+      ],
+    );
+  }
+}
+```
+</CodeGroup>
+
+<Info>
+  See the [FortalBadgeStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/badge/fortal_badge_styles.dart) for all available options.
+</Info>
+
+## Constructor
+<CodeGroup title="Constructor" defaultLanguage="dart">
+```dart
+const RemixBadge({
+  Key? key,
+  Widget? child,
+  String? label,
+  RemixBadgeLabelBuilder? labelBuilder,
+  RemixBadgeStyle style = const RemixBadgeStyle.create(),
+  RemixBadgeSpec? styleSpec,
+})
+```
+</CodeGroup>
+
+
+## Properties
+### Widget Properties
+
+#### `style` → `RemixBadgeStyle`
+
+Optional. The style configuration for the badge. Customize colors, sizing, shape, and state-based styling.
+
+#### `styleSpec` → `RemixBadgeSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `label` → `String?`
+
+Optional. Optional text label rendered with the badge text style.
+
+#### `child` → `Widget?`
+
+Optional. Optional fully custom badge content. When provided the badge style is applied only to the container.
+
+#### `labelBuilder` → `RemixBadgeLabelBuilder?`
+
+Optional. Optional builder that receives the resolved [TextSpec] so callers can render text with custom widgets while preserving badge typography.
+
+
+### Style Methods
+
+#### `backgroundColor(Color value)`
+
+Sets background color
+
+#### `foregroundColor(Color value)`
+
+Sets the foreground color (text) of the badge
+
+#### `borderRadius(BorderRadiusGeometryMix radius)`
+
+Sets border radius
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets padding
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets margin
+
+#### `decoration(DecorationMix value)`
+
+Sets decoration
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `label(TextStyler value)`
+
+Configures the label text style using a TextStyler.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets constraints
+
+#### `animate(AnimationConfig animation)`
+
+Sets animation
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)`
+
+Applies a matrix transformation to the component.
+
+#### `labelTextStyle(TextStyleMix value)`
+
+Sets label/text style using TextStyleMix directly
+
+#### `labelColor(Color value)`
+
+Sets label/text color
+
+#### `labelFontSize(double value)`
+
+Sets label/text font size
+
+#### `labelFontWeight(FontWeight value)`
+
+Sets label/text font weight
+
+#### `labelFontStyle(FontStyle value)`
+
+Sets label/text font style (italic/normal)
+
+#### `labelLetterSpacing(double value)`
+
+Sets label/text letter spacing
+
+#### `labelDecoration(TextDecoration value)`
+
+Sets label/text decoration (underline, strikethrough, etc.)
+
+#### `labelFontFamily(String value)`
+
+Sets label/text font family
+
+#### `labelHeight(double value)`
+
+Sets label/text line height
+
+#### `labelWordSpacing(double value)`
+
+Sets label/text word spacing
+
+#### `labelDecorationColor(Color value)`
+
+Sets label/text decoration color
+

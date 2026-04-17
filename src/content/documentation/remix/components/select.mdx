@@ -1,0 +1,362 @@
+---
+title: Select
+description: A dropdown select component for choosing options from a list
+keywords: [flutter, remix, select, dropdown, picker, combo-box, form]
+---
+
+A dropdown select component for choosing from a list of options.
+
+## When to use this
+
+- **Form inputs**: Collect user selections from predefined options
+- **Filters**: Allow users to filter content by categories or criteria
+- **Settings**: Enable users to choose configuration values
+- **Data entry**: Provide structured input options in forms
+
+## Basic implementation
+
+<CodeGroup title="Basic implementation" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class SelectExample extends StatefulWidget {
+  const SelectExample({super.key});
+
+  @override
+  State<SelectExample> createState() => _SelectExampleState();
+}
+
+class _SelectExampleState extends State<SelectExample> {
+  String? _selectedValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      child: RemixSelect(
+        trigger: const RemixSelectTrigger(placeholder: 'Text Value'),
+        items: [
+          RemixSelectItem(
+            value: 'option1',
+            label: 'Option 1',
+            enabled: true,
+            style: itemStyle,
+          ),
+          RemixSelectItem(
+            value: 'option2',
+            label: 'Option 2',
+            enabled: false,
+            style: itemStyle,
+          ),
+        ],
+        selectedValue: _selectedValue,
+        style: style,
+        onChanged: (value) {
+          setState(() {
+            _selectedValue = value;
+          });
+        },
+      ),
+    );
+  }
+
+  RemixSelectMenuItemStyle get itemStyle {
+    return RemixSelectMenuItemStyle()
+        .iconSize(16)
+        .paddingAll(8)
+        .borderRadiusAll(const Radius.circular(8))
+        .onHovered(RemixSelectMenuItemStyle().color(Colors.blueGrey.shade50))
+        .onDisabled(
+          RemixSelectMenuItemStyle().labelColor(Colors.grey.shade300),
+        );
+  }
+
+  RemixSelectStyle get style {
+    return RemixSelectStyle()
+        .trigger(
+          RemixSelectTriggerStyle()
+              .color(Colors.transparent)
+              .borderAll(color: const Color(0xFF898988))
+              .paddingY(10)
+              .paddingX(12)
+              .borderRadiusAll(const Radius.circular(12)),
+        )
+        .menuContainer(
+          FlexBoxStyler()
+              .width(200)
+              .marginY(5)
+              .paddingAll(6)
+              .color(Colors.white)
+              .borderRadiusAll(const Radius.circular(12)),
+        );
+  }
+}
+```
+</CodeGroup>
+
+## Fortal styles
+
+Remix includes Fortal-themed style helpers for this component:
+
+<CodeGroup title="Fortal base style" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class FortalSelectExample extends StatefulWidget {
+  const FortalSelectExample({super.key});
+
+  @override
+  State<FortalSelectExample> createState() => _FortalSelectExampleState();
+}
+
+class _FortalSelectExampleState extends State<FortalSelectExample> {
+  String? _selected;
+
+  @override
+  Widget build(BuildContext context) {
+    return RemixSelect(
+      trigger: const RemixSelectTrigger(placeholder: 'Select option'),
+      items: [
+        RemixSelectItem(
+          value: 'opt1',
+          label: 'Option 1',
+          style: FortalSelectMenuItemStyle.base(),
+        ),
+        RemixSelectItem(
+          value: 'opt2',
+          label: 'Option 2',
+          style: FortalSelectMenuItemStyle.base(),
+        ),
+      ],
+      selectedValue: _selected,
+      onChanged: (value) => setState(() => _selected = value),
+      style: FortalSelectStyle.base(),
+    );
+  }
+}
+```
+</CodeGroup>
+
+<Info>
+  See the [FortalSelectStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/select/fortal_select_styles.dart) for all available options.
+</Info>
+
+## Constructor
+<CodeGroup title="Constructor" defaultLanguage="dart">
+```dart
+const RemixSelect({
+  Key? key,
+  required RemixSelectTrigger trigger,
+  required List<RemixSelectItem<T>> items,
+  T? selectedValue,
+  Alignment? targetAnchor,
+  Alignment? followerAnchor,
+  ValueChanged<T?>? onChanged,
+  VoidCallback? onOpen,
+  VoidCallback? onClose,
+  bool enabled = true,
+  String? semanticLabel,
+  bool closeOnSelect = true,
+  FocusNode? focusNode,
+  RemixSelectStyle style = const RemixSelectStyle.create(),
+})
+```
+</CodeGroup>
+
+
+## Properties
+### Widget Properties
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `trigger` → `RemixSelectTrigger`
+
+**Required**. The trigger data that defines the select's button.
+
+#### `items` → `List<RemixSelectItem<T>>`
+
+**Required**. The list of selectable items.
+
+#### `selectedValue` → `T?`
+
+Optional. The currently selected value.
+
+#### `onChanged` → `ValueChanged<T?>?`
+
+Optional. Called when the selected value changes.
+
+#### `onOpen` → `VoidCallback?`
+
+Optional. Called when the dropdown opens.
+
+#### `onClose` → `VoidCallback?`
+
+Optional. Called when the dropdown closes.
+
+#### `enabled` → `bool`
+
+Optional. Whether the select is enabled and can be interacted with.
+
+#### `semanticLabel` → `String?`
+
+Optional. Semantic label for accessibility.
+
+#### `closeOnSelect` → `bool`
+
+Optional. Whether to automatically close the dropdown when an item is selected.
+
+#### `focusNode` → `FocusNode?`
+
+Optional. Optional focus node to control focus behavior.
+
+#### `style` → `RemixSelectStyle`
+
+Optional. The style configuration for the select.
+
+
+### Style Methods
+
+#### `text(TextStyler value)`
+
+Sets text styling
+
+#### `icon(IconStyler value)`
+
+Sets icon styling
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `label(TextStyler value)`
+
+Sets label styling (delegates to text for consistency with mixin)
+
+#### `animate(AnimationConfig config)`
+
+Configures implicit animation for style transitions.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `decoration(DecorationMix value)`
+
+Sets the container decoration.
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets the container margin.
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets the container padding.
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)`
+
+Applies a matrix transformation to the component.
+
+#### `flex(FlexStyler value)`
+
+Configures the flex layout properties.
+
+#### `labelTextStyle(TextStyleMix value)`
+
+Sets label/text style using TextStyleMix directly
+
+#### `labelColor(Color value)`
+
+Sets label/text color
+
+#### `labelFontSize(double value)`
+
+Sets label/text font size
+
+#### `labelFontWeight(FontWeight value)`
+
+Sets label/text font weight
+
+#### `labelFontStyle(FontStyle value)`
+
+Sets label/text font style (italic/normal)
+
+#### `labelLetterSpacing(double value)`
+
+Sets label/text letter spacing
+
+#### `labelDecoration(TextDecoration value)`
+
+Sets label/text decoration (underline, strikethrough, etc.)
+
+#### `labelFontFamily(String value)`
+
+Sets label/text font family
+
+#### `labelHeight(double value)`
+
+Sets label/text line height
+
+#### `labelWordSpacing(double value)`
+
+Sets label/text word spacing
+
+#### `labelDecorationColor(Color value)`
+
+Sets label/text decoration color
+
+#### `iconColor(Color value)`
+
+Sets icon color
+
+#### `iconSize(double value)`
+
+Sets icon size
+
+#### `iconOpacity(double value)`
+
+Sets icon opacity
+
+#### `iconWeight(double value)`
+
+Sets icon weight (useful for variable icons like Material Symbols)
+
+#### `iconGrade(double value)`
+
+Sets icon grade (useful for Material Icons)
+
+#### `iconFill(double value)`
+
+Sets icon fill (useful for Material Icons filled variants)
+
+#### `iconOpticalSize(double value)`
+
+Sets icon optical size (useful for Material Icons)
+
+#### `iconBlendMode(BlendMode value)`
+
+Sets icon blend mode
+
+#### `iconTextDirection(TextDirection value)`
+
+Sets icon text direction
+
+#### `iconShadows(List<ShadowMix> value)`
+
+Sets icon shadows
+
+#### `iconShadow(ShadowMix value)`
+
+Sets single icon shadow
+

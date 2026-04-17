@@ -5,27 +5,6 @@ import { motion } from "framer-motion";
 export const RemixHome = () => {
   return (
     <>
-      {/* Background — green radial glow + grid */}
-      <div className="pointer-events-none fixed inset-0 w-full h-full z-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 20%, rgba(0, 235, 3, 0.18) 0%, transparent 55%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: [
-              "linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px)",
-              "linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            ].join(", "),
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
       <div className="remix-landing">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

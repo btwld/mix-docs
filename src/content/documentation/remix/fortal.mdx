@@ -1,0 +1,164 @@
+---
+title: Fortal
+---
+
+import { Callout } from "nextra/components";
+
+# Fortal
+
+Fortal is a prebuilt design system that ships with Remix. It provides a full set of component styles — buttons, inputs, menus, badges, and everything else Remix offers — built on top of the [Radix](https://www.radix-ui.com/) color scales and spacing system. You can drop it into a Remix app and get a polished, modern look without defining a single token yourself.
+
+Fortal is also a *regular* Remix style underneath. Every `Fortal*Style` is built with the same fluent API you'd use to write your own — so you can extend, override, or fork any piece of it.
+
+## What Fortal Gives You
+
+- **A complete set of component styles** — one or more Fortal styles per Remix component, fully configured for every interaction state (hover, press, focus, disabled)
+- **A curated token system** — colors, spacing, border radii, shadows, typography, and border widths, all based on Radix's color science and scale conventions
+- **Variants** — most components expose multiple Fortal variants (e.g., `solid`, `soft`, `surface`, `outline`, `ghost`) so you can match the visual weight to the context
+- **Dark mode support** — Fortal's token system resolves automatically in light and dark themes through `FortalScope`
+
+## Installation
+
+Fortal ships with Remix — no extra package to add. Import it alongside Remix:
+
+```dart
+import 'package:remix/remix.dart';
+```
+
+Then wrap the part of your app that should use Fortal in a `FortalScope`. The scope provides the token values that every `Fortal*Style` and `FortalTokens.*` call resolves against:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: FortalScope(
+        child: Scaffold(
+          body: Center(
+            child: RemixButton(
+              onPressed: () {},
+              label: 'Fortal Button',
+              style: FortalButtonStyle.solid(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Without `FortalScope` in the widget tree above a Fortal-styled component, token lookups have no values to resolve and the component falls back to defaults.
+
+## Component Variants
+
+Each Remix component exposes a `Fortal*Style` class with named constructors for each variant. For example, `FortalButtonStyle` provides:
+
+```dart
+FortalButtonStyle.solid()     // high-emphasis, filled
+FortalButtonStyle.soft()      // medium-emphasis, tinted
+FortalButtonStyle.surface()   // subtle, surface-colored
+FortalButtonStyle.outline()   // bordered, transparent fill
+FortalButtonStyle.ghost()     // minimal, text-only until hover
+```
+
+You choose the variant that matches the visual weight you want, then pass it to the component's `style` parameter:
+
+```dart
+RemixButton(
+  onPressed: () {},
+  label: 'Save',
+  style: FortalButtonStyle.soft(),
+);
+```
+
+Not every component has every variant — a `RemixSpinner` doesn't need a `ghost` variant. Refer to each component's [reference page](/documentation/remix/components/button) for the full list of Fortal variants it ships.
+
+## Design Tokens
+
+Fortal is built on a scale-based token system that mirrors Radix's conventions:
+
+| Token group | Scale |
+|-------------|-------|
+| Colors — accent | 12 steps (`accent1` → `accent12`) |
+| Colors — gray | 12 steps (`gray1` → `gray12`) |
+| Colors — contrast | `accentContrast`, `grayContrast` for text on filled surfaces |
+| Spacing | 9 steps (`space1` → `space9`) |
+| Border radius | 6 steps (`radius1` → `radius6`) |
+| Shadows | 6 levels (`shadow1` → `shadow6`) |
+| Typography | 9 sizes (`text1` → `text9`) |
+| Border widths | `borderWidth1` → `borderWidth4` |
+
+Each token is a function on the `FortalTokens` class. Call it from any style:
+
+```dart
+final style = RemixButtonStyle()
+  .color(FortalTokens.accent9())
+  .paddingAll(FortalTokens.space4())
+  .borderRadiusAll(FortalTokens.radius3())
+  .label(TextStyler().color(FortalTokens.accentContrast()));
+```
+
+The `accent9` step is the "solid" color — the strongest fill suitable for primary actions. The 12-step scale maps numbered steps to specific uses:
+
+| Steps | Use for |
+|-------|---------|
+| 1–2 | App backgrounds |
+| 3–5 | Component backgrounds (hover states on higher steps) |
+| 6–8 | Borders and separators |
+| 9–10 | Solid fills (primary actions) |
+| 11–12 | Text and high-contrast elements |
+
+This mapping is consistent across every Radix-based design system — if you know Radix, you know Fortal.
+
+<Callout type="info">
+  Token functions like `FortalTokens.accent9()` resolve to the current theme's value at paint time. That means a single style definition works in both light and dark mode without rewriting.
+</Callout>
+
+## Customizing Fortal
+
+Because every `Fortal*Style` is itself a Remix style, you can chain additional methods to override or extend any piece of it:
+
+```dart
+final style = FortalButtonStyle.solid()
+  .borderRadiusAll(const Radius.circular(8))
+  .paddingX(32)
+  .onHovered(
+    RemixButtonStyle().wrap(WidgetModifierConfig.scale(x: 1.05, y: 1.05)),
+  );
+```
+
+The chain above starts from Fortal's `solid` button, overrides the border radius and horizontal padding, and adds a scale-on-hover modifier. Every other Fortal property — colors, state styling, typography — passes through untouched.
+
+You can also mix Fortal tokens into a completely custom style:
+
+```dart
+final style = RemixButtonStyle()
+  .color(FortalTokens.accent9())
+  .paddingAll(FortalTokens.space4())
+  .borderRadiusAll(FortalTokens.radius3())
+  .onHovered(
+    RemixButtonStyle().color(FortalTokens.accent10()),
+  );
+```
+
+This gives you Fortal's token consistency without starting from its component styles.
+
+## When to Use Fortal
+
+Reach for Fortal when:
+
+- You want a ready-made look that pairs with Radix's color science
+- You need dark-mode-aware components without wiring up your own theme
+- You're prototyping and don't yet have a design system of your own
+- Your design system can be expressed as overrides on top of Fortal's foundation
+
+Skip Fortal when your design system has strong opinions that clash with Radix's scale — in that case, build your own styles directly with the Mix API. Remix components work exactly the same either way.
+
+## Next Steps
+
+- [Components](/documentation/remix/components/button) — every component, with its Fortal variants documented inline
+- [Radix Colors documentation](https://www.radix-ui.com/colors) — the color science Fortal inherits

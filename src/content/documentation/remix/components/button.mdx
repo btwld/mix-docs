@@ -1,0 +1,464 @@
+---
+title: Button
+description: A customizable button component with text, optional icons, loading states, and comprehensive styling support
+keywords: [flutter, remix, button, interactive, action, form, submit, press, click]
+---
+
+A customizable button component that supports text with optional icons, loading states, and styling.
+
+## When to use this
+
+- **Primary actions**: Submit forms, confirm dialogs, save data, trigger main actions
+- **Navigation**: Navigate between screens, open new views, switch contexts
+- **Trigger functions**: Show modals, start processes, toggle features, execute commands
+- **Call to action**: Encourage users to take important actions within your app
+
+## Basic implementation
+
+<CodeGroup title="Basic implementation" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class ButtonExample extends StatelessWidget {
+  const ButtonExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 16,
+        children: [
+          RemixButton(
+            onPressed: () {},
+            label: 'Turn Off',
+            style: destructiveStyle,
+          ),
+          RemixButton(
+            onPressed: () {},
+            label: 'Turn on',
+            style: successStyle,
+          ),
+        ],
+      ),
+    );
+  }
+
+  RemixButtonStyle get destructiveStyle {
+    return RemixButtonStyle()
+        .paddingX(16)
+        .paddingY(10)
+        .color(const Color(0xFF4D1919))
+        .shadow(
+          BoxShadowMix().color(Colors.redAccent).blurRadius(10).spreadRadius(0),
+        )
+        .label(
+          TextStyler().uppercase().color(Colors.redAccent),
+        )
+        .shapeBeveledRectangle(
+          borderRadius: BorderRadiusMix()
+              .bottomLeft(const Radius.circular(12))
+              .topRight(const Radius.circular(12)),
+          side: BorderSideMix.width(1).color(Colors.redAccent),
+        )
+        .wrap(WidgetModifierConfig.scale(x: 1, y: 1))
+        .onPressed(
+          RemixButtonStyle().wrap(WidgetModifierConfig.scale(x: 0.90, y: 0.90)),
+        )
+        .onHovered(
+          RemixButtonStyle()
+              .color(const Color(0xFF732D2D))
+              .animate(AnimationConfig.spring(300.ms)),
+        )
+        .onFocused(
+          RemixButtonStyle().color(const Color(0xFF732D2D)),
+        );
+  }
+
+  RemixButtonStyle get successStyle {
+    return destructiveStyle
+        .color(const Color.fromARGB(255, 15, 61, 15))
+        .label(TextStyler().uppercase().color(Colors.greenAccent))
+        .shapeBeveledRectangle(
+          side: BorderSideMix().color(Colors.greenAccent),
+        )
+        .shadow(
+          BoxShadowMix()
+              .color(Colors.greenAccent)
+              .blurRadius(10)
+              .spreadRadius(0),
+        )
+        .onHovered(
+          RemixButtonStyle().color(const Color(0xFF357857)),
+        )
+        .onFocused(
+          RemixButtonStyle().color(const Color(0xFF357857)),
+        );
+  }
+}
+```
+</CodeGroup>
+
+## Fortal styles
+
+Remix includes Fortal-themed style helpers for this component:
+
+<CodeGroup title="Fortal variants" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class FortalButtonExample extends StatelessWidget {
+  const FortalButtonExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      spacing: 16,
+      children: [
+        // Solid variant - High emphasis, primary actions
+        RemixButton(
+          label: 'Solid Button',
+          onPressed: () {},
+          style: FortalButtonStyle.solid(),
+        ),
+        // Soft variant - Medium emphasis, secondary actions
+        RemixButton(
+          label: 'Soft Button',
+          onPressed: () {},
+          style: FortalButtonStyle.soft(),
+        ),
+        // Surface variant - Subtle emphasis with border
+        RemixButton(
+          label: 'Surface Button',
+          onPressed: () {},
+          style: FortalButtonStyle.surface(),
+        ),
+        // Outline variant - Low emphasis, tertiary actions
+        RemixButton(
+          label: 'Outline Button',
+          onPressed: () {},
+          style: FortalButtonStyle.outline(),
+        ),
+        // Ghost variant - Minimal styling, inline actions
+        RemixButton(
+          label: 'Ghost Button',
+          onPressed: () {},
+          style: FortalButtonStyle.ghost(),
+        ),
+      ],
+    );
+  }
+}
+```
+</CodeGroup>
+
+<Info>
+  See the [FortalButtonStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/button/fortal_button_styles.dart) for all available options.
+</Info>
+
+## Constructor
+<CodeGroup title="Constructor" defaultLanguage="dart">
+```dart
+const RemixButton({
+  Key? key,
+  required String label,
+  IconData? leadingIcon,
+  IconData? trailingIcon,
+  RemixButtonTextBuilder? textBuilder,
+  RemixButtonIconBuilder? leadingIconBuilder,
+  RemixButtonIconBuilder? trailingIconBuilder,
+  RemixButtonLoadingBuilder? loadingBuilder,
+  bool loading = false,
+  bool enabled = true,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  bool enableFeedback = true,
+  String? semanticLabel,
+  String? semanticHint,
+  bool excludeSemantics = false,
+  MouseCursor mouseCursor = SystemMouseCursors.click,
+  RemixButtonStyle style = const RemixButtonStyle.create(),
+  RemixButtonSpec? styleSpec,
+})
+```
+</CodeGroup>
+
+
+## Properties
+### Widget Properties
+
+#### `style` → `RemixButtonStyle`
+
+Optional. The style configuration for the button. Customize colors, sizing, spacing, and state-based styling.
+
+#### `styleSpec` → `RemixButtonSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `label` → `String`
+
+**Required**. The label text to display in the button. If [textBuilder] is provided, this is ignored.
+
+#### `leadingIcon` → `IconData?`
+
+Optional. The leading icon to display before the label. If [leadingIconBuilder] is provided, this is ignored.
+
+#### `trailingIcon` → `IconData?`
+
+Optional. The trailing icon to display after the label. If [trailingIconBuilder] is provided, this is ignored.
+
+#### `textBuilder` → `RemixButtonTextBuilder?`
+
+Optional. Builder for customizing the text rendering.
+
+#### `leadingIconBuilder` → `RemixButtonIconBuilder?`
+
+Optional. Builder for customizing the leading icon rendering.
+
+#### `trailingIconBuilder` → `RemixButtonIconBuilder?`
+
+Optional. Builder for customizing the trailing icon rendering.
+
+#### `loadingBuilder` → `RemixButtonLoadingBuilder?`
+
+Optional. Builder for customizing the loading state rendering.
+
+#### `autofocus` → `bool`
+
+Optional. Whether the button should automatically request focus when it is created.
+
+#### `loading` → `bool`
+
+Optional. Whether the button is in a loading state.  When true, the button will display a spinner and become non-interactive. The spinner can be customized via [spinnerBuilder].
+
+#### `enabled` → `bool`
+
+Optional. Whether the button is enabled.  When false, the button will be disabled regardless of other conditions. Defaults to true.
+
+#### `enableFeedback` → `bool`
+
+Optional. Whether to provide feedback when the button is pressed.  Defaults to true.
+
+#### `onPressed` → `VoidCallback?`
+
+**Required**. Callback function called when the button is pressed.  If null, the button will be considered disabled.
+
+#### `onLongPress` → `VoidCallback?`
+
+Optional. Callback function called when the button is long pressed.
+
+#### `focusNode` → `FocusNode?`
+
+Optional. Optional focus node to control the button's focus behavior.
+
+#### `semanticLabel` → `String?`
+
+Optional. The semantic label for the button.  Used by screen readers to describe the button.
+
+#### `semanticHint` → `String?`
+
+Optional. The semantic hint for the button.  Provides additional context about what will happen when the button is activated.
+
+#### `excludeSemantics` → `bool`
+
+Optional. Whether to exclude child semantics.  When true, the semantics of child widgets will be excluded. Defaults to false.
+
+#### `mouseCursor` → `MouseCursor`
+
+Optional. Cursor when hovering over the button.  Defaults to [SystemMouseCursors.click] when enabled.
+
+
+### Style Methods
+
+#### `label(TextStyler value)`
+
+Configures the label text style using a TextStyler.
+
+#### `icon(IconStyler value)`
+
+Configures the icon style using an IconStyler.
+
+#### `spinner(RemixSpinnerStyle value)`
+
+Configures the loading spinner style.
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets padding
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets margin
+
+#### `decoration(DecorationMix value)`
+
+Sets decoration
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `spacing(double value)`
+
+Sets item spacing between icon and label (Flex spacing)
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets constraints
+
+#### `animate(AnimationConfig animation)`
+
+Configures implicit animation for style transitions.
+
+#### `flex(FlexStyler value)`
+
+Configures the flex layout properties.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)`
+
+Applies a matrix transformation to the component.
+
+#### `color(Color value)`
+
+Sets background color.
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `labelTextStyle(TextStyleMix value)`
+
+Sets label/text style using TextStyleMix directly
+
+#### `labelColor(Color value)`
+
+Sets label/text color
+
+#### `labelFontSize(double value)`
+
+Sets label/text font size
+
+#### `labelFontWeight(FontWeight value)`
+
+Sets label/text font weight
+
+#### `labelFontStyle(FontStyle value)`
+
+Sets label/text font style (italic/normal)
+
+#### `labelLetterSpacing(double value)`
+
+Sets label/text letter spacing
+
+#### `labelDecoration(TextDecoration value)`
+
+Sets label/text decoration (underline, strikethrough, etc.)
+
+#### `labelFontFamily(String value)`
+
+Sets label/text font family
+
+#### `labelHeight(double value)`
+
+Sets label/text line height
+
+#### `labelWordSpacing(double value)`
+
+Sets label/text word spacing
+
+#### `labelDecorationColor(Color value)`
+
+Sets label/text decoration color
+
+#### `iconColor(Color value)`
+
+Sets icon color
+
+#### `iconSize(double value)`
+
+Sets icon size
+
+#### `iconOpacity(double value)`
+
+Sets icon opacity
+
+#### `iconWeight(double value)`
+
+Sets icon weight (useful for variable icons like Material Symbols)
+
+#### `iconGrade(double value)`
+
+Sets icon grade (useful for Material Icons)
+
+#### `iconFill(double value)`
+
+Sets icon fill (useful for Material Icons filled variants)
+
+#### `iconOpticalSize(double value)`
+
+Sets icon optical size (useful for Material Icons)
+
+#### `iconBlendMode(BlendMode value)`
+
+Sets icon blend mode
+
+#### `iconTextDirection(TextDirection value)`
+
+Sets icon text direction
+
+#### `iconShadows(List<ShadowMix> value)`
+
+Sets icon shadows
+
+#### `iconShadow(ShadowMix value)`
+
+Sets single icon shadow
+
+#### `spinnerIndicatorColor(Color value)`
+
+Sets spinner indicator color
+
+#### `spinnerTrackColor(Color value)`
+
+Sets spinner track color
+
+#### `spinnerSize(double value)`
+
+Sets spinner size
+
+#### `spinnerStrokeWidth(double value)`
+
+Sets spinner stroke width
+
+#### `spinnerTrackStrokeWidth(double value)`
+
+Sets spinner track stroke width
+
+#### `spinnerDuration(Duration value)`
+
+Sets spinner animation duration
+
+#### `spinnerFast()`
+
+Sets spinner animation to fast (500ms)
+
+#### `spinnerNormal()`
+
+Sets spinner animation to normal (1000ms)
+
+#### `spinnerSlow()`
+
+Sets spinner animation to slow (1500ms)
+

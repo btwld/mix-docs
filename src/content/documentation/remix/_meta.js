@@ -1,3 +1,5 @@
 export default {
-    index: "Introduction",
-};
+    index: 'Getting Started',
+    fortal: 'Fortal',
+    components: 'Components',
+}

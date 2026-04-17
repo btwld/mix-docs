@@ -1,0 +1,425 @@
+---
+title: Menu
+description: A dropdown menu component for displaying a list of actions or options
+keywords: [flutter, remix, menu, dropdown, context-menu, popup, overlay]
+---
+
+A dropdown menu component for displaying actions or options in an overlay.
+
+## When to use this
+
+- **Action menus**: Show a list of available actions for a selected item
+- **Context menus**: Provide contextual options based on user selection
+- **Navigation**: Create dropdown navigation menus
+- **Settings**: Display configuration options in a compact dropdown
+
+## Basic implementation
+
+<CodeGroup title="Basic implementation" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class MenuExample extends StatefulWidget {
+  const MenuExample({super.key});
+
+  @override
+  State<MenuExample> createState() => _MenuExampleState();
+}
+
+class _MenuExampleState extends State<MenuExample> {
+  final controller = MenuController();
+
+  @override
+  Widget build(BuildContext context) {
+    return RemixMenu<String>(
+      trigger: const RemixMenuTrigger(label: 'Open Menu'),
+      items: [
+        RemixMenuItem(
+          value: 'History',
+          leadingIcon: Icons.history,
+          label: 'History',
+          style: menuItemStyle,
+        ),
+        RemixMenuItem(
+          value: 'Settings',
+          leadingIcon: Icons.settings,
+          label: 'Settings',
+          style: menuItemStyle,
+        ),
+        const RemixMenuDivider(),
+        RemixMenuItem(
+          value: 'Logout',
+          leadingIcon: Icons.logout,
+          label: 'Logout',
+          style: menuItemStyle.onHovered(
+            RemixMenuItemStyle()
+                .color(Colors.redAccent.withValues(alpha: 0.05))
+                .label(TextStyler().color(Colors.redAccent))
+                .leadingIcon(IconStyler().color(Colors.redAccent)),
+          ),
+        ),
+      ],
+      positioning: const OverlayPositionConfig(
+        offset: Offset(0, 8),
+        followerAnchor: Alignment.topCenter,
+        targetAnchor: Alignment.bottomCenter,
+      ),
+      style: menuStyle,
+      onSelected: (value) {
+        print('Selected: $value');
+      },
+      controller: controller,
+    );
+  }
+
+  RemixMenuStyle get menuStyle {
+    return RemixMenuStyle()
+        .trigger(
+          RemixMenuTriggerStyle()
+              .padding(EdgeInsetsMix.symmetric(horizontal: 14))
+              .decoration(
+                BoxDecorationMix()
+                    .color(Colors.white)
+                    .borderRadius(BorderRadiusMix.all(const Radius.circular(12)))
+                    .border(BorderMix.all(BorderSideMix(color: Colors.blueGrey.shade100)))
+                    .boxShadow([
+                  BoxShadowMix(
+                    color: Colors.blueGrey.withValues(alpha: 0.1),
+                    blurRadius: 3,
+                    offset: const Offset(0, 3),
+                  ),
+                ]),
+              )
+              .constraints(BoxConstraintsMix(minHeight: 40))
+              .label(
+                TextStyler()
+                    .color(Colors.blueGrey.shade700)
+                    .fontWeight(FontWeight.w400),
+              ),
+        )
+        .overlay(
+          FlexBoxStyler(
+            padding: EdgeInsetsMix.all(12),
+            decoration: BoxDecorationMix(
+              color: Colors.white,
+              borderRadius: BorderRadiusMix.all(const Radius.circular(12)),
+              border: BorderMix.all(BorderSideMix(color: Colors.blueGrey.shade100)),
+              boxShadow: [
+                BoxShadowMix(
+                  color: Colors.blueGrey.withValues(alpha: 0.1),
+                  blurRadius: 3,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+          ),
+        );
+  }
+
+  RemixMenuItemStyle get menuItemStyle {
+    return RemixMenuItemStyle()
+        .paddingAll(6)
+        .leadingIcon(IconStyler().size(20).color(Colors.blueGrey.shade800))
+        .spacing(8)
+        .borderRadiusAll(const Radius.circular(8))
+        .label(TextStyler().color(Colors.blueGrey.shade800))
+        .onHovered(RemixMenuItemStyle().color(Colors.blueGrey.shade50));
+  }
+}
+```
+</CodeGroup>
+
+## Fortal styles
+
+Remix includes Fortal-themed style helpers for this component:
+
+<CodeGroup title="Fortal base style" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class FortalMenuExample extends StatelessWidget {
+  const FortalMenuExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RemixMenu<String>(
+      trigger: const RemixMenuTrigger(label: 'Options'),
+      items: [
+        RemixMenuItem(
+          value: 'edit',
+          label: 'Edit',
+          leadingIcon: Icons.edit,
+          style: FortalMenuItemStyle.base(),
+        ),
+        RemixMenuItem(
+          value: 'delete',
+          label: 'Delete',
+          leadingIcon: Icons.delete,
+          style: FortalMenuItemStyle.base(),
+        ),
+      ],
+      style: FortalMenuStyle.base(),
+      onSelected: (value) => print(value),
+    );
+  }
+}
+```
+</CodeGroup>
+
+<Info>
+  See the [FortalMenuStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/menu/fortal_menu_styles.dart) for all available options.
+</Info>
+
+## Constructor
+<CodeGroup title="Constructor" defaultLanguage="dart">
+```dart
+const RemixMenu({
+  Key? key,
+  required RemixMenuTrigger trigger,
+  required List<RemixMenuItemData<T>> items,
+  MenuController? controller,
+  ValueChanged<T>? onSelected,
+  VoidCallback? onOpen,
+  VoidCallback? onClose,
+  VoidCallback? onCanceled,
+  RawMenuAnchorOpenRequestedCallback? onOpenRequested,
+  RawMenuAnchorCloseRequestedCallback? onCloseRequested,
+  bool consumeOutsideTaps = true,
+  bool useRootOverlay = false,
+  bool closeOnClickOutside = true,
+  FocusNode? triggerFocusNode,
+  OverlayPositionConfig positioning = const OverlayPositionConfig(),
+  RemixMenuStyle style = const RemixMenuStyle.create(),
+})
+```
+</CodeGroup>
+
+
+## Properties
+### Widget Properties
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `trigger` → `RemixMenuTrigger`
+
+**Required**. The trigger data that defines the menu's button.
+
+#### `items` → `List<RemixMenuItemData<T>>`
+
+**Required**. The list of menu items and dividers. Use [RemixMenuItem] for selectable items and [RemixMenuDivider] for separators.
+
+#### `controller` → `MenuController?`
+
+Optional. Optional controller for programmatic control of the menu state. If not provided, an internal controller will be created automatically.
+
+#### `onSelected` → `ValueChanged<T>?`
+
+Optional. Called when an item is selected.
+
+#### `onOpen` → `VoidCallback?`
+
+Optional. Called when the menu opens.
+
+#### `onClose` → `VoidCallback?`
+
+Optional. Called when the menu closes.
+
+#### `onCanceled` → `VoidCallback?`
+
+Optional. Called when the menu closes without a selection.
+
+#### `onOpenRequested` → `RawMenuAnchorOpenRequestedCallback?`
+
+Optional. Open/close interceptors (for example, to drive animations).
+
+#### `onCloseRequested` → `RawMenuAnchorCloseRequestedCallback?`
+
+Optional. 
+
+#### `consumeOutsideTaps` → `bool`
+
+Optional. Whether outside taps on the trigger are consumed.
+
+#### `useRootOverlay` → `bool`
+
+Optional. Whether to target the root overlay instead of the nearest ancestor.
+
+#### `closeOnClickOutside` → `bool`
+
+Optional. Whether taps outside the overlay close the menu.
+
+#### `triggerFocusNode` → `FocusNode?`
+
+Optional. Optional focus node for the trigger.
+
+#### `positioning` → `OverlayPositionConfig`
+
+Optional. Overlay positioning configuration.
+
+#### `style` → `RemixMenuStyle`
+
+Optional. The style configuration for the menu.
+
+
+### Style Methods
+
+#### `label(TextStyler value)`
+
+Configures the label text style using a TextStyler.
+
+#### `leadingIcon(IconStyler value)`
+
+Configures the leading icon style.
+
+#### `trailingIcon(IconStyler value)`
+
+Configures the trailing icon style.
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets the container padding.
+
+#### `color(Color value)`
+
+Sets background color.
+
+#### `size(double width, double height)`
+
+Sets the component size.
+
+#### `borderRadius(BorderRadiusGeometryMix radius)`
+
+Sets the border radius.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `decoration(DecorationMix value)`
+
+Sets the container decoration.
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets the container margin.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)`
+
+Applies a matrix transformation to the component.
+
+#### `flex(FlexStyler value)`
+
+Configures the flex layout properties.
+
+#### `animate(AnimationConfig animation)`
+
+Configures implicit animation for style transitions.
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `labelTextStyle(TextStyleMix value)`
+
+Sets label/text style using TextStyleMix directly
+
+#### `labelColor(Color value)`
+
+Sets label/text color
+
+#### `labelFontSize(double value)`
+
+Sets label/text font size
+
+#### `labelFontWeight(FontWeight value)`
+
+Sets label/text font weight
+
+#### `labelFontStyle(FontStyle value)`
+
+Sets label/text font style (italic/normal)
+
+#### `labelLetterSpacing(double value)`
+
+Sets label/text letter spacing
+
+#### `labelDecoration(TextDecoration value)`
+
+Sets label/text decoration (underline, strikethrough, etc.)
+
+#### `labelFontFamily(String value)`
+
+Sets label/text font family
+
+#### `labelHeight(double value)`
+
+Sets label/text line height
+
+#### `labelWordSpacing(double value)`
+
+Sets label/text word spacing
+
+#### `labelDecorationColor(Color value)`
+
+Sets label/text decoration color
+
+#### `icon(IconStyler value)`
+
+Configures the icon style using an IconStyler.
+
+#### `iconColor(Color value)`
+
+Sets icon color
+
+#### `iconSize(double value)`
+
+Sets icon size
+
+#### `iconOpacity(double value)`
+
+Sets icon opacity
+
+#### `iconWeight(double value)`
+
+Sets icon weight (useful for variable icons like Material Symbols)
+
+#### `iconGrade(double value)`
+
+Sets icon grade (useful for Material Icons)
+
+#### `iconFill(double value)`
+
+Sets icon fill (useful for Material Icons filled variants)
+
+#### `iconOpticalSize(double value)`
+
+Sets icon optical size (useful for Material Icons)
+
+#### `iconBlendMode(BlendMode value)`
+
+Sets icon blend mode
+
+#### `iconTextDirection(TextDirection value)`
+
+Sets icon text direction
+
+#### `iconShadows(List<ShadowMix> value)`
+
+Sets icon shadows
+
+#### `iconShadow(ShadowMix value)`
+
+Sets single icon shadow
+
