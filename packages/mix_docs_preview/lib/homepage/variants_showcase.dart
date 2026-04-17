@@ -14,7 +14,7 @@ class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // #docregion showcase
-    final cardStyle = BoxStyler()
+    final box = BoxStyler()
         .size(120, 120)
         .borderRadius(.circular(16))
         .color(Colors.cyan)
@@ -23,7 +23,7 @@ class Example extends StatelessWidget {
         .scale(1)
         .onHovered(.color(Colors.cyanAccent).scale(1.2));
 
-    return cardStyle(
+    return box(
       child: const Text(
         'Hover',
         style: TextStyle(color: Colors.white, fontSize: 16),

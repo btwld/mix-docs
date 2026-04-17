@@ -15,12 +15,12 @@ class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // #docregion showcase
-    final boxStyle = BoxStyler()
+    final box = BoxStyler()
         .size(120, 120)
         .borderRadius(.circular(16))
         .color(Colors.deepPurple);
 
-    return boxStyle();
+    return box();
     // #enddocregion showcase
   }
 }

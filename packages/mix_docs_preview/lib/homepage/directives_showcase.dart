@@ -15,26 +15,13 @@ class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // #docregion showcase
-    final titleStyle = TextStyler()
+    final title = TextStyler()
         .fontSize(20)
         .fontWeight(.w700)
         .color(Colors.white)
         .uppercase();
 
-    final subtitleStyle = TextStyler()
-        .fontSize(14)
-        .color(Colors.white70)
-        .capitalize();
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        titleStyle('hello world'),
-        const SizedBox(height: 4),
-        subtitleStyle('style transforms built in'),
-      ],
-    );
+    return title('hello world');
     // #enddocregion showcase
   }
 }
