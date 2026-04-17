@@ -4,6 +4,7 @@ import 'nextra-theme-docs/style.css'
 import '../../globals.css'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
+import MixRemixSwitcherMount from '../../components/MixRemixSwitcherMount'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -106,6 +107,7 @@ export default async function RootLayout({ children }) {
                         defaultOpen: true,
                     }}
                 >
+                    <MixRemixSwitcherMount />
                     {children}
                 </Layout>
             </body>

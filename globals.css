@@ -137,3 +137,14 @@ nav a, aside a, [role="complementary"] a {
     margin: 0 !important;
     padding: 0 !important;
 }
+
+/* Mix/Remix sidebar switcher: hide the inactive product's top-level group.
+   Top-level folders in Nextra render as <li><button data-href="..."> at the
+   first level of .nextra-sidebar. We hide the <li> that wraps the inactive
+   product's button. */
+html[data-product="mix"] .nextra-sidebar li:has(> button[data-href="/documentation/remix"]) {
+    display: none !important;
+}
+html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/mix"]) {
+    display: none !important;
+}
