@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/assets/logo_light.png" alt="Mix logo" width="120" />
+<img src="public/assets/logo_light.png" alt="Mix logo" width="200" />
 
 # Mix Docs
 
