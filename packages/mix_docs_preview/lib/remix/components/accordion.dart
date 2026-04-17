@@ -1,0 +1,114 @@
+/// RemixAccordion Example
+///
+/// Collapsible FAQ list built from [RemixAccordion] items inside a group.
+/// Inspired by alignui — https://www.alignui.com/docs/v1.2/ui/accordion
+
+library;
+
+import 'package:flutter/material.dart';
+import 'package:mix_docs_preview/helpers.dart';
+import 'package:remix/remix.dart';
+
+void main() {
+  runMixApp(const Example());
+}
+
+class Example extends StatefulWidget {
+  const Example({super.key});
+
+  @override
+  State<Example> createState() => _ExampleState();
+}
+
+class _ExampleState extends State<Example> {
+  final controller = RemixAccordionController(min: 0, max: 1);
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 400,
+      child: FlexBox(
+        style: FlexBoxStyler()
+            .direction(.vertical)
+            .spacing(24)
+            .mainAxisSize(.min),
+        children: [
+          RemixAccordionGroup(
+            controller: controller,
+            child: ColumnBox(
+              style: FlexBoxStyler().spacing(16),
+              children: [
+                RemixAccordion(
+                  value: 'accordion1',
+                  title: 'How do I update my account information?',
+                  leadingIcon: Icons.help_outline,
+                  style: itemStyle,
+                  child: const Text(
+                    'Insert the accordion description here. It would look better as two lines of text.',
+                  ),
+                ),
+                RemixAccordion(
+                  value: 'accordion2',
+                  title: 'What payment methods are accepted?',
+                  leadingIcon: Icons.help_outline,
+                  style: itemStyle,
+                  child: const Text(
+                    'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.',
+                  ),
+                ),
+                RemixAccordion(
+                  value: 'accordion3',
+                  title: 'How can I track my order?',
+                  leadingIcon: Icons.help_outline,
+                  style: itemStyle,
+                  child: const Text(
+                    'You can track your order status in the "My Orders" section of your account.',
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  RemixAccordionStyle get itemStyle {
+    return RemixAccordionStyle()
+        .content(BoxStyler().paddingX(16).paddingTop(8))
+        .wrap(WidgetModifierConfig.clipRRect(borderRadius: .circular(8)))
+        .paddingX(16)
+        .paddingY(14)
+        .borderRounded(8)
+        .onHovered(RemixAccordionStyle().color(Colors.grey.shade100))
+        .decoration(
+          BoxDecorationMix(
+            color: Colors.white,
+            border: BoxBorderMix.all(
+              BorderSideMix().color(Colors.grey.shade300).width(1),
+            ),
+            borderRadius: BorderRadiusMix.circular(8),
+          ),
+        )
+        .trigger(
+          FlexBoxStyler()
+              .direction(.horizontal)
+              .mainAxisAlignment(.spaceBetween)
+              .spacing(12),
+        )
+        .leadingIcon(IconStyler().color(Colors.grey.shade700).size(20))
+        .title(
+          TextStyler()
+              .color(Colors.grey.shade900)
+              .fontWeight(FontWeight.w500)
+              .fontSize(14),
+        )
+        .trailingIcon(IconStyler().color(Colors.grey.shade700).size(20));
+  }
+}

@@ -163,6 +163,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.1-alpha.1"
+  naked_ui:
+    dependency: transitive
+    description:
+      name: naked_ui
+      sha256: "7c908f67a5b37d6434183bf261d0adc9cd53a52b62e58dca6f1e2e78929b29f7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0-beta.7"
   path:
     dependency: transitive
     description:
@@ -171,6 +179,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  prism:
+    dependency: transitive
+    description:
+      name: prism
+      sha256: cb5b80867392ed138ca7651d55c1c0013903f20355e3e015e2f6be5c1dcf7020
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  prism_flutter:
+    dependency: transitive
+    description:
+      name: prism_flutter
+      sha256: c915d488b864d92dc605091f28e631748a723f77d5c755d08dc4b70726a7bef4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  remix:
+    dependency: "direct main"
+    description:
+      name: remix
+      sha256: ada40eeb64342eeeb6b294598b147c38f00baf581f1936931e90dfae6e4b8311
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
