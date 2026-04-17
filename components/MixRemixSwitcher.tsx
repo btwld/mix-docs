@@ -10,11 +10,22 @@ type ProductEntry = {
     id: Product
     label: string
     href: string
+    logo: string
 }
 
 const PRODUCTS: ProductEntry[] = [
-    { id: 'mix', label: 'Mix', href: '/documentation/mix/overview/introduction' },
-    { id: 'remix', label: 'Remix', href: '/documentation/remix' },
+    {
+        id: 'mix',
+        label: 'Mix',
+        href: '/documentation/mix/overview/introduction',
+        logo: '/assets/logo_mix_sidebar.png',
+    },
+    {
+        id: 'remix',
+        label: 'Remix',
+        href: '/documentation/remix',
+        logo: '/assets/logo_remix_sidebar.png',
+    },
 ]
 
 export function getActiveProduct(pathname: string | null): Product {
@@ -33,9 +44,9 @@ export default function MixRemixSwitcher() {
         <nav
             aria-label="Product"
             data-mix-remix-switcher=""
-            className="mix-remix-switcher flex flex-col gap-1 px-3 py-3 border-b border-[var(--mix-border,rgba(255,255,255,0.08))]"
+            className="mix-remix-switcher flex flex-col gap-0.5 px-2 pt-2 pb-3"
         >
-            {PRODUCTS.map(({ id, label, href }) => {
+            {PRODUCTS.map(({ id, label, href, logo }) => {
                 const isActive = id === active
                 return (
                     <Link
@@ -44,14 +55,22 @@ export default function MixRemixSwitcher() {
                         aria-current={isActive ? 'page' : undefined}
                         data-active={isActive ? 'true' : 'false'}
                         className={[
-                            'relative flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors',
-                            'border-l-2',
+                            'flex items-center px-2.5 py-2 rounded-md group transition-colors duration-150',
                             isActive
-                                ? 'border-white text-white bg-white/5'
-                                : 'border-transparent text-[var(--mix-text-muted,#9ca3af)] hover:text-white hover:bg-white/5',
+                                ? 'bg-white/5 hover:bg-white/10'
+                                : 'hover:bg-white/5',
                         ].join(' ')}
                     >
-                        {label}
+                        <img
+                            src={logo}
+                            alt={label}
+                            className={[
+                                'h-6 w-auto transition-[filter,opacity] duration-150',
+                                isActive
+                                    ? 'filter-none'
+                                    : '[filter:brightness(0)_invert(1)] opacity-60 group-hover:opacity-100 group-hover:filter-none',
+                            ].join(' ')}
+                        />
                     </Link>
                 )
             })}

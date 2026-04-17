@@ -84,6 +84,11 @@ export default async function RootLayout({ children }) {
             className={`dark ${inter.variable} ${jetbrainsMono.variable}`}
         >
             <Head />
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `(()=>{try{var p=location.pathname;document.documentElement.setAttribute('data-product',p.startsWith('/documentation/remix')?'remix':'mix')}catch(e){}})();`,
+                }}
+            />
             <body>
                 <Layout
                     navbar={navbar}

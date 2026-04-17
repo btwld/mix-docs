@@ -31,6 +31,16 @@ html.dark {
     --mix-gradient-heading: linear-gradient(to bottom right, #fff, #a1a1aa);
 }
 
+/* Remix product: override brand accent to green */
+html.dark[data-product="remix"] {
+    --nextra-primary-hue: 140deg;
+    --nextra-primary-saturation: 90%;
+    --nextra-primary-lightness: 50%;
+
+    --mix-accent: #22C55E;
+    --mix-accent-low: rgba(34, 197, 94, 0.1);
+}
+
 body {
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -147,6 +157,21 @@ html[data-product="mix"] .nextra-sidebar li:has(> button[data-href="/documentati
 }
 html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/mix"]) {
     display: none !important;
+}
+
+/* Flatten the active product's folder: hide its wrapping button so the
+   section children appear as top-level entries below the switcher. */
+html[data-product="mix"] .nextra-sidebar li > button[data-href="/documentation/mix"],
+html[data-product="remix"] .nextra-sidebar li > button[data-href="/documentation/remix"] {
+    display: none !important;
+}
+
+/* Un-indent the active product's section list so it aligns with the sidebar. */
+html[data-product="mix"] .nextra-sidebar li:has(> button[data-href="/documentation/mix"]) > ul,
+html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/remix"]) > ul {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    border-left: none !important;
 }
 
 /* Strip Nextra's default separator padding/border around the switcher row
