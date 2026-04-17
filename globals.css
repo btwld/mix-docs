@@ -33,12 +33,12 @@ html.dark {
 
 /* Remix product: override brand accent to green */
 html.dark[data-product="remix"] {
-    --nextra-primary-hue: 140deg;
-    --nextra-primary-saturation: 90%;
-    --nextra-primary-lightness: 50%;
+    --nextra-primary-hue: 121deg;
+    --nextra-primary-saturation: 100%;
+    --nextra-primary-lightness: 46%;
 
-    --mix-accent: #22C55E;
-    --mix-accent-low: rgba(34, 197, 94, 0.1);
+    --mix-accent: #00EB03;
+    --mix-accent-low: rgba(0, 235, 3, 0.1);
 }
 
 body {
@@ -174,9 +174,3 @@ html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documenta
     border-left: none !important;
 }
 
-/* Strip Nextra's default separator padding/border around the switcher row
-   so the MixRemixSwitcher component can own its own spacing and divider. */
-.nextra-sidebar li:has(> .mix-remix-switcher) {
-    padding: 0 !important;
-    margin: 0 !important;
-}

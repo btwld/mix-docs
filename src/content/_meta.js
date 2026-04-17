@@ -13,6 +13,19 @@ export default {
             typesetting: "article",
         }
     },
+    remix: {
+        title: 'Remix',
+        type: 'page',
+        display: 'hidden',
+        theme: {
+            layout: 'full',
+            sidebar: false,
+            breadcrumb: false,
+            toc: false,
+            timestamp: false,
+            typesetting: "article",
+        }
+    },
     version: {
         title: 'Version',
         type: 'menu',
