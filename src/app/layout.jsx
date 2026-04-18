@@ -83,7 +83,6 @@ export default async function RootLayout({ children }) {
             <body>
                 <Layout
                     navbar={navbar}
-                    banner={<RemixBanner />}
                     pageMap={await getPageMap()}
                     docsRepositoryBase="https://github.com/btwld/mix/tree/main/website"
                     footer={footer}
@@ -105,6 +104,7 @@ export default async function RootLayout({ children }) {
                 >
                     {children}
                 </Layout>
+                <RemixBanner />
             </body>
         </html>
     )
