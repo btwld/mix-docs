@@ -56,6 +56,21 @@ const PRODUCTS = [
     },
 ]
 
+const DOCS_SECTIONS: Record<'mix' | 'remix', { label: string; href: string }[]> = {
+    mix: [
+        { label: 'Overview', href: '/documentation/mix/overview/introduction' },
+        { label: 'Guides', href: '/documentation/mix/guides/styling' },
+        { label: 'Widgets', href: '/documentation/mix/widgets/stylewidgets' },
+        { label: 'Tutorials', href: '/documentation/mix/tutorials/creating-a-widget' },
+        { label: 'Ecosystem', href: '/documentation/mix/ecosystem/mix-tailwinds' },
+    ],
+    remix: [
+        { label: 'Getting Started', href: '/documentation/remix' },
+        { label: 'Fortal', href: '/documentation/remix/fortal' },
+        { label: 'Components', href: '/documentation/remix/components/accordion' },
+    ],
+}
+
 function VersionMenu() {
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
@@ -190,9 +205,13 @@ function ProductMenu() {
 function MobileDrawer({
     onClose,
     docsHref,
+    activeProduct,
+    isDocsActive,
 }: {
     onClose: () => void
     docsHref: string
+    activeProduct: 'mix' | 'remix'
+    isDocsActive: boolean
 }) {
     return (
         <div className="fixed inset-0 z-[60] md:hidden">
@@ -230,12 +249,29 @@ function MobileDrawer({
                             {product.label}
                         </Link>
                     ))}
-                    <Link
-                        href={docsHref}
-                        className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
-                    >
-                        Docs
-                    </Link>
+                    {isDocsActive ? (
+                        <>
+                            <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
+                                Docs
+                            </div>
+                            {DOCS_SECTIONS[activeProduct].map((section) => (
+                                <Link
+                                    key={section.href}
+                                    href={section.href}
+                                    className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                                >
+                                    {section.label}
+                                </Link>
+                            ))}
+                        </>
+                    ) : (
+                        <Link
+                            href={docsHref}
+                            className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
+                        >
+                            Docs
+                        </Link>
+                    )}
                     <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
                         Version
                     </div>
@@ -416,6 +452,8 @@ export default function FloatingNavbar() {
                 <MobileDrawer
                     onClose={() => setDrawerOpen(false)}
                     docsHref={docsHref}
+                    activeProduct={activeProduct}
+                    isDocsActive={isDocsActive}
                 />
             )}
         </>

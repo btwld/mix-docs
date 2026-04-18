@@ -32,21 +32,21 @@ Add a top-level constant alongside `PRODUCTS`, `VERSION_ITEMS`, and the existing
 ```ts
 const DOCS_SECTIONS: Record<'mix' | 'remix', { label: string; href: string }[]> = {
     mix: [
-        { label: 'Overview', href: '/documentation/mix/overview' },
-        { label: 'Guides', href: '/documentation/mix/guides' },
-        { label: 'Widgets', href: '/documentation/mix/widgets' },
-        { label: 'Tutorials', href: '/documentation/mix/tutorials' },
-        { label: 'Ecosystem', href: '/documentation/mix/ecosystem' },
+        { label: 'Overview', href: '/documentation/mix/overview/introduction' },
+        { label: 'Guides', href: '/documentation/mix/guides/styling' },
+        { label: 'Widgets', href: '/documentation/mix/widgets/stylewidgets' },
+        { label: 'Tutorials', href: '/documentation/mix/tutorials/creating-a-widget' },
+        { label: 'Ecosystem', href: '/documentation/mix/ecosystem/mix-tailwinds' },
     ],
     remix: [
         { label: 'Getting Started', href: '/documentation/remix' },
         { label: 'Fortal', href: '/documentation/remix/fortal' },
-        { label: 'Components', href: '/documentation/remix/components' },
+        { label: 'Components', href: '/documentation/remix/components/accordion' },
     ],
 }
 ```
 
-Labels and order mirror the `_meta.js` files at `src/content/documentation/mix/_meta.js` and `src/content/documentation/remix/_meta.js`. Hrefs point at each section's landing page; Nextra resolves folder indexes to the first child.
+Labels and order mirror the `_meta.js` files at `src/content/documentation/mix/_meta.js` and `src/content/documentation/remix/_meta.js`. Nextra does not auto-resolve folder paths to their first child (verified via dev server), so each href points at the first leaf page of its section (following the `_meta.js` ordering), matching the existing `MIX_DOCS_URL = '/documentation/mix/overview/introduction'` pattern. Remix `Getting Started` uses `/documentation/remix` because `_meta.js` declares `index: 'Getting Started'`, which Nextra serves at the section root.
 
 ### Component plumbing
 
@@ -72,8 +72,8 @@ No styling beyond existing utility classes. No new imports. No changes to the cl
 
 ## Acceptance Criteria
 
-1. Navigating to any `/documentation/mix/*` route on a narrow viewport and opening the hamburger drawer shows a "Docs" subheader followed by `Overview`, `Guides`, `Widgets`, `Tutorials`, `Ecosystem` — in that order — each linking to `/documentation/mix/<section>`.
-2. Navigating to any `/documentation/remix/*` route (or `/documentation/remix`) on a narrow viewport shows a "Docs" subheader followed by `Getting Started`, `Fortal`, `Components`, linking to `/documentation/remix`, `/documentation/remix/fortal`, `/documentation/remix/components` respectively.
+1. Navigating to any `/documentation/mix/*` route on a narrow viewport and opening the hamburger drawer shows a "Docs" subheader followed by `Overview`, `Guides`, `Widgets`, `Tutorials`, `Ecosystem` — in that order — each linking to the first leaf page of its section (`/documentation/mix/overview/introduction`, `/documentation/mix/guides/styling`, `/documentation/mix/widgets/stylewidgets`, `/documentation/mix/tutorials/creating-a-widget`, `/documentation/mix/ecosystem/mix-tailwinds`).
+2. Navigating to any `/documentation/remix/*` route (or `/documentation/remix`) on a narrow viewport shows a "Docs" subheader followed by `Getting Started`, `Fortal`, `Components`, linking to `/documentation/remix`, `/documentation/remix/fortal`, `/documentation/remix/components/accordion` respectively.
 3. Navigating to `/`, `/remix`, or any non-documentation route on a narrow viewport shows the existing single "Docs" link pointing to the active product's docs URL — no section list.
 4. Tapping any section link navigates to that page and closes the drawer (existing `useEffect` on `pathname` already handles the close).
 5. Desktop layout (≥ `md` breakpoint) is unchanged.
