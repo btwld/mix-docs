@@ -1,7 +1,6 @@
 /// RemixCard Example
 ///
-/// A simple bordered card container.
-/// Inspired by dell — https://www.delldesignsystem.com/components/card/
+/// Fortal card in the surface variant.
 
 library;
 
@@ -10,7 +9,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatelessWidget {
@@ -18,14 +17,9 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RemixCard(style: style);
-  }
-
-  RemixCardStyle get style {
-    return RemixCardStyle()
-        .size(300, 200)
-        .color(Colors.white)
-        .borderRadiusAll(const Radius.circular(4))
-        .borderAll(color: Colors.grey.shade300);
+    return RemixCard(
+      style: FortalCardStyles.surface(),
+      child: const SizedBox(width: 280, height: 160),
+    );
   }
 }

@@ -10,7 +10,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatefulWidget {
@@ -21,7 +21,7 @@ class Example extends StatefulWidget {
 }
 
 class _ExampleState extends State<Example> {
-  final controller = RemixAccordionController(min: 0, max: 1);
+  final controller = RemixAccordionController<String>(min: 0, max: 1);
 
   @override
   void dispose() {
@@ -47,8 +47,7 @@ class _ExampleState extends State<Example> {
                 RemixAccordion(
                   value: 'accordion1',
                   title: 'How do I update my account information?',
-                  leadingIcon: Icons.help_outline,
-                  style: itemStyle,
+                  style: FortalAccordionStyle.base(),
                   child: const Text(
                     'Insert the accordion description here. It would look better as two lines of text.',
                   ),
@@ -56,8 +55,7 @@ class _ExampleState extends State<Example> {
                 RemixAccordion(
                   value: 'accordion2',
                   title: 'What payment methods are accepted?',
-                  leadingIcon: Icons.help_outline,
-                  style: itemStyle,
+                  style: FortalAccordionStyle.base(),
                   child: const Text(
                     'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.',
                   ),
@@ -65,8 +63,7 @@ class _ExampleState extends State<Example> {
                 RemixAccordion(
                   value: 'accordion3',
                   title: 'How can I track my order?',
-                  leadingIcon: Icons.help_outline,
-                  style: itemStyle,
+                  style: FortalAccordionStyle.base(),
                   child: const Text(
                     'You can track your order status in the "My Orders" section of your account.',
                   ),
@@ -81,34 +78,23 @@ class _ExampleState extends State<Example> {
 
   RemixAccordionStyle get itemStyle {
     return RemixAccordionStyle()
-        .content(BoxStyler().paddingX(16).paddingTop(8))
-        .wrap(WidgetModifierConfig.clipRRect(borderRadius: .circular(8)))
-        .paddingX(16)
-        .paddingY(14)
-        .borderRounded(8)
+        .content(BoxStyler().padding(.horizontal(16).top(8)))
+        .wrap(.clipRRect(borderRadius: .circular(8)))
+        .padding(.horizontal(16).vertical(14))
+        .borderRadius(.circular(8))
         .onHovered(RemixAccordionStyle().color(Colors.grey.shade100))
-        .decoration(
-          BoxDecorationMix(
-            color: Colors.white,
-            border: BoxBorderMix.all(
-              BorderSideMix().color(Colors.grey.shade300).width(1),
-            ),
-            borderRadius: BorderRadiusMix.circular(8),
-          ),
-        )
+        .color(Colors.white)
+        .border(.color(Colors.grey.shade300).width(1))
         .trigger(
           FlexBoxStyler()
               .direction(.horizontal)
               .mainAxisAlignment(.spaceBetween)
               .spacing(12),
         )
-        .leadingIcon(IconStyler().color(Colors.grey.shade700).size(20))
+        .leadingIcon(.color(Colors.grey.shade700).size(20))
         .title(
-          TextStyler()
-              .color(Colors.grey.shade900)
-              .fontWeight(FontWeight.w500)
-              .fontSize(14),
+          .color(Colors.grey.shade900).fontWeight(FontWeight.w500).fontSize(14),
         )
-        .trailingIcon(IconStyler().color(Colors.grey.shade700).size(20));
+        .trailingIcon(.color(Colors.grey.shade700).size(20));
   }
 }

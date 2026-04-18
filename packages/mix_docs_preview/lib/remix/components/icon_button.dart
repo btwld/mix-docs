@@ -1,17 +1,15 @@
 /// RemixIconButton Example
 ///
-/// Icon-only buttons including a loading variant with a spinner.
-/// Inspired by Github — https://primer.style/product/components/icon-button/
+/// Fortal icon button variants — solid, soft, surface, outline, and ghost.
 
 library;
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatelessWidget {
@@ -27,39 +25,29 @@ class Example extends StatelessWidget {
         RemixIconButton(
           icon: CupertinoIcons.heart,
           onPressed: () {},
-          style: style,
+          style: FortalIconButtonStyle.solid(),
         ),
         RemixIconButton(
           icon: CupertinoIcons.heart,
           onPressed: () {},
-          style: style,
-          loading: true,
+          style: FortalIconButtonStyle.soft(),
+        ),
+        RemixIconButton(
+          icon: CupertinoIcons.heart,
+          onPressed: () {},
+          style: FortalIconButtonStyle.surface(),
+        ),
+        RemixIconButton(
+          icon: CupertinoIcons.heart,
+          onPressed: () {},
+          style: FortalIconButtonStyle.outline(),
+        ),
+        RemixIconButton(
+          icon: CupertinoIcons.heart,
+          onPressed: () {},
+          style: FortalIconButtonStyle.ghost(),
         ),
       ],
     );
-  }
-
-  RemixIconButtonStyle get style {
-    return RemixIconButtonStyle()
-        .iconColor(Colors.blueGrey.shade700)
-        .iconSize(22)
-        .size(40, 40)
-        .color(Colors.blueGrey.shade50.withValues(alpha: 0.6))
-        .borderAll(color: Colors.blueGrey.shade100, width: 1.5)
-        .borderRadiusAll(const Radius.circular(8))
-        .spinner(
-          RemixSpinnerStyle()
-              .size(22)
-              .strokeWidth(1.3)
-              .indicatorColor(Colors.blueGrey.shade600),
-        )
-        .onHovered(
-          RemixIconButtonStyle()
-              .color(Colors.blueGrey.shade100.withValues(alpha: 0.4)),
-        )
-        .onPressed(
-          RemixIconButtonStyle()
-              .color(Colors.blueGrey.shade100.withValues(alpha: 0.8)),
-        );
   }
 }

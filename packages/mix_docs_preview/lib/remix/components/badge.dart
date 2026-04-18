@@ -1,7 +1,6 @@
 /// RemixBadge Example
 ///
-/// Two circular badges — one with a number label, one with an icon.
-/// Inspired by line — https://designsystem.line.me/LDSG/components/indicators/badge-en
+/// Fortal badge variants — solid, soft, surface, and outline.
 
 library;
 
@@ -10,7 +9,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatelessWidget {
@@ -23,39 +22,11 @@ class Example extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixBadge(label: '8', style: styleLabel),
-        RemixBadge(style: styleIcon, child: const Icon(Icons.camera_alt)),
+        RemixBadge(label: 'Solid', style: FortalBadgeStyles.solid()),
+        RemixBadge(label: 'Soft', style: FortalBadgeStyles.soft()),
+        RemixBadge(label: 'Surface', style: FortalBadgeStyles.surface()),
+        RemixBadge(label: 'Outline', style: FortalBadgeStyles.outline()),
       ],
     );
-  }
-
-  RemixBadgeStyle get styleLabel {
-    return RemixBadgeStyle()
-        .size(24, 24)
-        .wrap(WidgetModifierConfig.clipOval())
-        .label(
-          TextStyler()
-              .fontSize(15)
-              .wrap(WidgetModifierConfig.align(alignment: .center))
-              .fontFeatures([const FontFeature.tabularFigures()]),
-        )
-        .foregroundColor(Colors.greenAccent.shade700)
-        .labelColor(Colors.white)
-        .labelFontWeight(FontWeight.bold)
-        .labelFontSize(15);
-  }
-
-  RemixBadgeStyle get styleIcon {
-    return RemixBadgeStyle()
-        .size(24, 24)
-        .wrap(WidgetModifierConfig.clipOval())
-        .label(
-          TextStyler()
-              .fontSize(15)
-              .wrap(WidgetModifierConfig.align(alignment: .center))
-              .fontFeatures([const FontFeature.tabularFigures()]),
-        )
-        .foregroundColor(Colors.redAccent)
-        .wrap(.iconTheme(color: Colors.white, size: 15));
   }
 }

@@ -1,7 +1,6 @@
 /// RemixCallout Example
 ///
-/// Informational callout with a filled icon slot on the left.
-/// Inspired by design.alberta.ca — https://design.alberta.ca/components/callout
+/// Fortal callout in the surface variant.
 
 library;
 
@@ -10,7 +9,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatelessWidget {
@@ -21,29 +20,7 @@ class Example extends StatelessWidget {
     return RemixCallout(
       text: 'Callout important information for the user.',
       icon: Icons.info_outline,
-      style: style,
+      style: FortalCalloutStyles.surface(),
     );
-  }
-
-  RemixCalloutStyle get style {
-    return RemixCalloutStyle()
-        .backgroundColor(Colors.grey.shade200)
-        .spacing(12)
-        .height(60)
-        .paddingRight(12)
-        .icon(
-          IconStyler()
-              .size(24)
-              .color(Colors.white)
-              .wrap(
-                .box(
-                  BoxStyler()
-                      .color(Colors.blue.shade900)
-                      .paddingX(12)
-                      .height(.infinity),
-                ),
-              ),
-        )
-        .mainAxisSize(.min);
   }
 }

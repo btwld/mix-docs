@@ -1,7 +1,6 @@
 /// RemixCheckbox Example
 ///
-/// Stateful checkbox with filled-on-select styling.
-/// Inspired by Carbon — https://carbondesignsystem.com/components/checkbox/usage/
+/// Stateful Fortal checkbox.
 
 library;
 
@@ -10,7 +9,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatefulWidget {
@@ -32,22 +31,7 @@ class _ExampleState extends State<Example> {
           _isChecked = value ?? false;
         });
       },
-      style: style,
+      style: FortalCheckboxStyles.surface(),
     );
-  }
-
-  RemixCheckboxStyle get style {
-    return RemixCheckboxStyle()
-        .size(24, 24)
-        .icon(IconStyler().size(20).color(Colors.white))
-        .onSelected(
-          RemixCheckboxStyle().color(Colors.grey.shade900),
-        )
-        .borderRadiusAll(const Radius.circular(3))
-        .border(
-          BoxBorderMix.all(
-            BorderSideMix().color(Colors.black87).width(2),
-          ),
-        );
   }
 }
