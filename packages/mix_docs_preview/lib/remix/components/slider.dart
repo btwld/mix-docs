@@ -1,7 +1,6 @@
 /// RemixSlider Example
 ///
-/// Horizontal slider with a circular thumb and a subtle shadow.
-/// Inspired by Uber Base — https://base.uber.com/6d2425e9f/p/30cac1-slider
+/// Fortal horizontal slider.
 
 library;
 
@@ -10,7 +9,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatefulWidget {
@@ -29,7 +28,7 @@ class _ExampleState extends State<Example> {
       width: 300,
       child: RemixSlider(
         value: _selectedValue,
-        style: style,
+        style: FortalSliderStyles.surface(),
         onChanged: (value) {
           setState(() {
             _selectedValue = value;
@@ -37,28 +36,5 @@ class _ExampleState extends State<Example> {
         },
       ),
     );
-  }
-
-  RemixSliderStyle get style {
-    return RemixSliderStyle()
-        .thumbSize(const Size(24, 24))
-        .thumb(
-          BoxStyler().shapeCircle().shadow(
-                BoxShadowMix()
-                    .color(Colors.black45)
-                    .blurRadius(4)
-                    .offset(x: 0, y: 2),
-              ),
-        )
-        .thumbColor(Colors.black)
-        .thickness(2)
-        .trackColor(Colors.grey.shade300)
-        .rangeColor(Colors.black)
-        .onDisabled(
-          RemixSliderStyle()
-              .trackColor(Colors.grey.shade300)
-              .rangeColor(Colors.blueGrey)
-              .thumbColor(Colors.white.withValues(alpha: 0.6)),
-        );
   }
 }

@@ -1,6 +1,6 @@
 /// RemixDivider Example
 ///
-/// A horizontal divider with custom thickness, color, and width.
+/// Horizontal Fortal divider.
 
 library;
 
@@ -9,7 +9,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatelessWidget {
@@ -17,11 +17,9 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = RemixDividerStyle()
-        .height(1)
-        .width(300)
-        .color(Colors.grey.shade400);
-
-    return RemixDivider(style: style);
+    return SizedBox(
+      width: 300,
+      child: RemixDivider(style: FortalDividerStyles.base()),
+    );
   }
 }

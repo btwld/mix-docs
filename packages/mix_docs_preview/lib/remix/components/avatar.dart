@@ -10,7 +10,7 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(const Example());
+  runMixApp(FortalScope(child: const Example()));
 }
 
 class Example extends StatelessWidget {
@@ -23,39 +23,9 @@ class Example extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixAvatar(label: 'LF', style: labelStyle),
-        RemixAvatar(icon: Icons.person, style: iconStyle),
-        RemixAvatar(style: image),
+        RemixAvatar(label: 'LF', style: FortalAvatarStyles.soft()),
+        RemixAvatar(icon: Icons.person, style: FortalAvatarStyles.solid()),
       ],
     );
-  }
-
-  RemixAvatarStyle get labelStyle {
-    return RemixAvatarStyle()
-        .textColor(Colors.deepPurpleAccent)
-        .size(50, 50)
-        .shapeCircle()
-        .wrap(WidgetModifierConfig.clipOval())
-        .labelColor(Colors.white)
-        .labelFontWeight(FontWeight.bold)
-        .labelFontSize(15);
-  }
-
-  RemixAvatarStyle get iconStyle {
-    return RemixAvatarStyle()
-        .textColor(Colors.deepOrangeAccent)
-        .size(70, 70)
-        .iconColor(Colors.white)
-        .iconSize(70)
-        .icon(IconStyler().wrap(WidgetModifierConfig.translate(x: 0, y: 12)))
-        .shapeCircle()
-        .wrap(WidgetModifierConfig.clipOval());
-  }
-
-  RemixAvatarStyle get image {
-    return RemixAvatarStyle()
-        .size(90, 90)
-        .backgroundImageUrl('https://i.pravatar.cc/150?img=48')
-        .shapeCircle();
   }
 }

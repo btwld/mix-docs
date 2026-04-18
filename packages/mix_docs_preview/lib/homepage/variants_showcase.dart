@@ -19,16 +19,12 @@ class Example extends StatelessWidget {
         .borderRadius(.circular(16))
         .color(Colors.cyan)
         .alignment(.center)
-        .animate(.easeInOut(220.ms))
+        .textStyle(.color(Colors.white).fontSize(16))
         .scale(1)
-        .onHovered(.color(Colors.cyanAccent).scale(1.2));
+        .onHovered(.color(Colors.cyanAccent).scale(1.2))
+        .animate(.easeInOut(220.ms));
 
-    return box(
-      child: const Text(
-        'Hover',
-        style: TextStyle(color: Colors.white, fontSize: 16),
-      ),
-    );
+    return box(child: StyledText('Hover'));
     // #enddocregion showcase
   }
 }
