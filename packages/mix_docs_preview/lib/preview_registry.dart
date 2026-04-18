@@ -35,6 +35,25 @@ import 'guides/gradients/gradient_linear.dart' as gradient_linear;
 import 'guides/gradients/gradient_radial.dart' as gradient_radial;
 import 'guides/gradients/gradient_sweep.dart' as gradient_sweep;
 import 'overview/comparison/preview_0.dart' as comparison_0;
+import 'remix/components/accordion.dart' as remix_accordion;
+import 'remix/components/avatar.dart' as remix_avatar;
+import 'remix/components/badge.dart' as remix_badge;
+import 'remix/components/button.dart' as remix_button;
+import 'remix/components/callout.dart' as remix_callout;
+import 'remix/components/card.dart' as remix_card;
+import 'remix/components/checkbox.dart' as remix_checkbox;
+import 'remix/components/divider.dart' as remix_divider;
+import 'remix/components/icon_button.dart' as remix_icon_button;
+import 'remix/components/menu.dart' as remix_menu;
+import 'remix/components/progress.dart' as remix_progress;
+import 'remix/components/radio.dart' as remix_radio;
+import 'remix/components/select.dart' as remix_select;
+import 'remix/components/slider.dart' as remix_slider;
+import 'remix/components/spinner.dart' as remix_spinner;
+import 'remix/components/switch.dart' as remix_switch;
+import 'remix/components/tabs.dart' as remix_tabs;
+import 'remix/components/textfield.dart' as remix_textfield;
+import 'remix/components/tooltip.dart' as remix_tooltip;
 import 'overview/introduction/simple_red_box.dart' as simple_red_box;
 import 'overview/getting_started/hello_mix.dart' as getting_started_hello_mix;
 import 'tutorials/creating_a_widget/design_system_button.dart'
@@ -102,6 +121,7 @@ class PreviewRegistry {
   static const String _animations = 'Animations';
   static const String _ecosystem = 'Ecosystem';
   static const String _homepage = 'Homepage';
+  static const String _remixComponents = 'Remix Components';
   static final List<PreviewEntry> _previews = [
     // Documentation embeddings: previewId = doc path (without .mdx) + index
     // overview
@@ -348,6 +368,140 @@ class PreviewRegistry {
           'packages/mix_docs_preview/lib/tutorials/creating_context_variants/preview.dart',
       category: _variants,
       builder: (_) => const context_variant_flag.Example(),
+    ),
+    // remix components
+    PreviewEntry(
+      previewId: 'components/accordion.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/accordion.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_accordion.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/avatar.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/avatar.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_avatar.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/badge.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/badge.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_badge.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/button.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/button.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_button.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/callout.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/callout.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_callout.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/card.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/card.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_card.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/checkbox.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/checkbox.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_checkbox.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/divider.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/divider.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_divider.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/icon_button.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/icon_button.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_icon_button.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/menu.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/menu.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_menu.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/progress.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/progress.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_progress.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/radio.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/radio.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_radio.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/select.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/select.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_select.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/slider.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/slider.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_slider.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/spinner.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/spinner.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_spinner.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/switch.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/switch.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_switch.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/tabs.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/tabs.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_tabs.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/textfield.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/textfield.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_textfield.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/tooltip.0',
+      sourcePath:
+          'packages/mix_docs_preview/lib/remix/components/tooltip.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_tooltip.Example(),
     ),
     // ecosystem
     PreviewEntry(

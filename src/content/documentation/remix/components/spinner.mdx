@@ -1,0 +1,129 @@
+---
+title: Spinner
+description: An animated loading spinner component for indicating ongoing processes
+keywords: [flutter, remix, spinner, loading, progress, indicator, circular]
+---
+
+An animated loading spinner component for indicating ongoing processes.
+
+## When to use this
+
+- **Loading states**: Show that content or data is being loaded
+- **Processing**: Indicate that a background process is running
+- **Async operations**: Display during API calls or file uploads
+- **Indeterminate progress**: When the completion time is unknown
+
+## Basic implementation
+
+<CodeGroup title="Basic implementation" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class SpinnerExample extends StatelessWidget {
+  const SpinnerExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 16,
+      children: [
+        RemixSpinner(style: styleDefault),
+        RemixSpinner(style: styleWithTrack),
+        RemixSpinner(style: styleCustomColors),
+      ],
+    );
+  }
+
+  RemixSpinnerStyle get styleDefault {
+    return RemixSpinnerStyle().indicatorColor(Colors.blue);
+  }
+
+  RemixSpinnerStyle get styleWithTrack {
+    return RemixSpinnerStyle()
+        .indicatorColor(Colors.green)
+        .trackColor(Colors.green.withValues(alpha: 0.2));
+  }
+
+  RemixSpinnerStyle get styleCustomColors {
+    return RemixSpinnerStyle()
+        .indicatorColor(Colors.redAccent)
+        .trackColor(Colors.red.withValues(alpha: 0.15))
+        .duration(2.s);
+  }
+}
+```
+</CodeGroup>
+
+## Interactive preview
+
+<FlutterPreview
+  previewId="components/spinner.0"
+  height={240}
+/>
+
+## Fortal styles
+
+Remix includes Fortal-themed style helpers for this component:
+
+<CodeGroup title="Fortal base style" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class FortalSpinnerExample extends StatelessWidget {
+  const FortalSpinnerExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 16,
+      children: [
+        RemixSpinner(style: FortalSpinnerStyle.solid()),
+        RemixSpinner(style: FortalSpinnerStyle.soft()),
+      ],
+    );
+  }
+}
+```
+</CodeGroup>
+
+<Info>
+  See the [FortalSpinnerStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/spinner/fortal_spinner_styles.dart) for all available options.
+</Info>
+
+## Constructor
+<CodeGroup title="Constructor" defaultLanguage="dart">
+```dart
+const RemixSpinner({
+  Key? key,
+  RemixSpinnerStyle style = const RemixSpinnerStyle.create(),
+  RemixSpinnerSpec? styleSpec,
+})
+```
+</CodeGroup>
+
+
+## Properties
+### Widget Properties
+
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `RemixSpinnerStyle` | Optional. The style configuration for the spinner. Customize colors, sizing, stroke, and animation duration. |
+| `styleSpec` | `RemixSpinnerSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
+| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+
+### Style Methods
+
+| Method | Description |
+|--------|-------------|
+| `size(double value)` | Sets the spinner size (width and height). |
+| `indicatorColor(Color value)` | Sets the color of the spinning indicator. |
+| `trackColor(Color value)` | Sets the color of the track (background ring). |
+| `strokeWidth(double value)` | Sets the stroke width of the indicator. |
+| `trackStrokeWidth(double value)` | Sets the stroke width of the track. |
+| `duration(Duration value)` | Sets the duration of one full rotation. |
+| `animate(AnimationConfig animation)` | Configures implicit animation for style transitions. |
+| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
+

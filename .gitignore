@@ -1,1 +1,30 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# production build artifacts
+public/_pagefind/
+public/previews/
+
+# typescript
+tsconfig.tsbuildinfo
+
+# vercel
 .vercel
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS
+.DS_Store

@@ -1,9 +1,11 @@
 import { Inter, JetBrains_Mono } from 'next/font/google'
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Footer, Layout } from 'nextra-theme-docs'
 import 'nextra-theme-docs/style.css'
 import '../../globals.css'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
+import FloatingNavbar from '../../components/FloatingNavbar'
+import RemixBanner from '../../components/RemixBanner'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -48,19 +50,8 @@ export const metadata = {
     },
 }
 
-const navbar = (
-    <Navbar
-        logo={
-            <img
-                src="/assets/logo_mix.png"
-                alt="Logo"
-                style={{ height: 32, width: 'auto', display: 'inline-block', verticalAlign: 'middle' }}
-            />
-        }
-        chatLink="https://twitter.com/leoafarias"
-        projectLink="https://github.com/btwld/mix"
-    />
-)
+const navbar = <FloatingNavbar />
+
 const footer = (
     <Footer>
         <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-sm text-[var(--mix-text-muted)]">
@@ -84,6 +75,11 @@ export default async function RootLayout({ children }) {
             className={`dark ${inter.variable} ${jetbrainsMono.variable}`}
         >
             <Head />
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `(()=>{try{var p=location.pathname;var r=p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/');document.documentElement.setAttribute('data-product',r?'remix':'mix')}catch(e){}})();`,
+                }}
+            />
             <body>
                 <Layout
                     navbar={navbar}
@@ -108,6 +104,7 @@ export default async function RootLayout({ children }) {
                 >
                     {children}
                 </Layout>
+                <RemixBanner />
             </body>
         </html>
     )

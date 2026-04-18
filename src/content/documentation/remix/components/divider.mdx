@@ -1,0 +1,69 @@
+---
+title: Divider
+---
+
+# RemixDivider
+
+`RemixDivider` is a visual separator for splitting content into distinct sections. It renders a styled line — horizontal or vertical — with configurable thickness, color, spacing, and decoration.
+
+You can use `RemixDividerStyle` to create styles with a fluent API. Example:
+
+```dart
+final style = RemixDividerStyle()
+    .height(1)
+    .width(300)
+    .color(Colors.grey.shade400);
+
+RemixDivider(style: style)
+```
+
+The preview below shows this style applied.
+
+## Interactive Preview
+
+<FlutterPreview
+  previewId="components/divider.0"
+  height={240}
+/>
+
+## Fortal Styles
+
+Remix ships prebuilt Fortal styles for this component. Call one of the helpers and pass it to the `style` parameter:
+
+```dart
+RemixDivider(style: FortalDividerStyle.horizontal())
+RemixDivider(style: FortalDividerStyle.vertical())
+```
+
+See the [FortalDividerStyle source](https://github.com/btwld/remix/blob/main/lib/src/components/divider/fortal_divider_styles.dart) for the full set of options.
+
+## Constructor
+
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `RemixDividerStyle` | Optional, defaults to `const RemixDividerStyle.create()` |
+| `styleSpec` | `RemixDividerSpec?` | Optional (resolved style spec) |
+| `key` | `Key?` | Optional |
+
+## Style API Reference
+
+### Divider Methods
+
+| Method | Description |
+|--------|-------------|
+| `color` | Sets the divider color. |
+| `thickness` | Sets the divider thickness (height for horizontal, width for vertical). |
+| `alignment` | Sets the container alignment. |
+| `decoration` | Sets the container decoration. |
+| `foregroundDecoration` | Sets a foreground decoration painted on top of the component. |
+| `constraints` | Sets size constraints on the component. |
+| `transform` | Applies a matrix transformation to the component. |
+| `animate` | Sets the animation configuration. |
+| `wrap` | Applies widget modifiers such as clipping, opacity, or scaling. |
+
+### Spacing
+
+| Method | Description |
+|--------|-------------|
+| `padding` | Sets container padding. |
+| `margin` | Sets container margin. |

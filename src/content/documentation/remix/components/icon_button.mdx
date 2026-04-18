@@ -1,0 +1,204 @@
+---
+title: IconButton
+description: A button component that displays only an icon, perfect for toolbars and compact interfaces
+keywords: [flutter, remix, icon-button, button, icon, toolbar, action]
+---
+
+A button component that displays only an icon with loading state support.
+
+## When to use this
+
+- **Toolbars**: Create compact action buttons in toolbars and app bars
+- **Icon actions**: Provide quick actions with recognizable icons
+- **Space-constrained interfaces**: Use where space is limited
+- **Floating actions**: Create floating action buttons with custom styling
+
+## Basic implementation
+
+<CodeGroup title="Basic implementation" defaultLanguage="dart">
+```dart
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class IconButtonExample extends StatelessWidget {
+  const IconButtonExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 16,
+      children: [
+        RemixIconButton(
+          icon: CupertinoIcons.heart,
+          onPressed: () {},
+          style: style,
+        ),
+        RemixIconButton(
+          icon: CupertinoIcons.heart,
+          onPressed: () {},
+          style: style,
+          loading: true,
+        ),
+      ],
+    );
+  }
+
+  RemixIconButtonStyle get style {
+    return RemixIconButtonStyle()
+        .iconColor(Colors.blueGrey.shade700)
+        .iconSize(22)
+        .size(40, 40)
+        .color(Colors.blueGrey.shade50.withValues(alpha: 0.6))
+        .borderAll(color: Colors.blueGrey.shade100, width: 1.5)
+        .borderRadiusAll(const Radius.circular(8))
+        .spinner(
+          RemixSpinnerStyle()
+              .size(22)
+              .strokeWidth(1.3)
+              .indicatorColor(Colors.blueGrey.shade600),
+        )
+        .onHovered(
+          RemixIconButtonStyle()
+              .color(Colors.blueGrey.shade100.withValues(alpha: 0.4)),
+        )
+        .onPressed(
+          RemixIconButtonStyle()
+              .color(Colors.blueGrey.shade100.withValues(alpha: 0.8)),
+        );
+  }
+}
+```
+</CodeGroup>
+
+## Interactive preview
+
+<FlutterPreview
+  previewId="components/icon_button.0"
+  height={240}
+/>
+
+## Fortal styles
+
+Remix includes Fortal-themed style helpers for this component:
+
+<CodeGroup title="Fortal variants" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class FortalIconButtonExample extends StatelessWidget {
+  const FortalIconButtonExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 16,
+      children: [
+        RemixIconButton(
+          icon: Icons.add,
+          onPressed: () {},
+          style: FortalIconButtonStyle.solid(),
+        ),
+        RemixIconButton(
+          icon: Icons.edit,
+          onPressed: () {},
+          style: FortalIconButtonStyle.soft(),
+        ),
+        RemixIconButton(
+          icon: Icons.delete,
+          onPressed: () {},
+          style: FortalIconButtonStyle.ghost(),
+        ),
+      ],
+    );
+  }
+}
+```
+</CodeGroup>
+
+<Info>
+  See the [FortalIconButtonStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/icon_button/fortal_icon_button_styles.dart) for all available options.
+</Info>
+
+## Constructor
+<CodeGroup title="Constructor" defaultLanguage="dart">
+```dart
+const RemixIconButton({
+  Key? key,
+  required IconData icon,
+  RemixIconButtonIconBuilder? iconBuilder,
+  RemixIconButtonLoadingBuilder? loadingBuilder,
+  bool loading = false,
+  bool enableFeedback = true,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  String? semanticLabel,
+  String? semanticHint,
+  bool excludeSemantics = false,
+  MouseCursor mouseCursor = SystemMouseCursors.click,
+  RemixIconButtonStyle style = const RemixIconButtonStyle.create(),
+  RemixIconButtonSpec? styleSpec,
+})
+```
+</CodeGroup>
+
+
+## Properties
+### Widget Properties
+
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `RemixIconButtonStyle` | Optional. The style configuration for the icon button. Customize colors, sizing, and state-based styling. |
+| `styleSpec` | `RemixIconButtonSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
+| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+| `icon` | `IconData` | **Required**. The icon to display in the button. |
+| `iconBuilder` | `RemixIconButtonIconBuilder?` | Optional. Builder for customizing the icon rendering. |
+| `loadingBuilder` | `RemixIconButtonLoadingBuilder?` | Optional. Builder for customizing the loading state rendering. |
+| `autofocus` | `bool` | Optional. Whether the button should automatically request focus when it is created. |
+| `loading` | `bool` | Optional. Whether the button is in a loading state. When true, the button will display a spinner and become non-interactive. |
+| `enableFeedback` | `bool` | Optional. Whether to provide feedback when the button is pressed. Defaults to true. |
+| `onPressed` | `VoidCallback?` | **Required**. Callback function called when the button is pressed. If null, the button will be considered disabled. |
+| `onLongPress` | `VoidCallback?` | Optional. Callback function called when the button is long pressed. |
+| `focusNode` | `FocusNode?` | Optional. Optional focus node to control the button's focus behavior. |
+| `semanticLabel` | `String?` | Optional. The semantic label for the button. Used by screen readers to describe the button. |
+| `semanticHint` | `String?` | Optional. The semantic hint for the button. Provides additional context about what will happen when the button is activated. |
+| `excludeSemantics` | `bool` | Optional. Whether to exclude child semantics. When true, the semantics of child widgets will be excluded. Defaults to false. |
+| `mouseCursor` | `MouseCursor` | Optional. Cursor when hovering over the button. Defaults to [SystemMouseCursors.click] when enabled. |
+
+### Style Methods
+
+| Method | Description |
+|--------|-------------|
+| `icon(IconStyler value)` | Configures the icon style using an IconStyler. |
+| `spinner(RemixSpinnerStyle value)` | Configures the loading spinner style. |
+| `color(Color value)` | Sets background color |
+| `padding(EdgeInsetsGeometryMix value)` | Sets padding |
+| `borderRadius(BorderRadiusGeometryMix radius)` | Sets border radius |
+| `iconButtonSize(double size)` | Sets size (width and height - icon buttons are square) |
+| `border(BoxBorderMix value)` | Sets border |
+| `margin(EdgeInsetsGeometryMix value)` | Sets margin |
+| `alignment(Alignment value)` | Sets container alignment |
+| `decoration(DecorationMix value)` | Sets decoration |
+| `constraints(BoxConstraintsMix value)` | Sets constraints |
+| `iconColor(Color value)` | Sets icon color |
+| `iconSize(double value)` | Sets icon size |
+| `width(double value)` | Sets width |
+| `height(double value)` | Sets height |
+| `animate(AnimationConfig animation)` | Configures implicit animation for style transitions. |
+| `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
+| `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
+| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
+| `iconOpacity(double value)` | Sets icon opacity |
+| `iconWeight(double value)` | Sets icon weight (useful for variable icons like Material Symbols) |
+| `iconGrade(double value)` | Sets icon grade (useful for Material Icons) |
+| `iconFill(double value)` | Sets icon fill (useful for Material Icons filled variants) |
+| `iconOpticalSize(double value)` | Sets icon optical size (useful for Material Icons) |
+| `iconBlendMode(BlendMode value)` | Sets icon blend mode |
+| `iconTextDirection(TextDirection value)` | Sets icon text direction |
+| `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
+| `iconShadow(ShadowMix value)` | Sets single icon shadow |
+
