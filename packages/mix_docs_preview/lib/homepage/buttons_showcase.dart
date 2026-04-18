@@ -22,15 +22,17 @@ class Example extends StatelessWidget {
         .animate(.easeInOut(180.ms))
         .scale(1)
         .onPressed(.scale(0.95))
-        .wrap(.defaultText(TextStyler().fontSize(14).fontWeight(.w600)));
+        .textStyle(.fontSize(14).fontWeight(.w600).color(Colors.white));
 
     final solidButtonStyle = buttonStyle
         .color(Colors.deepPurpleAccent)
-        .wrap(.defaultText(.color(Colors.white)));
+        .textStyle(.fontSize(14).fontWeight(.w600).color(Colors.white));
 
     final outlinedButtonStyle = buttonStyle
         .border(.all(.color(Colors.deepPurpleAccent).width(1.5)))
-        .wrap(.defaultText(.color(Colors.deepPurpleAccent)));
+        .textStyle(
+          .fontSize(14).fontWeight(.w600).color(Colors.deepPurpleAccent),
+        );
 
     return Center(
       child: Row(
@@ -38,12 +40,12 @@ class Example extends StatelessWidget {
         children: [
           Pressable(
             onPress: () {},
-            child: solidButtonStyle(child: const Text('Solid')),
+            child: solidButtonStyle(child: StyledText('Solid')),
           ),
           const SizedBox(width: 12),
           Pressable(
             onPress: () {},
-            child: outlinedButtonStyle(child: const Text('Outlined')),
+            child: outlinedButtonStyle(child: StyledText('Outlined')),
           ),
         ],
       ),
