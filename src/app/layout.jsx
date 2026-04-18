@@ -5,6 +5,7 @@ import '../../globals.css'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import FloatingNavbar from '../../components/FloatingNavbar'
+import RemixBanner from '../../components/RemixBanner'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -82,6 +83,7 @@ export default async function RootLayout({ children }) {
             <body>
                 <Layout
                     navbar={navbar}
+                    banner={<RemixBanner />}
                     pageMap={await getPageMap()}
                     docsRepositoryBase="https://github.com/btwld/mix/tree/main/website"
                     footer={footer}
