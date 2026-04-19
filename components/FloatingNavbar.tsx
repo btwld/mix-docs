@@ -32,13 +32,18 @@ const VERSION_ITEMS = [
     { label: 'Mix v1', href: 'https://mix-docs-gosljkd74-fluttertools.vercel.app/' },
 ]
 
-const GITHUB_URL = 'https://github.com/btwld/mix'
+const MIX_GITHUB_URL = 'https://github.com/btwld/mix'
+const REMIX_GITHUB_URL = 'https://github.com/btwld/remix'
 const TWITTER_URL = 'https://twitter.com/leoafarias'
 const MIX_DOCS_URL = '/documentation/mix/overview/introduction'
 const REMIX_DOCS_URL = '/documentation/remix'
 
 function getDocsHref(product: 'mix' | 'remix') {
     return product === 'remix' ? REMIX_DOCS_URL : MIX_DOCS_URL
+}
+
+function getGithubHref(product: 'mix' | 'remix') {
+    return product === 'remix' ? REMIX_GITHUB_URL : MIX_GITHUB_URL
 }
 
 const PRODUCTS = [
@@ -281,11 +286,13 @@ function ProductMenu() {
 function MobileDrawer({
     onClose,
     docsHref,
+    githubHref,
     activeProduct,
     isDocsActive,
 }: {
     onClose: () => void
     docsHref: string
+    githubHref: string
     activeProduct: 'mix' | 'remix'
     isDocsActive: boolean
 }) {
@@ -378,7 +385,7 @@ function MobileDrawer({
                         Links
                     </div>
                     <a
-                        href={GITHUB_URL}
+                        href={githubHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-white/90 hover:bg-white/5 rounded"
@@ -408,6 +415,7 @@ export default function FloatingNavbar() {
     const homeHref = activeProduct === 'remix' ? '/remix' : '/'
     const isHomeActive = pathname === homeHref
     const docsHref = getDocsHref(activeProduct)
+    const githubHref = getGithubHref(activeProduct)
 
     useEffect(() => {
         setDrawerOpen(false)
@@ -475,7 +483,7 @@ export default function FloatingNavbar() {
                 <VersionMenu />
                 <span className="h-4 w-px bg-white/10" />
                 <a
-                    href={GITHUB_URL}
+                    href={githubHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
@@ -542,6 +550,7 @@ export default function FloatingNavbar() {
                 <MobileDrawer
                     onClose={() => setDrawerOpen(false)}
                     docsHref={docsHref}
+                    githubHref={githubHref}
                     activeProduct={activeProduct}
                     isDocsActive={isDocsActive}
                 />
