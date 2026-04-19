@@ -181,3 +181,8 @@ html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documenta
     border-left: none !important;
 }
 
+html[data-product="remix"] .nextra-breadcrumb a {
+    pointer-events: none;
+    cursor: default;
+}
+
