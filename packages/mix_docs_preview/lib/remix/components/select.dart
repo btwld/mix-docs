@@ -9,17 +9,26 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(FortalScope(child: const Example()));
+  runMixApp(const Example());
 }
 
-class Example extends StatefulWidget {
+class Example extends StatelessWidget {
   const Example({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
+  Widget build(BuildContext context) {
+    return FortalScope(brightness: .dark, child: const SelectPreview());
+  }
 }
 
-class _ExampleState extends State<Example> {
+class SelectPreview extends StatefulWidget {
+  const SelectPreview({super.key});
+
+  @override
+  State<SelectPreview> createState() => _SelectPreviewState();
+}
+
+class _SelectPreviewState extends State<SelectPreview> {
   String? _selectedValue;
 
   @override

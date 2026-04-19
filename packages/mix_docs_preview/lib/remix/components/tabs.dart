@@ -9,17 +9,26 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(FortalScope(child: const Example()));
+  runMixApp(const Example());
 }
 
-class Example extends StatefulWidget {
+class Example extends StatelessWidget {
   const Example({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
+  Widget build(BuildContext context) {
+    return FortalScope(brightness: .dark, child: const TabsPreview());
+  }
 }
 
-class _ExampleState extends State<Example> {
+class TabsPreview extends StatefulWidget {
+  const TabsPreview({super.key});
+
+  @override
+  State<TabsPreview> createState() => _TabsPreviewState();
+}
+
+class _TabsPreviewState extends State<TabsPreview> {
   String _tab = 'tab1';
 
   @override
