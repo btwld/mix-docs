@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Search } from 'nextra/components'
@@ -56,18 +56,94 @@ const PRODUCTS = [
     },
 ]
 
-const DOCS_SECTIONS: Record<'mix' | 'remix', { label: string; href: string }[]> = {
+type DocsEntry =
+    | { label: string; href: string }
+    | { label: string; pages: { label: string; href: string }[] }
+
+const DOCS_SECTIONS: Record<'mix' | 'remix', DocsEntry[]> = {
     mix: [
-        { label: 'Overview', href: '/documentation/mix/overview/introduction' },
-        { label: 'Guides', href: '/documentation/mix/guides/styling' },
-        { label: 'Widgets', href: '/documentation/mix/widgets/stylewidgets' },
-        { label: 'Tutorials', href: '/documentation/mix/tutorials/creating-a-widget' },
-        { label: 'Ecosystem', href: '/documentation/mix/ecosystem/mix-tailwinds' },
+        {
+            label: 'Overview',
+            pages: [
+                { label: 'Introduction', href: '/documentation/mix/overview/introduction' },
+                { label: 'Getting started', href: '/documentation/mix/overview/getting-started' },
+                { label: 'Utility-First', href: '/documentation/mix/overview/utility-first' },
+                { label: 'Comparative Overview', href: '/documentation/mix/overview/comparison' },
+                { label: 'Migration', href: '/documentation/mix/overview/migration' },
+            ],
+        },
+        {
+            label: 'Guides',
+            pages: [
+                { label: 'Styling', href: '/documentation/mix/guides/styling' },
+                { label: 'Design Tokens', href: '/documentation/mix/guides/design-token' },
+                { label: 'Dynamic Styling', href: '/documentation/mix/guides/dynamic-styling' },
+                { label: 'Widget Modifiers', href: '/documentation/mix/guides/widget-modifiers' },
+                { label: 'Animations', href: '/documentation/mix/guides/animations' },
+                { label: 'Directives', href: '/documentation/mix/guides/directives' },
+                { label: 'Common Patterns', href: '/documentation/mix/guides/common-patterns' },
+            ],
+        },
+        {
+            label: 'Widgets',
+            pages: [
+                { label: 'StyleWidgets', href: '/documentation/mix/widgets/stylewidgets' },
+                { label: 'Box', href: '/documentation/mix/widgets/box' },
+                { label: 'FlexBox', href: '/documentation/mix/widgets/flexbox' },
+                { label: 'Text', href: '/documentation/mix/widgets/text' },
+                { label: 'Icon', href: '/documentation/mix/widgets/icon' },
+                { label: 'Image', href: '/documentation/mix/widgets/image' },
+                { label: 'Pressable', href: '/documentation/mix/widgets/pressable' },
+                { label: 'Stack', href: '/documentation/mix/widgets/stack' },
+            ],
+        },
+        {
+            label: 'Tutorials',
+            pages: [
+                { label: 'Creating a Widget', href: '/documentation/mix/tutorials/creating-a-widget' },
+                { label: 'Advanced Widget State Control', href: '/documentation/mix/tutorials/controlling-widget-state' },
+                { label: 'Theming', href: '/documentation/mix/tutorials/theming' },
+                { label: 'Creating Context Variants', href: '/documentation/mix/tutorials/creating-context-variants' },
+                { label: 'Creating Custom Tokens', href: '/documentation/mix/tutorials/creating-custom-tokens' },
+            ],
+        },
+        {
+            label: 'Ecosystem',
+            pages: [
+                { label: 'mix_tailwinds', href: '/documentation/mix/ecosystem/mix-tailwinds' },
+                { label: 'mix_schema', href: '/documentation/mix/ecosystem/mix-schema' },
+                { label: 'mix_lint', href: '/documentation/mix/ecosystem/mix-lint' },
+                { label: 'mix_generator', href: '/documentation/mix/ecosystem/mix-generator' },
+            ],
+        },
     ],
     remix: [
         { label: 'Getting Started', href: '/documentation/remix' },
         { label: 'Fortal', href: '/documentation/remix/fortal' },
-        { label: 'Components', href: '/documentation/remix/components/accordion' },
+        {
+            label: 'Components',
+            pages: [
+                { label: 'Accordion', href: '/documentation/remix/components/accordion' },
+                { label: 'Avatar', href: '/documentation/remix/components/avatar' },
+                { label: 'Badge', href: '/documentation/remix/components/badge' },
+                { label: 'Button', href: '/documentation/remix/components/button' },
+                { label: 'Callout', href: '/documentation/remix/components/callout' },
+                { label: 'Card', href: '/documentation/remix/components/card' },
+                { label: 'Checkbox', href: '/documentation/remix/components/checkbox' },
+                { label: 'Divider', href: '/documentation/remix/components/divider' },
+                { label: 'IconButton', href: '/documentation/remix/components/icon_button' },
+                { label: 'Menu', href: '/documentation/remix/components/menu' },
+                { label: 'Progress', href: '/documentation/remix/components/progress' },
+                { label: 'Radio', href: '/documentation/remix/components/radio' },
+                { label: 'Select', href: '/documentation/remix/components/select' },
+                { label: 'Slider', href: '/documentation/remix/components/slider' },
+                { label: 'Spinner', href: '/documentation/remix/components/spinner' },
+                { label: 'Switch', href: '/documentation/remix/components/switch' },
+                { label: 'Tabs', href: '/documentation/remix/components/tabs' },
+                { label: 'TextField', href: '/documentation/remix/components/textfield' },
+                { label: 'Tooltip', href: '/documentation/remix/components/tooltip' },
+            ],
+        },
     ],
 }
 
@@ -220,7 +296,7 @@ function MobileDrawer({
                 onClick={onClose}
                 aria-hidden="true"
             />
-            <div className="absolute top-0 inset-x-0 bg-[var(--mix-surface)] border-b border-[color:var(--mix-border-card)] p-4">
+            <div className="absolute top-0 inset-x-0 max-h-screen overflow-y-auto bg-[var(--mix-surface)] border-b border-[color:var(--mix-border-card)] p-4">
                 <div className="flex justify-end mb-2">
                     <button
                         onClick={onClose}
@@ -251,18 +327,32 @@ function MobileDrawer({
                     ))}
                     {isDocsActive ? (
                         <>
-                            <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
-                                Docs
-                            </div>
-                            {DOCS_SECTIONS[activeProduct].map((section) => (
-                                <Link
-                                    key={section.href}
-                                    href={section.href}
-                                    className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
-                                >
-                                    {section.label}
-                                </Link>
-                            ))}
+                            {DOCS_SECTIONS[activeProduct].map((entry) =>
+                                'pages' in entry ? (
+                                    <Fragment key={entry.label}>
+                                        <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
+                                            {entry.label}
+                                        </div>
+                                        {entry.pages.map((page) => (
+                                            <Link
+                                                key={page.href}
+                                                href={page.href}
+                                                className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                                            >
+                                                {page.label}
+                                            </Link>
+                                        ))}
+                                    </Fragment>
+                                ) : (
+                                    <Link
+                                        key={entry.href}
+                                        href={entry.href}
+                                        className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                                    >
+                                        {entry.label}
+                                    </Link>
+                                ),
+                            )}
                         </>
                     ) : (
                         <Link
