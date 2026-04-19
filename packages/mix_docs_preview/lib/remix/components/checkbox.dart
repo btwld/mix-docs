@@ -17,7 +17,7 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(child: const CheckboxPreview());
+    return FortalScope(brightness: .dark, child: const CheckboxPreview());
   }
 }
 

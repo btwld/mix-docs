@@ -18,7 +18,7 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(child: const AccordionPreview());
+    return FortalScope(brightness: .dark, child: const AccordionPreview());
   }
 }
 
