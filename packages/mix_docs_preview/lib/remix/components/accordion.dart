@@ -10,17 +10,26 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(FortalScope(child: const Example()));
+  runMixApp(const Example());
 }
 
-class Example extends StatefulWidget {
+class Example extends StatelessWidget {
   const Example({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
+  Widget build(BuildContext context) {
+    return FortalScope(child: const AccordionPreview());
+  }
 }
 
-class _ExampleState extends State<Example> {
+class AccordionPreview extends StatefulWidget {
+  const AccordionPreview({super.key});
+
+  @override
+  State<AccordionPreview> createState() => _AccordionPreviewState();
+}
+
+class _AccordionPreviewState extends State<AccordionPreview> {
   final controller = RemixAccordionController<String>(min: 0, max: 1);
 
   @override

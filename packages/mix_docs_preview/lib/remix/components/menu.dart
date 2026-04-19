@@ -9,17 +9,26 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(FortalScope(child: const Example()));
+  runMixApp(const Example());
 }
 
-class Example extends StatefulWidget {
+class Example extends StatelessWidget {
   const Example({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
+  Widget build(BuildContext context) {
+    return FortalScope(child: const MenuPreview());
+  }
 }
 
-class _ExampleState extends State<Example> {
+class MenuPreview extends StatefulWidget {
+  const MenuPreview({super.key});
+
+  @override
+  State<MenuPreview> createState() => _MenuPreviewState();
+}
+
+class _MenuPreviewState extends State<MenuPreview> {
   final controller = MenuController();
 
   @override

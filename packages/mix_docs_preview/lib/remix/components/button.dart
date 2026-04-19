@@ -9,11 +9,20 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(FortalScope(child: const Example()));
+  runMixApp(const Example());
 }
 
 class Example extends StatelessWidget {
   const Example({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FortalScope(child: const ButtonPreview());
+  }
+}
+
+class ButtonPreview extends StatelessWidget {
+  const ButtonPreview({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,17 +9,26 @@ import 'package:mix_docs_preview/helpers.dart';
 import 'package:remix/remix.dart';
 
 void main() {
-  runMixApp(FortalScope(child: const Example()));
+  runMixApp(const Example());
 }
 
-class Example extends StatefulWidget {
+class Example extends StatelessWidget {
   const Example({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
+  Widget build(BuildContext context) {
+    return FortalScope(child: const CheckboxPreview());
+  }
 }
 
-class _ExampleState extends State<Example> {
+class CheckboxPreview extends StatefulWidget {
+  const CheckboxPreview({super.key});
+
+  @override
+  State<CheckboxPreview> createState() => _CheckboxPreviewState();
+}
+
+class _CheckboxPreviewState extends State<CheckboxPreview> {
   bool _isChecked = true;
 
   @override

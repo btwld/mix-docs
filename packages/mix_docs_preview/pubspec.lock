@@ -143,10 +143,10 @@ packages:
     dependency: "direct main"
     description:
       name: mix
-      sha256: "0d23b5004465a91350dd0d1eca1095a4f2a6fb7c77b21b4157da5961a17db9a8"
+      sha256: c954f83061dc2f4e5b1cbfc1e3505cb8592ad1f37d7011eb4884d1a8c45afecc
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   mix_annotations:
     dependency: transitive
     description:
