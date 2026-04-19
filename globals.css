@@ -181,3 +181,9 @@ html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documenta
     border-left: none !important;
 }
 
+/* Remix docs: breadcrumb segments should be display-only, not navigable. */
+html[data-product="remix"] .nextra-breadcrumb a {
+    pointer-events: none;
+    cursor: default;
+}
+
