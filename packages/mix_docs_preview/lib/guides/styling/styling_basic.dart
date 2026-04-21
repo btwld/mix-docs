@@ -21,6 +21,7 @@ class Example extends StatelessWidget {
         .width(240)
         .height(100)
         .color(Colors.blue)
+        .alignment(.center)
         .borderRadius(.circular(12));
 
     return Box(style: boxStyle, child: Text('Hello'));

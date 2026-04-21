@@ -12,7 +12,8 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final flexStyle = FlexBoxStyler.mainAxisSize(.min)
+    final flexStyle = FlexBoxStyler()
+        .mainAxisSize(.min)
         .spacing(4)
         .color(Colors.cyan.shade50)
         .padding(.symmetric(horizontal: 10, vertical: 4))

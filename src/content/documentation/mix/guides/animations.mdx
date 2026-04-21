@@ -243,9 +243,9 @@ final box = BoxStyler()
         final opacity = values.get('opacity');
 
         return style
-            .transform(Matrix4.diagonal3Values(scale, scale, 1.0))
+            .scale(scale)
             .color(values.get('color'))
-            .wrap(WidgetModifierConfig.opacity(opacity));
+            .wrap(.opacity(opacity));
       },
     );
 
