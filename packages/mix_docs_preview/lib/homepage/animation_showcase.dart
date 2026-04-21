@@ -18,7 +18,7 @@ class Example extends StatelessWidget {
     // #docregion showcase
     final box = BoxStyler()
         .size(100, 100)
-        .borderRadius(.all(.circular(5)))
+        .borderRadius(.circular(5))
         .keyframeAnimation(
           timeline: [
             KeyframeTrack<double>('scale', [
@@ -61,12 +61,9 @@ class Example extends StatelessWidget {
             final radius = values.get('radius');
             return style
                 .color(values.get('color'))
-                .transform(
-                  Matrix4.identity()
-                    ..scaleByDouble(scale, scale, 1.0, 1)
-                    ..rotateZ(rotate * math.pi / 180),
-                )
-                .borderRadius(.all(.circular(radius)));
+                .rotate(rotate * math.pi / 180)
+                .scale(scale)
+                .borderRadius(.circular(radius));
           },
         );
 

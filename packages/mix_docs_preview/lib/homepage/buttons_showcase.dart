@@ -29,7 +29,7 @@ class Example extends StatelessWidget {
         .textStyle(.fontSize(14).fontWeight(.w600).color(Colors.white));
 
     final outlinedButtonStyle = buttonStyle
-        .border(.all(.color(Colors.deepPurpleAccent).width(1.5)))
+        .border(.color(Colors.deepPurpleAccent).width(1.5))
         .textStyle(
           .fontSize(14).fontWeight(.w600).color(Colors.deepPurpleAccent),
         );
