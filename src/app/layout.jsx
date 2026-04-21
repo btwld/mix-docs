@@ -75,12 +75,12 @@ export default async function RootLayout({ children }) {
             className={`dark ${inter.variable} ${jetbrainsMono.variable}`}
         >
             <Head />
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `(()=>{try{var p=location.pathname;var r=p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/');document.documentElement.setAttribute('data-product',r?'remix':'mix')}catch(e){}})();`,
-                }}
-            />
             <body>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `(()=>{try{var p=location.pathname;var r=p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/');document.documentElement.setAttribute('data-product',r?'remix':'mix')}catch(e){}})();`,
+                    }}
+                />
                 <Layout
                     navbar={navbar}
                     pageMap={await getPageMap()}
