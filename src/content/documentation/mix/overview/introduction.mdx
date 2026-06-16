@@ -1,7 +1,9 @@
 ---
 title: Introduction
 og_image: introduction-og.png
+description: "Learn the core ideas behind Mix and how it separates style semantics from widget structure."
 ---
+
 # Introduction
 
 Mix is a styling system for Flutter that separates style definitions from widget structure. It provides a composable, type-safe way to define and apply styles using a fluent API, design tokens, and context-aware variants.
@@ -44,15 +46,6 @@ final boxStyle = BoxStyler()
 
 Use this pattern when defining styles with direct values, chaining multiple properties, or building most common styling use cases. Learn more about [styling](/documentation/mix/guides/styling).
 
-For advanced composition with design tokens and directives, Mix also offers a [Prop-based API](/documentation/mix/guides/styling) using the `.create()` constructor:
-
-```dart
-final style = BoxStyler.create(
-  color: Prop.token($primaryColor),
-  padding: Prop.value(EdgeInsets.all(16)),
-);
-```
-
 ## Key Features
 
 ### Dynamic Styling
@@ -90,13 +83,14 @@ Define reusable design tokens for colors, spacing, radii, and more:
 final $primaryColor = ColorToken('primary');
 final $borderRadius = RadiusToken('borderRadius');
 
-final tokenDefinitions = <MixToken, Object>{
-  $primaryColor: Colors.blue,
-  $borderRadius: Radius.circular(8),
-};
-
+// Provide token values through MixScope
 MixScope(
-  tokens: tokenDefinitions,
+  colors: {
+    $primaryColor: Colors.blue,
+  },
+  radii: {
+    $borderRadius: Radius.circular(8),
+  },
   child: MyApp(),
 );
 ```

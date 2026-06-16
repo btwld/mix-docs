@@ -1,3 +1,8 @@
+---
+title: "Box"
+description: "Style Flutter containers with BoxStyler — decoration, padding, margins, transforms, constraints, and interaction variants in Mix."
+---
+
 # Box
 
 `Box` is equivalent to Flutter's `Container`, it provides
@@ -136,7 +141,7 @@ The preview below shows this style applied.
 | `gradient` | Sets gradient with any GradientMix type |
 | `shadow` | Sets single shadow |
 | `shadows` | Sets multiple shadows |
-| `elevation` | Sets elevation shadow |
+| `elevation` | Sets Material Design elevation shadow. Values: `one`, `two`, `three`, `four`, `six`, `eight`, `nine`, `twelve`, `sixteen`, `twentyFour` |
 | `image` | Sets image decoration |
 | `shape` | Sets box shape |
 | `shapeCircle` | Sets a circular shape (CircleBorder) |
@@ -209,7 +214,7 @@ The preview below shows this style applied.
 | `onNot` | Creates a variant for when the context does NOT match the provided variant. |
 | `onLight` | Creates a variant for light mode. |
 | `onBuilder` | Creates a variant using a builder function that receives the build context. |
-| `builder` | Deprecated: Use [onBuilder] instead. |
+| `builder` | Deprecated: Use `onBuilder` instead. |
 | `onBreakpoint` | Creates a variant based on the specified breakpoint. |
 | `onPortrait` | Creates a variant for portrait device orientation. |
 | `onLandscape` | Creates a variant for landscape device orientation. |
@@ -235,3 +240,9 @@ The preview below shows this style applied.
 | `onFocused` | Creates a variant for focused state (requires `PressableBox` or `Pressable` wrapper) |
 | `onDisabled` | Creates a variant for disabled state |
 | `onEnabled` | Creates a variant for enabled state (opposite of disabled) |
+
+## Related
+
+- [FlexBox](/documentation/mix/widgets/flexbox) — flex layout with box styling
+- [Styling with Mix](/documentation/mix/guides/styling) — fluent Styler API patterns
+- [Dynamic Styling](/documentation/mix/guides/dynamic-styling) — variants for hover, press, dark mode
