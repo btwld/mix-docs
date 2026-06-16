@@ -1,3 +1,7 @@
+---
+title: "Creating a Custom Context Variant"
+description: "Create and apply custom context variants driven by BuildContext conditions."
+---
 
 # Creating a Custom Context Variant
 
@@ -43,15 +47,14 @@ Attach a `ContextVariant` that reads that flag:
 
 ```dart
 BoxStyler()
-  .color(Colors.red)
-  .size(100, 100)
-  .variant(
-    ContextVariant('custom_flag', (context) {
-      final flag = CustomInheritedWidget.of(context)?.flag ?? false;
-      return flag;
-    }),
-    BoxStyler().color(Colors.blue),
-  );
+    .color(Colors.red)
+    .size(100, 100)
+    .variant(
+      ContextVariant('custom_flag', (context) =>
+        CustomInheritedWidget.of(context)?.flag ?? false,
+      ),
+      .color(Colors.blue),
+    );
 ```
 
 In this example:
@@ -73,10 +76,9 @@ extension WidgetStateVariantMixinX<T extends Style<S>, S extends Spec<S>>
     on WidgetStateVariantMixin<T, S> {
   T onCustomFlag(T style) {
     return variant(
-      ContextVariant('custom_flag', (context) {
-        final flag = CustomInheritedWidget.of(context)?.flag ?? false;
-        return flag;
-      }),
+      ContextVariant('custom_flag', (context) =>
+        CustomInheritedWidget.of(context)?.flag ?? false,
+      ),
       style,
     );
   }
@@ -87,11 +89,9 @@ Usage:
 
 ```dart
 BoxStyler()
-  .color(Colors.red)
-  .size(100, 100)
-  .onCustomFlag(
-    BoxStyler().color(Colors.blue),
-  );
+    .color(Colors.red)
+    .size(100, 100)
+    .onCustomFlag(.color(Colors.blue));
 ```
 
 ## Complete Example

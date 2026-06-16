@@ -1,3 +1,8 @@
+---
+title: "StyledText"
+description: "Style Flutter text with TextStyler — font size, weight, color, decorations, text directives, and responsive variants in Mix."
+---
+
 # StyledText
 
 `StyledText` is equivalent to Flutter's `Text` widget, but provides
@@ -108,7 +113,7 @@ The preview below shows this style applied.
 | `onNot` | Creates a variant for when the context does NOT match the provided variant. |
 | `onLight` | Creates a variant for light mode. |
 | `onBuilder` | Creates a variant using a builder function that receives the build context. |
-| `builder` | Deprecated: Use [onBuilder] instead. |
+| `builder` | Deprecated: Use `onBuilder` instead. |
 | `onBreakpoint` | Creates a variant based on the specified breakpoint. |
 | `onPortrait` | Creates a variant for portrait device orientation. |
 | `onLandscape` | Creates a variant for landscape device orientation. |
@@ -131,6 +136,11 @@ The preview below shows this style applied.
 |--------|-------------|
 | `onHovered` | Creates a variant for hover state |
 | `onPressed` | Creates a variant for pressed state |
-| `onFocused` | Creates a variant for focused state |
+| `onFocused` | Creates a variant for focused state. Requires `Pressable` or `PressableBox` wrapper for focus tracking. |
 | `onDisabled` | Creates a variant for disabled state |
 | `onEnabled` | Creates a variant for enabled state (opposite of disabled) |
+
+## Related
+
+- [Styling with Mix](/documentation/mix/guides/styling) — fluent Styler API basics
+- [Design Tokens](/documentation/mix/guides/design-token) — `TextStyleToken` for reusable typography
