@@ -158,8 +158,7 @@ final $onSurface  = ContextToken<Color>((context) => Theme.of(context).colorSche
 // Use them like any other token — they track the active ThemeData automatically.
 final cardStyle = BoxStyler()
     .color($surface())
-    .borderRounded(12);
-
+    .borderRadius(.circular(12));
 Box(style: cardStyle);
 ```
 
