@@ -140,21 +140,25 @@ Every style referencing `$background` or `$foreground` updates automatically whe
 
 ## Context Tokens
 
-Sometimes a token's value comes straight from the surrounding Flutter context — `Theme.of(context).colorScheme.primary`, the current `MediaQuery`, or a `Localizations` lookup. Wiring those through `MixScope` means recomputing the value at the right spot in the tree and re-providing it whenever it changes.
+The most common reason to reach for a context token is **bridging Material's theme into Mix**. Your app already has a `ThemeData` — its `ColorScheme`, `TextTheme`, and other values live on `Theme.of(context)`. Re-declaring those as Mix tokens and re-providing them in a `MixScope` duplicates the source of truth: every Material 3 color, every brightness switch, every `ThemeData` override would have to be mirrored by hand.
 
-`ContextToken<T>` removes that step. You give it a resolver function that reads from `BuildContext`, and it computes its value at resolution time — **no `MixScope` required**.
+`ContextToken<T>` connects the two systems directly. You give it a resolver that reads from `BuildContext`, and it computes its value at resolution time straight from the ambient Material theme — **no `MixScope` required**.
 
 ```dart
-// Declare once — the resolver runs against the consuming widget's context
-final $primary = ContextToken<Color>(
-  (context) => Theme.of(context).colorScheme.primary,
-);
+// Map Material's ColorScheme into Mix tokens — declared once, app-wide.
+final $primary    = ContextToken<Color>((context) => Theme.of(context).colorScheme.primary);
+final $surface    = ContextToken<Color>((context) => Theme.of(context).colorScheme.surface);
+final $onSurface  = ContextToken<Color>((context) => Theme.of(context).colorScheme.onSurface);
 
-// Use it like any other token — no MixScope needed
-final style = BoxStyler().color($primary());
+// Use them like any other token — they track the active ThemeData automatically.
+final cardStyle = BoxStyler()
+    .color($surface())
+    .borderRounded(12);
 
-Box(style: style); // resolves to the ambient Theme's primary color
+Box(style: cardStyle);
 ```
+
+Because the resolver runs against the consuming widget's context, these tokens stay in sync with Material for free: toggle `MaterialApp`'s `themeMode`, change `colorScheme`, or sit under a local `Theme` override, and every Mix style referencing `$primary` follows — without touching a `MixScope`. The same pattern works for `Theme.of(context).textTheme`, `MediaQuery`, or any other context-derived value.
 
 Because the value flows through the same token-reference pipeline as every other token, it keeps exact fluent-chain ordering:
 
@@ -184,7 +188,7 @@ MixScope(
 | --------------------- | ----------------------------------------- | ---------------------------------------------------- |
 | Value source          | `MixScope` maps                           | Resolver reading `BuildContext`                      |
 | Requires `MixScope`?  | Yes                                       | No (scope override is optional)                      |
-| Best for              | Design-system values you swap by theme    | Values derived from Flutter context (`Theme`, `MediaQuery`, …) |
+| Best for              | Design-system values you swap by theme    | Bridging Material's theme (`ColorScheme`, `TextTheme`) and other `BuildContext`-derived values into Mix |
 
 ## Resolving Tokens Programmatically
 
