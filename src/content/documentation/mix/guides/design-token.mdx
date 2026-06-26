@@ -1,6 +1,6 @@
 ---
 title: Design Tokens
-description: "Define and consume Mix design tokens with MixScope for consistent theming."
+description: "Define and consume Mix design tokens — provided through MixScope or derived from BuildContext — for consistent theming."
 ---
 
 import { Callout } from "nextra/components";
@@ -10,6 +10,11 @@ import { Callout } from "nextra/components";
 When you hardcode `Colors.blue` or `EdgeInsets.all(16)` across your app, changing your brand color or spacing scale means hunting through dozens of files. Design tokens solve this: you define a named value once, provide it at the top of your widget tree, and every style that references it updates automatically — including when you switch themes.
 
 Mix provides built-in support for tokens through `MixToken` and `MixScope`.
+
+A token's value can come from one of two places:
+
+- **A `MixScope`** — you provide concrete values near the top of the tree and swap them to switch themes. This is the approach most of this guide covers.
+- **The build context** — a [`ContextToken`](#context-tokens) derives its value directly from `BuildContext`, with no `MixScope` required. This is the idiomatic way to **bridge Material's theme** (`Theme.of(context).colorScheme`, `textTheme`) into Mix, so your styles track the active `ThemeData` automatically. Jump to [Context Tokens](#context-tokens) if that's what you're here for.
 
 ## Getting Started
 
