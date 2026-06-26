@@ -138,6 +138,54 @@ Every style referencing `$background` or `$foreground` updates automatically whe
 
 <FlutterPreview previewId="guides/design-token.1" height={200} />
 
+## Context Tokens
+
+Sometimes a token's value comes straight from the surrounding Flutter context — `Theme.of(context).colorScheme.primary`, the current `MediaQuery`, or a `Localizations` lookup. Wiring those through `MixScope` means recomputing the value at the right spot in the tree and re-providing it whenever it changes.
+
+`ContextToken<T>` removes that step. You give it a resolver function that reads from `BuildContext`, and it computes its value at resolution time — **no `MixScope` required**.
+
+```dart
+// Declare once — the resolver runs against the consuming widget's context
+final $primary = ContextToken<Color>(
+  (context) => Theme.of(context).colorScheme.primary,
+);
+
+// Use it like any other token — no MixScope needed
+final style = BoxStyler().color($primary());
+
+Box(style: style); // resolves to the ambient Theme's primary color
+```
+
+Because the value flows through the same token-reference pipeline as every other token, it keeps exact fluent-chain ordering:
+
+```dart
+BoxStyler().color($primary()).color(Colors.red); // red wins
+BoxStyler().color(Colors.red).color($primary()); // primary wins
+```
+
+### Overriding a context token
+
+A matching entry in `MixScope` still wins, so the resolver acts as a context-derived *default* that any scope can override:
+
+```dart
+MixScope(
+  tokens: {$primary: Colors.green}, // overrides the resolver for this subtree
+  child: Box(style: BoxStyler().color($primary())),
+);
+```
+
+<Callout type="warning">
+  `ContextToken` equality is based on the resolver's identity, not a name. Two tokens built from the **same** top-level or static function are equal; two built from look-alike inline closures are **not**. Declare context tokens as top-level or static `final`s so overrides and merges match the token you expect.
+</Callout>
+
+### Context tokens vs. scope tokens
+
+|                       | Scope token (`ColorToken`, …)             | `ContextToken`                                       |
+| --------------------- | ----------------------------------------- | ---------------------------------------------------- |
+| Value source          | `MixScope` maps                           | Resolver reading `BuildContext`                      |
+| Requires `MixScope`?  | Yes                                       | No (scope override is optional)                      |
+| Best for              | Design-system values you swap by theme    | Values derived from Flutter context (`Theme`, `MediaQuery`, …) |
+
 ## Resolving Tokens Programmatically
 
 You can resolve tokens outside of styles using `BuildContext`. This is useful when you need a token value in non-Mix code, such as a plain Flutter widget:

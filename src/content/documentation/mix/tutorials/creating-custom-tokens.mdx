@@ -73,6 +73,10 @@ Custom tokens are useful when:
 
 For standard styling needs, prefer the [built-in token types](/documentation/mix/guides/design-token#built-in-token-types).
 
+<Callout type="info">
+  If your value is **derived from `BuildContext`** — such as `Theme.of(context)`, `MediaQuery`, or a `Localizations` lookup — you don't need a custom token. Use the built-in [`ContextToken`](/documentation/mix/guides/design-token#context-tokens), which runs a resolver against the consuming widget's context with no `MixScope` required.
+</Callout>
+
 ## See Also
 
 - [Design Tokens](/documentation/mix/guides/design-token) — declaring, providing, and referencing built-in tokens
