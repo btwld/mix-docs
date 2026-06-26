@@ -162,7 +162,7 @@ final cardStyle = BoxStyler()
 Box(style: cardStyle);
 ```
 
-Because the resolver runs against the consuming widget's context, these tokens stay in sync with Material for free: toggle `MaterialApp`'s `themeMode`, change `colorScheme`, or sit under a local `Theme` override, and every Mix style referencing `$primary` follows — without touching a `MixScope`. The same pattern works for `Theme.of(context).textTheme`, `MediaQuery`, or any other context-derived value.
+Because the resolver runs against the consuming widget's context, these tokens stay in sync with Material for free: toggle `MaterialApp`'s `themeMode`, change `colorScheme`, or sit under a local `Theme` override, and every Mix style referencing `$primary` follows — without touching a `MixScope`. The same pattern works for `Theme.of(context).textTheme`, `MediaQuery`, and other context-derived values **as long as `T` is one of Mix's [built-in token value types](#built-in-token-types)** (e.g. `Color`, `double`, `Radius`, `TextStyle`). For unsupported types, call `.resolve(context)` directly or use a [custom token](/documentation/mix/tutorials/creating-custom-tokens) — `ContextToken<T>.call()` only produces token refs for Mix's supported value set.
 
 Because the value flows through the same token-reference pipeline as every other token, it keeps exact fluent-chain ordering:
 
@@ -192,7 +192,7 @@ MixScope(
 | --------------------- | ----------------------------------------- | ---------------------------------------------------- |
 | Value source          | `MixScope` maps                           | Resolver reading `BuildContext`                      |
 | Requires `MixScope`?  | Yes                                       | No (scope override is optional)                      |
-| Best for              | Design-system values you swap by theme    | Bridging Material's theme (`ColorScheme`, `TextTheme`) and other `BuildContext`-derived values into Mix |
+| Best for              | Design-system values you swap by theme    | Bridging Material's theme and other context-derived values whose type is in Mix's built-in token set |
 
 ## Resolving Tokens Programmatically
 
