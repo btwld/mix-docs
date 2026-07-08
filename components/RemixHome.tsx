@@ -305,7 +305,15 @@ export const RemixHome = () => {
                       className={"rx-seg" + (i === activeTheme ? " is-active" : "")}
                       onClick={() => setActiveTheme(i)}
                     >
-                      {t.name}
+                      {i === activeTheme && (
+                        <motion.span
+                          layoutId="rx-seg-pill"
+                          className="rx-seg-pill"
+                          aria-hidden="true"
+                          transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                        />
+                      )}
+                      <span className="rx-seg-label">{t.name}</span>
                     </button>
                   ))}
                 </div>
@@ -792,6 +800,7 @@ export const RemixHome = () => {
           background: rgba(0, 0, 0, 0.3);
         }
         .rx-seg {
+          position: relative;
           font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
           font-size: 12px;
           font-weight: 500;
@@ -799,16 +808,27 @@ export const RemixHome = () => {
           padding: 5px 13px;
           border-radius: 999px;
           cursor: pointer;
-          transition: color 0.15s ease, background-color 0.15s ease;
+          background: transparent;
+          transition: color 0.2s ease;
         }
         @media (hover: hover) and (pointer: fine) {
-          .rx-seg:hover {
+          .rx-seg:not(.is-active):hover {
             color: #fff;
           }
         }
         .rx-seg.is-active {
           color: #05040a;
+        }
+        .rx-seg-pill {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          border-radius: 999px;
           background: var(--mix-accent);
+        }
+        .rx-seg-label {
+          position: relative;
+          z-index: 1;
         }
         .rx-seg:focus-visible {
           outline: 2px solid var(--mix-accent);
