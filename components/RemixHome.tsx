@@ -1,12 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { motion, MotionConfig } from "framer-motion";
+import { motion, MotionConfig, AnimatePresence } from "framer-motion";
+import {
+  Blocks,
+  Wand2,
+  Accessibility,
+  Zap,
+  Repeat2,
+  Github,
+  Sparkles,
+} from "lucide-react";
 import { HighlightedCode } from "./HighlightedCode";
 import { FlutterMultiView } from "./FlutterMultiView";
 import { RemixButton } from "./remix/RemixButton";
 
-/* ── Links ──────────────────────────────────────────────────────────── */
+/* ── Links (IA preserved from the existing page) ────────────────────── */
 const LINKS = {
   getStarted: "/documentation/remix",
   components: "/documentation/remix/components/button",
@@ -14,97 +23,44 @@ const LINKS = {
   mixDocs: "/documentation/mix/overview/introduction",
   github: "https://github.com/btwld/remix",
   discord: "https://discord.com/invite/Ycn6GV3m2k",
+  pubDev: "https://pub.dev/packages/remix",
 };
 
-/* ── Animation presets ──────────────────────────────────────────────── */
-const EASE = [0.25, 0.4, 0.25, 1] as const;
+/* ── Motion presets ─────────────────────────────────────────────────── */
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay, ease: EASE },
+    transition: { duration: 0.7, delay, ease: EASE },
   }),
 };
 
 const reveal = {
-  initial: { opacity: 0, y: 32 },
+  initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-80px" } as const,
-  transition: { duration: 0.6, ease: EASE },
+  transition: { duration: 0.7, ease: EASE },
 };
 
-/* ── Centered section header ────────────────────────────────────────── */
-function SectionHeader({
-  label,
-  title,
-  lead,
-}: {
-  label: string;
-  title: React.ReactNode;
-  lead?: React.ReactNode;
-}) {
-  return (
-    <motion.div className="rmx-section-header" {...reveal}>
-      <span className="rmx-mono-label">{label}</span>
-      <h2 className="rmx-section-title">{title}</h2>
-      {lead && <p className="rmx-lead">{lead}</p>}
-    </motion.div>
-  );
-}
+/* Stagger: parent orchestrates, children cascade in ~60ms apart */
+const staggerParent = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+};
 
-/* ── Live preview card ──────────────────────────────────────────────── */
-function LivePreview({
-  previewId,
-  height = 260,
-  eager = false,
-  caption,
-}: {
-  previewId: string;
-  height?: number;
-  eager?: boolean;
-  caption?: string;
-}) {
-  return (
-    <div className="rmx-card rmx-preview">
-      <div className="rmx-preview-chrome" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
-      <FlutterMultiView
-        previewId={previewId}
-        height={height}
-        bordered={false}
-        lazyLoad={!eager}
-        transparent
-      />
-      {caption && <p className="rmx-preview-caption">{caption}</p>}
-    </div>
-  );
-}
+const staggerChild = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
+};
 
-const GALLERY = [
-  { id: "components/button.0", label: "Button" },
-  { id: "components/card.0", label: "Card" },
-  { id: "components/switch.0", label: "Switch" },
-  { id: "components/slider.0", label: "Slider" },
-  { id: "components/select.0", label: "Select" },
-  { id: "components/tabs.0", label: "Tabs" },
-];
-
-const COMPONENTS = [
-  "Accordion", "Avatar", "Badge", "Callout", "Checkbox", "Divider",
-  "IconButton", "Menu", "Progress", "Radio", "Spinner", "TextField", "Tooltip",
-];
-
-/* ── Theme-variation showcase (pure-CSS mockups) ────────────────────── */
+/* ── One component, four Mix styles (hero showcase) ─────────────────── */
 const THEMES = [
   {
     key: "default",
     name: "Default",
-    blurb: "Clean, balanced, ready to ship.",
     code: `final style = RemixButtonStyle()
   .color(accent)
   .paddingX(22)
@@ -117,7 +73,6 @@ const THEMES = [
   {
     key: "glass",
     name: "Glass",
-    blurb: "Translucent surfaces and blur.",
     code: `final style = RemixButtonStyle()
   .color(Colors.white.withOpacity(.12))
   .paddingX(22)
@@ -129,7 +84,6 @@ const THEMES = [
   {
     key: "brutalist",
     name: "Brutalist",
-    blurb: "Hard edges, high contrast.",
     code: `final style = RemixButtonStyle()
   .color(accent)
   .paddingX(22)
@@ -141,7 +95,6 @@ const THEMES = [
   {
     key: "neon",
     name: "Neon",
-    blurb: "Glow accents on deep black.",
     code: `final style = RemixButtonStyle()
   .color(Colors.transparent)
   .paddingX(22)
@@ -152,14 +105,68 @@ const THEMES = [
   },
 ];
 
+/* ── Stats band ─────────────────────────────────────────────────────── */
+const STATS = [
+  { value: "20+", label: "Live components" },
+  { value: "100%", label: "Headless & yours" },
+  { value: "0", label: "Override wars" },
+  { value: "BSD-3", label: "Free forever" },
+];
+
+/* ── Feature grid (value props) ─────────────────────────────────────── */
+const FEATURES = [
+  {
+    icon: Blocks,
+    title: "Headless by design",
+    body: "Behavior, focus, and state are handled. Remix has zero opinion on how it looks — that part is entirely yours.",
+    wide: true,
+  },
+  {
+    icon: Wand2,
+    title: "Styled with Mix",
+    body: "Compose pixel-perfect styles with a fluent, type-safe API — variants, states, and tokens all in one place.",
+    wide: true,
+  },
+  {
+    icon: Accessibility,
+    title: "Accessible out of the box",
+    body: "Keyboard navigation and screen-reader support baked into every widget.",
+  },
+  {
+    icon: Repeat2,
+    title: "Define once, reuse everywhere",
+    body: "Share one style across your whole app. No drifting variants.",
+  },
+  {
+    icon: Zap,
+    title: "Real, running Flutter",
+    body: "Everything on this page is a live app — never a screenshot.",
+  },
+];
+
+/* ── Live component bento (real running Flutter apps) ───────────────── */
+const BENTO = [
+  { id: "components/button.0", label: "Button", wide: true, height: 300 },
+  { id: "components/card.0", label: "Card", wide: false, height: 300 },
+  { id: "components/switch.0", label: "Switch", wide: false, height: 232 },
+  { id: "components/slider.0", label: "Slider", wide: false, height: 232 },
+  { id: "components/tabs.0", label: "Tabs", wide: false, height: 232 },
+];
+
+const COMPONENTS = [
+  "Accordion", "Avatar", "Badge", "Button", "Callout", "Card", "Checkbox",
+  "Divider", "IconButton", "Menu", "Progress", "Radio", "Select", "Slider",
+  "Spinner", "Switch", "Tabs", "TextField", "Tooltip",
+];
+
 const FAQ = [
   {
     q: "Is it production-ready?",
-    a: "The component set is real, running, and usable in production apps today — every component on this page is live proof. Remix is in Beta because the API is still evolving and new components, references, and guides land continuously, not because the components are unstable. You can ship with it now.",
+    a: "The component set is real, running, and usable in production apps today. Every component on this page is live proof. Remix is in Beta because the API is still evolving and new components and guides land continuously, not because the components are unstable.",
   },
   {
     q: "How is it different from Material or Cupertino?",
-    a: "Material and Cupertino give you a look you then have to fight. Remix gives you behavior with no opinionated look — you style every pixel with Mix. Full control, no override wars.",
+    a: "Material and Cupertino give you a look you then have to fight. Remix gives you behavior with no opinionated look, so you style every pixel with Mix. Full control, no override wars.",
   },
   {
     q: "Do I need to know Mix first?",
@@ -167,28 +174,41 @@ const FAQ = [
   },
   {
     q: "Is it accessible and keyboard-navigable?",
-    a: "Yes — built into every component. You don't wire it up yourself.",
+    a: "Yes. It is built into every component. You don't wire it up yourself.",
   },
   {
     q: "Is Remix free?",
-    a: "Yes. Remix is open source and free — no tiers, no license fees, no lock-in.",
+    a: "Yes. Remix is open source and free. No tiers, no license fees, and it is BSD 3-Clause licensed.",
   },
   {
     q: "Can I use it in a commercial app?",
-    a: "Yes. It's open source — build whatever you want.",
+    a: "Yes. It is open source under BSD 3-Clause, so build whatever you want.",
   },
 ];
 
-const STYLE_SNIPPET = `final button = RemixButtonStyle()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .onHovered(
-    RemixButtonStyle().color(Colors.blue.shade700),
-  )
-  .animate(AnimationConfig.spring(300.ms));`;
-
+/* ── Section head ───────────────────────────────────────────────────── */
+function SectionHead({
+  eyebrow,
+  title,
+  lead,
+  align = "center",
+}: {
+  eyebrow?: string;
+  title: React.ReactNode;
+  lead?: React.ReactNode;
+  align?: "center" | "left";
+}) {
+  return (
+    <motion.div
+      className={"rx-head" + (align === "left" ? " rx-head-left" : "")}
+      {...reveal}
+    >
+      {eyebrow && <span className="rx-eyebrow">{eyebrow}</span>}
+      <h2 className="rx-title">{title}</h2>
+      {lead && <p className="rx-lead">{lead}</p>}
+    </motion.div>
+  );
+}
 
 export const RemixHome = () => {
   const [activeTheme, setActiveTheme] = useState(0);
@@ -196,195 +216,290 @@ export const RemixHome = () => {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="rmx-root">
-        {/* ── Hero (centered) ───────────────────────────────────── */}
-        <section className="rmx-shell rmx-hero">
+      <div className="rx-root">
+        {/* ══ Ambient backdrop (aurora + grid, fixed behind content) ══ */}
+        <div className="rx-aurora" aria-hidden="true">
+          <div className="rx-aurora-a" />
+          <div className="rx-aurora-b" />
+          <div className="rx-grid" />
+        </div>
+
+        {/* ══ Hero — centered, grand ═══════════════════════════════ */}
+        <section className="rx-shell rx-hero">
           <motion.img
-            className="rmx-logo"
+            className="rx-logo"
             src="/assets/logo_remix_sidebar.png"
             alt="Remix"
-            initial={{ opacity: 0, filter: "blur(10px)", y: 14, scale: 0.94 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: EASE }}
+            initial={{ opacity: 0, y: 14, scale: 0.92, filter: "blur(16px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.1, ease: EASE }}
           />
 
           <motion.h1
-            className="rmx-headline"
+            className="rx-hero-title"
             initial="hidden"
             animate="visible"
             custom={0.08}
             variants={fadeUp}
           >
-            Stop fighting Material to
-            <br className="hidden sm:inline" /> style your Flutter app.
+            Stop fighting the framework.
+            <br />
+            <span className="rx-gradient-text">Style Flutter your way.</span>
           </motion.h1>
 
           <motion.p
-            className="rmx-subtitle"
+            className="rx-hero-sub"
             initial="hidden"
             animate="visible"
-            custom={0.16}
+            custom={0.18}
             variants={fadeUp}
           >
-            Remix handles the boring parts — focus, keyboard, accessibility — and
-            leaves the look entirely up to you. Style it however you want with Mix.
-            No fighting the framework.
+            Headless, accessible Flutter components with the behavior already
+            handled. Style every pixel with Mix — the look is entirely yours.
           </motion.p>
 
           <motion.div
-            className="rmx-cta-row"
+            className="rx-hero-cta"
             initial="hidden"
             animate="visible"
-            custom={0.24}
+            custom={0.28}
             variants={fadeUp}
           >
             <RemixButton href={LINKS.getStarted} arrow="right">
               Start in 2 minutes
             </RemixButton>
-            <RemixButton href={LINKS.components} variant="secondary">
-              Browse components
+            <RemixButton href={LINKS.pubDev} variant="secondary" target="_blank">
+              <img
+                src="https://cdn.simpleicons.org/dart/ffffff"
+                alt=""
+                aria-hidden="true"
+                style={{ height: 16, width: 16 }}
+              />
+              Add dependency
             </RemixButton>
           </motion.div>
 
-          <motion.p
-            className="rmx-cta-trigger"
-            initial="hidden"
-            animate="visible"
-            custom={0.3}
-            variants={fadeUp}
-          >
-            Free · open source · works with any Flutter app
-          </motion.p>
-
-          {/* Hero showcase — one component, styled four ways with Mix */}
+          {/* Interactive product window: one component, four Mix styles */}
           <motion.div
-            className="rmx-hero-visual"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            className="rx-window-wrap"
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+            transition={{ duration: 0.9, delay: 0.38, ease: EASE }}
           >
-            <div className="rmx-hero-glow" aria-hidden="true" />
+            <div className="rx-window-glow" aria-hidden="true" />
 
-            <div className="rmx-card rmx-hero-showcase">
-              <div className="rmx-hero-code">
-                <div className="rmx-preview-chrome" aria-hidden="true">
+            <div className="rx-window">
+              <div className="rx-window-bar">
+                <div className="rx-dots" aria-hidden="true">
                   <span />
                   <span />
                   <span />
-                  <em>remix_button_style.dart</em>
                 </div>
-                <motion.div
-                  key={theme.key}
-                  className="rmx-code-body"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.25, ease: EASE }}
-                >
-                  <HighlightedCode code={theme.code} />
-                </motion.div>
+                <div className="rx-segmented" role="tablist" aria-label="Style">
+                  {THEMES.map((t, i) => (
+                    <button
+                      key={t.key}
+                      type="button"
+                      role="tab"
+                      aria-selected={i === activeTheme}
+                      className={"rx-seg" + (i === activeTheme ? " is-active" : "")}
+                      onClick={() => setActiveTheme(i)}
+                    >
+                      {t.name}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div className={`rmx-hero-stage rmx-theme-${theme.key}`}>
-                <motion.button
-                  key={theme.key}
-                  type="button"
-                  tabIndex={-1}
-                  className="rmx-mock-btn"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, ease: EASE }}
-                >
-                  Get started
-                </motion.button>
+              <div className="rx-window-body">
+                <div className="rx-window-code">
+                  <div className="rx-code-stack">
+                    <AnimatePresence initial={false}>
+                      <motion.div
+                        key={theme.key + "-code"}
+                        className="rx-code-layer"
+                        initial={{ opacity: 0, filter: "blur(3px)" }}
+                        animate={{ opacity: 1, filter: "blur(0px)" }}
+                        exit={{ opacity: 0, filter: "blur(3px)" }}
+                        transition={{ duration: 0.28, ease: EASE }}
+                      >
+                        <HighlightedCode code={theme.code} />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+                <div className={`rx-stage rx-theme-${theme.key}`}>
+                  <div className="rx-stage-label" aria-hidden="true">
+                    Live render
+                  </div>
+                  <motion.button
+                    key={theme.key + "-btn"}
+                    type="button"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    className="rx-mock-btn"
+                    initial={{ opacity: 0, transform: "scale(0.94)" }}
+                    animate={{ opacity: 1, transform: "scale(1)" }}
+                    transition={{ duration: 0.32, ease: EASE }}
+                  >
+                    Get started
+                  </motion.button>
+                </div>
               </div>
             </div>
+          </motion.div>
+        </section>
 
-            <div className="rmx-theme-tabs" role="tablist" aria-label="Theme">
-              {THEMES.map((t, i) => (
-                <button
-                  key={t.key}
-                  type="button"
-                  role="tab"
-                  aria-selected={i === activeTheme}
-                  className={
-                    "rmx-theme-tab" + (i === activeTheme ? " is-active" : "")
-                  }
-                  onClick={() => setActiveTheme(i)}
+        {/* ══ Stats band ═══════════════════════════════════════════ */}
+        <section className="rx-shell rx-gap-sm">
+          <motion.div
+            className="rx-stats"
+            variants={staggerParent}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            {STATS.map((s) => (
+              <motion.div key={s.label} className="rx-stat" variants={staggerChild}>
+                <span className="rx-stat-value">{s.value}</span>
+                <span className="rx-stat-label">{s.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* ══ Editorial statement ══════════════════════════════════ */}
+        <section className="rx-shell rx-gap">
+          <motion.p className="rx-statement" {...reveal}>
+            Material hands you a look you then spend weeks overriding.{" "}
+            <span className="rx-gradient-text">
+              Remix hands you behavior and gets out of the way
+            </span>
+            , so styling becomes the part you actually enjoy.
+          </motion.p>
+        </section>
+
+        {/* ══ Feature grid ═════════════════════════════════════════ */}
+        <section className="rx-shell rx-gap">
+          <SectionHead
+            eyebrow="Why Remix"
+            title="Everything you need. Nothing you have to fight."
+            lead="A foundation that handles the hard parts — behavior, focus, accessibility — and then disappears so your design can take over."
+          />
+
+          <motion.div
+            className="rx-features"
+            variants={staggerParent}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+          >
+            {FEATURES.map((f) => {
+              const Icon = f.icon;
+              return (
+                <motion.div
+                  key={f.title}
+                  variants={staggerChild}
+                  className={"rx-feature" + (f.wide ? " rx-feature-wide" : "")}
                 >
-                  {t.name}
-                </button>
+                  <span className="rx-feature-icon">
+                    <Icon size={20} strokeWidth={1.9} />
+                  </span>
+                  <h3 className="rx-feature-title">{f.title}</h3>
+                  <p className="rx-feature-body">{f.body}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </section>
+
+        {/* ══ Live components bento ════════════════════════════════ */}
+        <section className="rx-shell rx-gap">
+          <SectionHead
+            eyebrow="Components"
+            title="Every component, running live on this page."
+            lead="Real, running Flutter apps. Hover them, focus them, click them. Nothing here is a screenshot."
+          />
+
+          <motion.div
+            className="rx-bento"
+            variants={staggerParent}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+          >
+            {BENTO.map((c) => (
+              <motion.div
+                key={c.id}
+                variants={staggerChild}
+                className={"rx-tile" + (c.wide ? " rx-tile-wide" : "")}
+              >
+                <FlutterMultiView
+                  previewId={c.id}
+                  height={c.height}
+                  bordered={false}
+                  lazyLoad
+                  transparent
+                />
+                <p className="rx-tile-cap">{c.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* ══ Component marquee ════════════════════════════════════ */}
+        <section className="rx-gap-sm rx-marquee-section">
+          <div className="rx-marquee" aria-hidden="true">
+            <div className="rx-marquee-track">
+              {[...COMPONENTS, ...COMPONENTS].map((name, i) => (
+                <span key={name + i} className="rx-chip">
+                  {name}
+                </span>
               ))}
             </div>
-          </motion.div>
-        </section>
-
-        {/* ── Positioning ───────────────────────────────────────── */}
-        <section className="rmx-shell rmx-gap">
-          <SectionHeader
-            label="Why Remix"
-            title="Start anywhere. Style anything. Ship faster."
-            lead="Remix hands you accessible, headless components and gets out of the way. Interaction logic is handled — hover, focus, press, keyboard navigation — so you spend your time on the design, not the plumbing."
-          />
-          <motion.div className="rmx-contrast" {...reveal}>
-            <p>
-              <strong>
-                You stop rebuilding the same button, the same checkbox, the same
-                focus ring over and over.
-              </strong>{" "}
-              Remix gives you a solid baseline so you can spend time on your
-              product, not on reimplementing UI decisions Flutter should have
-              handled.
-            </p>
-            <RemixButton href={LINKS.getStarted} variant="ghost" arrow="right">
-              See how it works
-            </RemixButton>
-          </motion.div>
-        </section>
-
-        {/* ── Component gallery ─────────────────────────────────── */}
-        <section className="rmx-shell rmx-gap">
-          <SectionHeader
-            label="Components"
-            title="20+ components. Polished by default."
-            lead="Accessible, themeable Flutter components with hover, focus, press, keyboard navigation, and animation built in — not bolted on. Every one is a real, running app, right here on the page."
-          />
-          <motion.div className="rmx-gallery" {...reveal}>
-            {GALLERY.map((c) => (
-              <LivePreview
-                key={c.id}
-                previewId={c.id}
-                height={240}
-                caption={c.label}
-              />
-            ))}
-          </motion.div>
-
-          <motion.div className="rmx-pill-grid" {...reveal}>
-            {COMPONENTS.map((name) => (
-              <span key={name} className="rmx-pill">
-                {name}
-              </span>
-            ))}
-            <span className="rmx-pill rmx-pill-muted">and more…</span>
-          </motion.div>
-
-          <motion.div className="rmx-center" {...reveal}>
+          </div>
+          <div className="rx-marquee rx-marquee-rev" aria-hidden="true">
+            <div className="rx-marquee-track">
+              {[...COMPONENTS, ...COMPONENTS].reverse().map((name, i) => (
+                <span key={name + i} className="rx-chip">
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+          <motion.div className="rx-shell rx-center" {...reveal}>
             <RemixButton href={LINKS.components} variant="ghost" arrow="right">
-              Browse all components
+              Browse the full component library
             </RemixButton>
           </motion.div>
         </section>
 
-        {/* ── Styling (code) ────────────────────────────────────── */}
-        <section className="rmx-shell rmx-gap">
-          <div className="rmx-split">
-            <div>
-              <SectionHeader
-                label="Styling"
-                title="Fully customizable styles, ready for use."
-                lead="Make it yours without starting from scratch. Define a look once with Mix's fluent API, then reuse and adapt it across your whole app — no deep widget trees, no copy-pasted variants that drift out of sync."
+        {/* ══ Styling split ════════════════════════════════════════ */}
+        <section className="rx-shell rx-gap">
+          <div className="rx-split">
+            <div className="rx-split-copy">
+              <SectionHead
+                align="left"
+                eyebrow="Styling"
+                title="Define a look once. Reuse it everywhere."
+                lead="Compose a style with Mix's fluent API, then share it across your whole app. No deep widget trees, no copy-pasted variants drifting out of sync."
               />
-              <motion.div className="rmx-center-left" {...reveal}>
+              <ul className="rx-checklist">
+                <li>
+                  <Sparkles size={15} strokeWidth={2.2} /> Type-safe, fluent, and
+                  composable
+                </li>
+                <li>
+                  <Sparkles size={15} strokeWidth={2.2} /> Variants, states, and
+                  tokens in one place
+                </li>
+                <li>
+                  <Sparkles size={15} strokeWidth={2.2} /> Works on any Remix
+                  component
+                </li>
+              </ul>
+              <motion.div className="rx-left-cta" {...reveal}>
                 <RemixButton href={LINKS.styling} variant="ghost" arrow="right">
                   Explore styling
                 </RemixButton>
@@ -392,75 +507,36 @@ export const RemixHome = () => {
             </div>
 
             <motion.div
-              className="rmx-card rmx-code"
-              initial={{ opacity: 0, y: 24 }}
+              className="rx-code-card"
+              initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
             >
-              <div className="rmx-preview-chrome" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-                <em>remix_button_style.dart</em>
+              <div className="rx-window-bar rx-window-bar-plain">
+                <div className="rx-dots" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <em className="rx-window-file">app_button.dart</em>
               </div>
-              <div className="rmx-code-body">
-                <HighlightedCode code={STYLE_SNIPPET} />
+              <div className="rx-code-card-body">
+                <HighlightedCode code={THEMES[0].code} />
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* ── Built on Mix ──────────────────────────────────────── */}
-        <section className="rmx-shell rmx-gap">
-          <motion.div className="rmx-band" {...reveal}>
-            <span className="rmx-mono-label">Built on Mix</span>
-            <h2 className="rmx-band-title">The styling engine comes included.</h2>
-            <p className="rmx-lead">
-              Remix pairs headless components (inspired by Naked UI) with Mix&apos;s
-              composable styling system. You get the behavior for free and keep full
-              control over the look — no Material to override, no framework to fight.
-            </p>
-            <RemixButton href={LINKS.mixDocs} variant="ghost" arrow="right">
-              Read the Mix docs
-            </RemixButton>
-          </motion.div>
-        </section>
-
-        {/* ── Three reasons ─────────────────────────────────────── */}
-        <section className="rmx-shell rmx-gap">
-          <motion.div className="rmx-reasons" {...reveal}>
-            {[
-              {
-                t: "Design for speed",
-                d: "Behavior, accessibility, and animation ship inside every component. Compose, don't reimplement.",
-              },
-              {
-                t: "Built by people who use it",
-                d: "Remix is open source and shaped in the open, alongside the Mix community.",
-              },
-              {
-                t: "Ready for what's next",
-                d: "Beta and moving fast. References, guides, and richer tooling are landing continuously.",
-              },
-            ].map((r) => (
-              <div key={r.t} className="rmx-card rmx-reason">
-                <h3>{r.t}</h3>
-                <p>{r.d}</p>
-              </div>
-            ))}
-          </motion.div>
-        </section>
-
-        {/* ── FAQ ───────────────────────────────────────────────── */}
-        <section className="rmx-shell rmx-gap">
-          <SectionHeader label="FAQ" title="Questions, answered." />
-          <motion.div className="rmx-faq" {...reveal}>
+        {/* ══ FAQ ══════════════════════════════════════════════════ */}
+        <section className="rx-shell rx-gap">
+          <SectionHead eyebrow="FAQ" title="Questions, answered." />
+          <motion.div className="rx-faq" {...reveal}>
             {FAQ.map((item) => (
-              <details key={item.q} className="rmx-faq-item">
+              <details key={item.q} className="rx-faq-item">
                 <summary>
                   {item.q}
-                  <span className="rmx-faq-icon" aria-hidden="true" />
+                  <span className="rx-faq-icon" aria-hidden="true" />
                 </summary>
                 <p>{item.a}</p>
               </details>
@@ -468,424 +544,361 @@ export const RemixHome = () => {
           </motion.div>
         </section>
 
-        {/* ── Footer CTA ────────────────────────────────────────── */}
-        <section className="rmx-shell rmx-gap rmx-footer">
-          <motion.div {...reveal}>
-            <h2 className="rmx-footer-title">Discover the full design system.</h2>
-            <p className="rmx-lead">
-              Open source, free, and built on Mix. Explore the components, join the
-              community, and build Flutter UI that&apos;s finally, entirely yours.
+        {/* ══ Closing CTA ══════════════════════════════════════════ */}
+        <section className="rx-shell rx-gap">
+          <motion.div className="rx-cta-card" {...reveal}>
+            <div className="rx-cta-glow" aria-hidden="true" />
+            <h2 className="rx-cta-title">
+              Build Flutter UI that&apos;s finally yours.
+            </h2>
+            <p className="rx-cta-lead">
+              Open source, free, and in active Beta. Explore the components, read
+              the docs, and shape it with the community.
             </p>
-            <div className="rmx-cta-row rmx-cta-center">
+            <div className="rx-cta-row">
               <RemixButton href={LINKS.getStarted} arrow="right">
                 Start in 2 minutes
               </RemixButton>
-            </div>
-            <div className="rmx-cta-row rmx-cta-center rmx-cta-secondary">
-              <RemixButton href={LINKS.github} variant="ghost" target="_blank">
-                Star on GitHub
-              </RemixButton>
-              <RemixButton href={LINKS.discord} variant="ghost" target="_blank">
-                Join the Discord
+              <RemixButton href={LINKS.components} variant="secondary">
+                Browse components
               </RemixButton>
             </div>
-            <p className="rmx-fineprint">Open source · Built on Mix</p>
+            <div className="rx-cta-links">
+              <a href={LINKS.github} target="_blank" rel="noreferrer">
+                <Github size={15} strokeWidth={2} /> GitHub
+              </a>
+              <span aria-hidden="true">·</span>
+              <a href={LINKS.discord} target="_blank" rel="noreferrer">
+                Discord
+              </a>
+              <span aria-hidden="true">·</span>
+              <span className="rx-cta-fine">BSD 3-Clause · Built on Mix</span>
+            </div>
           </motion.div>
         </section>
       </div>
 
       <style jsx global>{`
-        .rmx-root {
+        /* ═══ Foundations ═══════════════════════════════════════ */
+        .rx-root {
           position: relative;
           z-index: 10;
-          padding-bottom: 120px;
+          padding-bottom: 140px;
+          overflow-x: clip;
+          interpolate-size: allow-keywords;
         }
-        .rmx-shell {
+        .rx-shell {
           width: 100%;
-          max-width: 72rem;
+          max-width: 76rem;
           margin: 0 auto;
           padding-left: 1.5rem;
           padding-right: 1.5rem;
         }
-        .rmx-gap {
-          margin-top: 140px;
+        .rx-gap {
+          margin-top: clamp(112px, 14vw, 200px);
+        }
+        .rx-gap-sm {
+          margin-top: clamp(72px, 9vw, 128px);
+        }
+        .rx-gradient-text {
+          background: linear-gradient(
+            100deg,
+            var(--mix-accent) 0%,
+            #7dffa0 55%,
+            #ffffff 120%
+          );
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
         }
 
-        /* Shared card surface (heroui-style: soft radius, hairline border) */
-        .rmx-card {
-          border: 1px solid var(--mix-border-card);
-          border-radius: 18px;
-          background: var(--mix-surface);
-          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset,
-            0 20px 50px -30px rgba(0, 0, 0, 0.75);
+        /* ═══ Ambient backdrop ══════════════════════════════════ */
+        .rx-aurora {
+          position: absolute;
+          inset: 0;
+          top: -80px;
+          height: 1100px;
+          z-index: -1;
+          pointer-events: none;
+          overflow: hidden;
+          mask-image: linear-gradient(to bottom, #000 55%, transparent);
+          -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+        }
+        .rx-aurora-a,
+        .rx-aurora-b {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(90px);
+          opacity: 0.5;
+        }
+        .rx-aurora-a {
+          top: -260px;
+          left: 50%;
+          width: 760px;
+          height: 620px;
+          transform: translateX(-50%);
+          background: radial-gradient(
+            circle,
+            var(--mix-accent-glow),
+            transparent 68%
+          );
+          opacity: 0.7;
+        }
+        .rx-aurora-b {
+          top: 40px;
+          right: -120px;
+          width: 460px;
+          height: 460px;
+          background: radial-gradient(
+            circle,
+            rgba(0, 235, 3, 0.12),
+            transparent 70%
+          );
+        }
+        .rx-grid {
+          position: absolute;
+          inset: 0;
+          background-image: linear-gradient(
+              to right,
+              rgba(255, 255, 255, 0.03) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              to bottom,
+              rgba(255, 255, 255, 0.03) 1px,
+              transparent 1px
+            );
+          background-size: 44px 44px;
+          mask-image: radial-gradient(circle at 50% 22%, #000, transparent 62%);
+          -webkit-mask-image: radial-gradient(
+            circle at 50% 22%,
+            #000,
+            transparent 62%
+          );
         }
 
-        /* ── Hero ─────────────────────────────────────────────── */
-        .rmx-hero {
+        /* ═══ Hero ══════════════════════════════════════════════ */
+        .rx-hero {
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding-top: 88px;
+          padding-top: clamp(40px, 8vw, 96px);
         }
-        .rmx-logo {
+        .rx-logo {
           height: 44px;
           width: auto;
-          margin-bottom: 26px;
+          margin-bottom: 6px;
         }
-        .rmx-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 9px;
-          padding: 7px 15px;
-          border-radius: 999px;
-          border: 1px solid var(--mix-border-card);
-          background: var(--mix-surface);
-          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 12px;
-          letter-spacing: 0.03em;
-          color: var(--mix-text-muted);
-        }
-        .rmx-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 999px;
-          background: var(--mix-accent);
-          box-shadow: 0 0 10px var(--mix-accent);
-        }
-        .rmx-headline {
-          font-size: min(5rem, max(8vw, 2.85rem));
-          font-weight: 600;
-          letter-spacing: -0.035em;
-          line-height: 1.03;
+        .rx-hero-title {
+          margin-top: 28px;
+          font-size: clamp(2.7rem, 6.6vw, 4.8rem);
+          font-weight: 640;
+          letter-spacing: -0.04em;
+          line-height: 1;
+          color: #fff;
           text-wrap: balance;
-          margin-top: 1.75rem;
-          background-image: linear-gradient(to bottom, #fff 40%, #a1a1aa);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
         }
-        .rmx-subtitle {
-          font-size: 1.2rem;
+        .rx-hero-sub {
+          margin-top: 1.5rem;
+          max-width: 40rem;
+          font-size: clamp(1.05rem, 2vw, 1.25rem);
           line-height: 1.6;
           color: var(--mix-text-muted);
-          margin-top: 1.5rem;
-          max-width: 36rem;
           text-wrap: pretty;
         }
-        .rmx-cta-row {
-          margin-top: 2rem;
+        .rx-hero-cta {
+          margin-top: 2.2rem;
           display: flex;
           flex-wrap: wrap;
-          gap: 14px;
           justify-content: center;
+          gap: 14px;
         }
-        .rmx-cta-trigger {
-          margin-top: 16px;
-          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 12px;
-          letter-spacing: 0.04em;
-          color: var(--mix-text-muted);
-        }
-        .rmx-cta-secondary {
-          margin-top: 12px;
-        }
-        .rmx-hero-visual {
+
+        /* ═══ Product window ════════════════════════════════════ */
+        .rx-window-wrap {
           position: relative;
           width: 100%;
-          max-width: 46rem;
-          margin-top: 72px;
+          max-width: 62rem;
+          margin: clamp(56px, 8vw, 88px) auto 0;
         }
-        .rmx-hero-glow {
+        .rx-window-glow {
           position: absolute;
-          inset: -12% -8% 0;
+          inset: -14% 4% -30%;
           background: radial-gradient(
-            circle at 50% 0%,
+            ellipse at 50% 0%,
             var(--mix-accent-glow),
-            transparent 62%
+            transparent 66%
           );
-          filter: blur(20px);
+          filter: blur(30px);
           z-index: -1;
         }
-
-        /* ── Hero themed showcase ─────────────────────────────── */
-        .rmx-theme-tabs {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 8px;
-          margin-top: 18px;
-        }
-        .rmx-theme-tab {
-          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 13px;
-          font-weight: 500;
-          color: var(--mix-text-muted);
-          padding: 7px 15px;
-          border-radius: 999px;
-          border: 1px solid var(--mix-border-card);
-          background: var(--mix-surface);
-          cursor: pointer;
-          transition: color 0.15s ease, border-color 0.15s ease,
-            background-color 0.15s ease;
-        }
-        .rmx-theme-tab:hover {
-          color: #fff;
-          border-color: var(--mix-accent);
-        }
-        .rmx-theme-tab.is-active {
-          color: #05040a;
-          background: var(--mix-accent);
-          border-color: var(--mix-accent);
-        }
-        .rmx-theme-tab:focus-visible {
-          outline: 2px solid var(--mix-accent);
-          outline-offset: 2px;
-        }
-        .rmx-hero-showcase {
-          display: grid;
-          grid-template-columns: 1fr;
-          overflow: hidden;
+        .rx-window {
+          position: relative;
           text-align: left;
-        }
-        @media (min-width: 720px) {
-          .rmx-hero-showcase {
-            grid-template-columns: 1.05fr 0.95fr;
-          }
-        }
-        .rmx-hero-code {
-          overflow: hidden;
-          border-bottom: 1px solid var(--mix-border-card);
-        }
-        @media (min-width: 720px) {
-          .rmx-hero-code {
-            border-bottom: none;
-            border-right: 1px solid var(--mix-border-card);
-          }
-        }
-        .rmx-hero-stage {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 190px;
-          padding: 32px;
-        }
-
-        /* ── Preview cards ────────────────────────────────────── */
-        .rmx-preview {
+          border: 1px solid var(--mix-border-card);
+          border-radius: 20px;
+          background: linear-gradient(
+            180deg,
+            rgba(22, 20, 33, 0.9),
+            rgba(13, 11, 20, 0.9)
+          );
+          backdrop-filter: blur(12px);
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset,
+            0 40px 90px -50px rgba(0, 0, 0, 0.9),
+            0 0 0 1px rgba(0, 0, 0, 0.4);
           overflow: hidden;
         }
-        .rmx-preview-chrome {
+        .rx-window-bar {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 7px;
+          gap: 16px;
           padding: 12px 16px;
           border-bottom: 1px solid var(--mix-border-card);
-          background: var(--mix-surface-bright);
+          background: rgba(255, 255, 255, 0.02);
         }
-        .rmx-preview-chrome span {
+        /* Product window: dots overlaid at left, segmented truly centered */
+        .rx-window > .rx-window-bar {
+          justify-content: center;
+        }
+        .rx-window > .rx-window-bar .rx-dots {
+          position: absolute;
+          left: 16px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        .rx-window > .rx-window-bar .rx-segmented {
+          margin: 0;
+        }
+        .rx-dots {
+          display: flex;
+          gap: 7px;
+          flex: 0 0 auto;
+        }
+        .rx-dots span {
           width: 11px;
           height: 11px;
           border-radius: 999px;
-          background: rgba(255, 255, 255, 0.14);
+          background: rgba(255, 255, 255, 0.13);
         }
-        .rmx-preview-chrome em {
-          margin-left: 8px;
+        .rx-segmented {
+          display: flex;
+          gap: 3px;
+          padding: 3px;
+          margin: 0 auto;
+          border-radius: 999px;
+          border: 1px solid var(--mix-border-card);
+          background: rgba(0, 0, 0, 0.3);
+        }
+        .rx-seg {
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--mix-text-muted);
+          padding: 5px 13px;
+          border-radius: 999px;
+          cursor: pointer;
+          transition: color 0.15s ease, background-color 0.15s ease;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .rx-seg:hover {
+            color: #fff;
+          }
+        }
+        .rx-seg.is-active {
+          color: #05040a;
+          background: var(--mix-accent);
+        }
+        .rx-seg:focus-visible {
+          outline: 2px solid var(--mix-accent);
+          outline-offset: 2px;
+        }
+        .rx-window-file {
+          flex: 0 0 auto;
           font-style: normal;
           font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
           font-size: 11px;
           color: var(--mix-text-muted);
         }
-        .rmx-preview-caption {
-          padding: 12px 18px 16px;
-          font-size: 13px;
-          font-weight: 500;
-          color: var(--mix-text-muted);
-          border-top: 1px solid var(--mix-border-card);
-        }
-
-        /* ── Section headers (centered) ───────────────────────── */
-        .rmx-section-header {
-          max-width: 44rem;
-          margin: 0 auto 52px;
-          text-align: center;
-        }
-        .rmx-mono-label {
-          display: inline-block;
-          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: var(--mix-accent);
-        }
-        .rmx-section-title {
-          font-size: clamp(1.75rem, 4.2vw, 2.6rem);
-          font-weight: 600;
-          color: #fff;
-          letter-spacing: -0.03em;
-          line-height: 1.12;
-          text-wrap: balance;
-          margin-top: 14px;
-        }
-        .rmx-lead {
-          margin-top: 18px;
-          font-size: 1.075rem;
-          line-height: 1.7;
-          color: var(--mix-text-muted);
-          text-wrap: pretty;
-        }
-        .rmx-section-header .rmx-lead {
-          max-width: 40rem;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        /* ── Positioning contrast ─────────────────────────────── */
-        .rmx-contrast {
-          max-width: 52rem;
-          margin: 0 auto;
-          text-align: center;
-          padding: 40px 40px 44px;
-          border-radius: 20px;
-          border: 1px solid var(--mix-border-card);
-          background: radial-gradient(
-              circle at 50% 0%,
-              var(--mix-accent-low),
-              transparent 70%
-            ),
-            var(--mix-surface);
-        }
-        .rmx-contrast p {
-          font-size: 1.2rem;
-          line-height: 1.65;
-          color: var(--mix-text-muted);
-          text-wrap: pretty;
-        }
-        .rmx-contrast strong {
-          color: #fff;
-          font-weight: 600;
-        }
-        .rmx-contrast a {
-          margin-top: 24px;
-        }
-
-        /* ── Component gallery ────────────────────────────────── */
-        .rmx-gallery {
+        .rx-window-body {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 20px;
         }
-        @media (min-width: 680px) {
-          .rmx-gallery {
-            grid-template-columns: repeat(2, 1fr);
+        @media (min-width: 780px) {
+          .rx-window-body {
+            grid-template-columns: 1.1fr 0.9fr;
           }
         }
-        @media (min-width: 1000px) {
-          .rmx-gallery {
-            grid-template-columns: repeat(3, 1fr);
-          }
+        .rx-window-code {
+          padding: 20px 22px;
+          min-width: 0;
         }
-        .rmx-pill-grid {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 10px;
-          margin-top: 40px;
-        }
-        .rmx-pill {
-          font-size: 13px;
-          font-weight: 500;
-          color: #e6e6ea;
-          padding: 8px 15px;
-          border-radius: 999px;
-          border: 1px solid var(--mix-border-card);
-          background: var(--mix-surface);
-          transition: border-color 0.15s ease, color 0.15s ease;
-        }
-        .rmx-pill:hover {
-          border-color: var(--mix-accent);
-          color: #fff;
-        }
-        .rmx-pill-muted {
-          color: var(--mix-text-muted);
-        }
-        .rmx-center {
-          margin-top: 40px;
-          text-align: center;
-        }
-        .rmx-center-left {
-          margin-top: 8px;
-        }
-
-        /* ── Theme showcase ───────────────────────────────────── */
-        .rmx-theme-grid {
+        .rx-code-stack {
           display: grid;
-          grid-template-columns: 1fr;
-          gap: 20px;
+          min-height: 208px;
         }
-        @media (min-width: 620px) {
-          .rmx-theme-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+        .rx-code-stack > * {
+          grid-area: 1 / 1;
         }
-        @media (min-width: 1000px) {
-          .rmx-theme-grid {
-            grid-template-columns: repeat(4, 1fr);
-          }
+        .rx-code-layer {
+          overflow-x: auto;
         }
-        .rmx-theme-tile {
-          overflow: hidden;
-        }
-        .rmx-theme-stage {
+        .rx-stage {
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 150px;
-          border-bottom: 1px solid var(--mix-border-card);
+          min-height: 208px;
+          padding: 28px;
+          border-top: 1px solid var(--mix-border-card);
         }
-        .rmx-theme-meta {
-          padding: 18px 20px 20px;
+        @media (min-width: 780px) {
+          .rx-stage {
+            border-top: none;
+            border-left: 1px solid var(--mix-border-card);
+          }
         }
-        .rmx-theme-meta h3 {
-          font-size: 15px;
-          font-weight: 600;
-          color: #fff;
+        .rx-stage-label {
+          position: absolute;
+          top: 12px;
+          left: 14px;
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 10px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.28);
         }
-        .rmx-theme-meta p {
-          margin-top: 5px;
-          font-size: 13px;
-          line-height: 1.5;
-          color: var(--mix-text-muted);
-        }
-        .rmx-mock-btn {
+
+        /* ═══ Themed rendered button (CSS mockups) ══════════════ */
+        .rx-mock-btn {
           font-size: 14px;
           font-weight: 600;
           cursor: default;
+          pointer-events: none;
         }
-        /* Default */
-        .rmx-theme-default {
+        .rx-theme-default {
           background: radial-gradient(
-            circle at 50% 30%,
-            rgba(255, 255, 255, 0.03),
+            circle at 50% 40%,
+            rgba(0, 235, 3, 0.06),
             transparent 70%
           );
         }
-        .rmx-theme-default .rmx-mock-btn {
+        .rx-theme-default .rx-mock-btn {
           background: var(--mix-accent);
           color: #05040a;
           padding: 11px 22px;
           border-radius: 10px;
-          box-shadow: 0 6px 20px -6px var(--mix-accent-glow);
+          box-shadow: 0 8px 26px -8px var(--mix-accent-glow);
         }
-        /* Glass */
-        .rmx-theme-glass {
+        .rx-theme-glass {
           background: linear-gradient(
             135deg,
             rgba(0, 235, 3, 0.14),
             rgba(139, 92, 246, 0.14)
           );
         }
-        .rmx-theme-glass .rmx-mock-btn {
+        .rx-theme-glass .rx-mock-btn {
           background: rgba(255, 255, 255, 0.12);
           color: #fff;
           padding: 11px 22px;
@@ -893,11 +906,10 @@ export const RemixHome = () => {
           border: 1px solid rgba(255, 255, 255, 0.35);
           backdrop-filter: blur(8px);
         }
-        /* Brutalist */
-        .rmx-theme-brutalist {
+        .rx-theme-brutalist {
           background: #0a0a0a;
         }
-        .rmx-theme-brutalist .rmx-mock-btn {
+        .rx-theme-brutalist .rx-mock-btn {
           background: var(--mix-accent);
           color: #000;
           padding: 11px 22px;
@@ -905,11 +917,10 @@ export const RemixHome = () => {
           border: 2px solid #fff;
           box-shadow: 5px 5px 0 #fff;
         }
-        /* Neon */
-        .rmx-theme-neon {
+        .rx-theme-neon {
           background: #04040a;
         }
-        .rmx-theme-neon .rmx-mock-btn {
+        .rx-theme-neon .rx-mock-btn {
           background: transparent;
           color: var(--mix-accent);
           padding: 11px 22px;
@@ -920,189 +931,499 @@ export const RemixHome = () => {
           text-shadow: 0 0 8px var(--mix-accent-glow);
         }
 
-        /* ── Styling split ────────────────────────────────────── */
-        .rmx-split {
+        /* ═══ Stats band ════════════════════════════════════════ */
+        .rx-stats {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1px;
+          border: 1px solid var(--mix-border-card);
+          border-radius: 20px;
+          overflow: hidden;
+          background: var(--mix-border-card);
+        }
+        @media (min-width: 720px) {
+          .rx-stats {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+        .rx-stat {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          padding: 32px 20px;
+          background: rgba(13, 11, 20, 0.6);
+          text-align: center;
+        }
+        .rx-stat-value {
+          font-size: clamp(2rem, 4vw, 2.8rem);
+          font-weight: 640;
+          letter-spacing: -0.03em;
+          background: linear-gradient(180deg, #fff, #b7b7c2);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+        .rx-stat-label {
+          font-size: 13px;
+          color: var(--mix-text-muted);
+        }
+
+        /* ═══ Editorial statement ═══════════════════════════════ */
+        /* line-height forced past Nextra's fixed 1.35rem <p> rule */
+        .rx-statement {
+          max-width: 54rem;
+          margin: 0 auto;
+          text-align: center;
+          font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+          font-weight: 500;
+          line-height: 1.32 !important;
+          letter-spacing: -0.02em;
+          color: #fff;
+          text-wrap: balance;
+        }
+
+        /* ═══ Section heads ═════════════════════════════════════ */
+        .rx-head {
+          max-width: 46rem;
+          margin: 0 auto 56px;
+          text-align: center;
+        }
+        .rx-head-left {
+          margin: 0 0 32px;
+          text-align: left;
+        }
+        .rx-eyebrow {
+          display: inline-block;
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.16em;
+          color: var(--mix-accent);
+          margin-bottom: 16px;
+        }
+        .rx-title {
+          font-size: clamp(1.8rem, 4vw, 2.7rem);
+          font-weight: 620;
+          color: #fff;
+          letter-spacing: -0.035em;
+          line-height: 1.08;
+          text-wrap: balance;
+        }
+        .rx-lead {
+          margin-top: 18px;
+          font-size: 1.08rem;
+          line-height: 1.65;
+          color: var(--mix-text-muted);
+          text-wrap: pretty;
+        }
+        .rx-head:not(.rx-head-left) .rx-lead {
+          max-width: 40rem;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        /* ═══ Feature grid ══════════════════════════════════════ */
+        .rx-features {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        @media (min-width: 720px) {
+          .rx-features {
+            grid-template-columns: repeat(6, 1fr);
+          }
+          .rx-feature {
+            grid-column: span 2;
+          }
+          .rx-feature-wide {
+            grid-column: span 3;
+          }
+        }
+        .rx-feature {
+          position: relative;
+          padding: 26px;
+          border: 1px solid var(--mix-border-card);
+          border-radius: 18px;
+          background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(255, 255, 255, 0.005)
+          );
+          overflow: hidden;
+          transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .rx-feature:hover {
+            border-color: rgba(0, 235, 3, 0.35);
+            transform: translateY(-2px);
+          }
+        }
+        .rx-feature-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 42px;
+          height: 42px;
+          border-radius: 11px;
+          margin-bottom: 18px;
+          color: var(--mix-accent);
+          background: var(--mix-accent-low);
+          border: 1px solid rgba(0, 235, 3, 0.2);
+        }
+        .rx-feature-title {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #fff;
+          letter-spacing: -0.01em;
+        }
+        .rx-feature-body {
+          margin-top: 8px;
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: var(--mix-text-muted);
+        }
+
+        /* ═══ Component bento ═══════════════════════════════════ */
+        .rx-bento {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+        @media (min-width: 720px) {
+          .rx-bento {
+            grid-template-columns: repeat(3, 1fr);
+          }
+          .rx-tile-wide {
+            grid-column: span 2;
+          }
+        }
+        .rx-tile {
+          overflow: hidden;
+          border: 1px solid var(--mix-border-card);
+          border-radius: 18px;
+          background: var(--mix-surface);
+          box-shadow: 0 24px 60px -40px rgba(0, 0, 0, 0.8);
+          transition: border-color 0.2s ease;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .rx-tile:hover {
+            border-color: rgba(0, 235, 3, 0.3);
+          }
+        }
+        .rx-tile-cap {
+          padding: 12px 18px 16px;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--mix-text-muted);
+          border-top: 1px solid var(--mix-border-card);
+        }
+
+        /* ═══ Marquee ═══════════════════════════════════════════ */
+        .rx-marquee-section {
+          overflow: hidden;
+        }
+        .rx-marquee {
+          display: flex;
+          width: 100%;
+          overflow: hidden;
+          mask-image: linear-gradient(
+            to right,
+            transparent,
+            #000 12%,
+            #000 88%,
+            transparent
+          );
+          -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            #000 12%,
+            #000 88%,
+            transparent
+          );
+        }
+        .rx-marquee + .rx-marquee {
+          margin-top: 14px;
+        }
+        .rx-marquee-track {
+          display: flex;
+          gap: 12px;
+          padding-right: 12px;
+          flex: 0 0 auto;
+          animation: rx-scroll 42s linear infinite;
+        }
+        .rx-marquee-rev .rx-marquee-track {
+          animation-direction: reverse;
+        }
+        @keyframes rx-scroll {
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .rx-marquee-track {
+            animation: none;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+        }
+        .rx-chip {
+          flex: 0 0 auto;
+          font-size: 14px;
+          font-weight: 500;
+          color: #e6e6ea;
+          padding: 9px 18px;
+          border-radius: 999px;
+          border: 1px solid var(--mix-border-card);
+          background: var(--mix-surface);
+        }
+        .rx-center {
+          margin-top: 44px;
+          text-align: center;
+        }
+
+        /* ═══ Styling split ═════════════════════════════════════ */
+        .rx-split {
           display: grid;
           grid-template-columns: 1fr;
           gap: 40px;
           align-items: center;
         }
         @media (min-width: 940px) {
-          .rmx-split {
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 56px;
-          }
-          .rmx-split .rmx-section-header {
-            text-align: left;
-            margin: 0 0 32px;
-          }
-          .rmx-split .rmx-section-header .rmx-lead {
-            margin-left: 0;
-            margin-right: 0;
+          .rx-split {
+            grid-template-columns: 0.92fr 1.08fr;
+            gap: 60px;
           }
         }
-        .rmx-code {
+        .rx-checklist {
+          list-style: none;
+          margin: 4px 0 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .rx-checklist li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 0.98rem;
+          color: #d4d4dc;
+        }
+        .rx-checklist svg {
+          color: var(--mix-accent);
+          flex: 0 0 auto;
+        }
+        .rx-left-cta {
+          margin-top: 28px;
+        }
+        .rx-code-card {
+          border: 1px solid var(--mix-border-card);
+          border-radius: 18px;
+          background: linear-gradient(
+            180deg,
+            rgba(22, 20, 33, 0.7),
+            rgba(13, 11, 20, 0.85)
+          );
+          box-shadow: 0 40px 90px -55px rgba(0, 0, 0, 0.9);
           overflow: hidden;
         }
-        .rmx-code-body {
+        .rx-window-bar-plain {
+          justify-content: flex-start;
+        }
+        .rx-window-bar-plain .rx-window-file {
+          margin-left: 8px;
+        }
+        .rx-code-card-body {
           padding: 20px 22px;
           overflow-x: auto;
         }
 
-        /* ── Built-on-Mix band ────────────────────────────────── */
-        .rmx-band {
-          max-width: 60rem;
-          margin: 0 auto;
-          text-align: center;
-          padding: 64px 32px;
-          border-radius: 24px;
-          border: 1px solid var(--mix-border-card);
-          background: radial-gradient(
-              circle at 50% 0%,
-              var(--mix-accent-low),
-              transparent 60%
-            ),
-            var(--mix-surface);
-        }
-        .rmx-band-title {
-          font-size: clamp(1.75rem, 4.2vw, 2.6rem);
-          font-weight: 600;
-          color: #fff;
-          letter-spacing: -0.03em;
-          text-wrap: balance;
-          margin-top: 14px;
-        }
-        .rmx-band .rmx-lead {
-          max-width: 42rem;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 26px;
-        }
-
-        /* ── Three reasons ────────────────────────────────────── */
-        .rmx-reasons {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 20px;
-        }
-        @media (min-width: 760px) {
-          .rmx-reasons {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-        .rmx-reason {
-          padding: 30px;
-        }
-        .rmx-reason h3 {
-          font-size: 1.15rem;
-          font-weight: 600;
-          color: #fff;
-          margin-bottom: 10px;
-        }
-        .rmx-reason p {
-          font-size: 0.95rem;
-          line-height: 1.65;
-          color: var(--mix-text-muted);
-        }
-
-        /* ── FAQ ──────────────────────────────────────────────── */
-        .rmx-faq {
+        /* ═══ FAQ ═══════════════════════════════════════════════ */
+        .rx-faq {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          max-width: 46rem;
+          max-width: 48rem;
           margin: 0 auto;
         }
-        .rmx-faq-item {
+        .rx-faq-item {
           border: 1px solid var(--mix-border-card);
-          border-radius: 14px;
-          background: var(--mix-surface);
+          border-radius: 16px;
+          background: rgba(13, 11, 20, 0.5);
           overflow: hidden;
+          transition: border-color 0.2s ease;
         }
-        .rmx-faq-item summary {
+        .rx-faq-item[open] {
+          border-color: rgba(0, 235, 3, 0.25);
+        }
+        .rx-faq-item summary {
           list-style: none;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 16px;
-          padding: 19px 24px;
-          font-size: 1rem;
+          padding: 20px 24px;
+          font-size: 1.02rem;
           font-weight: 500;
           color: #fff;
         }
-        .rmx-faq-item summary::-webkit-details-marker {
+        .rx-faq-item summary::-webkit-details-marker {
           display: none;
         }
-        .rmx-faq-item summary:focus-visible {
+        .rx-faq-item summary:focus-visible {
           outline: 2px solid var(--mix-accent);
           outline-offset: -2px;
-          border-radius: 14px;
+          border-radius: 16px;
         }
-        .rmx-faq-icon {
+        .rx-faq-icon {
           position: relative;
           flex: 0 0 auto;
           width: 14px;
           height: 14px;
         }
-        .rmx-faq-icon::before,
-        .rmx-faq-icon::after {
+        .rx-faq-icon::before,
+        .rx-faq-icon::after {
           content: "";
           position: absolute;
           background: var(--mix-accent);
           border-radius: 2px;
           transition: transform 0.2s ease, opacity 0.2s ease;
         }
-        .rmx-faq-icon::before {
+        .rx-faq-icon::before {
           top: 6px;
           left: 0;
           width: 14px;
           height: 2px;
         }
-        .rmx-faq-icon::after {
+        .rx-faq-icon::after {
           top: 0;
           left: 6px;
           width: 2px;
           height: 14px;
         }
-        .rmx-faq-item[open] .rmx-faq-icon::after {
+        .rx-faq-item[open] .rx-faq-icon::after {
           transform: scaleY(0);
           opacity: 0;
         }
-        .rmx-faq-item p {
-          padding: 0 24px 20px;
-          font-size: 0.95rem;
+        @media (prefers-reduced-motion: reduce) {
+          .rx-faq-icon::before,
+          .rx-faq-icon::after {
+            transition: opacity 0.2s ease;
+          }
+        }
+        .rx-faq-item p {
+          padding: 0 24px 22px;
+          font-size: 0.96rem;
           line-height: 1.7;
           color: var(--mix-text-muted);
         }
+        .rx-faq-item::details-content {
+          height: 0;
+          overflow: hidden;
+          content-visibility: hidden;
+          transition: height 0.3s ease, content-visibility 0.3s allow-discrete;
+        }
+        .rx-faq-item[open]::details-content {
+          height: auto;
+          content-visibility: visible;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .rx-faq-item::details-content {
+            transition: none;
+          }
+        }
 
-        /* ── Footer CTA ───────────────────────────────────────── */
-        .rmx-footer {
+        /* ═══ Closing CTA ═══════════════════════════════════════ */
+        .rx-cta-card {
+          position: relative;
+          overflow: hidden;
           text-align: center;
-          border-top: 1px solid var(--mix-border-card);
-          padding-top: 80px;
+          padding: clamp(48px, 8vw, 88px) 28px;
+          border: 1px solid rgba(0, 235, 3, 0.22);
+          border-radius: 28px;
+          background: linear-gradient(
+            180deg,
+            rgba(0, 235, 3, 0.06),
+            rgba(13, 11, 20, 0.4)
+          );
         }
-        .rmx-footer-title {
-          font-size: clamp(1.85rem, 5vw, 3rem);
-          font-weight: 600;
-          letter-spacing: -0.03em;
+        .rx-cta-glow {
+          position: absolute;
+          inset: -60% 20% auto;
+          height: 380px;
+          background: radial-gradient(
+            ellipse at 50% 0%,
+            var(--mix-accent-glow),
+            transparent 68%
+          );
+          filter: blur(20px);
+          z-index: 0;
+        }
+        .rx-cta-card > *:not(.rx-cta-glow) {
+          position: relative;
+          z-index: 1;
+        }
+        .rx-cta-title {
+          font-size: clamp(2rem, 5vw, 3.2rem);
+          font-weight: 640;
+          letter-spacing: -0.035em;
+          line-height: 1.05;
+          color: #fff;
           text-wrap: balance;
-          background-image: linear-gradient(to bottom, #fff 40%, #a1a1aa);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
         }
-        .rmx-footer .rmx-lead {
+        .rx-cta-lead {
           max-width: 40rem;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .rmx-fineprint {
-          margin-top: 24px;
-          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 12px;
-          letter-spacing: 0.06em;
+          margin: 18px auto 0;
+          font-size: 1.08rem;
+          line-height: 1.65;
           color: var(--mix-text-muted);
+          text-wrap: pretty;
+        }
+        .rx-cta-row {
+          margin-top: 32px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 14px;
+        }
+        .rx-cta-links {
+          margin-top: 28px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          font-size: 13px;
+          color: var(--mix-text-muted);
+        }
+        .rx-cta-links a {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          color: #d4d4dc;
+          transition: color 0.15s ease;
+        }
+        .rx-cta-links a:hover {
+          color: var(--mix-accent);
+        }
+        .rx-cta-fine {
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          letter-spacing: 0.03em;
+        }
+
+        /* ═══ Mobile ════════════════════════════════════════════ */
+        @media (max-width: 719px) {
+          .rx-statement {
+            font-size: 1.55rem;
+          }
+          .rx-window-file {
+            display: none;
+          }
+          .rx-segmented {
+            margin: 0;
+          }
         }
       `}</style>
     </MotionConfig>
