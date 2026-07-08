@@ -56,52 +56,54 @@ const staggerChild = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
 };
 
-/* ── One component, four Mix styles (hero showcase) ─────────────────── */
+/* ── One RemixButton, three real Mix styles (hero showcase) ─────────────
+   Each `code` snippet is the exact style built by its Flutter preview in
+   packages/mix_docs_preview/lib/homepage/hero_*.dart (rendered live via
+   FlutterMultiView). Keep the two in sync. */
 const THEMES = [
   {
     key: "default",
-    name: "Default",
+    name: "Classic",
+    previewId: "homepage/hero-classic",
     code: `final style = RemixButtonStyle()
-  .color(accent)
-  .paddingX(22)
-  .paddingY(11)
-  .borderRadiusAll(const Radius.circular(10))
-  .onHovered(
-    RemixButtonStyle().color(accent.shade400),
-  );`,
+    .color(const Color(0xFF00EB03))
+    .labelColor(const Color(0xFF05040A))
+    .paddingX(22)
+    .paddingY(11)
+    .borderRadiusAll(const Radius.circular(10))
+    .onHovered(
+      RemixButtonStyle().color(const Color(0xFF33FF36)),
+    );`,
   },
   {
-    key: "glass",
-    name: "Glass",
+    key: "gradient",
+    name: "Gradient",
+    previewId: "homepage/hero-gradient",
     code: `final style = RemixButtonStyle()
-  .color(Colors.white.withOpacity(.12))
-  .paddingX(22)
-  .paddingY(11)
-  .borderRadiusAll(const Radius.circular(12))
-  .borderAll(color: Colors.white38)
-  .backdropBlur(8);`,
-  },
-  {
-    key: "brutalist",
-    name: "Brutalist",
-    code: `final style = RemixButtonStyle()
-  .color(accent)
-  .paddingX(22)
-  .paddingY(11)
-  .borderRadiusAll(Radius.zero)
-  .borderAll(color: Colors.white, width: 2)
-  .shadowOnly(color: Colors.white, offset: const Offset(5, 5));`,
+    .gradient(
+      LinearGradientMix(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
+      ),
+    )
+    .labelColor(const Color(0xFF05040A))
+    .paddingX(22)
+    .paddingY(11)
+    .borderRadiusAll(const Radius.circular(12));`,
   },
   {
     key: "neon",
     name: "Neon",
+    previewId: "homepage/hero-neon",
     code: `final style = RemixButtonStyle()
-  .color(Colors.transparent)
-  .paddingX(22)
-  .paddingY(11)
-  .borderRadiusAll(const Radius.circular(10))
-  .borderAll(color: accent)
-  .shadowOnly(color: accent, blurRadius: 18);`,
+    .color(const Color(0xFF0A0014))
+    .labelColor(const Color(0xFF00F0FF))
+    .paddingX(24)
+    .paddingY(11)
+    .borderRadiusAll(const Radius.circular(2))
+    .borderAll(color: const Color(0xFF00F0FF), width: 1)
+    .shadowOnly(color: const Color(0xFFFF00E5), blurRadius: 22);`,
   },
 ];
 
@@ -339,20 +341,32 @@ export const RemixHome = () => {
 
                 <div className={`rx-stage rx-theme-${theme.key}`}>
                   <div className="rx-stage-label" aria-hidden="true">
-                    Live render
+                    Live render · Flutter
                   </div>
-                  <motion.button
-                    key={theme.key + "-btn"}
-                    type="button"
-                    tabIndex={-1}
-                    aria-hidden="true"
-                    className="rx-mock-btn"
-                    initial={{ opacity: 0, transform: "scale(0.94)" }}
-                    animate={{ opacity: 1, transform: "scale(1)" }}
-                    transition={{ duration: 0.32, ease: EASE }}
-                  >
-                    Get started
-                  </motion.button>
+                  {/* Real compiled Flutter previews (one RemixButton per
+                      style) sharing a single engine. All mount once and
+                      cross-fade on switch for instant, flicker-free toggling. */}
+                  <div className="rx-flutter-stack">
+                    {THEMES.map((t, i) => (
+                      <div
+                        key={t.key}
+                        className="rx-flutter-layer"
+                        aria-hidden={i !== activeTheme}
+                        style={{
+                          opacity: i === activeTheme ? 1 : 0,
+                          pointerEvents: i === activeTheme ? "auto" : "none",
+                        }}
+                      >
+                        <FlutterMultiView
+                          previewId={t.previewId}
+                          height={140}
+                          bordered={false}
+                          transparent
+                          lazyLoad={false}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -890,13 +904,20 @@ export const RemixHome = () => {
           color: rgba(255, 255, 255, 0.28);
         }
 
-        /* ═══ Themed rendered button (CSS mockups) ══════════════ */
-        .rx-mock-btn {
-          font-size: 14px;
-          font-weight: 600;
-          cursor: default;
-          pointer-events: none;
+        /* ═══ Live Flutter render (stacked, cross-faded) ════════ */
+        .rx-flutter-stack {
+          position: relative;
+          display: grid;
+          place-items: center;
+          width: 100%;
+          min-height: 140px;
         }
+        .rx-flutter-layer {
+          grid-area: 1 / 1;
+          width: 100%;
+          transition: opacity 0.32s ease;
+        }
+        /* Per-theme ambient stage backdrop (matches each style's mood) */
         .rx-theme-default {
           background: radial-gradient(
             circle at 50% 40%,
@@ -904,51 +925,15 @@ export const RemixHome = () => {
             transparent 70%
           );
         }
-        .rx-theme-default .rx-mock-btn {
-          background: var(--mix-accent);
-          color: #05040a;
-          padding: 11px 22px;
-          border-radius: 10px;
-          box-shadow: 0 8px 26px -8px var(--mix-accent-glow);
-        }
-        .rx-theme-glass {
-          background: linear-gradient(
-            135deg,
-            rgba(0, 235, 3, 0.14),
-            rgba(139, 92, 246, 0.14)
+        .rx-theme-gradient {
+          background: radial-gradient(
+            circle at 50% 40%,
+            rgba(139, 92, 246, 0.1),
+            transparent 70%
           );
         }
-        .rx-theme-glass .rx-mock-btn {
-          background: rgba(255, 255, 255, 0.12);
-          color: #fff;
-          padding: 11px 22px;
-          border-radius: 12px;
-          border: 1px solid rgba(255, 255, 255, 0.35);
-          backdrop-filter: blur(8px);
-        }
-        .rx-theme-brutalist {
-          background: #0a0a0a;
-        }
-        .rx-theme-brutalist .rx-mock-btn {
-          background: var(--mix-accent);
-          color: #000;
-          padding: 11px 22px;
-          border-radius: 0;
-          border: 2px solid #fff;
-          box-shadow: 5px 5px 0 #fff;
-        }
         .rx-theme-neon {
-          background: #04040a;
-        }
-        .rx-theme-neon .rx-mock-btn {
-          background: transparent;
-          color: var(--mix-accent);
-          padding: 11px 22px;
-          border-radius: 10px;
-          border: 1px solid var(--mix-accent);
-          box-shadow: 0 0 18px var(--mix-accent-glow),
-            inset 0 0 12px var(--mix-accent-low);
-          text-shadow: 0 0 8px var(--mix-accent-glow);
+          background: #06000f;
         }
 
         /* ═══ Stats band ════════════════════════════════════════ */

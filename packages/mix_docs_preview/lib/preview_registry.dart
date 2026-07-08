@@ -28,6 +28,9 @@ import 'guides/dynamic_styling/selected.dart' as selected;
 import 'guides/dynamic_styling/selected_toggle.dart' as selected_toggle;
 import 'homepage/animation_showcase.dart' as homepage_animation;
 import 'homepage/buttons_showcase.dart' as homepage_buttons;
+import 'homepage/hero_classic.dart' as hero_classic;
+import 'homepage/hero_gradient.dart' as hero_gradient;
+import 'homepage/hero_neon.dart' as hero_neon;
 import 'homepage/directives_showcase.dart' as homepage_directives;
 import 'homepage/styling_showcase.dart' as homepage_styling;
 import 'homepage/variants_showcase.dart' as homepage_variants;
@@ -284,6 +287,27 @@ class PreviewRegistry {
       category: _homepage,
       builder: (_) => const homepage_buttons.Example(),
       snippetRegion: 'showcase',
+    ),
+    PreviewEntry(
+      previewId: 'homepage/hero-classic',
+      sourcePath: 'packages/mix_docs_preview/lib/homepage/hero_classic.dart',
+      category: _homepage,
+      builder: (_) => const hero_classic.Example(),
+      snippetRegion: 'style',
+    ),
+    PreviewEntry(
+      previewId: 'homepage/hero-gradient',
+      sourcePath: 'packages/mix_docs_preview/lib/homepage/hero_gradient.dart',
+      category: _homepage,
+      builder: (_) => const hero_gradient.Example(),
+      snippetRegion: 'style',
+    ),
+    PreviewEntry(
+      previewId: 'homepage/hero-neon',
+      sourcePath: 'packages/mix_docs_preview/lib/homepage/hero_neon.dart',
+      category: _homepage,
+      builder: (_) => const hero_neon.Example(),
+      snippetRegion: 'style',
     ),
     PreviewEntry(
       previewId: 'homepage/directives',
