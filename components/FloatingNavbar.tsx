@@ -321,9 +321,15 @@ function ProductMenu() {
                                     style={{ height: 20, width: 'auto' }}
                                     className={clsx(
                                         'max-w-none transition-[filter,opacity]',
-                                        isActive
-                                            ? 'filter-none'
-                                            : '[filter:brightness(0)_invert(1)] opacity-60 group-hover:opacity-100 group-hover:filter-none',
+                                        !isActive &&
+                                            'opacity-60 group-hover:opacity-100',
+                                        // The white-out filter only works on the
+                                        // transparent-background wordmark PNGs; the
+                                        // square glyph SVGs have an opaque backdrop
+                                        // that it would wipe to a solid white tile.
+                                        !isActive &&
+                                            !product.showLabel &&
+                                            '[filter:brightness(0)_invert(1)] group-hover:filter-none',
                                     )}
                                 />
                                 {product.showLabel && (
@@ -386,6 +392,9 @@ function MobileDrawer({
                         <Link
                             key={product.id}
                             href={product.href}
+                            // The pathname effect only closes the drawer when the
+                            // route actually changes; same-route taps need this.
+                            onClick={onClose}
                             className="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:bg-white/5 rounded"
                         >
                             <img
@@ -409,6 +418,7 @@ function MobileDrawer({
                                             <Link
                                                 key={page.href}
                                                 href={page.href}
+                                                onClick={onClose}
                                                 className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
                                             >
                                                 {page.label}
@@ -419,6 +429,7 @@ function MobileDrawer({
                                     <Link
                                         key={entry.href}
                                         href={entry.href}
+                                        onClick={onClose}
                                         className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
                                     >
                                         {entry.label}
@@ -429,6 +440,7 @@ function MobileDrawer({
                     ) : docsHref ? (
                         <Link
                             href={docsHref}
+                            onClick={onClose}
                             className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
                         >
                             Docs
