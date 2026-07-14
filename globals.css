@@ -43,6 +43,28 @@ html.dark[data-product="remix"] {
     --mix-accent-glow: rgba(0, 235, 3, 0.18);
 }
 
+/* Stargate product: override brand accent to portal violet */
+html.dark[data-product="stargate"] {
+    --nextra-primary-hue: 255deg;
+    --nextra-primary-saturation: 92%;
+    --nextra-primary-lightness: 76%;
+
+    --mix-accent: #A78BFA;
+    --mix-accent-low: rgba(167, 139, 250, 0.1);
+    --mix-accent-glow: rgba(167, 139, 250, 0.18);
+}
+
+/* Code Analysis product: override brand accent to cyan */
+html.dark[data-product="code-analysis"] {
+    --nextra-primary-hue: 191deg;
+    --nextra-primary-saturation: 100%;
+    --nextra-primary-lightness: 50%;
+
+    --mix-accent: #00D3FF;
+    --mix-accent-low: rgba(0, 211, 255, 0.1);
+    --mix-accent-glow: rgba(0, 211, 255, 0.18);
+}
+
 body {
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;

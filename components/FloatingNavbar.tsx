@@ -22,10 +22,14 @@ function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     )
 }
 
-function getActiveProduct(pathname: string | null): 'mix' | 'remix' {
+type ProductId = 'mix' | 'remix' | 'stargate' | 'code-analysis'
+
+function getActiveProduct(pathname: string | null): ProductId {
     if (!pathname) return 'mix'
     if (pathname.startsWith('/documentation/remix')) return 'remix'
     if (pathname === '/remix' || pathname.startsWith('/remix/')) return 'remix'
+    if (pathname === '/stargate' || pathname.startsWith('/stargate/')) return 'stargate'
+    if (pathname === '/code-analysis' || pathname.startsWith('/code-analysis/')) return 'code-analysis'
     return 'mix'
 }
 
@@ -47,15 +51,34 @@ const DISCORD_URL = 'https://discord.com/invite/Ycn6GV3m2k'
 const MIX_DOCS_URL = '/documentation/mix/overview/introduction'
 const REMIX_DOCS_URL = '/documentation/remix'
 
-function getDocsHref(product: 'mix' | 'remix') {
-    return product === 'remix' ? REMIX_DOCS_URL : MIX_DOCS_URL
+// Stargate and Code Analysis have no public docs or repos yet.
+function getDocsHref(product: ProductId): string | null {
+    if (product === 'mix') return MIX_DOCS_URL
+    if (product === 'remix') return REMIX_DOCS_URL
+    return null
 }
 
-function getGithubHref(product: 'mix' | 'remix') {
-    return product === 'remix' ? REMIX_GITHUB_URL : MIX_GITHUB_URL
+function getGithubHref(product: ProductId): string | null {
+    if (product === 'mix') return MIX_GITHUB_URL
+    if (product === 'remix') return REMIX_GITHUB_URL
+    return null
 }
 
-const PRODUCTS = [
+// Mix versioning does not apply to the standalone product landing pages.
+function hasVersionMenu(product: ProductId) {
+    return product === 'mix' || product === 'remix'
+}
+
+type Product = {
+    id: ProductId
+    label: string
+    href: string
+    logo: string
+    /** Set for square glyph logos that need the text label rendered beside them. */
+    showLabel?: boolean
+}
+
+const PRODUCTS: Product[] = [
     {
         id: 'mix' as const,
         label: 'Mix',
@@ -68,13 +91,28 @@ const PRODUCTS = [
         href: '/remix',
         logo: '/assets/logo_remix_sidebar.png',
     },
+    {
+        id: 'stargate' as const,
+        label: 'Stargate',
+        href: '/stargate',
+        logo: '/assets/logo_stargate_sidebar.svg',
+        // Square glyph, not a wordmark — show the text label next to it.
+        showLabel: true,
+    },
+    {
+        id: 'code-analysis' as const,
+        label: 'Code Analysis',
+        href: '/code-analysis',
+        logo: '/assets/logo_code_analysis_sidebar.svg',
+        showLabel: true,
+    },
 ]
 
 type DocsEntry =
     | { label: string; href: string }
     | { label: string; pages: { label: string; href: string }[] }
 
-const DOCS_SECTIONS: Record<'mix' | 'remix', DocsEntry[]> = {
+const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
     mix: [
         {
             label: 'Overview',
@@ -247,6 +285,11 @@ function ProductMenu() {
                     alt={activeProduct.label}
                     className="h-5 w-auto"
                 />
+                {activeProduct.showLabel && (
+                    <span className="text-sm whitespace-nowrap">
+                        {activeProduct.label}
+                    </span>
+                )}
                 <ChevronDown className="h-3 w-3" />
             </button>
             {open && (
@@ -268,7 +311,7 @@ function ProductMenu() {
                                 aria-label={product.label}
                                 aria-current={isActive ? 'page' : undefined}
                                 className={clsx(
-                                    'flex items-center justify-center px-3 py-2 rounded-md transition-colors',
+                                    'group flex items-center justify-center gap-2 px-3 py-2 rounded-md transition-colors',
                                     isActive ? 'bg-white/5' : 'hover:bg-white/5',
                                 )}
                             >
@@ -280,9 +323,21 @@ function ProductMenu() {
                                         'max-w-none transition-[filter,opacity]',
                                         isActive
                                             ? 'filter-none'
-                                            : '[filter:brightness(0)_invert(1)] opacity-60 hover:opacity-100 hover:filter-none',
+                                            : '[filter:brightness(0)_invert(1)] opacity-60 group-hover:opacity-100 group-hover:filter-none',
                                     )}
                                 />
+                                {product.showLabel && (
+                                    <span
+                                        className={clsx(
+                                            'text-sm whitespace-nowrap transition-colors',
+                                            isActive
+                                                ? 'text-white'
+                                                : 'text-white/60 group-hover:text-white',
+                                        )}
+                                    >
+                                        {product.label}
+                                    </span>
+                                )}
                             </Link>
                         )
                     })}
@@ -300,11 +355,12 @@ function MobileDrawer({
     isDocsActive,
 }: {
     onClose: () => void
-    docsHref: string
-    githubHref: string
-    activeProduct: 'mix' | 'remix'
+    docsHref: string | null
+    githubHref: string | null
+    activeProduct: ProductId
     isDocsActive: boolean
 }) {
+    const docsSections = DOCS_SECTIONS[activeProduct] ?? []
     return (
         <div className="fixed inset-0 z-[60] md:hidden">
             <div
@@ -343,7 +399,7 @@ function MobileDrawer({
                     ))}
                     {isDocsActive ? (
                         <>
-                            {DOCS_SECTIONS[activeProduct].map((entry) =>
+                            {docsSections.map((entry) =>
                                 'pages' in entry ? (
                                     <Fragment key={entry.label}>
                                         <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
@@ -370,37 +426,51 @@ function MobileDrawer({
                                 ),
                             )}
                         </>
-                    ) : (
+                    ) : docsHref ? (
                         <Link
                             href={docsHref}
                             className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
                         >
                             Docs
                         </Link>
-                    )}
-                    <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
-                        Version
-                    </div>
-                    {VERSION_ITEMS.map((item) => (
-                        <a
-                            key={item.href}
-                            href={item.href}
-                            className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                    ) : (
+                        <Link
+                            href="#waitlist"
+                            onClick={onClose}
+                            className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
                         >
-                            {item.label}
-                        </a>
-                    ))}
+                            Join waitlist
+                        </Link>
+                    )}
+                    {hasVersionMenu(activeProduct) && (
+                        <>
+                            <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
+                                Version
+                            </div>
+                            {VERSION_ITEMS.map((item) => (
+                                <a
+                                    key={item.href}
+                                    href={item.href}
+                                    className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                                >
+                                    {item.label}
+                                </a>
+                            ))}
+                        </>
+                    )}
                     <div className="px-3 pt-3 text-xs uppercase tracking-wider text-white/40">
                         Links
                     </div>
-                    <a
-                        href={githubHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-3 py-2 text-white/90 hover:bg-white/5 rounded"
-                    >
-                        <Github className="h-4 w-4" /> GitHub
-                    </a>
+                    {githubHref && (
+                        <a
+                            href={githubHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                        >
+                            <Github className="h-4 w-4" /> GitHub
+                        </a>
+                    )}
                     <a
                         href={TWITTER_URL}
                         target="_blank"
@@ -429,7 +499,8 @@ export default function FloatingNavbar() {
     const [searchOpen, setSearchOpen] = useState(false)
     const isDocsActive = pathname?.startsWith('/documentation') ?? false
     const activeProduct = getActiveProduct(pathname)
-    const homeHref = activeProduct === 'remix' ? '/remix' : '/'
+    const homeHref =
+        PRODUCTS.find((p) => p.id === activeProduct)?.href ?? '/'
     const isHomeActive = pathname === homeHref
     const docsHref = getDocsHref(activeProduct)
     const githubHref = getGithubHref(activeProduct)
@@ -469,17 +540,26 @@ export default function FloatingNavbar() {
                     Home
                 </Link>
                 <span className="h-4 w-px bg-white/10" />
-                <Link
-                    href={docsHref}
-                    className={clsx(
-                        'px-3 py-1.5 text-sm transition-colors',
-                        isDocsActive
-                            ? 'text-[color:var(--mix-accent)]'
-                            : 'text-white/80 hover:text-white',
-                    )}
-                >
-                    Docs
-                </Link>
+                {docsHref ? (
+                    <Link
+                        href={docsHref}
+                        className={clsx(
+                            'px-3 py-1.5 text-sm transition-colors',
+                            isDocsActive
+                                ? 'text-[color:var(--mix-accent)]'
+                                : 'text-white/80 hover:text-white',
+                        )}
+                    >
+                        Docs
+                    </Link>
+                ) : (
+                    <Link
+                        href="#waitlist"
+                        className="px-3 py-1.5 text-sm text-white/80 hover:text-white transition-colors"
+                    >
+                        Join waitlist
+                    </Link>
+                )}
                 <span className="h-4 w-px bg-white/10" />
                 <div className="relative floating-search [&_input]:!bg-transparent [&_input]:!border-0 [&_input]:!shadow-none [&_input]:!text-sm [&_input]:!w-44 [&_input]:!h-8 [&_input]:!pl-7 [&_input:focus]:!ring-0 [&_input:focus]:!outline-none [&_input:focus]:!border-0 [&_input:focus]:!shadow-none">
                     <SearchIcon
@@ -497,17 +577,23 @@ export default function FloatingNavbar() {
                     PILL,
                 )}
             >
-                <VersionMenu />
-                <span className="h-4 w-px bg-white/10" />
-                <a
-                    href={githubHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    className="p-2 text-white/70 hover:text-white"
-                >
-                    <Github className="h-4 w-4" />
-                </a>
+                {hasVersionMenu(activeProduct) && (
+                    <>
+                        <VersionMenu />
+                        <span className="h-4 w-px bg-white/10" />
+                    </>
+                )}
+                {githubHref && (
+                    <a
+                        href={githubHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                        className="p-2 text-white/70 hover:text-white"
+                    >
+                        <Github className="h-4 w-4" />
+                    </a>
+                )}
                 <a
                     href={TWITTER_URL}
                     target="_blank"
