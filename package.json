@@ -20,8 +20,10 @@
     "postcss": "^8.5.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "resend": "^6.17.2",
     "shiki": "^4.0.2",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/node": "24.5.0",
@@ -31,5 +33,10 @@
     "eslint-plugin-mdx": "^3.7.0",
     "pagefind": "^1.4.0",
     "typescript": "^5.9.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "zod": "4.3.6"
+    }
   }
 }
