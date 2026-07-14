@@ -24,14 +24,14 @@ class _HeroButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // #docregion style
-    final style = RemixButtonStyle()
+    final style = RemixButtonStyler()
         .color(const Color(0xFF00EB03))
         .labelColor(const Color(0xFF05040A))
         .paddingX(22)
         .paddingY(11)
         .borderRadiusAll(const Radius.circular(10))
         .onHovered(
-          RemixButtonStyle().color(const Color(0xFF33FF36)),
+          RemixButtonStyler().color(const Color(0xFF33FF36)),
         );
     // #enddocregion style
 

@@ -52,8 +52,8 @@ class IconButtonExample extends StatelessWidget {
     );
   }
 
-  RemixIconButtonStyle get style {
-    return RemixIconButtonStyle()
+  RemixIconButtonStyler get style {
+    return RemixIconButtonStyler()
         .iconColor(Colors.blueGrey.shade700)
         .iconSize(22)
         .size(40, 40)
@@ -61,17 +61,17 @@ class IconButtonExample extends StatelessWidget {
         .borderAll(color: Colors.blueGrey.shade100, width: 1.5)
         .borderRadiusAll(const Radius.circular(8))
         .spinner(
-          RemixSpinnerStyle()
+          RemixSpinnerStyler()
               .size(22)
               .strokeWidth(1.3)
               .indicatorColor(Colors.blueGrey.shade600),
         )
         .onHovered(
-          RemixIconButtonStyle()
+          RemixIconButtonStyler()
               .color(Colors.blueGrey.shade100.withValues(alpha: 0.4)),
         )
         .onPressed(
-          RemixIconButtonStyle()
+          RemixIconButtonStyler()
               .color(Colors.blueGrey.shade100.withValues(alpha: 0.8)),
         );
   }
@@ -99,17 +99,17 @@ class FortalIconButtonExample extends StatelessWidget {
         RemixIconButton(
           icon: Icons.add,
           onPressed: () {},
-          style: FortalIconButtonStyle.solid(),
+          style: fortalIconButtonStyler(variant: .solid),
         ),
         RemixIconButton(
           icon: Icons.edit,
           onPressed: () {},
-          style: FortalIconButtonStyle.soft(),
+          style: fortalIconButtonStyler(variant: .soft),
         ),
         RemixIconButton(
           icon: Icons.delete,
           onPressed: () {},
-          style: FortalIconButtonStyle.ghost(),
+          style: fortalIconButtonStyler(variant: .ghost),
         ),
       ],
     );
@@ -119,7 +119,7 @@ class FortalIconButtonExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [FortalIconButtonStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/icon_button/fortal_icon_button_styles.dart) for all available options.
+  See the [fortalIconButtonStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/icon_button/fortal_icon_button_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -132,7 +132,7 @@ const RemixIconButton({
   RemixIconButtonLoadingBuilder? loadingBuilder,
   bool loading = false,
   bool enableFeedback = true,
-  required VoidCallback? onPressed,
+  VoidCallback? onPressed,
   VoidCallback? onLongPress,
   FocusNode? focusNode,
   bool autofocus = false,
@@ -140,7 +140,7 @@ const RemixIconButton({
   String? semanticHint,
   bool excludeSemantics = false,
   MouseCursor mouseCursor = SystemMouseCursors.click,
-  RemixIconButtonStyle style = const RemixIconButtonStyle.create(),
+  RemixIconButtonStyler style = const RemixIconButtonStyler.create(),
   RemixIconButtonSpec? styleSpec,
 })
 ```
@@ -152,7 +152,7 @@ const RemixIconButton({
 
 | Prop | Type | Required / Default Value |
 |------|------|--------------------------|
-| `style` | `RemixIconButtonStyle` | Optional. The style configuration for the icon button. Customize colors, sizing, and state-based styling. |
+| `style` | `RemixIconButtonStyler` | Optional. The style configuration for the icon button. Customize colors, sizing, and state-based styling. |
 | `styleSpec` | `RemixIconButtonSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
 | `icon` | `IconData` | **Required**. The icon to display in the button. |
@@ -161,7 +161,7 @@ const RemixIconButton({
 | `autofocus` | `bool` | Optional. Whether the button should automatically request focus when it is created. |
 | `loading` | `bool` | Optional. Whether the button is in a loading state. When true, the button will display a spinner and become non-interactive. |
 | `enableFeedback` | `bool` | Optional. Whether to provide feedback when the button is pressed. Defaults to true. |
-| `onPressed` | `VoidCallback?` | **Required**. Callback function called when the button is pressed. If null, the button will be considered disabled. |
+| `onPressed` | `VoidCallback?` | Optional. Callback function called when the button is pressed. If null, the button will be considered disabled. |
 | `onLongPress` | `VoidCallback?` | Optional. Callback function called when the button is long pressed. |
 | `focusNode` | `FocusNode?` | Optional. Optional focus node to control the button's focus behavior. |
 | `semanticLabel` | `String?` | Optional. The semantic label for the button. Used by screen readers to describe the button. |
@@ -174,7 +174,7 @@ const RemixIconButton({
 | Method | Description |
 |--------|-------------|
 | `icon(IconStyler value)` | Configures the icon style using an IconStyler. |
-| `spinner(RemixSpinnerStyle value)` | Configures the loading spinner style. |
+| `spinner(RemixSpinnerStyler value)` | Configures the loading spinner style. |
 | `color(Color value)` | Sets background color |
 | `padding(EdgeInsetsGeometryMix value)` | Sets padding |
 | `borderRadius(BorderRadiusGeometryMix radius)` | Sets border radius |

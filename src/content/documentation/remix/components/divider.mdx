@@ -6,10 +6,10 @@ title: Divider
 
 `RemixDivider` is a visual separator for splitting content into distinct sections. It renders a styled line — horizontal or vertical — with configurable thickness, color, spacing, and decoration.
 
-You can use `RemixDividerStyle` to create styles with a fluent API. Example:
+You can use `RemixDividerStyler` to create styles with a fluent API. Example:
 
 ```dart
-final style = RemixDividerStyle()
+final style = RemixDividerStyler()
     .height(1)
     .width(300)
     .color(Colors.grey.shade400);
@@ -31,17 +31,17 @@ The preview below shows this style applied.
 Remix ships prebuilt Fortal styles for this component. Call one of the helpers and pass it to the `style` parameter:
 
 ```dart
-RemixDivider(style: FortalDividerStyle.horizontal())
-RemixDivider(style: FortalDividerStyle.vertical())
+RemixDivider(style: fortalDividerStyler(size: .size1))
+RemixDivider(style: fortalDividerStyler(size: .size2))
 ```
 
-See the [FortalDividerStyle source](https://github.com/btwld/remix/blob/main/lib/src/components/divider/fortal_divider_styles.dart) for the full set of options.
+See the [fortalDividerStyler source](https://github.com/btwld/remix/blob/main/lib/src/components/divider/fortal_divider_styles.dart) for the full set of options.
 
 ## Constructor
 
 | Prop | Type | Required / Default Value |
 |------|------|--------------------------|
-| `style` | `RemixDividerStyle` | Optional, defaults to `const RemixDividerStyle.create()` |
+| `style` | `RemixDividerStyler` | Optional, defaults to `const RemixDividerStyler.create()` |
 | `styleSpec` | `RemixDividerSpec?` | Optional (resolved style spec) |
 | `key` | `Key?` | Optional |
 

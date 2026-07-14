@@ -55,21 +55,21 @@ class TooltipExample extends StatelessWidget {
     );
   }
 
-  RemixTooltipStyle get styleDefault {
-    return RemixTooltipStyle()
+  RemixTooltipStyler get styleDefault {
+    return RemixTooltipStyler()
         .padding(EdgeInsetsGeometryMix.symmetric(horizontal: 12, vertical: 8))
         .color(Colors.black87)
         .borderRadius(BorderRadiusGeometryMix.all(const Radius.circular(6)))
         .wrapDefaultTextStyle(TextStyleMix().color(Colors.white).fontSize(14));
   }
 
-  RemixTooltipStyle get styleFast {
+  RemixTooltipStyler get styleFast {
     return styleDefault
         .waitDuration(const Duration(milliseconds: 100))
         .showDuration(const Duration(milliseconds: 800));
   }
 
-  RemixTooltipStyle get styleSlow {
+  RemixTooltipStyler get styleSlow {
     return styleDefault
         .waitDuration(const Duration(seconds: 1))
         .showDuration(const Duration(seconds: 3));
@@ -115,12 +115,12 @@ class FortalTooltipExample extends StatelessWidget {
       children: [
         RemixTooltip(
           tooltipChild: const Text('Information tooltip'),
-          style: FortalTooltipStyle.base(),
+          style: fortalTooltipStyler(),
           child: const Icon(Icons.info),
         ),
         RemixTooltip(
           tooltipChild: const Text('Help tooltip'),
-          style: FortalTooltipStyle.base(),
+          style: fortalTooltipStyler(),
           child: const Icon(Icons.help),
         ),
       ],
@@ -131,7 +131,7 @@ class FortalTooltipExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [FortalTooltipStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/tooltip/fortal_tooltip_styles.dart) for all available options.
+  See the [fortalTooltipStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/tooltip/fortal_tooltip_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -142,7 +142,8 @@ const RemixTooltip({
   required Widget child,
   required Widget tooltipChild,
   String? tooltipSemantics,
-  RemixTooltipStyle style = const RemixTooltipStyle.create(),
+  OverlayPositionConfig positioning = const OverlayPositionConfig(),
+  RemixTooltipStyler style = const RemixTooltipStyler.create(),
   RemixTooltipSpec? styleSpec,
 })
 ```
@@ -155,11 +156,12 @@ const RemixTooltip({
 | Prop | Type | Required / Default Value |
 |------|------|--------------------------|
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
-| `style` | `RemixTooltipStyle` | Optional. The style configuration for the tooltip. |
+| `style` | `RemixTooltipStyler` | Optional. The style configuration for the tooltip. |
 | `styleSpec` | `RemixTooltipSpec?` | Optional. The style spec for the tooltip. |
 | `tooltipChild` | `Widget` | **Required**. The widget to display in the tooltip. |
 | `child` | `Widget` | **Required**. The child widget that will trigger the tooltip. |
 | `tooltipSemantics` | `String?` | Optional. The semantic label for the tooltip. |
+| `positioning` | `OverlayPositionConfig` | Optional. Overlay positioning configuration. |
 
 ### Style Methods
 
@@ -173,6 +175,7 @@ const RemixTooltip({
 | `decoration(DecorationMix value)` | Sets container decoration |
 | `waitDuration(Duration value)` | Sets the wait duration before showing tooltip |
 | `showDuration(Duration value)` | Sets the show duration before hiding tooltip |
+| `dismissDuration(Duration value)` | Sets the hover-exit grace duration before the tooltip closes |
 | `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
 | `animate(AnimationConfig config)` | Configures implicit animation for style transitions. |
 | `constraints(BoxConstraintsMix value)` | Sets size constraints on the component. |

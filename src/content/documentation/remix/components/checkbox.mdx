@@ -50,11 +50,11 @@ class _CheckboxExampleState extends State<CheckboxExample> {
     );
   }
 
-  RemixCheckboxStyle get style {
-    return RemixCheckboxStyle()
+  RemixCheckboxStyler get style {
+    return RemixCheckboxStyler()
         .size(24, 24)
         .icon(IconStyler().size(20).color(Colors.white))
-        .onSelected(RemixCheckboxStyle().color(Colors.grey.shade900))
+        .onSelected(RemixCheckboxStyler().color(Colors.grey.shade900))
         .borderRadiusAll(const Radius.circular(3))
         .border(
           BoxBorderMix.all(
@@ -93,12 +93,12 @@ class _FortalCheckboxExampleState extends State<FortalCheckboxExample> {
         RemixCheckbox(
           selected: _isChecked,
           onChanged: (value) => setState(() => _isChecked = value ?? false),
-          style: FortalCheckboxStyle.solid(),
+          style: fortalCheckboxStyler(variant: .surface),
         ),
         RemixCheckbox(
           selected: _isChecked,
           onChanged: (value) => setState(() => _isChecked = value ?? false),
-          style: FortalCheckboxStyle.soft(),
+          style: fortalCheckboxStyler(variant: .soft),
         ),
       ],
     );
@@ -108,7 +108,7 @@ class _FortalCheckboxExampleState extends State<FortalCheckboxExample> {
 </CodeGroup>
 
 <Info>
-  See the [FortalCheckboxStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/checkbox/fortal_checkbox_styles.dart) for all available options.
+  See the [fortalCheckboxStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/checkbox/fortal_checkbox_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -125,7 +125,7 @@ const RemixCheckbox({
   IconData? uncheckedIcon,
   IconData indeterminateIcon = Icons.horizontal_rule,
   bool enableFeedback = true,
-  RemixCheckboxStyle style = const RemixCheckboxStyle.create(),
+  RemixCheckboxStyler style = const RemixCheckboxStyler.create(),
   RemixCheckboxSpec? styleSpec,
   FocusNode? focusNode,
   String? semanticLabel,
@@ -150,7 +150,7 @@ const RemixCheckbox({
 | `uncheckedIcon` | `IconData?` | Optional. The icon to display when the checkbox is unchecked. |
 | `indeterminateIcon` | `IconData` | Optional. The icon to display when the checkbox is in indeterminate state. Defaults to Icons.horizontal_rule. |
 | `enableFeedback` | `bool` | Optional. Whether to provide haptic feedback when the checkbox is toggled. Defaults to true. |
-| `style` | `RemixCheckboxStyle` | Optional. The style configuration for the checkbox. |
+| `style` | `RemixCheckboxStyler` | Optional. The style configuration for the checkbox. |
 | `styleSpec` | `RemixCheckboxSpec?` | Optional. The style spec for the checkbox. |
 | `focusNode` | `FocusNode?` | Optional. The focus node for the checkbox. |
 | `semanticLabel` | `String?` | Optional. The semantic label for the checkbox. |
@@ -165,7 +165,7 @@ const RemixCheckbox({
 | `border(BoxBorderMix value)` | Sets checkbox border on the container. |
 | `indicatorColor(Color value)` | Sets indicator color. |
 | `alignment(Alignment value)` | Sets container alignment. |
-| `onIndeterminate(RemixCheckboxStyle value)` | Style applied when the checkbox is in the indeterminate state. |
+| `onIndeterminate(RemixCheckboxStyler value)` | Style applied when the checkbox is in the indeterminate state. |
 | `icon(IconStyler value)` | Configures the icon style using an IconStyler. |
 | `padding(EdgeInsetsGeometryMix value)` | Sets container padding. |
 | `color(Color value)` | Sets checkbox background color on the container. |

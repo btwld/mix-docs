@@ -31,10 +31,10 @@ class BadgePreview extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixBadge(label: 'Solid', style: FortalBadgeStyles.solid()),
-        RemixBadge(label: 'Soft', style: FortalBadgeStyles.soft()),
-        RemixBadge(label: 'Surface', style: FortalBadgeStyles.surface()),
-        RemixBadge(label: 'Outline', style: FortalBadgeStyles.outline()),
+        RemixBadge(label: 'Solid', style: fortalBadgeStyler(variant: .solid)),
+        RemixBadge(label: 'Soft', style: fortalBadgeStyler(variant: .soft)),
+        RemixBadge(label: 'Surface', style: fortalBadgeStyler(variant: .surface)),
+        RemixBadge(label: 'Outline', style: fortalBadgeStyler(variant: .outline)),
       ],
     );
   }

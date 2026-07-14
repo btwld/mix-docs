@@ -80,14 +80,14 @@ class _AccordionExampleState extends State<AccordionExample> {
     );
   }
 
-  RemixAccordionStyle<String> get itemStyle {
-    return RemixAccordionStyle<String>()
+  RemixAccordionStyler<String> get itemStyle {
+    return RemixAccordionStyler<String>()
         .content(BoxStyler().paddingX(16).paddingTop(8))
         .wrapClipRRect(borderRadius: BorderRadius.circular(8))
         .paddingX(16)
         .paddingY(14)
         .borderRounded(8)
-        .onHovered(RemixAccordionStyle<String>().color(Colors.grey.shade100))
+        .onHovered(RemixAccordionStyler<String>().color(Colors.grey.shade100))
         .decoration(
           BoxDecorationMix(
             color: Colors.white,
@@ -150,13 +150,13 @@ class _FortalAccordionExampleState extends State<FortalAccordionExample> {
           RemixAccordion(
             value: 'item1',
             title: 'First Item',
-            style: FortalAccordionStyle.base(),
+            style: fortalAccordionStyler(),
             child: Text('First content'),
           ),
           RemixAccordion(
             value: 'item2',
             title: 'Second Item',
-            style: FortalAccordionStyle.base(),
+            style: fortalAccordionStyler(),
             child: Text('Second content'),
           ),
         ],
@@ -168,7 +168,7 @@ class _FortalAccordionExampleState extends State<FortalAccordionExample> {
 </CodeGroup>
 
 <Info>
-  See the [FortalAccordionStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/accordion/fortal_accordion_styles.dart) for all available options.
+  See the [fortalAccordionStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/accordion/fortal_accordion_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -200,7 +200,7 @@ const RemixAccordion({
   ValueChanged<bool>? onHoverChange,
   ValueChanged<bool>? onPressChange,
   String? semanticLabel,
-  RemixAccordionStyle style = const RemixAccordionStyle.create(),
+  RemixAccordionStyler style = const RemixAccordionStyler.create(),
   Widget Function(Widget, Animation<double>) transitionBuilder = defaultAccordionTransitionBuilder,
 })
 ```
@@ -227,6 +227,6 @@ const RemixAccordion({
 | `onHoverChange` | `ValueChanged<bool>?` | Optional. Called when the header's hover state changes. |
 | `onPressChange` | `ValueChanged<bool>?` | Optional. Called when the header's pressed state changes. |
 | `semanticLabel` | `String?` | Optional. Semantic label announced for the header. |
-| `style` | `RemixAccordionStyle<T>` | Optional. The style configuration for the accordion item. |
+| `style` | `RemixAccordionStyler<T>` | Optional. The style configuration for the accordion item. |
 | `transitionBuilder` | `Widget Function(Widget, Animation<double>)` | Optional. The transition builder for the accordion item. |
 

@@ -40,17 +40,17 @@ class _SelectPreviewState extends State<SelectPreview> {
           value: 'option1',
           label: 'Option 1',
           enabled: true,
-          style: FortalSelectItemStyles.surface(),
+          style: fortalSelectMenuItemStyler(variant: .surface),
         ),
         RemixSelectItem(
           value: 'option2',
           label: 'Option 2',
           enabled: false,
-          style: FortalSelectItemStyles.surface(),
+          style: fortalSelectMenuItemStyler(variant: .surface),
         ),
       ],
       selectedValue: _selectedValue,
-      style: FortalSelectStyles.surface(),
+      style: fortalSelectStyler(variant: .surface),
       onChanged: (value) {
         setState(() {
           _selectedValue = value;

@@ -34,27 +34,27 @@ class ButtonPreview extends StatelessWidget {
         RemixButton(
           onPressed: () {},
           label: 'Solid',
-          style: FortalButtonStyle.solid(),
+          style: fortalButtonStyler(variant: .solid),
         ),
         RemixButton(
           onPressed: () {},
           label: 'Soft',
-          style: FortalButtonStyle.soft(),
+          style: fortalButtonStyler(variant: .soft),
         ),
         RemixButton(
           onPressed: () {},
           label: 'Surface',
-          style: FortalButtonStyle.surface(),
+          style: fortalButtonStyler(variant: .surface),
         ),
         RemixButton(
           onPressed: () {},
           label: 'Outline',
-          style: FortalButtonStyle.outline(),
+          style: fortalButtonStyler(variant: .outline),
         ),
         RemixButton(
           onPressed: () {},
           label: 'Ghost',
-          style: FortalButtonStyle.ghost(),
+          style: fortalButtonStyler(variant: .ghost),
         ),
       ],
     );

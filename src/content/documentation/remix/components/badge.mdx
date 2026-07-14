@@ -48,8 +48,8 @@ class BadgeExample extends StatelessWidget {
     );
   }
 
-  RemixBadgeStyle get styleLabel {
-    return RemixBadgeStyle()
+  RemixBadgeStyler get styleLabel {
+    return RemixBadgeStyler()
         .size(24, 24)
         .wrapClipOval()
         .label(
@@ -64,8 +64,8 @@ class BadgeExample extends StatelessWidget {
         .labelFontSize(15);
   }
 
-  RemixBadgeStyle get styleIcon {
-    return RemixBadgeStyle()
+  RemixBadgeStyler get styleIcon {
+    return RemixBadgeStyler()
         .size(24, 24)
         .wrapClipOval()
         .label(
@@ -100,11 +100,11 @@ class FortalBadgeExample extends StatelessWidget {
       children: [
         RemixBadge(
           label: '5',
-          style: FortalBadgeStyle.solid(),
+          style: fortalBadgeStyler(variant: .solid),
         ),
         RemixBadge(
           label: 'New',
-          style: FortalBadgeStyle.soft(),
+          style: fortalBadgeStyler(variant: .soft),
         ),
       ],
     );
@@ -114,7 +114,7 @@ class FortalBadgeExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [FortalBadgeStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/badge/fortal_badge_styles.dart) for all available options.
+  See the [fortalBadgeStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/badge/fortal_badge_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -125,7 +125,7 @@ const RemixBadge({
   Widget? child,
   String? label,
   RemixBadgeLabelBuilder? labelBuilder,
-  RemixBadgeStyle style = const RemixBadgeStyle.create(),
+  RemixBadgeStyler style = const RemixBadgeStyler.create(),
   RemixBadgeSpec? styleSpec,
 })
 ```
@@ -137,7 +137,7 @@ const RemixBadge({
 
 | Prop | Type | Required / Default Value |
 |------|------|--------------------------|
-| `style` | `RemixBadgeStyle` | Optional. The style configuration for the badge. Customize colors, sizing, shape, and state-based styling. |
+| `style` | `RemixBadgeStyler` | Optional. The style configuration for the badge. Customize colors, sizing, shape, and state-based styling. |
 | `styleSpec` | `RemixBadgeSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
 | `label` | `String?` | Optional. Optional text label rendered with the badge text style. |

@@ -29,7 +29,7 @@ class CalloutPreview extends StatelessWidget {
     return RemixCallout(
       text: 'Callout important information for the user.',
       icon: Icons.info_outline,
-      style: FortalCalloutStyles.surface(),
+      style: fortalCalloutStyler(variant: .surface),
     );
   }
 }

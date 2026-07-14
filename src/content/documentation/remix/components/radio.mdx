@@ -72,8 +72,8 @@ class _RadioExampleState extends State<RadioExample> {
     );
   }
 
-  RemixRadioStyle get style {
-    return RemixRadioStyle()
+  RemixRadioStyler get style {
+    return RemixRadioStyler()
         .borderRadiusAll(const Radius.circular(30))
         .size(22, 22)
         .border(
@@ -85,7 +85,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
         )
         .onHovered(
-          RemixRadioStyle().shadow(
+          RemixRadioStyler().shadow(
             BoxShadowMix()
                 .color(Colors.blueGrey.shade50.withValues(alpha: 0.7))
                 .blurRadius(0)
@@ -93,7 +93,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
         )
         .onPressed(
-          RemixRadioStyle().border(
+          RemixRadioStyler().border(
             BoxBorderMix.all(
               BorderSideMix()
                   .color(Colors.blueGrey.shade100)
@@ -103,7 +103,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
         )
         .onSelected(
-          RemixRadioStyle().border(
+          RemixRadioStyler().border(
             BoxBorderMix.all(
               BorderSideMix()
                   .color(Colors.blueAccent.shade700)
@@ -143,8 +143,8 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
       onChanged: (value) => setState(() => _selected = value),
       child: Column(
         children: [
-          RemixRadio(value: 'soft', style: FortalRadioStyle.soft()),
-          RemixRadio(value: 'solid', style: FortalRadioStyle.solid()),
+          RemixRadio(value: 'soft', style: fortalRadioStyler(variant: .soft)),
+          RemixRadio(value: 'surface', style: fortalRadioStyler(variant: .surface)),
         ],
       ),
     );
@@ -154,7 +154,7 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
 </CodeGroup>
 
 <Info>
-  See the [FortalRadioStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/radio/fortal_radio_styles.dart) for all available options.
+  See the [fortalRadioStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/radio/fortal_radio_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -164,7 +164,7 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
 const RemixRadioGroup({
   Key? key,
   required T? groupValue,
-  required ValueChanged<T?> onChanged,
+  ValueChanged<T?>? onChanged,
   required Widget child,
 })
 
@@ -175,10 +175,9 @@ const RemixRadio({
   bool enabled = true,
   bool toggleable = false,
   MouseCursor? mouseCursor,
-  bool enableFeedback = true,
   FocusNode? focusNode,
   bool autofocus = false,
-  RemixRadioStyle style = const RemixRadioStyle.create(),
+  RemixRadioStyler style = const RemixRadioStyler.create(),
   RemixRadioSpec? styleSpec,
 })
 ```
@@ -190,7 +189,7 @@ const RemixRadio({
 
 | Prop | Type | Required / Default Value |
 |------|------|--------------------------|
-| `style` | `RemixRadioStyle` | Optional. The style configuration for the radio button. Customize colors, borders, and state-based styling. |
+| `style` | `RemixRadioStyler` | Optional. The style configuration for the radio button. Customize colors, borders, and state-based styling. |
 | `styleSpec` | `RemixRadioSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
 | `value` | `T` | **Required**. The value represented by this radio button. |
@@ -199,7 +198,6 @@ const RemixRadio({
 | `toggleable` | `bool` | Optional. Whether the radio button is toggleable (can be unselected). |
 | `focusNode` | `FocusNode?` | Optional. The focus node for the radio button. |
 | `mouseCursor` | `MouseCursor?` | Optional. The mouse cursor to use when hovering over the radio button. |
-| `enableFeedback` | `bool` | Optional. Whether to provide feedback when the radio button is pressed. |
 
 ### Style Methods
 

@@ -37,7 +37,7 @@ class _SliderPreviewState extends State<SliderPreview> {
       width: 300,
       child: RemixSlider(
         value: _selectedValue,
-        style: FortalSliderStyles.surface(),
+        style: fortalSliderStyler(variant: .surface),
         onChanged: (value) {
           setState(() {
             _selectedValue = value;

@@ -34,27 +34,27 @@ class IconButtonPreview extends StatelessWidget {
         RemixIconButton(
           icon: CupertinoIcons.heart,
           onPressed: () {},
-          style: FortalIconButtonStyle.solid(),
+          style: fortalIconButtonStyler(variant: .solid),
         ),
         RemixIconButton(
           icon: CupertinoIcons.heart,
           onPressed: () {},
-          style: FortalIconButtonStyle.soft(),
+          style: fortalIconButtonStyler(variant: .soft),
         ),
         RemixIconButton(
           icon: CupertinoIcons.heart,
           onPressed: () {},
-          style: FortalIconButtonStyle.surface(),
+          style: fortalIconButtonStyler(variant: .surface),
         ),
         RemixIconButton(
           icon: CupertinoIcons.heart,
           onPressed: () {},
-          style: FortalIconButtonStyle.outline(),
+          style: fortalIconButtonStyler(variant: .outline),
         ),
         RemixIconButton(
           icon: CupertinoIcons.heart,
           onPressed: () {},
-          style: FortalIconButtonStyle.ghost(),
+          style: fortalIconButtonStyler(variant: .ghost),
         ),
       ],
     );

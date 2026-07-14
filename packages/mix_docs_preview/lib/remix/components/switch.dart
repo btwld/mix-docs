@@ -34,7 +34,7 @@ class _SwitchPreviewState extends State<SwitchPreview> {
   @override
   Widget build(BuildContext context) {
     return RemixSwitch(
-      style: FortalSwitchStyles.surface(),
+      style: fortalSwitchStyler(variant: .surface),
       selected: _selected,
       onChanged: (value) {
         setState(() {

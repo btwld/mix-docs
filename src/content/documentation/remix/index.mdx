@@ -29,13 +29,13 @@ Remix pairs headless components (inspired by Naked UI) with Mix's styling system
 Define a style with a fluent chain, then call it or pass it to a component:
 
 ```dart
-final button = RemixButtonStyle()
+final button = RemixButtonStyler()
   .paddingX(16)
   .paddingY(10)
   .color(Colors.blue)
   .borderRadiusAll(const Radius.circular(8))
   .onHovered(
-    RemixButtonStyle().color(Colors.blue.shade700),
+    RemixButtonStyler().color(Colors.blue.shade700),
   )
   .animate(AnimationConfig.spring(300.ms));
 
@@ -83,7 +83,7 @@ import 'package:remix/remix.dart';
 
 ### Your first Remix component
 
-Build a blue button labeled "Click Me". The `RemixButtonStyle` class defines styles with a fluent API, and calling it directly produces the widget:
+Build a blue button labeled "Click Me". The `RemixButtonStyler` class defines styles with a fluent API, and calling it directly produces the widget:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -92,7 +92,7 @@ import 'package:remix/remix.dart';
 class Example extends StatelessWidget {
   const Example({super.key});
 
-  RemixButtonStyle get _button => RemixButtonStyle()
+  RemixButtonStyler get _button => RemixButtonStyler()
       .paddingX(16)
       .paddingY(10)
       .color(Colors.blue)
@@ -113,23 +113,23 @@ class Example extends StatelessWidget {
 
 ## Styling Components
 
-Remix components are styled through the same fluent, composable API you use everywhere else in Mix. A *component styler* — such as `RemixButtonStyle` — provides small, chainable utilities that combine into the style you need, and respond to interaction state without extra wiring.
+Remix components are styled through the same fluent, composable API you use everywhere else in Mix. A *component styler* — such as `RemixButtonStyler` — provides small, chainable utilities that combine into the style you need, and respond to interaction state without extra wiring.
 
 ### Adding Interaction States
 
 Define how a component should look in hover, pressed, focused, and other states by chaining state-specific styles onto the base:
 
 ```dart
-final style = RemixButtonStyle()
+final style = RemixButtonStyler()
   .paddingX(16)
   .paddingY(10)
   .color(Colors.blue)
   .borderRadiusAll(const Radius.circular(8))
   .onHovered(
-    RemixButtonStyle().color(Colors.blue.shade700),
+    RemixButtonStyler().color(Colors.blue.shade700),
   )
   .onPressed(
-    RemixButtonStyle().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
+    RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
   );
 ```
 
@@ -140,17 +140,17 @@ Remix tracks the interaction internally, so you don't wire up hover detectors, f
 Attach animation directly to a style with `.animate()`. State-specific styles interpolate smoothly — no controllers, no tweens:
 
 ```dart
-final style = RemixButtonStyle()
+final style = RemixButtonStyler()
   .paddingX(16)
   .paddingY(10)
   .color(Colors.blue)
   .borderRadiusAll(const Radius.circular(8))
   .animate(AnimationConfig.spring(300.ms))
   .onHovered(
-    RemixButtonStyle().color(Colors.blue.shade700),
+    RemixButtonStyler().color(Colors.blue.shade700),
   )
   .onPressed(
-    RemixButtonStyle().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
+    RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
   );
 ```
 
@@ -165,7 +165,7 @@ Both the color on hover and the scale on press animate through a single spring c
 Build a base style once, then extend it for variants:
 
 ```dart
-final baseButton = RemixButtonStyle()
+final baseButton = RemixButtonStyler()
     .paddingX(16)
     .paddingY(10)
     .borderRadiusAll(const Radius.circular(8));
@@ -189,7 +189,7 @@ Remix gives you the freedom to build any design system from scratch, but you don
 RemixButton(
   onPressed: () {},
   label: 'Fortal Button',
-  style: FortalButtonStyle.solid(),
+  style: fortalButtonStyler(variant: .solid),
 );
 ```
 
