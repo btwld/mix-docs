@@ -149,7 +149,7 @@ const FEATURES = [
 /* ── Live component bento (real running Flutter apps) ───────────────── */
 const BENTO = [
   { id: "components/button.0", label: "Button", wide: true, height: 300 },
-  { id: "components/card.0", label: "Card", wide: false, height: 300 },
+  { id: "components/accordion.0", label: "Accordion", wide: false, height: 300 },
   { id: "components/switch.0", label: "Switch", wide: false, height: 232 },
   { id: "components/slider.0", label: "Slider", wide: false, height: 232 },
   { id: "components/tabs.0", label: "Tabs", wide: false, height: 232 },
