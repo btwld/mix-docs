@@ -5,6 +5,10 @@
 /* or nextra-theme-blog/style.css */
 
 html.dark {
+    /* Dark UA surfaces (scrollbars, form controls) from first paint, without
+       waiting for next-themes to hydrate and set the inline style. */
+    color-scheme: dark;
+
     /* Nextra primary — vibrant purple (HSL, matching Nextra v4 format) */
     --nextra-primary-hue: 268deg;
     --nextra-primary-saturation: 100%;

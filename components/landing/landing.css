@@ -49,7 +49,10 @@ html[data-product='code-analysis'] {
   }
 }
 
-.lp-root ::selection {
+/* Page-wide like the standalone sites, so the navbar and footer chrome on
+   these routes select in the product accent too. */
+html[data-product='stargate'] ::selection,
+html[data-product='code-analysis'] ::selection {
   background: color-mix(in srgb, var(--lp-accent) 25%, transparent);
   color: inherit;
 }
