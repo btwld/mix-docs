@@ -18,7 +18,7 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(brightness: .dark, child: const AccordionPreview());
+    return FortalScope(accent: .green, brightness: .dark, child: const AccordionPreview());
   }
 }
 
@@ -67,14 +67,6 @@ class _AccordionPreviewState extends State<AccordionPreview> {
                   style: FortalAccordionStyle.base(),
                   child: const Text(
                     'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.',
-                  ),
-                ),
-                RemixAccordion(
-                  value: 'accordion3',
-                  title: 'How can I track my order?',
-                  style: FortalAccordionStyle.base(),
-                  child: const Text(
-                    'You can track your order status in the "My Orders" section of your account.',
                   ),
                 ),
               ],

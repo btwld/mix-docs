@@ -135,26 +135,26 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
+      sha256: "1741988757a65eb6b36abe716829688cf01910bbf91c34354ff7ec1c3de2b349"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.18.0"
   mix:
     dependency: "direct main"
     description:
       name: mix
-      sha256: c954f83061dc2f4e5b1cbfc1e3505cb8592ad1f37d7011eb4884d1a8c45afecc
+      sha256: ed8382ac70d5d85c3d0f753c9f8f68f61d74958afbd05f3e3d7144a11ab8efad
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.0"
   mix_annotations:
     dependency: transitive
     description:
       name: mix_annotations
-      sha256: dc5227da34a81585ce815ebc76ddb8bc6cc904c2109cda8a40ed1d518b9c9cf1
+      sha256: "926c11dbc6d0df9f7b5eeb22491bb76500d4427bd6a639776216abd5ac71a9d0"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.1"
   mix_tailwinds:
     dependency: "direct main"
     description:
@@ -252,10 +252,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "8161c84903fd860b26bfdefb7963b3f0b68fee7adea0f59ef805ecca346f0c7a"
+      sha256: "949a932224383300f01be9221c39180316445ecb8e7547f70a41a35bf421fb9e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.10"
+    version: "0.7.11"
   vector_math:
     dependency: transitive
     description:

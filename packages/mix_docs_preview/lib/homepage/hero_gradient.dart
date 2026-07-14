@@ -1,0 +1,43 @@
+/// Landing hero — Gradient Remix button style (linear gradient fill).
+library;
+
+import 'package:flutter/material.dart';
+import 'package:mix_docs_preview/helpers.dart';
+import 'package:remix/remix.dart';
+
+void main() {
+  runMixApp(const Example());
+}
+
+class Example extends StatelessWidget {
+  const Example({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FortalScope(brightness: .dark, child: const _HeroButton());
+  }
+}
+
+class _HeroButton extends StatelessWidget {
+  const _HeroButton();
+
+  @override
+  Widget build(BuildContext context) {
+    // #docregion style
+    final style = RemixButtonStyle()
+        .gradient(
+          LinearGradientMix(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
+          ),
+        )
+        .labelColor(const Color(0xFF05040A))
+        .paddingX(22)
+        .paddingY(11)
+        .borderRadiusAll(const Radius.circular(12));
+    // #enddocregion style
+
+    return RemixButton(label: 'Get started', onPressed: () {}, style: style);
+  }
+}
