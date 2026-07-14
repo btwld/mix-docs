@@ -457,13 +457,22 @@ export const RemixHome = () => {
                 variants={staggerChild}
                 className={"rx-tile" + (c.wide ? " rx-tile-wide" : "")}
               >
-                <FlutterMultiView
-                  previewId={c.id}
-                  height={c.height}
-                  bordered={false}
-                  lazyLoad
-                  transparent
-                />
+                {/* Flutter multi-views all share one fixed-size rasterizer
+                    surface (~360x220 CSS). A host larger than that clips, so
+                    each live view is capped to a centered box that fits and the
+                    tile keeps its own height around it (same approach as the
+                    mix landing page). */}
+                <div className="rx-tile-stage" style={{ height: c.height }}>
+                  <div className="rx-tile-view">
+                    <FlutterMultiView
+                      previewId={c.id}
+                      height={Math.min(c.height, 200)}
+                      bordered={false}
+                      lazyLoad
+                      transparent
+                    />
+                  </div>
+                </div>
                 <p className="rx-tile-cap">{c.label}</p>
               </motion.div>
             ))}
@@ -1115,6 +1124,15 @@ export const RemixHome = () => {
           .rx-tile:hover {
             border-color: rgba(0, 235, 3, 0.3);
           }
+        }
+        .rx-tile-stage {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .rx-tile-view {
+          width: 100%;
+          max-width: 360px;
         }
         .rx-tile-cap {
           padding: 12px 18px 16px;
