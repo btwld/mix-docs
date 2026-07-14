@@ -9,6 +9,30 @@ const waitlistSchema = z.object({
 
 type Product = z.infer<typeof waitlistSchema>["product"];
 
+// Best-effort per-instance rate limit. Serverless instances don't share this
+// map, so it bounds abuse per warm instance rather than globally — enough to
+// stop casual mail-bombing loops without an external store.
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const MAX_TRACKED_IPS = 10_000;
+const rateHits = new Map<string, { count: number; windowStart: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  if (rateHits.size > MAX_TRACKED_IPS) {
+    for (const [key, entry] of rateHits) {
+      if (now - entry.windowStart > RATE_WINDOW_MS) rateHits.delete(key);
+    }
+  }
+  const entry = rateHits.get(ip);
+  if (!entry || now - entry.windowStart > RATE_WINDOW_MS) {
+    rateHits.set(ip, { count: 1, windowStart: now });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT;
+}
+
 function welcomeHtml(wordmark: string, pitch: string, expectations: string[]) {
   return `
 <!DOCTYPE html>
@@ -74,44 +98,87 @@ const PRODUCT_CONFIG: Record<
 };
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { email, product } = waitlistSchema.parse(body);
-    const config = PRODUCT_CONFIG[product];
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { success: false, message: "Too many requests — please try again later." },
+      { status: 429 }
+    );
+  }
 
-    if (!process.env.RESEND_API_KEY || !config.audienceId) {
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(
-          `[waitlist] RESEND_API_KEY / audience id missing for ${product} — dev no-op for:`,
-          email
-        );
-        return NextResponse.json(
-          { success: true, message: "Dev mode: signup logged, not stored." },
-          { status: 200 }
-        );
-      }
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json(
+      { success: false, message: "Invalid request body." },
+      { status: 400 }
+    );
+  }
+
+  const parsed = waitlistSchema.safeParse(body);
+  if (!parsed.success) {
+    const firstIssue = parsed.error.issues[0];
+    return NextResponse.json(
+      { success: false, message: firstIssue?.message || "Invalid input" },
+      { status: 400 }
+    );
+  }
+  const { email, product } = parsed.data;
+  const config = PRODUCT_CONFIG[product];
+
+  if (!process.env.RESEND_API_KEY || !config.audienceId) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        `[waitlist] RESEND_API_KEY / audience id missing for ${product} — dev no-op for:`,
+        email
+      );
       return NextResponse.json(
-        { success: false, message: "Waitlist temporarily unavailable." },
-        { status: 503 }
+        { success: true, message: "Dev mode: signup logged, not stored." },
+        { status: 200 }
       );
     }
+    return NextResponse.json(
+      { success: false, message: "Waitlist temporarily unavailable." },
+      { status: 503 }
+    );
+  }
 
+  try {
     const resend = getResend();
 
-    await resend.contacts.create({
+    // The Resend SDK never throws for API failures — errors come back as
+    // { data, error } values and must be checked explicitly.
+    const { error: contactError } = await resend.contacts.create({
       email,
       audienceId: config.audienceId,
     });
 
+    if (contactError) {
+      // Already subscribed: succeed without re-sending the welcome email, so
+      // repeat POSTs can't be used to spam an address we already have.
+      if (contactError.statusCode === 409) {
+        return NextResponse.json(
+          { success: true, message: "You're already on the list — talk soon!" },
+          { status: 200 }
+        );
+      }
+      console.error("[waitlist] contact create failed:", contactError);
+      return NextResponse.json(
+        { success: false, message: "Something went wrong. Please try again." },
+        { status: 502 }
+      );
+    }
+
     // A failed welcome email shouldn't fail the signup.
-    try {
-      await resend.emails.send({
-        from: config.from,
-        to: email,
-        subject: config.subject,
-        html: config.html,
-      });
-    } catch (emailError) {
+    const { error: emailError } = await resend.emails.send({
+      from: config.from,
+      to: email,
+      subject: config.subject,
+      html: config.html,
+    });
+    if (emailError) {
       console.error("[waitlist] welcome email failed:", emailError);
     }
 
@@ -121,15 +188,6 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error("[waitlist] error:", error);
-
-    if (error instanceof z.ZodError) {
-      const firstIssue = error.issues[0];
-      return NextResponse.json(
-        { success: false, message: firstIssue?.message || "Invalid input" },
-        { status: 400 }
-      );
-    }
-
     return NextResponse.json(
       { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
