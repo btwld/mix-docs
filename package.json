@@ -20,8 +20,10 @@
     "postcss": "^8.5.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "resend": "^6.17.2",
     "shiki": "^4.0.2",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "24.5.0",
