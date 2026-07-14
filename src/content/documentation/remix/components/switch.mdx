@@ -56,8 +56,8 @@ class _SwitchExampleState extends State<SwitchExample> {
     );
   }
 
-  RemixSwitchStyle get style {
-    return RemixSwitchStyle()
+  RemixSwitchStyler get style {
+    return RemixSwitchStyler()
         .thumbColor(Colors.grey.shade600)
         .trackColor(Colors.deepPurpleAccent.shade200)
         .size(65, 30)
@@ -111,12 +111,12 @@ class _FortalSwitchExampleState extends State<FortalSwitchExample> {
         RemixSwitch(
           selected: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: FortalSwitchStyle.solid(),
+          style: fortalSwitchStyler(variant: .surface),
         ),
         RemixSwitch(
           selected: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: FortalSwitchStyle.soft(),
+          style: fortalSwitchStyler(variant: .soft),
         ),
       ],
     );
@@ -126,7 +126,7 @@ class _FortalSwitchExampleState extends State<FortalSwitchExample> {
 </CodeGroup>
 
 <Info>
-  See the [FortalSwitchStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/switch/fortal_switch_styles.dart) for all available options.
+  See the [fortalSwitchStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/switch/fortal_switch_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -135,14 +135,14 @@ class _FortalSwitchExampleState extends State<FortalSwitchExample> {
 const RemixSwitch({
   Key? key,
   required bool selected,
-  required ValueChanged<bool>? onChanged,
+  ValueChanged<bool>? onChanged,
   bool enabled = true,
   MouseCursor mouseCursor = SystemMouseCursors.click,
   bool enableFeedback = true,
   FocusNode? focusNode,
   bool autofocus = false,
   String? semanticLabel,
-  RemixSwitchStyle style = const RemixSwitchStyle.create(),
+  RemixSwitchStyler style = const RemixSwitchStyler.create(),
   RemixSwitchSpec? styleSpec,
 })
 ```
@@ -157,8 +157,8 @@ const RemixSwitch({
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
 | `enabled` | `bool` | Optional. Whether this switch is enabled. |
 | `selected` | `bool` | **Required**. Whether the switch is currently selected. |
-| `onChanged` | `ValueChanged<bool>` | **Required**. Called when the user toggles the switch. |
-| `style` | `RemixSwitchStyle` | Optional. The style configuration for the switch. |
+| `onChanged` | `ValueChanged<bool>?` | Optional. Called when the user toggles the switch. When null, the switch is disabled. |
+| `style` | `RemixSwitchStyler` | Optional. The style configuration for the switch. |
 | `styleSpec` | `RemixSwitchSpec?` | Optional. The style spec for the switch. |
 | `enableFeedback` | `bool` | Optional. Whether to enable haptic feedback when toggled. |
 | `focusNode` | `FocusNode?` | Optional. The focus node for the switch. |

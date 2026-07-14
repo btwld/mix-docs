@@ -51,7 +51,7 @@ class _RadioPreviewState extends State<RadioPreview> {
             children: [
               RemixRadio<String>(
                 value: 'option1',
-                style: FortalRadioStyles.surface(),
+                style: fortalRadioStyler(variant: .surface),
               ),
               const Text('Option 1'),
             ],
@@ -62,7 +62,7 @@ class _RadioPreviewState extends State<RadioPreview> {
             children: [
               RemixRadio<String>(
                 value: 'option2',
-                style: FortalRadioStyles.surface(),
+                style: fortalRadioStyler(variant: .surface),
               ),
               const Text('Option 2'),
             ],

@@ -56,7 +56,7 @@ class _AccordionPreviewState extends State<AccordionPreview> {
                 RemixAccordion(
                   value: 'accordion1',
                   title: 'How do I update my account information?',
-                  style: FortalAccordionStyle.base(),
+                  style: fortalAccordionStyler(),
                   child: const Text(
                     'Insert the accordion description here. It would look better as two lines of text.',
                   ),
@@ -64,7 +64,7 @@ class _AccordionPreviewState extends State<AccordionPreview> {
                 RemixAccordion(
                   value: 'accordion2',
                   title: 'What payment methods are accepted?',
-                  style: FortalAccordionStyle.base(),
+                  style: fortalAccordionStyler(),
                   child: const Text(
                     'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.',
                   ),
@@ -77,13 +77,13 @@ class _AccordionPreviewState extends State<AccordionPreview> {
     );
   }
 
-  RemixAccordionStyle get itemStyle {
-    return RemixAccordionStyle()
+  RemixAccordionStyler get itemStyle {
+    return RemixAccordionStyler()
         .content(BoxStyler().padding(.horizontal(16).top(8)))
         .wrap(.clipRRect(borderRadius: .circular(8)))
         .padding(.horizontal(16).vertical(14))
         .borderRadius(.circular(8))
-        .onHovered(RemixAccordionStyle().color(Colors.grey.shade100))
+        .onHovered(RemixAccordionStyler().color(Colors.grey.shade100))
         .color(Colors.white)
         .border(.color(Colors.grey.shade300).width(1))
         .trigger(

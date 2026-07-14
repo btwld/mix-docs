@@ -28,11 +28,11 @@ class TooltipPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return RemixTooltip(
       tooltipChild: const Text('Fortal tooltip'),
-      style: FortalTooltipStyles.create(),
+      style: fortalTooltipStyler(),
       child: RemixButton(
         onPressed: () {},
         label: 'Hover me',
-        style: FortalButtonStyle.solid(),
+        style: fortalButtonStyler(variant: .solid),
       ),
     );
   }

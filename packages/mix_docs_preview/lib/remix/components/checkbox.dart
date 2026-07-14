@@ -40,7 +40,7 @@ class _CheckboxPreviewState extends State<CheckboxPreview> {
           _isChecked = value ?? false;
         });
       },
-      style: FortalCheckboxStyles.surface(),
+      style: fortalCheckboxStyler(variant: .surface),
     );
   }
 }

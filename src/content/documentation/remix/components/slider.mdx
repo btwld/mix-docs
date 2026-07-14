@@ -53,8 +53,8 @@ class _SliderExampleState extends State<SliderExample> {
     );
   }
 
-  RemixSliderStyle get style {
-    return RemixSliderStyle()
+  RemixSliderStyler get style {
+    return RemixSliderStyler()
         .thumbSize(const Size(24, 24))
         .thumb(
           BoxStyler().shapeCircle().shadow(
@@ -69,7 +69,7 @@ class _SliderExampleState extends State<SliderExample> {
         .trackColor(Colors.grey.shade300)
         .rangeColor(Colors.black)
         .onDisabled(
-          RemixSliderStyle()
+          RemixSliderStyler()
               .trackColor(Colors.grey.shade300)
               .rangeColor(Colors.blueGrey)
               .thumbColor(Colors.white.withValues(alpha: 0.6)),
@@ -106,12 +106,12 @@ class _FortalSliderExampleState extends State<FortalSliderExample> {
         RemixSlider(
           value: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: FortalSliderStyle.solid(),
+          style: fortalSliderStyler(variant: .surface),
         ),
         RemixSlider(
           value: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: FortalSliderStyle.soft(),
+          style: fortalSliderStyler(variant: .soft),
         ),
       ],
     );
@@ -121,7 +121,7 @@ class _FortalSliderExampleState extends State<FortalSliderExample> {
 </CodeGroup>
 
 <Info>
-  See the [FortalSliderStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/slider/fortal_slider_styles.dart) for all available options.
+  See the [fortalSliderStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/slider/fortal_slider_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -130,17 +130,17 @@ class _FortalSliderExampleState extends State<FortalSliderExample> {
 const RemixSlider({
   Key? key,
   required double value,
-  required ValueChanged<double>? onChanged,
+  ValueChanged<double>? onChanged,
   ValueChanged<double>? onChangeStart,
   ValueChanged<double>? onChangeEnd,
   double min = 0.0,
   double max = 1.0,
   bool enabled = true,
-  bool enableHapticFeedback = true,
+  bool enableFeedback = true,
   FocusNode? focusNode,
   bool autofocus = false,
   int? snapDivisions,
-  RemixSliderStyle style = const RemixSliderStyle.create(),
+  RemixSliderStyler style = const RemixSliderStyler.create(),
   RemixSliderSpec? styleSpec,
 })
 ```
@@ -155,14 +155,14 @@ const RemixSlider({
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
 | `min` | `double` | Optional. The minimum value the slider can have. |
 | `max` | `double` | Optional. The maximum value the slider can have. |
-| `onChanged` | `ValueChanged<double>?` | **Required**. Called during drag with the new value. |
+| `onChanged` | `ValueChanged<double>?` | Optional. Called during drag with the new value. When null, the slider is disabled. |
 | `value` | `double` | **Required**. The current value of the slider. Must be between [min] and [max]. |
 | `onChangeEnd` | `ValueChanged<double>?` | Optional. Called when the user is done selecting a new value. |
 | `onChangeStart` | `ValueChanged<double>?` | Optional. Called when the user starts dragging the slider. |
-| `style` | `RemixSliderStyle` | Optional. The style configuration for the slider. |
+| `style` | `RemixSliderStyler` | Optional. The style configuration for the slider. |
 | `styleSpec` | `RemixSliderSpec?` | Optional. The style spec for the slider. |
 | `enabled` | `bool` | Optional. Whether the slider is enabled for interaction. |
-| `enableHapticFeedback` | `bool` | Optional. Whether to provide haptic feedback during value changes. Defaults to true. |
+| `enableFeedback` | `bool` | Optional. Whether to provide haptic feedback during value changes. Defaults to true. |
 | `focusNode` | `FocusNode?` | Optional. The focus node for the slider. |
 | `autofocus` | `bool` | Optional. Whether the slider should automatically request focus when it is created. |
 | `snapDivisions` | `int?` | Optional. Optional snapping divisions for interaction only (no visual ticks). When provided, the slider snaps to these discrete steps but does not render any division marks on the track. |

@@ -32,8 +32,8 @@ class AvatarPreview extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixAvatar(label: 'LF', style: FortalAvatarStyles.soft()),
-        RemixAvatar(icon: Icons.person, style: FortalAvatarStyles.solid()),
+        RemixAvatar(label: 'LF', style: fortalAvatarStyler(variant: .soft)),
+        RemixAvatar(icon: Icons.person, style: fortalAvatarStyler(variant: .solid)),
       ],
     );
   }

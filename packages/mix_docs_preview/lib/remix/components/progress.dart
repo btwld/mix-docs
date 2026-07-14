@@ -28,7 +28,7 @@ class ProgressPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
-      child: RemixProgress(value: 0.3, style: FortalProgressStyles.surface()),
+      child: RemixProgress(value: 0.3, style: fortalProgressStyler(variant: .surface)),
     );
   }
 }

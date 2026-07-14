@@ -37,8 +37,8 @@ class CardExample extends StatelessWidget {
     );
   }
 
-  RemixCardStyle get style {
-    return RemixCardStyle()
+  RemixCardStyler get style {
+    return RemixCardStyler()
         .size(300, 200)
         .textColor(Colors.white)
         .borderRadiusAll(const Radius.circular(4))
@@ -66,10 +66,10 @@ class FortalCardExample extends StatelessWidget {
       spacing: 16,
       children: [
         RemixCard(
-          style: FortalCardStyle.elevated(),
+          style: fortalCardStyler(variant: .classic),
         ),
         RemixCard(
-          style: FortalCardStyle.outlined(),
+          style: fortalCardStyler(variant: .surface),
         ),
       ],
     );
@@ -79,7 +79,7 @@ class FortalCardExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [FortalCardStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/card/fortal_card_styles.dart) for all available options.
+  See the [fortalCardStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/card/fortal_card_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -88,7 +88,7 @@ class FortalCardExample extends StatelessWidget {
 const RemixCard({
   Key? key,
   Widget? child,
-  RemixCardStyle style = const RemixCardStyle.create(),
+  RemixCardStyler style = const RemixCardStyler.create(),
   RemixCardSpec? styleSpec,
 })
 ```
@@ -100,7 +100,7 @@ const RemixCard({
 
 | Prop | Type | Required / Default Value |
 |------|------|--------------------------|
-| `style` | `RemixCardStyle` | Optional. The style configuration for the card. Customize colors, sizing, borders, and state-based styling. |
+| `style` | `RemixCardStyler` | Optional. The style configuration for the card. Customize colors, sizing, borders, and state-based styling. |
 | `styleSpec` | `RemixCardSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
 | `child` | `Widget?` | Optional. The widget below this widget in the tree. This widget can only have one child. To lay out multiple children, let this widget's child be a widget such as [RowBox], [ColumnBox], or [StackBox], which have a children property, and then provide the children to that widget. |

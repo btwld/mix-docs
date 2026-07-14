@@ -51,8 +51,8 @@ class _TextfieldExampleState extends State<TextfieldExample> {
     );
   }
 
-  RemixTextFieldStyle get style {
-    return RemixTextFieldStyle()
+  RemixTextFieldStyler get style {
+    return RemixTextFieldStyler()
         .color(Colors.grey.shade800)
         .backgroundColor(Colors.white)
         .borderRadiusAll(const Radius.circular(8.0))
@@ -80,7 +80,7 @@ class _TextfieldExampleState extends State<TextfieldExample> {
           BoxBorderMix.all(BorderSideMix(color: Colors.grey.shade300)),
         )
         .onFocused(
-          RemixTextFieldStyle().border(
+          RemixTextFieldStyler().border(
             BoxBorderMix.all(
               BorderSideMix()
                   .color(Colors.deepPurpleAccent)
@@ -122,14 +122,14 @@ class _FortalTextFieldExampleState extends State<FortalTextFieldExample> {
           controller: controller,
           label: 'Email',
           hintText: 'Enter your email',
-          style: FortalTextFieldStyle.base(),
+          style: fortalTextFieldStyler(variant: .surface),
         ),
         RemixTextField(
           controller: controller,
           label: 'Password',
           hintText: 'Enter password',
           obscureText: true,
-          style: FortalTextFieldStyle.base(),
+          style: fortalTextFieldStyler(variant: .surface),
         ),
       ],
     );
@@ -139,7 +139,7 @@ class _FortalTextFieldExampleState extends State<FortalTextFieldExample> {
 </CodeGroup>
 
 <Info>
-  See the [FortalTextFieldStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/textfield/fortal_textfield_styles.dart) for all available options.
+  See the [fortalTextFieldStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/textfield/fortal_textfield_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -203,7 +203,7 @@ const RemixTextField({
   String? semanticLabel,
   String? semanticHint,
   bool excludeSemantics = false,
-  RemixTextFieldStyle style = const RemixTextFieldStyle.create(),
+  RemixTextFieldStyler style = const RemixTextFieldStyler.create(),
   RemixTextFieldSpec? styleSpec,
 })
 ```
@@ -273,7 +273,7 @@ const RemixTextField({
 | `semanticLabel` | `String?` | Optional. The semantic label for the text field. |
 | `semanticHint` | `String?` | Optional. The semantic hint for the text field. |
 | `excludeSemantics` | `bool` | Optional. Whether to exclude child semantics. |
-| `style` | `RemixTextFieldStyle` | Optional. The style configuration for the text field. |
+| `style` | `RemixTextFieldStyler` | Optional. The style configuration for the text field. |
 
 ### Style Methods
 

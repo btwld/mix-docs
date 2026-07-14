@@ -33,7 +33,7 @@ class _TabsPreviewState extends State<TabsPreview> {
 
   @override
   Widget build(BuildContext context) {
-    final tabStyle = FortalTabsStyles.base();
+    final tabStyle = fortalTabStyler();
     return SizedBox(
       width: 320,
       height: 200,

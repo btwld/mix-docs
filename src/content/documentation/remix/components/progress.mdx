@@ -38,8 +38,8 @@ class ProgressExample extends StatelessWidget {
     );
   }
 
-  RemixProgressStyle get style {
-    return RemixProgressStyle()
+  RemixProgressStyler get style {
+    return RemixProgressStyler()
         .wrapClipRRect(borderRadius: BorderRadius.circular(10))
         .trackColor(Colors.grey.shade300)
         .indicatorColor(Colors.grey.shade900)
@@ -69,11 +69,11 @@ class FortalProgressExample extends StatelessWidget {
       children: [
         RemixProgress(
           value: 0.6,
-          style: FortalProgressStyle.solid(),
+          style: fortalProgressStyler(variant: .surface),
         ),
         RemixProgress(
           value: 0.4,
-          style: FortalProgressStyle.soft(),
+          style: fortalProgressStyler(variant: .soft),
         ),
       ],
     );
@@ -83,7 +83,7 @@ class FortalProgressExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [FortalProgressStyle source code](https://github.com/btwld/remix/blob/main/lib/src/components/progress/fortal_progress_styles.dart) for all available options.
+  See the [fortalProgressStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/progress/fortal_progress_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -92,7 +92,7 @@ class FortalProgressExample extends StatelessWidget {
 const RemixProgress({
   Key? key,
   required double value,
-  RemixProgressStyle style = const RemixProgressStyle.create(),
+  RemixProgressStyler style = const RemixProgressStyler.create(),
   RemixProgressSpec? styleSpec,
 })
 ```
@@ -104,7 +104,7 @@ const RemixProgress({
 
 | Prop | Type | Required / Default Value |
 |------|------|--------------------------|
-| `style` | `RemixProgressStyle` | Optional. The style configuration for the progress indicator. Customize colors, sizing, and track appearance. |
+| `style` | `RemixProgressStyler` | Optional. The style configuration for the progress indicator. Customize colors, sizing, and track appearance. |
 | `styleSpec` | `RemixProgressSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
 | `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
 | `value` | `double` | **Required**. The progress value between 0 and 1. This value determines how much of the progress bar is filled. A value of 0 means empty, while 1 means completely filled. |

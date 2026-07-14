@@ -46,7 +46,7 @@ class _TextFieldPreviewState extends State<TextFieldPreview> {
         hintText: 'Placeholder',
         label: 'Label',
         helperText: 'Required field',
-        style: FortalTextFieldStyles.surface(),
+        style: fortalTextFieldStyler(variant: .surface),
       ),
     );
   }
