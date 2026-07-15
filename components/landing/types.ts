@@ -1,7 +1,9 @@
 import type { ComponentType, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 
-export type ProductSlug = "stargate" | "code-analysis";
+/* "readiness" is a service lead pipe, not a landing product — it shares the
+   waitlist/Resend mechanism but has no LandingContent page of its own. */
+export type ProductSlug = "stargate" | "code-analysis" | "readiness";
 
 export interface LandingContent {
   product: ProductSlug;
@@ -34,6 +36,6 @@ export interface LandingContent {
     snippet: string;
     snippetFile: string;
   };
-  faq: { q: string; a: string }[];
+  faq: { q: string; a: ReactNode }[];
   closingCta: { title: string; lead: string; finePrint: string };
 }

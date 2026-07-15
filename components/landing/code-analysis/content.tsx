@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Gauge,
   ShieldAlert,
@@ -137,6 +138,21 @@ export const codeAnalysisContent: LandingContent = {
     {
       q: "What do I get at the end?",
       a: "A hotspot catalog, finding catalog, flow catalog, coverage map, and code-health.json for your tooling — plus a consolidated final report rendered to PDF, written to be client-shareable as-is.",
+    },
+    {
+      q: "Can Concepta run the audit for me?",
+      a: (
+        <>
+          Yes — that&apos;s the{" "}
+          <Link href="/code-analysis/readiness">
+            Delivery Readiness Assessment
+          </Link>
+          :
+          a 2–3 week engagement where we run the audit on your codebase, verify
+          your release gates, and walk you through a graded verdict plus a
+          sequenced remediation plan.
+        </>
+      ),
     },
     {
       q: "When can I use it?",
