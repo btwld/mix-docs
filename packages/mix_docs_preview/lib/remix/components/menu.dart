@@ -33,7 +33,7 @@ class _MenuPreviewState extends State<MenuPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixMenu<String>(
+    return FortalMenu<String>.soft(
       trigger: const RemixMenuTrigger(label: 'Open Menu'),
       items: [
         RemixMenuItem(
@@ -56,7 +56,6 @@ class _MenuPreviewState extends State<MenuPreview> {
           style: fortalMenuItemStyler(variant: .soft),
         ),
       ],
-      style: fortalMenuStyler(variant: .soft),
       onSelected: (_) {},
       controller: controller,
     );

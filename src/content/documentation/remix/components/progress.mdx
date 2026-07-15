@@ -50,11 +50,11 @@ class ProgressExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -67,13 +67,11 @@ class FortalProgressExample extends StatelessWidget {
     return Column(
       spacing: 16,
       children: [
-        RemixProgress(
+        FortalProgress.surface(
           value: 0.6,
-          style: fortalProgressStyler(variant: .surface),
         ),
-        RemixProgress(
+        FortalProgress.soft(
           value: 0.4,
-          style: fortalProgressStyler(variant: .soft),
         ),
       ],
     );
@@ -129,4 +127,3 @@ const RemixProgress({
 | `padding(EdgeInsetsGeometryMix value)` | Sets the container padding. |
 | `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
 | `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
-

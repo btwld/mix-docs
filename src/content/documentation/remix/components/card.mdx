@@ -48,11 +48,11 @@ class CardExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -65,12 +65,8 @@ class FortalCardExample extends StatelessWidget {
     return Column(
       spacing: 16,
       children: [
-        RemixCard(
-          style: fortalCardStyler(variant: .classic),
-        ),
-        RemixCard(
-          style: fortalCardStyler(variant: .surface),
-        ),
+        FortalCard.classic(),
+        FortalCard.surface(),
       ],
     );
   }
@@ -120,4 +116,3 @@ const RemixCard({
 | `constraints(BoxConstraintsMix value)` | Sets size constraints on the component. |
 | `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
 | `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
-

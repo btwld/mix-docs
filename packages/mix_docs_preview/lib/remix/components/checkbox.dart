@@ -33,14 +33,13 @@ class _CheckboxPreviewState extends State<CheckboxPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixCheckbox(
+    return FortalCheckbox.surface(
       selected: _isChecked,
       onChanged: (value) {
         setState(() {
           _isChecked = value ?? false;
         });
       },
-      style: fortalCheckboxStyler(variant: .surface),
     );
   }
 }

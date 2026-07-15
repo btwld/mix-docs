@@ -26,9 +26,6 @@ class DividerPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      child: RemixDivider(style: fortalDividerStyler()),
-    );
+    return SizedBox(width: 300, child: const FortalDivider());
   }
 }

@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const SliderPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const SliderPreview(),
+    );
   }
 }
 
@@ -35,9 +39,8 @@ class _SliderPreviewState extends State<SliderPreview> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
-      child: RemixSlider(
+      child: FortalSlider.surface(
         value: _selectedValue,
-        style: fortalSliderStyler(variant: .surface),
         onChanged: (value) {
           setState(() {
             _selectedValue = value;

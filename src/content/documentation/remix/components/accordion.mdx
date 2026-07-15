@@ -80,14 +80,14 @@ class _AccordionExampleState extends State<AccordionExample> {
     );
   }
 
-  RemixAccordionStyler<String> get itemStyle {
-    return RemixAccordionStyler<String>()
+  RemixAccordionStyler get itemStyle {
+    return RemixAccordionStyler()
         .content(BoxStyler().paddingX(16).paddingTop(8))
         .wrapClipRRect(borderRadius: BorderRadius.circular(8))
         .paddingX(16)
         .paddingY(14)
         .borderRounded(8)
-        .onHovered(RemixAccordionStyler<String>().color(Colors.grey.shade100))
+        .onHovered(RemixAccordionStyler().color(Colors.grey.shade100))
         .decoration(
           BoxDecorationMix(
             color: Colors.white,
@@ -116,11 +116,11 @@ class _AccordionExampleState extends State<AccordionExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal base style" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal component" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -147,16 +147,14 @@ class _FortalAccordionExampleState extends State<FortalAccordionExample> {
       controller: controller,
       child: Column(
         children: [
-          RemixAccordion(
+          FortalAccordion.surface(
             value: 'item1',
             title: 'First Item',
-            style: fortalAccordionStyler(),
             child: Text('First content'),
           ),
-          RemixAccordion(
+          FortalAccordion.surface(
             value: 'item2',
             title: 'Second Item',
-            style: fortalAccordionStyler(),
             child: Text('Second content'),
           ),
         ],
@@ -229,4 +227,3 @@ const RemixAccordion({
 | `semanticLabel` | `String?` | Optional. Semantic label announced for the header. |
 | `style` | `RemixAccordionStyler<T>` | Optional. The style configuration for the accordion item. |
 | `transitionBuilder` | `Widget Function(Widget, Animation<double>)` | Optional. The transition builder for the accordion item. |
-

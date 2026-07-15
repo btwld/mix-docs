@@ -65,45 +65,49 @@ const THEMES = [
     key: "default",
     name: "Classic",
     previewId: "homepage/hero-classic",
-    code: `final style = RemixButtonStyle()
+    code: `final style = RemixButtonStyler()
     .color(const Color(0xFF00EB03))
-    .labelColor(const Color(0xFF05040A))
-    .paddingX(22)
-    .paddingY(11)
-    .borderRadiusAll(const Radius.circular(10))
-    .onHovered(
-      RemixButtonStyle().color(const Color(0xFF33FF36)),
-    );`,
+    .label(.color(const Color(0xFF05040A)))
+    .padding(.horizontal(22).vertical(11))
+    .borderRadius(.circular(10))
+    .onHovered(.new().color(const Color(0xFF33FF36)))
+    .onPressed(.new().scale(0.97))
+    .animate(.spring(180.ms));`,
   },
   {
     key: "gradient",
     name: "Gradient",
     previewId: "homepage/hero-gradient",
-    code: `final style = RemixButtonStyle()
+    code: `final style = RemixButtonStyler()
     .gradient(
-      LinearGradientMix(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
+      .linear(
+        .begin(.topLeft)
+            .end(.bottomRight)
+            .colors(const [
+              Color(0xFF00EB03),
+              Color(0xFF8B5CF6),
+            ]),
       ),
     )
-    .labelColor(const Color(0xFF05040A))
-    .paddingX(22)
-    .paddingY(11)
-    .borderRadiusAll(const Radius.circular(12));`,
+    .label(.color(const Color(0xFF05040A)))
+    .padding(.horizontal(22).vertical(11))
+    .borderRadius(.circular(12))
+    .onPressed(.new().scale(0.97))
+    .animate(.spring(180.ms));`,
   },
   {
     key: "neon",
     name: "Neon",
     previewId: "homepage/hero-neon",
-    code: `final style = RemixButtonStyle()
+    code: `final style = RemixButtonStyler()
     .color(const Color(0xFF0A0014))
-    .labelColor(const Color(0xFF00F0FF))
-    .paddingX(24)
-    .paddingY(11)
-    .borderRadiusAll(const Radius.circular(2))
-    .borderAll(color: const Color(0xFF00F0FF), width: 1)
-    .shadowOnly(color: const Color(0xFFFF00E5), blurRadius: 22);`,
+    .label(.color(const Color(0xFF00F0FF)))
+    .padding(.horizontal(24).vertical(11))
+    .borderRadius(.circular(2))
+    .border(.all(.color(const Color(0xFF00F0FF)).width(1)))
+    .shadow(.color(const Color(0xFFFF00E5)).blurRadius(22))
+    .onPressed(.new().scale(0.97))
+    .animate(.spring(180.ms));`,
   },
 ];
 
@@ -281,7 +285,7 @@ export const RemixHome = () => {
             </RemixButton>
           </motion.div>
 
-          {/* Interactive product window: one component, four Mix styles */}
+          {/* Interactive product window: one component, three Mix styles */}
           <motion.div
             className="rx-window-wrap"
             initial={{ opacity: 0, y: 40, scale: 0.97 }}

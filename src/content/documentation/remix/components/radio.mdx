@@ -39,7 +39,7 @@ class _RadioExampleState extends State<RadioExample> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixRadioGroup<String>(
+    return RemixRadioGroup(
       groupValue: _selectedValue,
       onChanged: (value) {
         setState(() {
@@ -55,7 +55,7 @@ class _RadioExampleState extends State<RadioExample> {
             spacing: 8,
             mainAxisSize: MainAxisSize.min,
             children: [
-              RemixRadio<String>(value: 'option1', style: style),
+              RemixRadio(value: 'option1', style: style),
               const Text('Option 1'),
             ],
           ),
@@ -63,7 +63,7 @@ class _RadioExampleState extends State<RadioExample> {
             spacing: 8,
             mainAxisSize: MainAxisSize.min,
             children: [
-              RemixRadio<String>(value: 'option2', style: style),
+              RemixRadio(value: 'option2', style: style),
               const Text('Option 2'),
             ],
           ),
@@ -117,11 +117,11 @@ class _RadioExampleState extends State<RadioExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -138,13 +138,13 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixRadioGroup<String>(
+    return RemixRadioGroup(
       groupValue: _selected,
       onChanged: (value) => setState(() => _selected = value),
       child: Column(
         children: [
-          RemixRadio(value: 'soft', style: fortalRadioStyler(variant: .soft)),
-          RemixRadio(value: 'surface', style: fortalRadioStyler(variant: .surface)),
+          FortalRadio.soft(value: 'soft'),
+          FortalRadio.surface(value: 'surface'),
         ],
       ),
     );
@@ -216,4 +216,3 @@ const RemixRadio({
 | `decoration(DecorationMix value)` | Sets the container decoration. |
 | `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
 | `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
-

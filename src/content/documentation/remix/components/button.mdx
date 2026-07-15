@@ -22,10 +22,27 @@ A customizable button component that supports text with optional icons, loading 
 
 ## Basic implementation
 
+Place the generated component definition in `create_project_button.dart`:
+
 <CodeGroup title="Basic implementation" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
+import 'package:mix_annotations/mix_annotations.dart';
 import 'package:remix/remix.dart';
+
+part 'create_project_button.g.dart';
+
+@MixWidget()
+final createProjectButtonStyle = RemixButtonStyler()
+    .color(const Color(0xFF6D5DFB))
+    .padding(.horizontal(18).vertical(12))
+    .spacing(8)
+    .borderRadius(.circular(10))
+    .label(.color(Colors.white).fontWeight(.w600))
+    .icon(.color(Colors.white).size(18))
+    .onHovered(.new().color(const Color(0xFF5947E8)))
+    .onPressed(.new().scale(0.97))
+    .animate(.spring(180.ms));
 
 class ButtonExample extends StatelessWidget {
   const ButtonExample({super.key});
@@ -33,85 +50,24 @@ class ButtonExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 16,
-        children: [
-          RemixButton(
-            onPressed: () {},
-            label: 'Turn Off',
-            style: destructiveStyle,
-          ),
-          RemixButton(
-            onPressed: () {},
-            label: 'Turn on',
-            style: successStyle,
-          ),
-        ],
+      child: CreateProjectButton(
+        label: 'Create project',
+        leadingIcon: Icons.add,
+        onPressed: () {},
       ),
     );
-  }
-
-  RemixButtonStyler get destructiveStyle {
-    return RemixButtonStyler()
-        .paddingX(16)
-        .paddingY(10)
-        .color(const Color(0xFF4D1919))
-        .shadow(
-          BoxShadowMix().color(Colors.redAccent).blurRadius(10).spreadRadius(0),
-        )
-        .label(
-          TextStyler().uppercase().color(Colors.redAccent),
-        )
-        .shapeBeveledRectangle(
-          borderRadius: BorderRadiusMix()
-              .bottomLeft(const Radius.circular(12))
-              .topRight(const Radius.circular(12)),
-          side: BorderSideMix.width(1).color(Colors.redAccent),
-        )
-        .wrap(WidgetModifierConfig.scale(x: 1, y: 1))
-        .onPressed(
-          RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 0.90, y: 0.90)),
-        )
-        .onHovered(
-          RemixButtonStyler()
-              .color(const Color(0xFF732D2D))
-              .animate(AnimationConfig.spring(300.ms)),
-        )
-        .onFocused(
-          RemixButtonStyler().color(const Color(0xFF732D2D)),
-        );
-  }
-
-  RemixButtonStyler get successStyle {
-    return destructiveStyle
-        .color(const Color.fromARGB(255, 15, 61, 15))
-        .label(TextStyler().uppercase().color(Colors.greenAccent))
-        .shapeBeveledRectangle(
-          side: BorderSideMix().color(Colors.greenAccent),
-        )
-        .shadow(
-          BoxShadowMix()
-              .color(Colors.greenAccent)
-              .blurRadius(10)
-              .spreadRadius(0),
-        )
-        .onHovered(
-          RemixButtonStyler().color(const Color(0xFF357857)),
-        )
-        .onFocused(
-          RemixButtonStyler().color(const Color(0xFF357857)),
-        );
   }
 }
 ```
 </CodeGroup>
 
-## Fortal styles
+`@MixWidget` generates `CreateProjectButton` from `createProjectButtonStyle`. Run `dart run build_runner build` after adding or changing the style.
 
-Remix includes Fortal-themed style helpers for this component:
+## Generated Fortal component
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+Remix includes a generated Fortal component with prebuilt variants:
+
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -121,38 +77,40 @@ class FortalButtonExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Wrap(
+      alignment: .center,
+      runAlignment: .center,
       spacing: 16,
+      runSpacing: 12,
       children: [
         // Solid variant - High emphasis, primary actions
-        RemixButton(
+        FortalButton.solid(
           label: 'Solid Button',
           onPressed: () {},
-          style: fortalButtonStyler(variant: .solid),
         ),
+
         // Soft variant - Medium emphasis, secondary actions
-        RemixButton(
+        FortalButton.soft(
           label: 'Soft Button',
           onPressed: () {},
-          style: fortalButtonStyler(variant: .soft),
         ),
+
         // Surface variant - Subtle emphasis with border
-        RemixButton(
+        FortalButton.surface(
           label: 'Surface Button',
           onPressed: () {},
-          style: fortalButtonStyler(variant: .surface),
         ),
+
         // Outline variant - Low emphasis, tertiary actions
-        RemixButton(
+        FortalButton.outline(
           label: 'Outline Button',
           onPressed: () {},
-          style: fortalButtonStyler(variant: .outline),
         ),
+
         // Ghost variant - Minimal styling, inline actions
-        RemixButton(
+        FortalButton.ghost(
           label: 'Ghost Button',
           onPressed: () {},
-          style: fortalButtonStyler(variant: .ghost),
         ),
       ],
     );
@@ -272,4 +230,3 @@ const RemixButton({
 | `spinnerFast()` | Sets spinner animation to fast (500ms) |
 | `spinnerNormal()` | Sets spinner animation to normal (1000ms) |
 | `spinnerSlow()` | Sets spinner animation to slow (1500ms) |
-

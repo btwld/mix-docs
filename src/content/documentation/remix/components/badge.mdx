@@ -81,11 +81,11 @@ class BadgeExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -98,13 +98,11 @@ class FortalBadgeExample extends StatelessWidget {
     return Row(
       spacing: 16,
       children: [
-        RemixBadge(
+        FortalBadge.solid(
           label: '5',
-          style: fortalBadgeStyler(variant: .solid),
         ),
-        RemixBadge(
+        FortalBadge.soft(
           label: 'New',
-          style: fortalBadgeStyler(variant: .soft),
         ),
       ],
     );
@@ -172,4 +170,3 @@ const RemixBadge({
 | `labelHeight(double value)` | Sets label/text line height |
 | `labelWordSpacing(double value)` | Sets label/text word spacing |
 | `labelDecorationColor(Color value)` | Sets label/text decoration color |
-

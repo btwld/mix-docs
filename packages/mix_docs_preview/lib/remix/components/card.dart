@@ -26,9 +26,6 @@ class CardPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RemixCard(
-      style: fortalCardStyler(variant: .surface),
-      child: const SizedBox(width: 280, height: 160),
-    );
+    return const FortalCard.surface(child: SizedBox(width: 280, height: 160));
   }
 }

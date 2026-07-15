@@ -124,11 +124,11 @@ class _TabsExampleState extends State<TabsExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal components
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes generated Fortal components for the tab bar, tabs, and views:
 
-<CodeGroup title="Fortal base style" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal components" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -150,17 +150,16 @@ class _FortalTabsExampleState extends State<FortalTabsExample> {
       onChanged: (id) => setState(() => _tab = id),
       child: Column(
         children: [
-          RemixTabBar(
-            style: fortalTabBarStyler(),
+          FortalTabBar(
             child: Row(
               children: [
-                RemixTab(tabId: 'tab1', label: 'Tab 1', style: fortalTabStyler()),
-                RemixTab(tabId: 'tab2', label: 'Tab 2', style: fortalTabStyler()),
+                FortalTab(tabId: 'tab1', label: 'Tab 1'),
+                FortalTab(tabId: 'tab2', label: 'Tab 2'),
               ],
             ),
           ),
-          RemixTabView(tabId: 'tab1', style: fortalTabViewStyler(), child: Text('Content 1')),
-          RemixTabView(tabId: 'tab2', style: fortalTabViewStyler(), child: Text('Content 2')),
+          FortalTabView(tabId: 'tab1', child: Text('Content 1')),
+          FortalTabView(tabId: 'tab2', child: Text('Content 2')),
         ],
       ),
     );
@@ -280,4 +279,3 @@ const RemixTabView({
 | `iconTextDirection(TextDirection value)` | Sets icon text direction |
 | `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
 | `iconShadow(ShadowMix value)` | Sets single icon shadow |
-

@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const SelectPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const SelectPreview(),
+    );
   }
 }
 
@@ -33,7 +37,7 @@ class _SelectPreviewState extends State<SelectPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixSelect(
+    return FortalSelect.surface(
       trigger: const RemixSelectTrigger(placeholder: 'Text Value'),
       items: [
         RemixSelectItem(
@@ -50,7 +54,6 @@ class _SelectPreviewState extends State<SelectPreview> {
         ),
       ],
       selectedValue: _selectedValue,
-      style: fortalSelectStyler(variant: .surface),
       onChanged: (value) {
         setState(() {
           _selectedValue = value;

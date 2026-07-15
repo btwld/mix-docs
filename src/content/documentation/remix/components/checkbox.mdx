@@ -66,11 +66,11 @@ class _CheckboxExampleState extends State<CheckboxExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -90,15 +90,13 @@ class _FortalCheckboxExampleState extends State<FortalCheckboxExample> {
     return Column(
       spacing: 16,
       children: [
-        RemixCheckbox(
+        FortalCheckbox.surface(
           selected: _isChecked,
           onChanged: (value) => setState(() => _isChecked = value ?? false),
-          style: fortalCheckboxStyler(variant: .surface),
         ),
-        RemixCheckbox(
+        FortalCheckbox.soft(
           selected: _isChecked,
           onChanged: (value) => setState(() => _isChecked = value ?? false),
-          style: fortalCheckboxStyler(variant: .soft),
         ),
       ],
     );
@@ -189,4 +187,3 @@ const RemixCheckbox({
 | `iconTextDirection(TextDirection value)` | Sets icon text direction |
 | `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
 | `iconShadow(ShadowMix value)` | Sets single icon shadow |
-

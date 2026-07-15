@@ -79,11 +79,11 @@ class IconButtonExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -96,20 +96,17 @@ class FortalIconButtonExample extends StatelessWidget {
     return Row(
       spacing: 16,
       children: [
-        RemixIconButton(
+        FortalIconButton.solid(
           icon: Icons.add,
           onPressed: () {},
-          style: fortalIconButtonStyler(variant: .solid),
         ),
-        RemixIconButton(
+        FortalIconButton.soft(
           icon: Icons.edit,
           onPressed: () {},
-          style: fortalIconButtonStyler(variant: .soft),
         ),
-        RemixIconButton(
+        FortalIconButton.ghost(
           icon: Icons.delete,
           onPressed: () {},
-          style: fortalIconButtonStyler(variant: .ghost),
         ),
       ],
     );
@@ -201,4 +198,3 @@ const RemixIconButton({
 | `iconTextDirection(TextDirection value)` | Sets icon text direction |
 | `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
 | `iconShadow(ShadowMix value)` | Sets single icon shadow |
-

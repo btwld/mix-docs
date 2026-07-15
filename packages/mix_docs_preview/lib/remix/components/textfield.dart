@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const TextFieldPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const TextFieldPreview(),
+    );
   }
 }
 
@@ -41,12 +45,11 @@ class _TextFieldPreviewState extends State<TextFieldPreview> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
-      child: RemixTextField(
+      child: FortalTextField.surface(
         controller: controller,
         hintText: 'Placeholder',
         label: 'Label',
         helperText: 'Required field',
-        style: fortalTextFieldStyler(variant: .surface),
       ),
     );
   }

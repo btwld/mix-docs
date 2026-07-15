@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const BadgePreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const BadgePreview(),
+    );
   }
 }
 
@@ -31,10 +35,10 @@ class BadgePreview extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixBadge(label: 'Solid', style: fortalBadgeStyler(variant: .solid)),
-        RemixBadge(label: 'Soft', style: fortalBadgeStyler(variant: .soft)),
-        RemixBadge(label: 'Surface', style: fortalBadgeStyler(variant: .surface)),
-        RemixBadge(label: 'Outline', style: fortalBadgeStyler(variant: .outline)),
+        const FortalBadge.solid(label: 'Solid'),
+        const FortalBadge.soft(label: 'Soft'),
+        const FortalBadge.surface(label: 'Surface'),
+        const FortalBadge.outline(label: 'Outline'),
       ],
     );
   }

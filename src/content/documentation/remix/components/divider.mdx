@@ -26,13 +26,13 @@ The preview below shows this style applied.
   height={240}
 />
 
-## Fortal Styles
+## Generated Fortal component
 
-Remix ships prebuilt Fortal styles for this component. Call one of the helpers and pass it to the `style` parameter:
+Remix ships a generated `FortalDivider` component with size presets:
 
 ```dart
-RemixDivider(style: fortalDividerStyler(size: .size1))
-RemixDivider(style: fortalDividerStyler(size: .size2))
+FortalDivider(size: .size1);
+FortalDivider(size: .size2);
 ```
 
 See the [fortalDividerStyler source](https://github.com/btwld/remix/blob/main/lib/src/components/divider/fortal_divider_styles.dart) for the full set of options.

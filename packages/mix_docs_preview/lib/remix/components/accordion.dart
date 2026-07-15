@@ -57,18 +57,16 @@ class _AccordionPreviewState extends State<AccordionPreview> {
             child: ColumnBox(
               style: FlexBoxStyler().spacing(16),
               children: [
-                RemixAccordion(
+                FortalAccordion.surface(
                   value: 'accordion1',
                   title: 'How do I update my account information?',
-                  style: fortalAccordionStyler(),
                   child: const Text(
                     'Insert the accordion description here. It would look better as two lines of text.',
                   ),
                 ),
-                RemixAccordion(
+                FortalAccordion.surface(
                   value: 'accordion2',
                   title: 'What payment methods are accepted?',
-                  style: fortalAccordionStyler(),
                   child: const Text(
                     'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.',
                   ),

@@ -94,11 +94,11 @@ class _TextfieldExampleState extends State<TextfieldExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal base style" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal component" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -118,18 +118,16 @@ class _FortalTextFieldExampleState extends State<FortalTextFieldExample> {
     return Column(
       spacing: 16,
       children: [
-        RemixTextField(
+        FortalTextField.surface(
           controller: controller,
           label: 'Email',
           hintText: 'Enter your email',
-          style: fortalTextFieldStyler(variant: .surface),
         ),
-        RemixTextField(
+        FortalTextField.surface(
           controller: controller,
           label: 'Password',
           hintText: 'Enter password',
           obscureText: true,
-          style: fortalTextFieldStyler(variant: .surface),
         ),
       ],
     );
@@ -314,4 +312,3 @@ const RemixTextField({
 | `labelHeight(double value)` | Sets label/text line height |
 | `labelWordSpacing(double value)` | Sets label/text word spacing |
 | `labelDecorationColor(Color value)` | Sets label/text decoration color |
-

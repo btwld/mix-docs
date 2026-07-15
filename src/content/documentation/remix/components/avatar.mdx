@@ -83,11 +83,11 @@ class AvatarExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -101,14 +101,12 @@ class FortalAvatarExample extends StatelessWidget {
       spacing: 16,
       children: [
         // Soft variant - Subtle background
-        RemixAvatar(
+        FortalAvatar.soft(
           label: 'AB',
-          style: fortalAvatarStyler(variant: .soft),
         ),
         // Solid variant - Bold background
-        RemixAvatar(
+        FortalAvatar.solid(
           label: 'CD',
-          style: fortalAvatarStyler(variant: .solid),
         ),
       ],
     );
@@ -203,4 +201,3 @@ const RemixAvatar({
 | `iconTextDirection(TextDirection value)` | Sets icon text direction |
 | `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
 | `iconShadow(ShadowMix value)` | Sets single icon shadow |
-

@@ -26,25 +26,31 @@ Remix pairs headless components (inspired by Naked UI) with Mix's styling system
 
 ## The Remix Approach
 
-Define a style with a fluent chain, then call it or pass it to a component:
+Define a top-level style with a fluent chain and annotate it with `@MixWidget`. Mix's generator turns that style into a named Flutter component, so your UI uses a regular widget constructor instead of invoking the styler:
 
 ```dart
-final button = RemixButtonStyler()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .onHovered(
-    RemixButtonStyler().color(Colors.blue.shade700),
-  )
-  .animate(AnimationConfig.spring(300.ms));
+@MixWidget()
+final primaryButtonStyle = RemixButtonStyler()
+    .padding(.horizontal(16).vertical(10))
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .onHovered(.new().color(Colors.blue.shade700))
+    .animate(.spring(300.ms));
 
-button(label: 'Click me', onPressed: () {});
+Widget buildCallToAction() {
+  return PrimaryButton(
+    label: 'Click me',
+    onPressed: () {},
+  );
+}
 ```
+
+`PrimaryButton` is generated from `primaryButtonStyle`. The styler remains the source of truth for appearance, while the generated widget becomes the component API used throughout the app.
 
 With Remix, you get:
 
 - **Ready-to-use components** with interaction behavior, accessibility, and keyboard navigation built in
+- **Generated component APIs** that turn reusable styles into named Flutter widgets
 - **Complete styling freedom** using Mix's chainable styling API
 - **State-aware styling** with built-in support for hover, focus, press, and custom states
 - **Smooth animations** that plug directly into your style definitions
@@ -66,6 +72,8 @@ Install the latest version:
 
 ```bash
 flutter pub add remix
+dart pub add mix_annotations
+dart pub add dev:build_runner dev:mix_generator
 ```
 
 Or pin explicitly in `pubspec.yaml`:
@@ -78,30 +86,52 @@ dependencies:
 Import it where you use it:
 
 ```dart
+import 'package:mix_annotations/mix_annotations.dart';
 import 'package:remix/remix.dart';
 ```
 
-### Your first Remix component
+### Define your first Remix component
 
-Build a blue button labeled "Click Me". The `RemixButtonStyler` class defines styles with a fluent API, and calling it directly produces the widget:
+Create a Dart file such as `primary_button.dart`. The `part` directive gives `mix_generator` a destination for the generated widget:
 
 ```dart
 import 'package:flutter/material.dart';
+import 'package:mix_annotations/mix_annotations.dart';
 import 'package:remix/remix.dart';
 
+part 'primary_button.g.dart';
+
+@MixWidget()
+final primaryButtonStyle = RemixButtonStyler()
+    .padding(.horizontal(16).vertical(10))
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .label(.color(Colors.white));
+```
+
+The variable name ends in `Style`, so the generator derives the component name `PrimaryButton`.
+
+### Run code generation
+
+Generate the widget class after defining or changing an annotated style:
+
+```bash
+dart run build_runner build
+```
+
+The generated `primary_button.g.dart` file contains the `PrimaryButton` widget. Do not edit that file by hand.
+
+### Use the generated component
+
+Instantiate `PrimaryButton` like any other Flutter widget:
+
+```dart
 class Example extends StatelessWidget {
   const Example({super.key});
 
-  RemixButtonStyler get _button => RemixButtonStyler()
-      .paddingX(16)
-      .paddingY(10)
-      .color(Colors.blue)
-      .borderRadiusAll(const Radius.circular(8))
-      .label(TextStyler().color(Colors.white));
-
   @override
   Widget build(BuildContext context) {
-    return _button(
+    return PrimaryButton(
       label: 'Click Me',
       onPressed: () {},
     );
@@ -121,16 +151,11 @@ Define how a component should look in hover, pressed, focused, and other states 
 
 ```dart
 final style = RemixButtonStyler()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .onHovered(
-    RemixButtonStyler().color(Colors.blue.shade700),
-  )
-  .onPressed(
-    RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
-  );
+    .padding(.horizontal(16).vertical(10))
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .onHovered(.new().color(Colors.blue.shade700))
+    .onPressed(.new().scale(0.95));
 ```
 
 Remix tracks the interaction internally, so you don't wire up hover detectors, focus nodes, or gesture recognizers yourself.
@@ -141,17 +166,12 @@ Attach animation directly to a style with `.animate()`. State-specific styles in
 
 ```dart
 final style = RemixButtonStyler()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .animate(AnimationConfig.spring(300.ms))
-  .onHovered(
-    RemixButtonStyler().color(Colors.blue.shade700),
-  )
-  .onPressed(
-    RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
-  );
+    .padding(.horizontal(16).vertical(10))
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .animate(.spring(300.ms))
+    .onHovered(.new().color(Colors.blue.shade700))
+    .onPressed(.new().scale(0.95));
 ```
 
 Both the color on hover and the scale on press animate through a single spring curve.
@@ -166,17 +186,16 @@ Build a base style once, then extend it for variants:
 
 ```dart
 final baseButton = RemixButtonStyler()
-    .paddingX(16)
-    .paddingY(10)
-    .borderRadiusAll(const Radius.circular(8));
+    .padding(.horizontal(16).vertical(10))
+    .borderRadius(.circular(8));
 
 final primaryButton = baseButton
     .color(Colors.blue)
-    .label(TextStyler().color(Colors.white));
+    .label(.color(Colors.white));
 
 final destructiveButton = baseButton
     .color(Colors.red)
-    .label(TextStyler().color(Colors.white));
+    .label(.color(Colors.white));
 ```
 
 Each chain call returns a new style, so `baseButton` stays unchanged and every variant is independently mergeable.
@@ -186,10 +205,9 @@ Each chain call returns a new style, so `baseButton` stays unchanged and every v
 Remix gives you the freedom to build any design system from scratch, but you don't have to start there. **Fortal** is a prebuilt set of component styles based on [Radix](https://www.radix-ui.com/), ready to drop in and customize. Reach for Fortal when you want a polished, modern look without defining every token yourself — and extend it when you need something specific.
 
 ```dart
-RemixButton(
-  onPressed: () {},
+FortalButton.solid(
   label: 'Fortal Button',
-  style: fortalButtonStyler(variant: .solid),
+  onPressed: () {},
 );
 ```
 

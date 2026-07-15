@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const TabsPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const TabsPreview(),
+    );
   }
 }
 
@@ -33,7 +37,6 @@ class _TabsPreviewState extends State<TabsPreview> {
 
   @override
   Widget build(BuildContext context) {
-    final tabStyle = fortalTabStyler();
     return SizedBox(
       width: 320,
       height: 200,
@@ -44,17 +47,17 @@ class _TabsPreviewState extends State<TabsPreview> {
           mainAxisSize: .max,
           crossAxisAlignment: .stretch,
           children: [
-            RemixTabBar(
+            FortalTabBar(
               child: Row(
                 mainAxisSize: .max,
                 children: [
-                  RemixTab(tabId: 'tab1', style: tabStyle, label: 'Tab 1'),
-                  RemixTab(tabId: 'tab2', style: tabStyle, label: 'Tab 2'),
+                  FortalTab(tabId: 'tab1', label: 'Tab 1'),
+                  FortalTab(tabId: 'tab2', label: 'Tab 2'),
                 ],
               ),
             ),
             const Expanded(
-              child: RemixTabView(
+              child: FortalTabView(
                 tabId: 'tab1',
                 child: Padding(
                   padding: EdgeInsets.all(16),
@@ -66,7 +69,7 @@ class _TabsPreviewState extends State<TabsPreview> {
               ),
             ),
             const Expanded(
-              child: RemixTabView(
+              child: FortalTabView(
                 tabId: 'tab2',
                 child: Padding(
                   padding: EdgeInsets.all(16),

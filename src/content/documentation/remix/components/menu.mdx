@@ -39,7 +39,7 @@ class _MenuExampleState extends State<MenuExample> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixMenu<String>(
+    return FortalMenu<String>.soft(
       trigger: const RemixMenuTrigger(label: 'Open Menu'),
       items: [
         RemixMenuItem(
@@ -137,11 +137,11 @@ class _MenuExampleState extends State<MenuExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal base style" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal component" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -151,7 +151,7 @@ class FortalMenuExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RemixMenu<String>(
+    return RemixMenu(
       trigger: const RemixMenuTrigger(label: 'Options'),
       items: [
         RemixMenuItem(
@@ -167,7 +167,6 @@ class FortalMenuExample extends StatelessWidget {
           style: fortalMenuItemStyler(variant: .soft),
         ),
       ],
-      style: fortalMenuStyler(variant: .soft),
       onSelected: (value) => print(value),
     );
   }
@@ -269,4 +268,3 @@ const RemixMenu({
 | `iconTextDirection(TextDirection value)` | Sets icon text direction |
 | `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
 | `iconShadow(ShadowMix value)` | Sets single icon shadow |
-

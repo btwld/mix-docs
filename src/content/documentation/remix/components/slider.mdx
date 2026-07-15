@@ -79,11 +79,11 @@ class _SliderExampleState extends State<SliderExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Generated Fortal component
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal component with prebuilt variants:
 
-<CodeGroup title="Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -103,15 +103,13 @@ class _FortalSliderExampleState extends State<FortalSliderExample> {
     return Column(
       spacing: 16,
       children: [
-        RemixSlider(
+        FortalSlider.surface(
           value: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: fortalSliderStyler(variant: .surface),
         ),
-        RemixSlider(
+        FortalSlider.soft(
           value: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: fortalSliderStyler(variant: .soft),
         ),
       ],
     );
@@ -191,4 +189,3 @@ const RemixSlider({
 | `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
 | `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
 | `animate(AnimationConfig animation)` | Configures implicit animation for style transitions. |
-

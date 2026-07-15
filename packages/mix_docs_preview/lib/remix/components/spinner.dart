@@ -31,9 +31,9 @@ class SpinnerPreview extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixSpinner(style: fortalSpinnerStyler(size: .size1)),
-        RemixSpinner(style: fortalSpinnerStyler(size: .size2)),
-        RemixSpinner(style: fortalSpinnerStyler(size: .size3)),
+        const FortalSpinner(size: .size1),
+        const FortalSpinner(size: .size2),
+        const FortalSpinner(size: .size3),
       ],
     );
   }
