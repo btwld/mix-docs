@@ -1,0 +1,201 @@
+# Ack
+
+> A schema validation library for Dart and Flutter with a fluent runtime API and `@AckType()`-driven extension-type generation. Version 1.1.0.
+
+Ack validates external data with hand-written schemas built using the `Ack`
+factory. When you want typed wrappers over validated values, annotate top-level
+schema variables or getters with `@AckType()` and run `ack_generator`.
+
+## Packages
+
+1. `ack`: core runtime validation library
+2. `ack_annotations`: exposes `@AckType()`
+3. `ack_generator`: generates extension types for annotated top-level schemas
+4. `ack_firebase_ai`: converts Ack schemas to Firebase AI structured-output schemas
+5. `ack_json_schema_builder`: converts Ack schemas to `json_schema_builder` schemas
+
+## Core runtime usage
+
+```dart
+import 'package:ack/ack.dart';
+
+final userSchema = Ack.object({
+  'name': Ack.string().minLength(2),
+  'email': Ack.string().email(),
+  'age': Ack.integer().min(0).optional(),
+});
+
+final result = userSchema.safeParse({
+  'name': 'Alice',
+  'email': 'alice@example.com',
+});
+```
+
+## Codecs
+
+Codecs decode a boundary value (wire shape) into a runtime value and encode it
+back. `parse`/`safeParse` decode; `encode`/`safeEncode` encode.
+
+- Built-in: `Ack.date()` (ISO `YYYY-MM-DD` <-> local-midnight `DateTime`),
+  `Ack.datetime()` (ISO 8601 <-> UTC `DateTime`; rejects leap-second strings
+  because Dart cannot represent them), `Ack.uri()` (`String` <-> `Uri`),
+  `Ack.duration()` (milliseconds `int` <-> `Duration`), `Ack.enumCodec(values)`
+  (enum-name `String` <-> enum value).
+- Custom: `Ack.codec(input: ..., decode: ..., encode: ...)`, or
+  `schema.codec<R>(decode: ..., encode: ...)` on an existing schema.
+- `schema.transform<R>(fn)` is one-way (parse only); encoding it fails.
+- A codec exports the JSON Schema of its boundary (input) schema.
+
+## AckType generation
+
+`@AckType()` is supported only on:
+
+- top-level schema variables
+- top-level schema getters
+
+It is not supported on classes or instance members.
+
+Example:
+
+```dart
+import 'package:ack/ack.dart';
+import 'package:ack_annotations/ack_annotations.dart';
+
+part 'user_schema.g.dart';
+
+@AckType()
+final addressSchema = Ack.object({
+  'street': Ack.string(),
+  'city': Ack.string(),
+});
+
+@AckType()
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'address': addressSchema,
+});
+```
+
+Generated capabilities:
+
+- `UserType.parse(data)`
+- `UserType.safeParse(data)`
+- typed getters such as `String get name` and `AddressType get address`
+
+## Supported AckType schema shapes
+
+- `Ack.object(...)`
+- `Ack.string()`
+- `Ack.integer()`
+- `Ack.double()`
+- `Ack.boolean()`
+- `Ack.list(...)`
+- `Ack.literal(...)`
+- `Ack.enumString(...)`
+- `Ack.enumValues(...)`
+- explicit transforms such as `.transform<Uri>(...)`
+- `Ack.discriminated(...)` with the constraints below
+
+Not supported for extension-type generation:
+
+- `Ack.any()`
+- `Ack.anyOf()`
+- transformed object schemas
+- transformed discriminated schemas
+
+## Discriminated AckType schemas
+
+`Ack.discriminated(...)` works with `@AckType()` when:
+
+- the base schema is a top-level `@AckType()` declaration
+- `schemas` is a non-empty map literal
+- each branch is a top-level schema variable/getter reference
+- each branch is an `@AckType()` object schema
+- each branch is non-nullable
+- each branch is declared in the same library as the base
+- branch schemas normally omit the discriminator field
+- if a branch includes the discriminator field, it must be `Ack.literal(...)`
+  matching the branch key or `Ack.enumString(...)` containing the branch key
+
+Example:
+
+```dart
+@AckType()
+final catSchema = Ack.object({
+  'lives': Ack.integer(),
+});
+
+@AckType()
+final dogSchema = Ack.object({
+  'breed': Ack.string(),
+});
+
+@AckType()
+final petSchema = Ack.discriminated(
+  discriminatorKey: 'type',
+  schemas: {
+    'cat': catSchema,
+    'dog': dogSchema,
+  },
+);
+```
+
+`Ack.discriminated(...)` owns the discriminator property. Boundary payloads
+must still include the discriminator key, but branch schemas should usually
+omit it. If a branch schema includes the discriminator field, it must be
+an exact literal or enum containing the branch map key:
+
+```dart
+@AckType()
+final catSchema = Ack.object({
+  'type': Ack.literal('cat'), // allowed, but usually unnecessary
+  'lives': Ack.integer(),
+});
+```
+
+Conflicting discriminator fields are rejected. Exported and generated schemas
+treat the discriminator as an exact literal for each branch. Broad
+`Ack.string()`, transformed/refined discriminator fields, and restrictive
+chains are rejected. Generated subtype `parse()` / `safeParse()` methods
+validate through the union's effective branch.
+
+## Resolution rules
+
+AckType generation is intentionally strict:
+
+- nested object fields must reference named top-level schemas
+- inline anonymous object schemas are rejected for typed generation
+- cross-file direct imports, prefixed imports, and re-exports are supported
+- unannotated object schema references fail generation instead of silently falling back to raw maps
+- circular schema alias/reference chains fail generation
+
+## Runtime API reminders
+
+- `schema.parse(data)` throws on invalid input
+- `schema.safeParse(data)` returns `SchemaResult<T>`
+- `safeParse` turns invalid input and recoverable `Exception` values from
+  constraint/refinement callbacks into contextual failures
+- `Error` values from constraint/refinement callbacks are rethrown with their
+  original stack trace
+- codec/transform decoders and `safeParseAs` mappers turn thrown values,
+  including `Error` values, into `SchemaTransformError` failures
+- `SchemaResult<T>.getOrThrow()` returns the validated value or throws `AckException`
+- `.optional()` allows a field to be omitted
+- `.nullable()` allows a present field to hold `null`
+- object schemas support `additionalProperties: true`
+- `schema.toSchemaModel()` returns `AckSchemaModel`, the canonical boundary/export model for adapters
+- `schema.toJsonSchema()` renders `schema.toSchemaModel().toJsonSchema()`
+- adapter packages should render from `AckSchemaModel`, not by traversing `AckSchema` subclasses
+- `Ack.list(...)` does not support nullable item schemas; make the list itself nullable when needed
+- `Ack.lazy(...)` defaults `maxDepth` to `100` for recursive parsing, runtime
+  validation, and encoding; the runtime-only limit is omitted from exported schemas with a warning
+- `Ack.object`, `Ack.anyOf`, and enum factories snapshot their input collections;
+  unions and enum value lists must be non-empty, and enum values must be unique
+- lengths and item counts must be non-negative; numeric bounds must be finite;
+  `multipleOf` must be finite and greater than zero
+
+## Build command
+
+```bash
+dart run build_runner build
+```

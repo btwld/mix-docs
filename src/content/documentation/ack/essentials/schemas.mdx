@@ -1,0 +1,458 @@
+---
+title: Schemas
+---
+
+# Schemas
+
+A schema describes the shape your data should have. You build one with the `Ack` factory, then validate input against it. This page tours every schema type and how to compose them.
+
+```dart
+import 'package:ack/ack.dart';
+
+// Define schema
+final userSchema = Ack.object({
+  'name': Ack.string().minLength(2),
+  'age': Ack.integer().min(0),
+  'email': Ack.string().email(),
+});
+
+// Validate data
+final result = userSchema.safeParse({
+  'name': 'John',
+  'age': 30,
+  'email': 'john@example.com',
+});
+
+if (result.isOk) {
+  final validData = result.getOrThrow();
+  print('Valid: ${validData['name']}');
+} else {
+  print('Error: ${result.getError()}');
+}
+```
+
+## Schema types
+
+### String
+
+```dart
+// Basic string — primitives are strict by default and reject non-string values
+final nameSchema = Ack.string();
+
+// With constraints
+final usernameSchema = Ack.string()
+  .minLength(3)
+  .maxLength(20)
+  .matches(r'^[a-zA-Z0-9_]+$');
+
+// Email validation
+final emailSchema = Ack.string().email();
+
+// URL validation
+final websiteSchema = Ack.string().url();
+
+// Date/datetime strings
+final dateSchema = Ack.string().date(); // YYYY-MM-DD
+final datetimeSchema = Ack.string().datetime(); // ISO 8601
+
+// Enum values
+enum Role { admin, user, guest }
+final roleSchema = Ack.enumValues(Role.values);
+```
+
+> **`Ack.string().date()` vs `Ack.date()`:** `Ack.string().date()` checks the
+> format and keeps the value a `String`. [`Ack.date()`](/documentation/ack/advanced/codecs) (a codec)
+> validates the same format but returns a `DateTime`. The same applies to
+> `Ack.string().datetime()` vs `Ack.datetime()`, except announced leap seconds:
+> the string schema preserves them, while the codec rejects them because Dart's
+> `DateTime` cannot represent `:60`.
+
+### Number
+
+Numeric schemas are strict about their Dart runtime type. `Ack.integer()`
+rejects `double` values (even whole ones like `42.0`); `Ack.double()` rejects
+`int` values. Use `Ack.number()` when either is acceptable. `Ack.double()` and
+`Ack.number()` reject non-finite values (`NaN` and infinities) by default.
+
+```dart
+// Integer validation (int only — 42.0 would fail)
+final ageSchema = Ack.integer()
+  .min(0)
+  .max(120);
+
+// Double validation (double only — 42 would fail)
+final priceSchema = Ack.double()
+  .positive()
+  .multipleOf(0.5); // Use factors that avoid floating point rounding issues
+
+// Either int or double
+final amountSchema = Ack.number().positive();
+
+final temperatureSchema = Ack.integer(); // Any integer
+final scoreSchema = Ack.double().positive(); // > 0
+final debtSchema = Ack.double().negative(); // < 0
+```
+
+### Boolean
+
+```dart
+final isActiveSchema = Ack.boolean();
+```
+
+### List
+
+```dart
+// List of strings
+final tagsSchema = Ack.list(Ack.string());
+
+// With constraints
+final itemsSchema = Ack.list(Ack.string())
+  .minLength(1)
+  .maxLength(10)
+  .unique();
+
+// List of objects
+final usersSchema = Ack.list(Ack.object({
+  'id': Ack.integer(),
+  'name': Ack.string(),
+}));
+```
+
+### Object
+
+The most common schema type for structured data:
+
+```dart
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'age': Ack.integer().min(0),
+  'email': Ack.string().email(),
+});
+```
+
+**Nested objects:**
+
+```dart
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'address': Ack.object({
+    'street': Ack.string(),
+    'city': Ack.string(),
+    'zipCode': Ack.string().matches(r'^\d{5}$'),
+  }),
+});
+```
+
+**Working with validated data:**
+
+```dart
+final result = userSchema.safeParse(data);
+
+if (result.isOk) {
+  final validData = result.getOrThrow();
+
+  // Type cast when accessing
+  final name = validData['name'] as String;
+  final address = validData['address'] as Map<String, Object?>;
+  final city = address['city'] as String;
+}
+```
+
+### Union types
+
+Validate against multiple possible schemas:
+
+```dart
+// String or integer — primitive branches are strict, so the union won't
+// silently coerce one into the other.
+final idSchema = Ack.anyOf([
+  Ack.string(),
+  Ack.integer(),
+]);
+
+// Discriminated union (polymorphic data)
+final shapeSchema = Ack.discriminated(
+  discriminatorKey: 'type',
+  schemas: {
+    'circle': Ack.object({
+      'radius': Ack.double().positive(),
+    }),
+    'rectangle': Ack.object({
+      'width': Ack.double().positive(),
+      'height': Ack.double().positive(),
+    }),
+  },
+);
+```
+
+The union owns the discriminator and injects the exact branch literal at
+parse/export boundaries. Branch schemas usually omit the discriminator field.
+
+### Recursive schemas
+
+Use `Ack.lazy(...)` when a schema needs to refer to itself:
+
+```dart
+late final ObjectSchema categorySchema;
+
+categorySchema = Ack.object({
+  'name': Ack.string(),
+  'children': Ack.list(
+    Ack.lazy<JsonMap, JsonMap>('Category', () => categorySchema),
+  ),
+});
+```
+
+The lazy builder is resolved once and memoized. JSON Schema export renders the
+reference through Draft-7 `definitions` / `$ref`, so recursive children are
+referenced rather than inlined forever. `maxDepth` defaults to `100`, must be at
+least `1`, and returns a validation failure when parsing, runtime validation, or
+encoding exceeds the limit. Because the limit is runtime-only and cannot be
+represented by `$ref`, exported schema models warn that it was omitted.
+
+### Any
+
+Accepts any non-null JSON-safe value without validation (use sparingly):
+
+```dart
+final flexibleSchema = Ack.object({
+  'id': Ack.string(),
+  'metadata': Ack.any(), // Any non-null JSON-safe value accepted
+});
+```
+
+Use `Ack.any().nullable()` to also accept `null`.
+
+## Optional vs nullable
+
+**`.nullable()`** — Field must be present but can be `null`:
+
+```dart
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'middleName': Ack.string().nullable(),
+});
+
+// ✅ Valid
+{'name': 'John', 'middleName': null}
+{'name': 'John', 'middleName': 'Robert'}
+
+// ❌ Invalid - middleName missing
+{'name': 'John'}
+```
+
+**`.optional()`** — Field can be omitted (but is still validated when present):
+
+```dart
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'age': Ack.integer().optional(),
+});
+
+// ✅ Valid
+{'name': 'John'} // age omitted
+{'name': 'John', 'age': 30}
+
+// ❌ Invalid
+{'name': 'John', 'age': null} // Use .nullable() if null should be allowed
+```
+
+**Combining both** — Field can be missing or `null`:
+
+```dart
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'bio': Ack.string().optional().nullable(),
+});
+
+// All valid:
+{'name': 'John'}
+{'name': 'John', 'bio': null}
+{'name': 'John', 'bio': 'Developer'}
+```
+
+## Object schema operations
+
+### Extension
+
+Add or override properties:
+
+```dart
+final baseSchema = Ack.object({
+  'id': Ack.string(),
+  'name': Ack.string(),
+});
+
+// Add properties
+final extendedSchema = baseSchema.extend({
+  'email': Ack.string().email(),
+  'role': Ack.literal('admin'),
+});
+
+// Override properties
+final modifiedSchema = baseSchema.extend({
+  'name': Ack.string().optional(), // Make name optional
+});
+```
+
+### Pick and omit
+
+Select or exclude properties:
+
+```dart
+final fullSchema = Ack.object({
+  'id': Ack.string(),
+  'name': Ack.string(),
+  'email': Ack.string().email(),
+  'password': Ack.string(),
+  'createdAt': Ack.string().datetime(),
+});
+
+// Pick specific fields
+final publicSchema = fullSchema.pick(['id', 'name', 'email']);
+
+// Omit sensitive fields
+final safeSchema = fullSchema.omit(['password']);
+```
+
+### Partial
+
+Make all properties optional:
+
+```dart
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'email': Ack.string().email(),
+  'age': Ack.integer(),
+});
+
+// All fields become optional
+final partialSchema = userSchema.partial();
+
+// All valid:
+partialSchema.safeParse({});
+partialSchema.safeParse({'name': 'John'});
+partialSchema.safeParse({'email': 'john@example.com', 'age': 30});
+```
+
+### Additional properties
+
+By default, objects are **strict** and reject additional properties.
+
+#### Using the constructor parameter
+
+```dart
+// Strict mode (default) - rejects additional properties
+final strictSchema = Ack.object({
+  'id': Ack.string(),
+  'name': Ack.string(),
+}); // additionalProperties: false is the default
+
+strictSchema.safeParse({'id': '1', 'name': 'John', 'extra': 'value'}); // ❌ Fails
+
+// Passthrough mode - allows additional properties
+final flexibleSchema = Ack.object({
+  'id': Ack.string(),
+  'name': Ack.string(),
+}, additionalProperties: true);
+
+flexibleSchema.safeParse({'id': '1', 'name': 'John', 'extra': 'allowed'}); // ✅ Passes
+```
+
+#### Using extension methods
+
+```dart
+final baseSchema = Ack.object({
+  'id': Ack.string(),
+  'name': Ack.string(),
+});
+
+// Make strict (reject extra properties)
+final strict = baseSchema.strict();
+strict.safeParse({'id': '1', 'name': 'John', 'role': 'admin'}); // ❌ Fails
+
+// Allow passthrough (accept extra properties)
+final passthrough = baseSchema.passthrough();
+passthrough.safeParse({'id': '1', 'name': 'John', 'role': 'admin'}); // ✅ Passes
+```
+
+**Common use cases:**
+
+- **Strict mode**: API request validation and form validation where only known fields are allowed
+- **Passthrough mode**: Dynamic data or cases where extra metadata is acceptable
+
+## Custom validation
+
+### Refinements
+
+Add custom validation logic:
+
+```dart
+// Password confirmation
+final passwordSchema = Ack.object({
+  'password': Ack.string().minLength(8),
+  'confirmPassword': Ack.string(),
+}).refine(
+  (data) => data['password'] == data['confirmPassword'],
+  message: 'Passwords must match',
+);
+
+// Business logic validation
+final orderSchema = Ack.object({
+  'items': Ack.list(Ack.object({
+    'price': Ack.double(),
+    'quantity': Ack.integer(),
+  })),
+  'total': Ack.double(),
+}).refine(
+  (order) {
+    final items = order['items'] as List;
+    final calculatedTotal = items.fold<double>(0, (sum, item) {
+      final itemMap = item as Map<String, Object?>;
+      final price = itemMap['price'] as double;
+      final qty = itemMap['quantity'] as int;
+      return sum + (price * qty);
+    });
+    final total = order['total'] as double;
+    return (calculatedTotal - total).abs() < 0.01;
+  },
+  message: 'Total must match sum of items',
+);
+```
+
+### Transformations
+
+Transform validated data after parsing:
+
+```dart
+// Transform to uppercase. The callback receives the non-null validated
+// runtime value; nullable handling happens on the surrounding schema.
+final upperSchema = Ack.string().transform((s) => s.toUpperCase());
+
+// Add computed fields
+final userWithAgeSchema = Ack.object({
+  'name': Ack.string(),
+  'birthYear': Ack.integer(),
+}).transform((data) {
+  final birthYear = data['birthYear'] as int;
+  final age = DateTime.now().year - birthYear;
+  return {...data, 'age': age};
+});
+
+// Type transformation
+final dateSchema = Ack.string()
+  .matches(r'^\d{4}-\d{2}-\d{2}$')
+  .transform<DateTime>((s) => DateTime.parse(s));
+```
+
+## Validation result
+
+Every `safeParse()` returns a `SchemaResult` holding the validated value or a `SchemaError`. See [Error Handling](/documentation/ack/essentials/error-handling) for reading values and errors.
+
+## Next steps
+
+- **[Validation rules](/documentation/ack/essentials/validation)**: All built-in constraints and strict parsing
+- **[Error handling](/documentation/ack/essentials/error-handling)**: Handle validation errors effectively
+- **[Custom validation](/documentation/ack/how-to-guides/custom-validation)**: Create custom constraints and refinements
+- **[JSON serialization](/documentation/ack/essentials/json-serialization)**: Validate and transform JSON data
+- **[Common recipes](/documentation/ack/how-to-guides/common-recipes)**: Practical schema patterns

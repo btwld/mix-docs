@@ -1,0 +1,389 @@
+---
+title: Validation Rules
+---
+
+# Validation Rules
+
+Constraints turn "a string" into "an email between 2 and 50 characters." Chain them onto any schema — each comes with a sensible default error message, and you can supply your own (see [Custom Validation](/documentation/ack/how-to-guides/custom-validation)).
+
+## Common constraints
+
+### `nullable()` and `optional()`
+
+`.nullable()` lets a present field hold `null`; `.optional()` lets it be omitted. These are field-presence modifiers rather than constraints — see [Optional vs nullable](/documentation/ack/essentials/schemas#optional-vs-nullable).
+
+### `constrain(Constraint<T> constraint, {String? message})`
+
+Applies a custom `Constraint<T>` that also implements `Validator<T>`. See the [Custom Validation](/documentation/ack/how-to-guides/custom-validation) guide.
+
+## String constraints
+
+Apply these to [`Ack.string()`](/documentation/ack/essentials/schemas#string) schemas.
+
+### `minLength(int min)`
+Requires at least `min` characters.
+```dart
+Ack.string().minLength(5)
+```
+
+### `maxLength(int max)`
+Requires at most `max` characters.
+```dart
+Ack.string().maxLength(100)
+```
+
+### `length(int n)`
+Requires exactly `n` characters.
+```dart
+Ack.string().length(10)
+```
+
+### `notEmpty()`
+Requires a non-empty string. Equivalent to `minLength(1)`.
+```dart
+Ack.string().notEmpty()
+```
+
+### `matches(String pattern, {String? example, String? message})`
+Requires the string to match a regular expression `pattern`.
+
+Patterns are **not** automatically anchored. The pattern matches if found anywhere in the string. To require a full-string match, add anchors: `^...$`
+
+```dart
+// Simple alphanumeric pattern (full-string match with anchors)
+Ack.string().matches(r'^[a-zA-Z0-9]+$')
+
+// UUID pattern (full-string match with anchors)
+Ack.string()
+    .matches(r'^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$')
+
+// Without anchors - matches substring (usually not what you want!)
+Ack.string().matches(r'[0-9]+')  // Matches "abc123xyz" ⚠️
+```
+
+### `contains(String pattern, {String? example, String? message})`
+Requires `pattern` to appear somewhere in the string.
+```dart
+// Password must contain at least one uppercase letter
+Ack.string().contains(r'[A-Z]')
+
+// Password must contain at least one digit
+Ack.string().contains(r'[0-9]')
+```
+
+### `email()`
+Requires a valid email address format.
+```dart
+Ack.string().email()
+```
+
+### `date()`
+Requires a valid date string in `YYYY-MM-DD` format.
+```dart
+Ack.string().date()
+```
+
+### `datetime()`
+Requires a valid ISO 8601 date-time string with a timezone. Announced RFC 3339
+leap seconds are accepted and preserved because this schema returns the input
+`String`. The `Ack.datetime()` codec rejects leap seconds because Dart's
+`DateTime` cannot represent them without normalization.
+```dart
+Ack.string().datetime()
+```
+
+### `time()`
+Requires a valid time string in `HH:MM:SS` format.
+```dart
+Ack.string().time()
+```
+
+### `uri()`
+Requires a valid absolute URI with a scheme and host. This is the network-URI
+subset Ack accepts, rather than every relative or non-host URI permitted by RFC
+3986.
+```dart
+Ack.string().uri()
+```
+
+### `uuid()`
+Requires a valid UUID per RFC 4122.
+```dart
+Ack.string().uuid()
+```
+
+### `ipv4()`
+Requires a valid IPv4 address.
+```dart
+Ack.string().ipv4()
+```
+
+### `ipv6()`
+Requires a valid IPv6 address.
+```dart
+Ack.string().ipv6()
+```
+
+
+
+### `Ack.enumString(List<String> allowedValues)`
+An `Ack` factory (not a fluent method) that creates a `StringSchema` accepting only values in `allowedValues`. Use for ad-hoc string lists; prefer `Ack.enumValues(MyEnum.values)` when a Dart enum exists.
+```dart
+Ack.enumString(['active', 'inactive', 'pending'])
+```
+
+### `Ack.literal(String value)`
+An `Ack` factory (not a fluent method) that creates a `StringSchema` requiring an exact string match.
+```dart
+Ack.literal('admin')
+```
+
+### `startsWith(String prefix)`
+Requires the string to start with `prefix`.
+```dart
+Ack.string().startsWith('https://')
+```
+
+### `endsWith(String suffix)`
+Requires the string to end with `suffix`.
+```dart
+Ack.string().endsWith('.dart')
+```
+
+### `url()`
+Alias for `uri()`. Requires a valid URL.
+```dart
+Ack.string().url()
+```
+
+### `ip({int? version})`
+Requires a valid IP address. Set `version` to `4` or `6` to restrict the version.
+```dart
+Ack.string().ip()           // Any IP (v4 or v6)
+Ack.string().ip(version: 4) // IPv4 only
+Ack.string().ip(version: 6) // IPv6 only
+```
+
+## String transformations
+
+These methods modify the output value during parsing rather than adding a validation constraint.
+
+### `trim()`
+Removes leading and trailing whitespace.
+```dart
+Ack.string().trim()
+// "  hello  " → "hello"
+```
+
+### `toLowerCase()`
+Converts the string to lowercase.
+```dart
+Ack.string().toLowerCase()
+// "HELLO" → "hello"
+```
+
+### `toUpperCase()`
+Converts the string to uppercase.
+```dart
+Ack.string().toUpperCase()
+// "hello" → "HELLO"
+```
+
+## Number constraints
+
+Apply these to [`Ack.integer()`](/documentation/ack/essentials/schemas#number), [`Ack.double()`](/documentation/ack/essentials/schemas#number), or [`Ack.number()`](/documentation/ack/essentials/schemas#number) schemas.
+
+### `min(num limit)`
+Requires a value `>= limit` (inclusive).
+```dart
+Ack.integer().min(0) // >= 0
+Ack.double().min(0.0) // >= 0.0
+Ack.number().min(0) // >= 0
+```
+
+### `max(num limit)`
+Requires a value `<= limit` (inclusive).
+```dart
+Ack.integer().max(100) // <= 100
+Ack.double().max(100.0) // <= 100.0
+Ack.number().max(100) // <= 100
+```
+
+### `greaterThan(num limit)`
+Requires a value strictly `> limit` (exclusive).
+```dart
+Ack.integer().greaterThan(0) // > 0
+Ack.double().greaterThan(0.0) // > 0.0
+Ack.number().greaterThan(0) // > 0
+```
+
+### `lessThan(num limit)`
+Requires a value strictly `< limit` (exclusive).
+```dart
+Ack.integer().lessThan(100) // < 100
+Ack.double().lessThan(100.0) // < 100.0
+Ack.number().lessThan(100) // < 100
+```
+
+### `multipleOf(num factor)`
+Requires a value that is a multiple of `factor`. Integer checks are exact; doubles use a small scale-relative tolerance, so round accumulated floating-point sums (or validate integer units such as cents) before parsing.
+```dart
+Ack.integer().multipleOf(5) // Must be divisible by 5
+Ack.double().multipleOf(0.5) // Use factors that avoid floating point rounding issues
+Ack.number().multipleOf(0.5)
+```
+
+### `positive()`
+Requires a value greater than 0.
+```dart
+Ack.integer().positive() // > 0
+Ack.double().positive() // > 0.0
+Ack.number().positive() // > 0
+```
+
+### `negative()`
+Requires a value less than 0.
+```dart
+Ack.integer().negative() // < 0
+Ack.double().negative() // < 0.0
+Ack.number().negative() // < 0
+```
+
+### `safe()` (integer only)
+Requires an integer within JavaScript's safe range (`-2^53+1` to `2^53-1`).
+```dart
+Ack.integer().safe()
+```
+
+### `finite()`
+Requires a finite number (rejects `infinity` and `NaN`). `Ack.double()` and
+`Ack.number()` enforce this by default; `finite()` is available for
+explicitness and API symmetry.
+```dart
+Ack.double().finite()
+Ack.number().finite()
+```
+
+## List constraints
+
+Apply these to [`Ack.list()`](/documentation/ack/essentials/schemas#list) schemas.
+
+### `minLength(int min)`
+Requires at least `min` items.
+```dart
+Ack.list(Ack.string()).minLength(1)
+```
+
+### `maxLength(int max)`
+Requires at most `max` items.
+```dart
+Ack.list(Ack.integer()).maxLength(10)
+```
+
+### `length(int count)`
+Requires exactly `count` items.
+```dart
+Ack.list(Ack.boolean()).length(5)
+```
+
+### `notEmpty()`
+Requires a non-empty list. Equivalent to `minLength(1)`.
+```dart
+Ack.list(Ack.object({})).notEmpty()
+```
+
+### `unique()`
+Requires all items to be unique. Uses deep structural equality, so nested maps and lists are compared by value.
+```dart
+Ack.list(Ack.string()).unique()
+```
+
+## Primitive type strictness
+
+Primitive schemas (`Ack.string()`, `Ack.integer()`, `Ack.double()`, `Ack.number()`, `Ack.boolean()`) are strict: a value must already match the expected Dart runtime type. Mismatched inputs surface as a `TypeMismatchError` rather than being silently coerced.
+
+Each schema maps to a specific runtime type:
+
+| Schema           | Accepted runtime type | Notes                              |
+| ---------------- | --------------------- | ---------------------------------- |
+| `Ack.string()`   | `String`              | rejects `num`, `bool`, etc.        |
+| `Ack.integer()`  | `int`                 | rejects `double` (even `42.0`)     |
+| `Ack.double()`   | `double`              | rejects `int` (even `42`)          |
+| `Ack.number()`   | `num`                 | accepts both `int` and `double`    |
+| `Ack.boolean()`  | `bool`                | rejects `"true"`, `1`, `0`, etc.   |
+
+```dart
+final stringSchema = Ack.string();
+stringSchema.safeParse('hello');  // ✅ OK
+stringSchema.safeParse(123);      // ❌ FAIL: TypeMismatchError
+stringSchema.safeParse(true);     // ❌ FAIL: TypeMismatchError
+
+final intSchema = Ack.integer();
+intSchema.safeParse(42);    // ✅ OK
+intSchema.safeParse('42');  // ❌ FAIL: TypeMismatchError
+intSchema.safeParse(42.0);  // ❌ FAIL: TypeMismatchError (double is not int)
+
+final doubleSchema = Ack.double();
+doubleSchema.safeParse(3.14);  // ✅ OK
+doubleSchema.safeParse(42);    // ❌ FAIL: TypeMismatchError (int is not double)
+
+final numberSchema = Ack.number();
+numberSchema.safeParse(42);    // ✅ OK (int is num)
+numberSchema.safeParse(3.14);  // ✅ OK (double is num)
+numberSchema.safeParse('42');  // ❌ FAIL: TypeMismatchError
+```
+
+Because `Ack.integer()` and `Ack.double()` do not overlap, use `Ack.number()` when a field may be either an `int` or a `double`. Use `transform`/`codec` only when the boundary value isn't already a `num` (for example, a numeric string).
+
+This strictness makes `anyOf` and discriminated unions reliable — they can distinguish the string `"42"` from the integer `42` without configuration:
+
+```dart
+final stringOrNumber = Ack.anyOf([
+  Ack.string(),
+  Ack.integer(),
+]);
+
+stringOrNumber.safeParse('42');  // ✅ Matches string branch
+stringOrNumber.safeParse(42);    // ✅ Matches integer branch
+```
+
+### Converting boundary types
+
+When your boundary payload uses a different shape than your runtime model (for example, ISO strings → `DateTime`, or `"true"`/`"false"` → `bool`), express the conversion explicitly with [`transform`](/documentation/ack/essentials/schemas#transformations) or a `codec`:
+
+```dart
+// Boundary "true"/"false" string → runtime bool
+final boolFromString = Ack.enumString(['true', 'false'])
+  .transform((s) => s == 'true');
+
+boolFromString.safeParse('true');   // ✅ runtime value: true
+boolFromString.safeParse('false');  // ✅ runtime value: false
+boolFromString.safeParse(true);     // ❌ FAIL: string schema rejects bool
+```
+
+Use `schema.codec<R>(decode: ..., encode: ...)` when you also need a reversible encode path back to the boundary type.
+
+## Combining constraints
+
+You can chain multiple constraints. Ack evaluates them in the order you apply them.
+
+```dart
+final usernameSchema = Ack.string()
+  .minLength(3)           // First: check min length
+  .maxLength(20)          // Second: check max length
+  .matches(r'^[a-z0-9_]+$') // Third: require only lowercase letters, digits, or underscores
+  .notEmpty();            // Redundant if minLength(>0) is used, but illustrates chaining
+
+final quantitySchema = Ack.integer()
+  .min(1)         // Must be at least 1
+  .max(100)       // Must be at most 100
+  .multipleOf(1); // Must be an integer (redundant for Ack.integer)
+```
+
+## Next steps
+
+- **[Error handling](/documentation/ack/essentials/error-handling)**: Handle and display validation errors
+- **[Custom validation](/documentation/ack/how-to-guides/custom-validation)**: Create custom constraints and refinement logic
+- **[Schema types](/documentation/ack/essentials/schemas)**: All available schema types and their operations
+- **[Common recipes](/documentation/ack/how-to-guides/common-recipes)**: Practical validation patterns and solutions
+- **[Flutter forms](/documentation/ack/how-to-guides/flutter-form-validation)**: Integrate validation with Flutter form widgets

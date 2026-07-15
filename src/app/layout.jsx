@@ -5,6 +5,7 @@ import '../../globals.css'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import FloatingNavbar from '../../components/FloatingNavbar'
+import ProductFooter from '../../components/ProductFooter'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -25,6 +26,7 @@ export const viewport = {
 }
 
 export const metadata = {
+    metadataBase: new URL('https://fluttermix.com'),
     title: 'Mix',
     description,
     applicationName: 'Mix',
@@ -53,15 +55,7 @@ const navbar = <FloatingNavbar />
 
 const footer = (
     <Footer>
-        <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-sm text-[var(--mix-text-muted)]">
-            <span>&copy; 2026 Concepta Tech.</span>
-            <div className="flex items-center gap-5">
-                <a href="https://github.com/btwld/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
-                <a href="https://pub.dev/packages/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
-                <a href="https://discord.com/invite/Ycn6GV3m2k" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Discord</a>
-                <a href="https://twitter.com/leoafarias" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Twitter</a>
-            </div>
-        </div>
+        <ProductFooter />
     </Footer>
 )
 
@@ -77,13 +71,13 @@ export default async function RootLayout({ children }) {
             <body>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
+                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p.startsWith('/documentation/ack')||p==='/ack'||p.startsWith('/ack/'))d='ack';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
                     }}
                 />
                 <Layout
                     navbar={navbar}
                     pageMap={await getPageMap()}
-                    docsRepositoryBase="https://github.com/btwld/mix/tree/main/website"
+                    docsRepositoryBase="https://github.com/btwld/mix-docs/tree/main"
                     footer={footer}
                     darkMode={false}
                     copyPageButton={false}
