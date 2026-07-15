@@ -19,7 +19,8 @@ const jetbrainsMono = JetBrains_Mono({
     display: 'swap',
 })
 
-const description = "An expressive way to build design systems in Flutter."
+const description =
+    'Concepta ships the systems your business runs on — and builds the open-source delivery foundation behind them: Mix, Remix, Ack, Stargate, and Code Analysis.'
 
 export const viewport = {
     themeColor: '#111111',
@@ -27,25 +28,27 @@ export const viewport = {
 
 export const metadata = {
     metadataBase: new URL('https://fluttermix.com'),
-    title: 'Mix',
+    title: 'Concepta',
     description,
-    applicationName: 'Mix',
-    // Favicon comes from the app-router file convention: src/app/icon.svg
-    // (Concepta glyph), with public/favicon.ico as the legacy fallback.
+    applicationName: 'Concepta',
+    // Favicon comes from the app-router file convention: src/app/icon.png +
+    // apple-icon.png (Concepta mark from conceptatech.com), with
+    // public/favicon.ico as the legacy fallback. Product routes override it
+    // with their own icon.svg.
     openGraph: {
-        title: 'Mix',
+        title: 'Concepta',
         description,
-        images: ['https://fluttermix.com/og_banner.png'],
+        images: ['/og_concepta.png'],
     },
     twitter: {
         card: 'summary_large_image',
-        images: ['https://fluttermix.com/og_banner.png'],
-        domain: 'fluttermix.com',
-        url: 'https://fluttermix.com',
+        title: 'Concepta',
+        description,
+        images: ['/og_concepta.png'],
     },
     other: {
         'msapplication-TileColor': '#111111',
-        'apple-mobile-web-app-title': 'Mix',
+        'apple-mobile-web-app-title': 'Concepta',
     },
 }
 
