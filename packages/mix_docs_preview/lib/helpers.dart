@@ -8,7 +8,14 @@ class _ExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: Center(child: child)),
+      debugShowCheckedModeBanner: false,
+      // Match the dark host container (#1a1a2e) so demos that only render a
+      // small centered widget (menu, tooltip, select, etc.) don't show a
+      // light-grey Scaffold behind them.
+      home: Scaffold(
+        backgroundColor: const Color(0xFF1A1A2E),
+        body: Center(child: child),
+      ),
     );
   }
 }
