@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MotionConfig, motion } from "framer-motion";
-import { Flame, Gauge, Map, Rocket, ShieldAlert } from "lucide-react";
+import { Fingerprint, Flame, Gauge, Map, Rocket, ShieldAlert } from "lucide-react";
 import "../../landing.css";
 import { Aurora } from "../../sections/Aurora";
 import { Stats } from "../../sections/Stats";
@@ -28,7 +28,7 @@ const STATS: LandingContent["stats"] = [
 
 const FEATURES: LandingContent["features"] = {
   eyebrow: "The deliverable",
-  title: "Five lenses. One verdict.",
+  title: "Six lenses. One verdict.",
   lead: "Everything below comes from one audit run — deterministic where tools can measure, AI-assisted where judgment is needed, and every claim tied to a file and line.",
   items: [
     {
@@ -47,16 +47,25 @@ const FEATURES: LandingContent["features"] = {
       icon: ShieldAlert,
       title: "Business impact, quantified",
       body: "Every exposure with file:line evidence and OWASP / CWE mapping — and in business terms: what's exposed, who can reach it, the regulatory dollars at stake, and what it costs to fix.",
+      wide: true,
+    },
+    {
+      icon: Fingerprint,
+      title: "Privacy, mapped",
+      body: "Every flow tagged with the personal data it touches — location, camera, push tokens, device IDs — surfacing undisclosed third-party leaks and consent checks that don't line up. A data map your counsel can use.",
+      wide: true,
     },
     {
       icon: Flame,
       title: "Where the next incident is brewing",
       body: "Churn × complexity hotspots, systemic test gaps, duplication, and verified dead code — the tech debt that actually bites, ranked.",
+      wide: true,
     },
     {
       icon: Map,
       title: "A map of your own system",
       body: "Business rules with enforcement points, state machines, module dependencies, and plain-English flows. Documentation your team keeps, whatever you do next.",
+      wide: true,
     },
   ],
 };
@@ -87,6 +96,7 @@ const TRUST_SPLIT: LandingContent["trustSplit"] = {
     "Confidence level on every score and finding",
     "Coverage gaps disclosed — never papered over",
     "Deterministic evidence — rerun it, get the same numbers",
+    "Policy-backed ceilings — an unrotated secret caps the grade, no matter what else is right",
   ],
   ctaLabel: "Questions, answered",
   snippet: METHODOLOGY_JSON,
@@ -108,7 +118,7 @@ const FAQ: LandingContent["faq"] = [
   },
   {
     q: "Does this only cover security?",
-    a: "No — security is one of five lenses. The same run grades architecture, module quality, and tech debt, checks your release gates, and documents your system's business rules and flows. The sample verdict above comes from a real, anonymized assessment.",
+    a: "No — security is one of six lenses. The same run grades architecture, module quality, and tech debt, checks your release gates, maps where personal data flows, and documents your system's business rules. The sample verdict above comes from a real, anonymized assessment.",
   },
   {
     q: "What happens after the assessment?",

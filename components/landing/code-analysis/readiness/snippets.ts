@@ -41,6 +41,7 @@ export const METHODOLOGY_JSON = `{
     "notCovered": ["dart", "kotlin", "swift"],
     "note": "absence of findings ≠ absence of issues"
   },
+  "policy": { "hardCeilings": ["unrotated secret"] },
   "scores": { "confidence": "medium" },
   "deterministic": true
 }`;
