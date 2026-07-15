@@ -4,12 +4,17 @@ import { getResend } from "../../../lib/resend";
 
 const waitlistSchema = z.object({
   email: z.email("Please enter a valid email address"),
-  product: z.enum(["stargate", "code-analysis"]),
+  product: z.enum(["stargate", "code-analysis", "readiness"]),
 });
 
 type Product = z.infer<typeof waitlistSchema>["product"];
 
-function welcomeHtml(wordmark: string, pitch: string, expectations: string[]) {
+function welcomeHtml(
+  wordmark: string,
+  heading: string,
+  pitch: string,
+  expectations: string[]
+) {
   return `
 <!DOCTYPE html>
 <html>
@@ -22,7 +27,7 @@ function welcomeHtml(wordmark: string, pitch: string, expectations: string[]) {
       <span style="font-family: ui-monospace, monospace; font-size: 20px; font-weight: 700; color: #05040A;">${wordmark}</span>
     </div>
 
-    <h2 style="color: #05040A;">You're on the list!</h2>
+    <h2 style="color: #05040A;">${heading}</h2>
 
     <p>${pitch}</p>
 
@@ -41,14 +46,22 @@ function welcomeHtml(wordmark: string, pitch: string, expectations: string[]) {
 
 const PRODUCT_CONFIG: Record<
   Product,
-  { audienceId: string; from: string; subject: string; html: string }
+  {
+    audienceId: string;
+    from: string;
+    subject: string;
+    successMessage: string;
+    html: string;
+  }
 > = {
   stargate: {
     audienceId: process.env.RESEND_AUDIENCE_ID_STARGATE ?? "",
     from: process.env.RESEND_FROM_EMAIL ?? "Stargate <hello@conceptatech.com>",
     subject: "You're on the Stargate waitlist",
+    successMessage: "You're on the list — talk soon!",
     html: welcomeHtml(
       "stargate",
+      "You're on the list!",
       "Thanks for joining the Stargate waitlist. We're building a workflow system on reusable component contracts — schemas define the ports, workflows are portable JSON graphs, and engines validate every boundary before and after each handler runs.",
       [
         "Early access when we launch",
@@ -61,13 +74,32 @@ const PRODUCT_CONFIG: Record<
     from:
       process.env.RESEND_FROM_EMAIL ?? "Code Analysis <hello@conceptatech.com>",
     subject: "You're on the Code Analysis waitlist",
+    successMessage: "You're on the list — talk soon!",
     html: welcomeHtml(
       "code-analysis",
+      "You're on the list!",
       "Thanks for joining the Code Analysis waitlist. We're building an audit pipeline that turns any codebase into grades you can defend — deterministic scores, evidence-backed findings, and a report you can put in front of a client.",
       [
         "Early access when we launch",
         "Launch pricing for waitlist members",
         "Progress updates as the pipeline evolves",
+      ]
+    ),
+  },
+  readiness: {
+    audienceId: process.env.RESEND_AUDIENCE_ID_READINESS ?? "",
+    from: process.env.RESEND_FROM_EMAIL ?? "Concepta <hello@conceptatech.com>",
+    subject: "Your Delivery Readiness Assessment request",
+    successMessage:
+      "Request received — we'll reach out to schedule a scoping call.",
+    html: welcomeHtml(
+      "readiness",
+      "Request received!",
+      "Thanks for requesting a Delivery Readiness Assessment. We'll reach out shortly to schedule a short scoping call. The engagement itself runs two to three weeks: we audit your codebase with Code Analysis, verify your release gates, and hand you a graded verdict with a sequenced remediation plan.",
+      [
+        "A short scoping call to size the engagement",
+        "A fixed quote before any work starts",
+        "A graded verdict and remediation plan in 2–3 weeks",
       ]
     ),
   },
@@ -116,7 +148,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { success: true, message: "You're on the list — talk soon!" },
+      { success: true, message: config.successMessage },
       { status: 200 }
     );
   } catch (error) {

@@ -1770,6 +1770,245 @@ html[data-product='code-analysis'] {
   color: var(--lp-text-muted);
 }
 
+/* ═══ Readiness assessment page ═════════════════════════ */
+/* Gates stage: pass/fail release-gate rows */
+.lp-gates {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 300px;
+  margin: 14px auto 0;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 12px;
+}
+.lp-gate-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #d4d4dc;
+}
+.lp-gate-name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.lp-gate-chip {
+  flex: 0 0 auto;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.lp-gate-chip.is-pass {
+  background: rgba(52, 211, 153, 0.12);
+  color: #34d399;
+}
+.lp-gate-chip.is-fail {
+  background: rgba(248, 113, 113, 0.14);
+  color: #f87171;
+}
+.lp-gates-verdict {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--lp-border-card);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--lp-text-muted);
+}
+.lp-gates-verdict b {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Findings stage: one finding toggled between dev and business views */
+.lp-dual {
+  width: 100%;
+  max-width: 300px;
+  margin: 14px auto 0;
+}
+.lp-dual-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.lp-dual-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+.lp-dual-tabs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+.lp-dual-tab {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--lp-text-muted);
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--lp-border-card);
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .lp-dual-tab:not(.is-active):hover {
+    color: #fff;
+  }
+}
+.lp-dual-tab.is-active {
+  color: #05040a;
+  background: var(--lp-accent);
+  border-color: transparent;
+}
+.lp-dual-tab:focus-visible {
+  outline: 2px solid var(--lp-accent);
+  outline-offset: 2px;
+}
+.lp-dual-dev {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lp-dual-biz {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #d4d4dc;
+}
+.lp-dual-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+/* Engagement timeline: numbered step cards reuse the feature tile */
+.lp-step-num {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Business-impact bento: report metrics rendered for decision-makers */
+.lp-bi-title {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+.lp-ex-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 720px) {
+  .lp-ex-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.lp-ex {
+  border: 1px solid var(--lp-border-card);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.25);
+}
+.lp-ex-v {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+.lp-ex-l {
+  margin-top: 5px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--lp-text-muted);
+}
+.lp-bi-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.lp-bi-hero-num {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+.lp-bi-hero-num.is-crit {
+  color: #f87171;
+}
+.lp-bi-hero-num.is-warn {
+  color: #fbbf24;
+}
+.lp-bi-hero-label {
+  font-size: 12px;
+  color: var(--lp-text-muted);
+}
+.lp-sev-line {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12.5px;
+  color: #d4d4dc;
+}
+.lp-sev-line b {
+  margin-left: auto;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-weight: 600;
+  color: #fff;
+}
+.lp-sev-swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+.lp-effort-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: #d4d4dc;
+}
+.lp-effort-line .lp-graph-cap {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Request CTA: what-we-need chips above the form */
+.lp-cta-reqs {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.lp-cta-reqs-label {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lp-text-muted);
+}
+
+/* FAQ answers may carry inline links (e.g. readiness cross-sell) */
+.lp-faq-item p a {
+  color: var(--lp-accent);
+}
+.lp-faq-item p a:hover {
+  text-decoration: underline;
+}
+
 /* ═══ Mobile ════════════════════════════════════════════ */
 @media (max-width: 719px) {
   .lp-statement {

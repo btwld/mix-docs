@@ -11,7 +11,15 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function WaitlistForm({ product }: { product: ProductSlug }) {
+export function WaitlistForm({
+  product,
+  buttonLabel = "Join waitlist",
+  loadingLabel = "Joining…",
+}: {
+  product: ProductSlug;
+  buttonLabel?: string;
+  loadingLabel?: string;
+}) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -85,7 +93,7 @@ export function WaitlistForm({ product }: { product: ProductSlug }) {
               disabled={status === "loading"}
             />
             <LandingButton type="submit" disabled={status === "loading"}>
-              {status === "loading" ? "Joining…" : "Join waitlist"}
+              {status === "loading" ? loadingLabel : buttonLabel}
             </LandingButton>
           </motion.form>
         )}

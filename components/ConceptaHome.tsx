@@ -360,8 +360,7 @@ export const ConceptaHome = () => {
               variants={fadeUp}
             >
               <Button
-                href="https://conceptatech.com"
-                target="_blank"
+                href="/code-analysis/readiness"
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
@@ -480,8 +479,7 @@ export const ConceptaHome = () => {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Button
-                href="https://conceptatech.com"
-                target="_blank"
+                href="/code-analysis/readiness"
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
