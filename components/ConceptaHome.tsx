@@ -60,9 +60,9 @@ const PILLARS = [
 
 /* ── Per-project window visuals ──────────────────────────────────────
    Each block echoes the visual signature of its product page: Mix shows
-   a style snippet, Remix its component catalog, Ack a validation result,
-   Stargate a governed workflow, Code Analysis a scorecard. Same chrome,
-   different content. */
+   a style snippet, Remix its component catalog, Naked UI its observable state,
+   Ack a validation result, Stargate a governed workflow, and Code Analysis a
+   scorecard. Same chrome, different content. */
 
 const MIX_SNIPPET = `final cardStyle = BoxStyler()
     .color(Colors.blue)
@@ -99,6 +99,27 @@ function RemixVisual() {
         </span>
       ))}
       <span className="pv-chip pv-chip-more">+9 more</span>
+    </div>
+  );
+}
+
+function NakedUiVisual() {
+  return (
+    <div className="pv-naked">
+      <span className="pv-naked-button">Save changes</span>
+      <div className="pv-naked-states">
+        <span className="is-active">hovered</span>
+        <span>focused</span>
+        <span>pressed</span>
+      </div>
+      <div className="pv-naked-contract">
+        <span>behavior</span>
+        <strong>semantics · keyboard · focus</strong>
+      </div>
+      <div className="pv-naked-contract is-presentation">
+        <span>presentation</span>
+        <strong>entirely yours</strong>
+      </div>
     </div>
   );
 }
@@ -185,8 +206,6 @@ type Project = {
   /** Mono label shown in the window chrome, like a filename. */
   windowLabel: string;
   Visual: React.ComponentType;
-  /** Last-row card spans both columns with a side-by-side layout. */
-  wide?: boolean;
 };
 
 const PROJECTS: Project[] = [
@@ -211,6 +230,17 @@ const PROJECTS: Project[] = [
     status: "Open source",
     windowLabel: "components",
     Visual: RemixVisual,
+  },
+  {
+    name: "Naked UI",
+    tagline: "Behavior-first Flutter primitives.",
+    description:
+      "Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state — without imposed styling.",
+    href: "/naked-ui",
+    accent: "#60A5FA",
+    status: "Open source",
+    windowLabel: "builder state",
+    Visual: NakedUiVisual,
   },
   {
     name: "Ack",
@@ -244,7 +274,6 @@ const PROJECTS: Project[] = [
     status: "Waitlist",
     windowLabel: "code-health.json",
     Visual: CodeAnalysisVisual,
-    wide: true,
   },
 ];
 
@@ -252,7 +281,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { Visual } = project;
   return (
     <motion.div
-      className={project.wide ? "md:col-span-2" : undefined}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -264,9 +292,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     >
       <Link
         href={project.href}
-        className={
-          "project-card group" + (project.wide ? " project-card-wide" : "")
-        }
+        className="project-card group"
         style={{ "--card-accent": project.accent } as React.CSSProperties}
       >
         <div className="project-card-copy">
@@ -696,20 +722,6 @@ export const ConceptaHome = () => {
           flex-grow: 1;
         }
 
-        /* Wide closer card: copy and window sit side by side on desktop */
-        @media (min-width: 768px) {
-          .project-card-wide {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-            align-items: stretch;
-          }
-
-          .project-card-wide .project-window {
-            margin-top: 0;
-          }
-        }
-
         .project-name {
           font-size: 1.25rem;
           font-weight: 600;
@@ -860,6 +872,86 @@ export const ConceptaHome = () => {
           color: var(--card-accent);
           background: color-mix(in srgb, var(--card-accent) 8%, transparent);
           border-color: color-mix(in srgb, var(--card-accent) 25%, transparent);
+        }
+
+        /* Naked UI: behavior/presentation split */
+        .pv-naked {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 9px;
+        }
+
+        .pv-naked-button {
+          grid-column: 1 / -1;
+          justify-self: start;
+          border-radius: 9px;
+          padding: 9px 14px;
+          background: var(--card-accent);
+          color: #07111f;
+          font-size: 12px;
+          font-weight: 650;
+          box-shadow: 0 8px 22px
+            color-mix(in srgb, var(--card-accent) 24%, transparent);
+        }
+
+        .pv-naked-states {
+          grid-column: 1 / -1;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+
+        .pv-naked-states span {
+          border: 1px solid var(--mix-border-card);
+          border-radius: 999px;
+          padding: 3px 8px;
+          color: var(--mix-text-muted);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 10px;
+        }
+
+        .pv-naked-states .is-active {
+          border-color: color-mix(in srgb, var(--card-accent) 30%, transparent);
+          background: color-mix(in srgb, var(--card-accent) 9%, transparent);
+          color: var(--card-accent);
+        }
+
+        .pv-naked-contract {
+          min-width: 0;
+          border: 1px solid color-mix(in srgb, var(--card-accent) 22%, transparent);
+          border-radius: 9px;
+          padding: 9px 10px;
+          background: color-mix(in srgb, var(--card-accent) 6%, transparent);
+        }
+
+        .pv-naked-contract span,
+        .pv-naked-contract strong {
+          display: block;
+        }
+
+        .pv-naked-contract span {
+          color: var(--card-accent);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 9px;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .pv-naked-contract strong {
+          margin-top: 5px;
+          color: #fff;
+          font-size: 10px;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+
+        .pv-naked-contract.is-presentation {
+          border-color: var(--mix-border-card);
+          background: var(--mix-surface-bright);
+        }
+
+        .pv-naked-contract.is-presentation span {
+          color: var(--mix-text-muted);
         }
 
         /* Stargate: mini workflow graph */
