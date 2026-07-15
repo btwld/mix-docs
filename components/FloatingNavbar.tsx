@@ -22,13 +22,15 @@ function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     )
 }
 
-type ProductId = 'concepta' | 'mix' | 'remix' | 'stargate' | 'code-analysis'
+type ProductId = 'concepta' | 'mix' | 'remix' | 'ack' | 'stargate' | 'code-analysis'
 
 function getActiveProduct(pathname: string | null): ProductId {
     if (!pathname) return 'concepta'
     if (pathname === '/') return 'concepta'
     if (pathname.startsWith('/documentation/remix')) return 'remix'
     if (pathname === '/remix' || pathname.startsWith('/remix/')) return 'remix'
+    if (pathname.startsWith('/documentation/ack')) return 'ack'
+    if (pathname === '/ack' || pathname.startsWith('/ack/')) return 'ack'
     if (pathname === '/stargate' || pathname.startsWith('/stargate/')) return 'stargate'
     if (pathname === '/code-analysis' || pathname.startsWith('/code-analysis/')) return 'code-analysis'
     return 'mix'
@@ -48,15 +50,18 @@ const VERSION_ITEMS = [
 const CONCEPTA_GITHUB_URL = 'https://github.com/btwld'
 const MIX_GITHUB_URL = 'https://github.com/btwld/mix'
 const REMIX_GITHUB_URL = 'https://github.com/btwld/remix'
+const ACK_GITHUB_URL = 'https://github.com/btwld/ack'
 const TWITTER_URL = 'https://twitter.com/leoafarias'
 const DISCORD_URL = 'https://discord.com/invite/Ycn6GV3m2k'
 const MIX_DOCS_URL = '/documentation/mix/overview/introduction'
 const REMIX_DOCS_URL = '/documentation/remix'
+const ACK_DOCS_URL = '/documentation/ack/getting-started/overview'
 
 // Stargate and Code Analysis have no public docs or repos yet.
 function getDocsHref(product: ProductId): string | null {
     if (product === 'mix') return MIX_DOCS_URL
     if (product === 'remix') return REMIX_DOCS_URL
+    if (product === 'ack') return ACK_DOCS_URL
     return null
 }
 
@@ -64,6 +69,7 @@ function getGithubHref(product: ProductId): string | null {
     if (product === 'concepta') return CONCEPTA_GITHUB_URL
     if (product === 'mix') return MIX_GITHUB_URL
     if (product === 'remix') return REMIX_GITHUB_URL
+    if (product === 'ack') return ACK_GITHUB_URL
     return null
 }
 
@@ -95,6 +101,13 @@ const PRODUCTS: Product[] = [
         label: 'Remix',
         href: '/remix',
         logo: '/assets/logo_remix_sidebar.png',
+    },
+    {
+        id: 'ack' as const,
+        label: 'Ack',
+        href: '/ack',
+        logo: '/assets/logo_ack_sidebar.svg',
+        showLabel: true,
     },
     {
         id: 'stargate' as const,
@@ -199,6 +212,51 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
                 { label: 'Tabs', href: '/documentation/remix/components/tabs' },
                 { label: 'TextField', href: '/documentation/remix/components/textfield' },
                 { label: 'Tooltip', href: '/documentation/remix/components/tooltip' },
+            ],
+        },
+    ],
+    ack: [
+        {
+            label: 'Getting Started',
+            pages: [
+                { label: 'Overview', href: '/documentation/ack/getting-started/overview' },
+                { label: 'Installation', href: '/documentation/ack/getting-started/installation' },
+                { label: 'Quickstart Tutorial', href: '/documentation/ack/getting-started/quickstart-tutorial' },
+            ],
+        },
+        {
+            label: 'Essentials',
+            pages: [
+                { label: 'Schema Types', href: '/documentation/ack/essentials/schemas' },
+                { label: 'Validation Rules', href: '/documentation/ack/essentials/validation' },
+                { label: 'Error Handling', href: '/documentation/ack/essentials/error-handling' },
+                { label: 'JSON Serialization', href: '/documentation/ack/essentials/json-serialization' },
+            ],
+        },
+        {
+            label: 'How-To Guides',
+            pages: [
+                { label: 'Flutter Form Validation', href: '/documentation/ack/how-to-guides/flutter-form-validation' },
+                { label: 'Common Recipes', href: '/documentation/ack/how-to-guides/common-recipes' },
+                { label: 'Custom Validation', href: '/documentation/ack/how-to-guides/custom-validation' },
+            ],
+        },
+        {
+            label: 'Advanced',
+            pages: [
+                { label: 'Codecs', href: '/documentation/ack/advanced/codecs' },
+                { label: 'TypeSafe Schemas', href: '/documentation/ack/advanced/typesafe-schemas' },
+                { label: 'JSON Schema Integration', href: '/documentation/ack/advanced/json-schema-integration' },
+                { label: 'Configuration', href: '/documentation/ack/advanced/configuration' },
+                { label: 'Adapter Package Quickstart', href: '/documentation/ack/advanced/schema-converter-quickstart' },
+                { label: 'Creating Adapter Packages', href: '/documentation/ack/advanced/creating-schema-converter-packages' },
+            ],
+        },
+        {
+            label: 'Reference',
+            pages: [
+                { label: 'API Reference', href: '/documentation/ack/reference/api-reference' },
+                { label: 'AI & llms.txt', href: '/documentation/ack/reference/llms-txt' },
             ],
         },
     ],

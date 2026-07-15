@@ -1,0 +1,266 @@
+---
+title: Error Handling
+---
+
+# Error Handling
+
+When validation fails, you want to know what went wrong and where. `safeParse()` hands back a `SchemaResult` holding either the validated value or a `SchemaError`, so you can inspect failures without try/catch.
+
+## The `SchemaResult` object
+
+`safeParse()` returns a `SchemaResult<T>`. Its value is nullable — a nullable schema can succeed with `null`.
+
+- `result.isOk`: `true` if validation succeeded.
+- `result.isFail`: `true` if validation failed.
+- `result.getOrThrow()`: Returns the validated value, or throws `AckException` on failure.
+- `result.getOrNull()`: Returns the validated value, or `null` on failure.
+- `result.getError()`: Returns the `SchemaError` on failure, or throws `StateError` if called on a success.
+- `result.getOrElse(() => defaultValue)`: Returns the validated value on success, or calls the fallback on failure.
+- `result.match(onOk: (value) => ..., onFail: (error) => ...)`: Collapses both cases into a single value.
+- `result.map((value) => ...)`: Transforms the success value and leaves failures untouched.
+- `result.ifOk((value) { ... })` / `result.ifFail((error) { ... })`: Runs a side effect for just one case.
+
+```dart
+import 'package:ack/ack.dart';
+
+final schema = Ack.string().minLength(5);
+final result = schema.safeParse('abc');
+
+if (result.isFail) {
+  final error = result.getError();
+  print('Validation failed: $error');
+
+  // Try to get data (will throw)
+  try {
+    result.getOrThrow();
+  } catch (e) {
+    print('Caught exception: $e');
+  }
+
+  // Get a default value
+  final dataOrDefault = result.getOrElse(() => 'default_string');
+  print('Data or default: $dataOrDefault'); // Output: default_string
+}
+```
+
+## Understanding `SchemaError`
+
+`SchemaError` contains details about the validation failure.
+
+- `error.name`: The context name at the failure point (for example, a field name or the `debugName` passed to `safeParse`).
+- `error.value`: The value that failed validation.
+- `error.schema`: The schema being validated against.
+- `error.path`: The RFC 6901 JSON Pointer path to the failure (for example, `#/address/city`).
+
+```dart
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'age': Ack.integer().min(18),
+  'address': Ack.object({
+    'city': Ack.string()
+  })
+});
+
+final invalidData = {
+  'name': 'Test',
+  'age': 15, // Fails min(18)
+  'address': {
+    'city': 123 // Fails Ack.string
+  }
+};
+
+final result = userSchema.safeParse(invalidData);
+
+if (result.isFail) {
+  final error = result.getError();
+  print('Error Name: ${error.name}');         // Example: 'address'
+  print('Error Path: ${error.path}');         // Example: '#/address/city'
+  print('Failed Value: ${error.value}');      // Example: the invalid data
+  print('Full Error: $error');               // Complete error details
+
+  // Note: The exact error structure (especially for nested errors) can vary.
+  // Sometimes the top-level error might be SchemaNestedError,
+  // and you might need to inspect its nested errors.
+}
+```
+
+## Error types
+
+Each `SchemaError` subtype carries specific information about why validation failed.
+
+### `TypeMismatchError`
+
+Raised when the input type doesn't match the expected schema type.
+
+```dart
+final schema = Ack.string();
+final result = schema.safeParse(42); // Number instead of string
+
+if (result.isFail) {
+  final error = result.getError() as TypeMismatchError;
+  print('Expected: ${error.expectedType}'); // "string"
+  print('Actual: ${error.actualType}');     // "integer"
+  print('Error: ${error.message}');          // "Expected string, got integer"
+}
+```
+
+### `SchemaConstraintsError`
+
+Raised when the value violates one or more validation constraints (such as `minLength`, `min`, or `email`).
+
+```dart
+final schema = Ack.string().minLength(5).email();
+final result = schema.safeParse('abc');
+
+if (result.isFail) {
+  final error = result.getError() as SchemaConstraintsError;
+  print('Constraint violations: ${error.constraints.length}');
+
+  // Access individual failed constraints
+  for (final constraintError in error.constraints) {
+    print('- Constraint: ${constraintError.constraint}');
+    print('- Message: ${constraintError.message}');
+  }
+}
+```
+
+### `SchemaNestedError`
+
+Raised when validation fails within nested objects or lists. Contains a list of child errors.
+
+```dart
+final schema = Ack.object({
+  'name': Ack.string().minLength(2),
+  'age': Ack.integer().min(0),
+});
+
+final result = schema.safeParse({
+  'name': 'J',    // Too short
+  'age': -5,      // Negative
+});
+
+if (result.isFail) {
+  final error = result.getError() as SchemaNestedError;
+  print('Nested errors: ${error.errors.length}');
+
+  // Recursively inspect nested errors
+  for (final nestedError in error.errors) {
+    print('- Field: ${nestedError.name}');
+    print('- Error: ${nestedError.message}');
+  }
+}
+```
+
+### `SchemaValidationError`
+
+Raised when custom validation logic added via `.refine()` fails.
+
+```dart
+final schema = Ack.integer().refine(
+  (value) => value % 2 == 0,
+  message: 'Must be an even number',
+);
+
+final result = schema.safeParse(3);
+
+if (result.isFail) {
+  final error = result.getError() as SchemaValidationError;
+  print('Validation error: ${error.message}'); // "Must be an even number"
+}
+```
+
+### `SchemaTransformError`
+
+Raised when a `.transform()` callback throws an exception.
+
+Callbacks receive the non-null validated runtime value; null handling belongs to the surrounding `nullable`/`withDefault` configuration. `SchemaTransformError` fires when the callback itself throws — for example, when the input passes validation but the conversion fails:
+
+```dart
+final schema = Ack.string().transform((value) {
+  final parsed = int.tryParse(value);
+  if (parsed == null) throw FormatException('Not numeric: $value');
+  return parsed;
+});
+
+final result = schema.safeParse('not-a-number');
+
+if (result.isFail) {
+  final error = result.getError() as SchemaTransformError;
+  print('Transform error: ${error.message}');
+  print('Cause: ${error.cause}'); // Original exception
+}
+```
+
+### `SchemaEncodeError`
+
+Raised when `encode()` or `safeEncode()` can't turn a runtime value back into its boundary form — for example, encoding a one-way `transform`, or a value that breaks a codec's invariant (such as a non-UTC `DateTime` for `Ack.datetime()`). Its `kind` field says which case occurred.
+
+### Working with error types
+
+Use pattern matching to handle specific error types:
+
+```dart
+final result = schema.safeParse(data);
+
+if (result.isFail) {
+  final error = result.getError();
+
+  switch (error) {
+    case TypeMismatchError():
+      print('Wrong type: expected ${error.expectedType}');
+    case SchemaConstraintsError():
+      print('Failed ${error.constraints.length} constraints');
+    case SchemaNestedError():
+      print('Nested validation failed at ${error.errors.length} locations');
+    case SchemaValidationError():
+      print('Custom validation failed: ${error.message}');
+    case SchemaTransformError():
+      print('Transformation failed: ${error.cause}');
+    case SchemaEncodeError():
+      print('Could not encode value: ${error.message}');
+    default:
+      print('Validation failed: ${error.message}');
+  }
+}
+```
+
+## Displaying errors in UI (Flutter example)
+
+In a `TextFormField` validator, return the error string directly:
+
+```dart
+// Inside TextFormField validator
+validator: (value) {
+  final result = someSchema.safeParse(value);
+  if (result.isFail) {
+    return result.getError().toString();
+  }
+  return null;
+}
+```
+
+*See the [Form Validation Guide](/documentation/ack/how-to-guides/flutter-form-validation) for details.*
+
+## Custom error messages
+
+Built-in constraints ship with default messages. For a custom message, pass `message:` to `.refine()`, or attach a constraint with `.constrain(..., message: ...)` — see [Custom Validation](/documentation/ack/how-to-guides/custom-validation).
+
+```dart
+final schema = Ack.string().refine(
+  (value) => value.startsWith('ACK_'),
+  message: 'Value must start with ACK_',
+);
+
+final result = schema.safeParse('nope');
+if (result.isFail) {
+  print(result.getError().message); // Value must start with ACK_
+}
+```
+
+## Next steps
+
+- **[Custom Validation](/documentation/ack/how-to-guides/custom-validation)**: Create constraints with custom error messages
+- **[Flutter Forms](/documentation/ack/how-to-guides/flutter-form-validation)**: Display validation errors in Flutter form widgets
+- **[Validation Rules](/documentation/ack/essentials/validation)**: All built-in validation constraints
+- **[Schema Types](/documentation/ack/essentials/schemas)**: Schema types and their behavior
+- **[Common Recipes](/documentation/ack/how-to-guides/common-recipes)**: Practical error handling patterns

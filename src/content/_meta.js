@@ -39,6 +39,26 @@ export default {
             typesetting: "article",
         }
     },
+    ack: {
+        title: 'Ack',
+        type: 'page',
+        display: 'hidden',
+    },
+    stargate: {
+        title: 'Stargate',
+        type: 'page',
+        display: 'hidden',
+    },
+    'code-analysis': {
+        title: 'Code Analysis',
+        type: 'page',
+        display: 'hidden',
+    },
+    examples: {
+        title: 'Examples',
+        type: 'page',
+        display: 'hidden',
+    },
     version: {
         title: 'Version',
         type: 'menu',

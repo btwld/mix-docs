@@ -1,0 +1,103 @@
+---
+title: Configuration
+---
+
+# Configuration
+
+Ack has no global configuration object. All behavior is configured at the schema level through the fluent API.
+
+## Schema-level configuration
+
+Define behavior when you create your schemas.
+
+### Optional and nullable values
+
+Fields in [`Ack.object`](/documentation/ack/essentials/schemas#object) are required and non-nullable by
+default. Use `.optional()` when a field may be omitted, `.nullable()` when a
+present field may be `null`, or both when either state is valid.
+
+```dart
+Ack.object({
+  'id': Ack.integer(),
+  'nickname': Ack.string().optional(),
+  'middleName': Ack.string().nullable(),
+  'avatarUrl': Ack.string().url().optional().nullable(),
+});
+```
+
+See [Optional vs nullable](/documentation/ack/essentials/schemas#optional-vs-nullable) for the complete
+presence and nullability matrix.
+
+### Additional properties
+
+Control how extra fields are handled with the `additionalProperties` parameter in [`Ack.object`](/documentation/ack/essentials/schemas#object).
+
+```dart
+// Reject extra properties (default)
+Ack.object({'id': Ack.integer()});
+// or explicitly:
+Ack.object({'id': Ack.integer()}, additionalProperties: false);
+
+// Allow extra properties
+Ack.object({'id': Ack.integer()}, additionalProperties: true);
+```
+
+Use strict objects for data you own and want to detect drift in. At external
+API boundaries, `additionalProperties: true` can make a schema resilient to
+new response fields while still validating every field your application uses.
+
+### Default values
+
+Use `.withDefault(value)` when a `null` or missing object field should receive
+a runtime value during parsing. The default must satisfy the schema's runtime
+type and constraints.
+
+```dart
+final settingsSchema = Ack.object({
+  'theme': Ack.enumString(['light', 'dark']).withDefault('light'),
+  'pageSize': Ack.integer().min(1).max(100).withDefault(20),
+});
+```
+
+Defaults change the parsed result; `.optional()` only changes whether an object
+field is required.
+
+### Schema metadata
+
+Attach a description with `.describe()` when the schema is also used for JSON
+Schema export or adapter packages.
+
+```dart
+final userIdSchema = Ack.string()
+    .uuid()
+    .describe('Stable identifier for a user account');
+```
+
+### Custom error messages
+
+Built-in constraints provide default messages. APIs that accept `message:`,
+such as `.matches()`, can replace that message inline. Use `.constrain()` to
+provide a message for a reusable custom constraint. See [Custom error
+messages](/documentation/ack/essentials/error-handling#custom-error-messages).
+
+```dart
+final usernameSchema = Ack.string().matches(
+  r'^[a-z0-9_]+$',
+  message: 'Use lowercase letters, numbers, and underscores only.',
+);
+```
+
+### Custom validation logic
+
+Use `.constrain()` for reusable value-level checks and `.refine()` for cross-field rules — see [Custom Validation](/documentation/ack/how-to-guides/custom-validation).
+
+## Code generation
+
+Annotate a top-level schema with `@AckType()` to generate a typed wrapper — see [TypeSafe Schemas](/documentation/ack/advanced/typesafe-schemas) for setup and supported shapes.
+
+## Related guides
+
+- [Schema Types](/documentation/ack/essentials/schemas) — factories, composition, and transformations
+- [Validation Rules](/documentation/ack/essentials/validation) — built-in constraints
+- [Codecs](/documentation/ack/advanced/codecs) — bidirectional boundary/runtime configuration
+- [JSON Schema Integration](/documentation/ack/advanced/json-schema-integration) — exported metadata and defaults

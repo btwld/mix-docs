@@ -1,0 +1,220 @@
+---
+title: Common Recipes
+---
+
+# Common Recipes
+
+Quick solutions to common validation scenarios. Each recipe shows a working
+schema pattern you can copy and adapt. Examples assume
+`package:ack/ack.dart` is imported unless the snippet shows other imports.
+
+## Email and password validation
+
+Validate user credentials with proper constraints:
+
+```dart
+import 'package:ack/ack.dart';
+
+// Email with proper format
+final emailSchema = Ack.string()
+  .email()
+  .notEmpty();
+
+// Password with security requirements
+final passwordSchema = Ack.string()
+  .minLength(8)
+  .matches(r'.*[A-Z].*', message: 'Password must contain an uppercase letter')
+  .matches(r'.*[a-z].*', message: 'Password must contain a lowercase letter')
+  .matches(r'.*[0-9].*', message: 'Password must contain a number');
+
+// Login form schema
+final loginSchema = Ack.object({
+  'email': emailSchema,
+  'password': passwordSchema,
+});
+
+// Usage
+final result = loginSchema.safeParse({
+  'email': 'user@example.com',
+  'password': 'SecurePass123',
+});
+
+if (result.isOk) {
+  print('Credentials valid');
+} else {
+  print('Error: ${result.getError()}');
+}
+```
+
+## Nested object validation
+
+Validate nested data structures like addresses:
+
+```dart
+final addressSchema = Ack.object({
+  'street': Ack.string().notEmpty(),
+  'city': Ack.string().notEmpty(),
+  'zipCode': Ack.string().matches(r'^\d{5}(-\d{4})?$'),
+  'country': Ack.string().notEmpty(),
+});
+
+final userWithAddressSchema = Ack.object({
+  'name': Ack.string(),
+  'email': Ack.string().email(),
+  'shippingAddress': addressSchema,
+  'billingAddress': addressSchema.optional().nullable(),
+});
+
+// Usage
+final result = userWithAddressSchema.safeParse({
+  'name': 'John Doe',
+  'email': 'john@example.com',
+  'shippingAddress': {
+    'street': '123 Main St',
+    'city': 'Springfield',
+    'zipCode': '12345',
+    'country': 'USA',
+  },
+});
+```
+
+## List validation
+
+Validate lists with constraints on items and length:
+
+```dart
+// Shopping cart with at least 1 item
+final cartSchema = Ack.object({
+  'userId': Ack.string(),
+  'items': Ack.list(Ack.object({
+    'productId': Ack.string(),
+    'quantity': Ack.integer().positive(),
+    'price': Ack.double().positive(),
+  })).minLength(1).maxLength(50),
+});
+
+// Tags with max 5 items
+final postSchema = Ack.object({
+  'title': Ack.string().minLength(5).maxLength(100),
+  'content': Ack.string().minLength(10),
+  'tags': Ack.list(Ack.string()).maxLength(5),
+});
+```
+
+## Enum validation
+
+Validate values against a set of allowed options using Dart enums:
+
+```dart
+enum OrderStatus { pending, processing, shipped, delivered, cancelled }
+enum Priority { low, medium, high }
+
+final orderSchema = Ack.object({
+  'orderId': Ack.string(),
+  'status': Ack.enumValues(OrderStatus.values),
+  'priority': Ack.enumValues(Priority.values),
+});
+
+// Usage
+final result = orderSchema.safeParse({
+  'orderId': 'ORD-123',
+  'status': 'shipped',
+  'priority': 'high',
+});
+```
+
+## Custom validation
+
+Create reusable custom validators for domain-specific rules:
+
+```dart
+import 'package:ack/ack.dart';
+
+// Custom phone number constraint
+class PhoneNumberConstraint extends Constraint<String> with Validator<String> {
+  PhoneNumberConstraint()
+      : super(
+          constraintKey: 'phone_number',
+          description: 'Must be valid phone number (e.g., +1-234-567-8900)',
+        );
+
+  final _regex = RegExp(r'^\+\d{1,3}-\d{3}-\d{3}-\d{4}$');
+
+  @override
+  bool isValid(String value) => _regex.hasMatch(value);
+
+  @override
+  String buildMessage(String value) =>
+      'Must be valid phone number (e.g., +1-234-567-8900)';
+}
+
+final registrationSchema = Ack.object({
+  'username': Ack.string().minLength(3),
+  'email': Ack.string().email(),
+  'phone': Ack.string().constrain(PhoneNumberConstraint()),
+  'password': Ack.string().minLength(8),
+  'confirmPassword': Ack.string().minLength(8),
+}).refine(
+  (data) => data['password'] == data['confirmPassword'],
+  message: 'Passwords do not match',
+);
+```
+
+## API response validation
+
+Validate external API responses before using the payload. APIs commonly add
+fields over time, so this boundary schema validates the fields the application
+uses while allowing the rest of GitHub's response to pass through.
+
+Add the HTTP client first with `dart pub add http`.
+
+```dart
+import 'dart:convert';
+
+import 'package:ack/ack.dart';
+import 'package:http/http.dart' as http;
+
+// GitHub user API response
+final githubUserSchema = Ack.object({
+  'login': Ack.string(),
+  'id': Ack.integer(),
+  'avatar_url': Ack.string().url(),
+  'name': Ack.string().nullable(),
+  'email': Ack.string().email().nullable(),
+  'bio': Ack.string().nullable(),
+  'public_repos': Ack.integer(),
+  'followers': Ack.integer(),
+  'following': Ack.integer(),
+  'created_at': Ack.string().datetime(),
+}, additionalProperties: true);
+
+// Usage in API call
+Future<void> fetchUser(String username) async {
+  final response = await http.get(
+    Uri.parse('https://api.github.com/users/$username'),
+  );
+
+  if (response.statusCode != 200) {
+    throw StateError('GitHub request failed: ${response.statusCode}');
+  }
+
+  final json = jsonDecode(response.body);
+  final result = githubUserSchema.safeParse(json);
+
+  if (result.isOk) {
+    final user = result.getOrThrow()!;
+    print('User: ${user['login']}');
+  } else {
+    print('Invalid API response: ${result.getError()}');
+  }
+}
+```
+
+## See also
+
+- [Custom validation guide](/documentation/ack/how-to-guides/custom-validation) — deep dive into custom validators
+- [Flutter form validation](/documentation/ack/how-to-guides/flutter-form-validation) — integrate with Flutter forms
+- [Codecs](/documentation/ack/advanced/codecs) — date, URI, and custom value conversions
+- [JSON Schema integration](/documentation/ack/advanced/json-schema-integration) — export schemas for API docs and tools
+- [Schema types](/documentation/ack/essentials/schemas) — all available schema types
+- [Validation rules](/documentation/ack/essentials/validation) — complete constraint reference

@@ -78,6 +78,25 @@ html.dark[data-product="code-analysis"] {
     --mix-accent-glow: rgba(0, 211, 255, 0.18);
 }
 
+/* Ack product: blue/cyan validation palette */
+html.dark[data-product="ack"] {
+    --nextra-primary-hue: 228deg;
+    --nextra-primary-saturation: 100%;
+    --nextra-primary-lightness: 67%;
+
+    --mix-bg: #060914;
+    --mix-surface: #0B1122;
+    --mix-surface-bright: #111A31;
+    --mix-accent: #315CFF;
+    --mix-accent-low: rgba(49, 92, 255, 0.1);
+    --mix-accent-glow: rgba(49, 92, 255, 0.18);
+    --mix-surface-code: #0B1122;
+    --mix-surface-card: #0B1122;
+    --mix-surface-table-body: #0B1122;
+    --mix-surface-table-head: #111A31;
+    --mix-border-table: rgba(153, 175, 226, 0.14);
+}
+
 body {
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -197,27 +216,44 @@ nav a, aside a, [role="complementary"] a {
 html[data-product="mix"] .nextra-sidebar li:has(> button[data-href="/documentation/remix"]) {
     display: none !important;
 }
+html[data-product="mix"] .nextra-sidebar li:has(> button[data-href="/documentation/ack"]) {
+    display: none !important;
+}
 html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/mix"]) {
+    display: none !important;
+}
+html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/ack"]) {
+    display: none !important;
+}
+html[data-product="ack"] .nextra-sidebar li:has(> button[data-href="/documentation/mix"]),
+html[data-product="ack"] .nextra-sidebar li:has(> button[data-href="/documentation/remix"]) {
     display: none !important;
 }
 
 /* Flatten the active product's folder: hide its wrapping button so the
    section children appear as top-level entries below the switcher. */
 html[data-product="mix"] .nextra-sidebar li > button[data-href="/documentation/mix"],
-html[data-product="remix"] .nextra-sidebar li > button[data-href="/documentation/remix"] {
+html[data-product="remix"] .nextra-sidebar li > button[data-href="/documentation/remix"],
+html[data-product="ack"] .nextra-sidebar li > button[data-href="/documentation/ack"] {
     display: none !important;
 }
 
 /* Un-indent the active product's section list so it aligns with the sidebar. */
 html[data-product="mix"] .nextra-sidebar li:has(> button[data-href="/documentation/mix"]) > ul,
-html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/remix"]) > ul {
+html[data-product="remix"] .nextra-sidebar li:has(> button[data-href="/documentation/remix"]) > ul,
+html[data-product="ack"] .nextra-sidebar li:has(> button[data-href="/documentation/ack"]) > ul {
     margin-left: 0 !important;
     padding-left: 0 !important;
     border-left: none !important;
 }
 
-html[data-product="remix"] .nextra-breadcrumb a {
+html[data-product="remix"] .nextra-breadcrumb a,
+html[data-product="ack"] .nextra-breadcrumb a {
     pointer-events: none;
     cursor: default;
 }
 
+/* Keep the first Ack page from paginating backward into Remix. */
+html[data-product="ack"] article > div.nextra-border a[href^="/documentation/remix"] {
+    display: none !important;
+}
