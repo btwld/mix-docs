@@ -87,7 +87,12 @@ const PRODUCT_CONFIG: Record<
     ),
   },
   readiness: {
-    audienceId: process.env.RESEND_AUDIENCE_ID_READINESS ?? "",
+    // Falls back to the Code Analysis audience so requests keep working
+    // before a dedicated RESEND_AUDIENCE_ID_READINESS is provisioned.
+    audienceId:
+      process.env.RESEND_AUDIENCE_ID_READINESS ??
+      process.env.RESEND_AUDIENCE_ID_CODE_ANALYSIS ??
+      "",
     from: process.env.RESEND_FROM_EMAIL ?? "Concepta <hello@conceptatech.com>",
     subject: "Your Delivery Readiness Assessment request",
     successMessage:
