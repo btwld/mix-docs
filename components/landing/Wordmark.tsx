@@ -13,7 +13,12 @@ export function Wordmark({ name }: { name: string }) {
         target="_blank"
         rel="noreferrer"
       >
-        by Concepta
+        by
+        <img
+          src="/assets/logo_concepta.svg"
+          alt="Concepta"
+          className="lp-byline-logo"
+        />
       </a>
     </div>
   );

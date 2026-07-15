@@ -113,15 +113,16 @@ const PRODUCTS: Product[] = [
         id: 'stargate' as const,
         label: 'Stargate',
         href: '/stargate',
-        logo: '/assets/logo_stargate_sidebar.svg',
-        // Square glyph, not a wordmark — show the text label next to it.
+        // Mark-only glyph (no background plate) so the menu's white-silhouette
+        // filter renders the shape, not a solid square.
+        logo: '/assets/logo_stargate_mark.svg',
         showLabel: true,
     },
     {
         id: 'code-analysis' as const,
         label: 'Code Analysis',
         href: '/code-analysis',
-        logo: '/assets/logo_code_analysis_sidebar.svg',
+        logo: '/assets/logo_code_analysis_mark.svg',
         showLabel: true,
     },
 ]

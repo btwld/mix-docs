@@ -58,7 +58,7 @@ function SseMock() {
                 e.state === "completed"
                   ? "var(--lp-accent)"
                   : e.state === "running"
-                    ? "#22d3ee"
+                    ? "var(--lp-accent-2)"
                     : "var(--lp-text-muted)",
             }}
           >
@@ -82,7 +82,7 @@ function McpMock() {
           <span
             className="lp-severity-chip"
             style={{
-              background: "rgba(167,139,250,0.14)",
+              background: "color-mix(in srgb, var(--lp-accent) 14%, transparent)",
               color: "var(--lp-accent)",
             }}
           >

@@ -14,7 +14,7 @@ import { ClosingCta } from "./sections/ClosingCta";
 import type { LandingContent } from "./types";
 
 export function LandingRoot({ content }: { content: LandingContent }) {
-  const { OutputsBento } = content;
+  const { OutputsBento, Spotlights } = content;
   return (
     <MotionConfig reducedMotion="user">
       <main className="lp-root" data-pagefind-ignore>
@@ -24,10 +24,15 @@ export function LandingRoot({ content }: { content: LandingContent }) {
         <Statement>{content.statement}</Statement>
         <Features features={content.features} />
         <OutputsBento />
+        {Spotlights ? <Spotlights /> : null}
         <Marquee marquee={content.marquee} />
         <TrustSplit trustSplit={content.trustSplit} />
         <Faq faq={content.faq} />
-        <ClosingCta closingCta={content.closingCta} product={content.product} />
+        <ClosingCta
+          closingCta={content.closingCta}
+          product={content.product}
+          Visual={content.ClosingVisual}
+        />
       </main>
     </MotionConfig>
   );

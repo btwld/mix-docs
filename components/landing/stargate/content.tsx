@@ -2,6 +2,8 @@ import { Braces, SearchCheck, ShieldCheck, FileJson, Bot } from "lucide-react";
 import type { LandingContent } from "../types";
 import { HeroWindow } from "./HeroWindow";
 import { OutputsBento } from "./OutputsBento";
+import { Spotlights } from "./Spotlights";
+import { StudioPrototype } from "./StudioPrototype";
 import { WORKFLOW_SPEC_JSON } from "./snippets";
 
 export const stargateContent: LandingContent = {
@@ -71,6 +73,7 @@ export const stargateContent: LandingContent = {
     ],
   },
   OutputsBento,
+  Spotlights,
   marquee: {
     rowA: [
       "http.action",
@@ -98,6 +101,8 @@ export const stargateContent: LandingContent = {
       "SSE execution streams",
       "MCP tools",
       "Conformance suite",
+      "Human-in-the-loop",
+      "Workflow evals",
     ],
   },
   trustSplit: {
@@ -144,4 +149,5 @@ export const stargateContent: LandingContent = {
     lead: "Stargate is launching soon. Join the waitlist for early access and progress updates.",
     finePrint: "© 2026 · Studio · CLI · API · MCP",
   },
+  ClosingVisual: StudioPrototype,
 };

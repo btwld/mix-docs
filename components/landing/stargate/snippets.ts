@@ -38,6 +38,37 @@ export const RUN_CMD = `$ stargate run qa-agent-demo.json
 
 🎉 Status: completed · 1240ms`;
 
+/* Evals spotlight: faithful to the @stargate/evals API —
+   runEval + built-in scorers, persisted as a run artifact. */
+export const EVAL_TS = `import {
+  runEval, writeEvalRun,
+  outputEquals, nodeStatus,
+} from "@stargate/evals";
+import { NodeExecutionStatus } from "@stargate/engine";
+
+const run = await runEval({
+  workflow,
+  dataset, // 12 cases: { id, input, expected }
+  scorers: [
+    outputEquals({ nodeId: "greet" }),
+    nodeStatus({
+      nodeId: "greet",
+      expected: NodeExecutionStatus.Completed,
+    }),
+  ],
+});
+
+await writeEvalRun(run); // .evals/runs/<id>.json`;
+
+/* Studio prototype: node-category colors as rendered by the
+   Stargate studio canvas (Refined Cyan theme). */
+export const STUDIO_NODE_COLORS = {
+  info: "#5dadff",
+  flow: "#a78bfa",
+  agent: "#f5b544",
+  action: "#3eb8c9",
+} as const;
+
 /* Trust split: what actually travels in the artifact —
    graph, bindings, references. Secrets stay env-var names. */
 export const WORKFLOW_SPEC_JSON = `{
