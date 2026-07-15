@@ -32,6 +32,19 @@ html.dark {
     --mix-gradient-heading: linear-gradient(to bottom right, #fff, #a1a1aa);
 }
 
+/* Concepta home: brand palette from conceptadev/design-system.
+   Dark-surface roles: primary blue brightened to hold contrast on black,
+   aqua reserved as the hero accent. */
+html.dark[data-product="concepta"] {
+    --nextra-primary-hue: 230deg;
+    --nextra-primary-saturation: 100%;
+    --nextra-primary-lightness: 61%;
+
+    --mix-accent: #3A5BFF;
+    --mix-accent-low: rgba(58, 91, 255, 0.1);
+    --mix-accent-glow: rgba(58, 91, 255, 0.18);
+}
+
 /* Remix product: override brand accent to green */
 html.dark[data-product="remix"] {
     --nextra-primary-hue: 121deg;

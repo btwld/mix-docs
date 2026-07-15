@@ -28,10 +28,8 @@ export const metadata = {
     title: 'Mix',
     description,
     applicationName: 'Mix',
-    icons: {
-        icon: '/favicon.ico',
-        shortcut: '/favicon.ico',
-    },
+    // Favicon comes from the app-router file convention: src/app/icon.svg
+    // (Concepta glyph), with public/favicon.ico as the legacy fallback.
     openGraph: {
         title: 'Mix',
         description,
@@ -77,7 +75,7 @@ export default async function RootLayout({ children }) {
             <body>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
+                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p==='/')d='concepta';else if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
                     }}
                 />
                 <Layout

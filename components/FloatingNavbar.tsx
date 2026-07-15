@@ -22,10 +22,11 @@ function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     )
 }
 
-type ProductId = 'mix' | 'remix' | 'stargate' | 'code-analysis'
+type ProductId = 'concepta' | 'mix' | 'remix' | 'stargate' | 'code-analysis'
 
 function getActiveProduct(pathname: string | null): ProductId {
-    if (!pathname) return 'mix'
+    if (!pathname) return 'concepta'
+    if (pathname === '/') return 'concepta'
     if (pathname.startsWith('/documentation/remix')) return 'remix'
     if (pathname === '/remix' || pathname.startsWith('/remix/')) return 'remix'
     if (pathname === '/stargate' || pathname.startsWith('/stargate/')) return 'stargate'
@@ -40,10 +41,11 @@ const MENU_PANEL =
     'rounded-xl bg-[color:var(--mix-surface-bright)]/95 backdrop-blur-md border border-[color:var(--mix-border-card)] shadow-[0_12px_32px_rgba(0,0,0,0.45)]'
 
 const VERSION_ITEMS = [
-    { label: 'Mix v2', href: '/' },
+    { label: 'Mix v2', href: '/mix' },
     { label: 'Mix v1', href: 'https://mix-docs-gosljkd74-fluttertools.vercel.app/' },
 ]
 
+const CONCEPTA_GITHUB_URL = 'https://github.com/btwld'
 const MIX_GITHUB_URL = 'https://github.com/btwld/mix'
 const REMIX_GITHUB_URL = 'https://github.com/btwld/remix'
 const TWITTER_URL = 'https://twitter.com/leoafarias'
@@ -59,6 +61,7 @@ function getDocsHref(product: ProductId): string | null {
 }
 
 function getGithubHref(product: ProductId): string | null {
+    if (product === 'concepta') return CONCEPTA_GITHUB_URL
     if (product === 'mix') return MIX_GITHUB_URL
     if (product === 'remix') return REMIX_GITHUB_URL
     return null
@@ -78,11 +81,13 @@ type Product = {
     showLabel?: boolean
 }
 
+// The Concepta home is not a product: it's reachable via the outline glyph
+// at the left edge of the pill, not through the product switcher.
 const PRODUCTS: Product[] = [
     {
         id: 'mix' as const,
         label: 'Mix',
-        href: '/',
+        href: '/mix',
         logo: '/assets/logo_mix_sidebar.png',
     },
     {
@@ -254,7 +259,8 @@ function VersionMenu() {
 function ProductMenu() {
     const pathname = usePathname()
     const active = getActiveProduct(pathname)
-    const activeProduct = PRODUCTS.find((p) => p.id === active) ?? PRODUCTS[0]
+    // Undefined on the Concepta home — the trigger falls back to "Projects".
+    const activeProduct = PRODUCTS.find((p) => p.id === active)
 
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
@@ -278,17 +284,27 @@ function ProductMenu() {
                 className="flex items-center gap-1.5 pl-2 pr-1.5 py-1 rounded-full text-white/80 hover:text-white hover:bg-white/5 transition-colors"
                 aria-haspopup="menu"
                 aria-expanded={open}
-                aria-label={`Switch product (current: ${activeProduct.label})`}
+                aria-label={
+                    activeProduct
+                        ? `Switch product (current: ${activeProduct.label})`
+                        : 'Browse projects'
+                }
             >
-                <img
-                    src={activeProduct.logo}
-                    alt={activeProduct.label}
-                    className="h-5 w-auto"
-                />
-                {activeProduct.showLabel && (
-                    <span className="text-sm whitespace-nowrap">
-                        {activeProduct.label}
-                    </span>
+                {activeProduct ? (
+                    <>
+                        <img
+                            src={activeProduct.logo}
+                            alt={activeProduct.label}
+                            className="h-5 w-auto"
+                        />
+                        {activeProduct.showLabel && (
+                            <span className="text-sm whitespace-nowrap">
+                                {activeProduct.label}
+                            </span>
+                        )}
+                    </>
+                ) : (
+                    <span className="text-sm whitespace-nowrap">Projects</span>
                 )}
                 <ChevronDown className="h-3 w-3" />
             </button>
@@ -382,6 +398,18 @@ function MobileDrawer({
                     <div className="px-3 pb-1 text-xs uppercase tracking-wider text-white/40">
                         Product
                     </div>
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                    >
+                        <img
+                            src="/assets/logo_concepta_icon_outline.svg"
+                            alt=""
+                            aria-hidden="true"
+                            className="h-5 w-auto"
+                        />
+                        Concepta
+                    </Link>
                     {PRODUCTS.map((product) => (
                         <Link
                             key={product.id}
@@ -432,6 +460,14 @@ function MobileDrawer({
                             className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
                         >
                             Docs
+                        </Link>
+                    ) : activeProduct === 'concepta' ? (
+                        <Link
+                            href="/#projects"
+                            onClick={onClose}
+                            className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
+                        >
+                            Projects
                         </Link>
                     ) : (
                         <Link
@@ -526,41 +562,63 @@ export default function FloatingNavbar() {
                     PILL,
                 )}
             >
-                <ProductMenu />
-                <span className="h-4 w-px bg-white/10" />
                 <Link
-                    href={homeHref}
+                    href="/"
+                    aria-label="Concepta home"
                     className={clsx(
-                        'px-3 py-1.5 text-sm transition-colors',
-                        isHomeActive
-                            ? 'text-[color:var(--mix-accent)]'
-                            : 'text-white/80 hover:text-white',
+                        'flex items-center px-2 py-1.5 transition-opacity',
+                        activeProduct === 'concepta'
+                            ? 'opacity-100'
+                            : 'opacity-60 hover:opacity-100',
                     )}
                 >
-                    Home
+                    <img
+                        src="/assets/logo_concepta_icon_outline.svg"
+                        alt=""
+                        aria-hidden="true"
+                        className="h-4 w-auto"
+                    />
                 </Link>
                 <span className="h-4 w-px bg-white/10" />
-                {docsHref ? (
-                    <Link
-                        href={docsHref}
-                        className={clsx(
-                            'px-3 py-1.5 text-sm transition-colors',
-                            isDocsActive
-                                ? 'text-[color:var(--mix-accent)]'
-                                : 'text-white/80 hover:text-white',
-                        )}
-                    >
-                        Docs
-                    </Link>
-                ) : (
-                    <Link
-                        href="#waitlist"
-                        className="px-3 py-1.5 text-sm text-white/80 hover:text-white transition-colors"
-                    >
-                        Join waitlist
-                    </Link>
-                )}
+                <ProductMenu />
                 <span className="h-4 w-px bg-white/10" />
+                {activeProduct !== 'concepta' && (
+                    <>
+                        <Link
+                            href={homeHref}
+                            className={clsx(
+                                'px-3 py-1.5 text-sm transition-colors',
+                                isHomeActive
+                                    ? 'text-[color:var(--mix-accent)]'
+                                    : 'text-white/80 hover:text-white',
+                            )}
+                        >
+                            Home
+                        </Link>
+                        <span className="h-4 w-px bg-white/10" />
+                        {docsHref ? (
+                            <Link
+                                href={docsHref}
+                                className={clsx(
+                                    'px-3 py-1.5 text-sm transition-colors',
+                                    isDocsActive
+                                        ? 'text-[color:var(--mix-accent)]'
+                                        : 'text-white/80 hover:text-white',
+                                )}
+                            >
+                                Docs
+                            </Link>
+                        ) : (
+                            <Link
+                                href="#waitlist"
+                                className="px-3 py-1.5 text-sm text-white/80 hover:text-white transition-colors"
+                            >
+                                Join waitlist
+                            </Link>
+                        )}
+                        <span className="h-4 w-px bg-white/10" />
+                    </>
+                )}
                 <div className="relative floating-search [&_input]:!bg-transparent [&_input]:!border-0 [&_input]:!shadow-none [&_input]:!text-sm [&_input]:!w-44 [&_input]:!h-8 [&_input]:!pl-7 [&_input:focus]:!ring-0 [&_input:focus]:!outline-none [&_input:focus]:!border-0 [&_input:focus]:!shadow-none">
                     <SearchIcon
                         aria-hidden="true"
@@ -640,6 +698,18 @@ export default function FloatingNavbar() {
                     </>
                 ) : (
                     <>
+                        <Link
+                            href="/"
+                            aria-label="Concepta home"
+                            className="flex items-center p-2 opacity-70 hover:opacity-100 transition-opacity"
+                        >
+                            <img
+                                src="/assets/logo_concepta_icon_outline.svg"
+                                alt=""
+                                aria-hidden="true"
+                                className="h-4 w-auto"
+                            />
+                        </Link>
                         <button
                             onClick={() => setSearchOpen(true)}
                             aria-label="Search"
