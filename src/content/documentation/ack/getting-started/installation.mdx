@@ -1,0 +1,78 @@
+---
+title: Installing Ack
+---
+
+# Installing Ack
+
+Ack is a pure-Dart package with no required build step. Add the core library — and, optionally, the code generator for typed wrappers.
+
+## Add to your project
+
+Add Ack to your project using the Dart CLI:
+
+```bash
+# For Dart projects
+dart pub add ack
+
+# For Flutter projects
+flutter pub add ack
+```
+
+Or add to your `pubspec.yaml` (check [pub.dev](https://pub.dev/packages/ack) for the latest version):
+
+```yaml
+dependencies:
+  ack: ^1.0.0 # Replace with latest version
+```
+
+## Code generator (`@AckType()`)
+
+To generate typed wrappers for hand-written schemas, add the annotation and generator packages alongside `ack`:
+
+```bash
+dart pub add ack ack_annotations
+dart pub add --dev ack_generator build_runner
+```
+
+Or add them to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  ack: ^1.0.0 # Replace with latest version
+  ack_annotations: ^1.0.0 # Replace with latest version
+
+dev_dependencies:
+  ack_generator: ^1.0.0 # Replace with latest version
+  build_runner: ^2.4.0
+```
+
+`ack_generator` does not generate schemas from classes. It reads top-level Ack schema variables and getters annotated with `@AckType()` and emits typed extension wrappers with `parse()`/`safeParse()` helpers.
+
+```dart
+import 'package:ack/ack.dart';
+import 'package:ack_annotations/ack_annotations.dart';
+
+part 'user.g.dart';
+
+@AckType()
+final userSchema = Ack.object({
+  'name': Ack.string(),
+  'email': Ack.string().email(),
+});
+```
+
+Run the generator:
+
+```bash
+dart run build_runner build
+```
+
+See [TypeSafe Schemas](/documentation/ack/advanced/typesafe-schemas) for more `@AckType` examples and supported schema shapes.
+
+## Next step
+
+Import `package:ack/ack.dart` and you're ready — the [Quickstart Tutorial](/documentation/ack/getting-started/quickstart-tutorial) takes you from your first schema to handling every validation outcome.
+
+## Requirements
+
+- Dart SDK: `>=3.8.0 <4.0.0`

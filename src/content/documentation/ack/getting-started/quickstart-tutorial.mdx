@@ -1,0 +1,84 @@
+---
+title: Quickstart Tutorial
+---
+
+# Quickstart Tutorial
+
+This tutorial validates a Dart map — the kind you get from `jsonDecode()` of an API response or a form submission — and handles every outcome.
+
+## Prerequisites
+
+[Install Ack](/documentation/ack/getting-started/installation) in your Dart or Flutter project.
+
+## 1. Define a schema
+
+Describe the shape you expect. Fields are required unless you mark them `.optional()`.
+
+```dart
+import 'package:ack/ack.dart';
+
+final userSchema = Ack.object({
+  'name': Ack.string().minLength(2),      // required, min 2 chars
+  'age': Ack.integer().min(0).optional(), // optional, non-negative
+});
+```
+
+See [Schema Types](/documentation/ack/essentials/schemas) and [Validation Rules](/documentation/ack/essentials/validation) for everything you can express.
+
+## 2. Validate data
+
+Call `safeParse()` with the data you received — for example
+`jsonDecode(response.body)`. It returns a `SchemaResult`, so expected validation
+failures stay in normal control flow instead of throwing. For callback,
+transform, and codec failure semantics, see [Error Handling](/documentation/ack/essentials/error-handling).
+
+```dart
+final result = userSchema.safeParse({'name': 'Alice', 'age': 30});
+
+if (result.isOk) {
+  final user = result.getOrThrow();       // validated Map<String, Object?>
+  print('Valid: $user');
+} else {
+  print('Invalid: ${result.getError()}'); // structured error with a path
+}
+```
+
+Prefer exceptions? Use `parse()` instead — it returns the value or throws `AckException`.
+
+## 3. Handle every outcome
+
+A schema accepts valid data and rejects each way it can be wrong. This runnable example checks four inputs:
+
+```dart
+import 'package:ack/ack.dart';
+
+void main() {
+  final userSchema = Ack.object({
+    'name': Ack.string().minLength(2),
+    'age': Ack.integer().min(0).optional(),
+  });
+
+  checkResult(userSchema.safeParse({'name': 'Alice', 'age': 30})); // OK
+  checkResult(userSchema.safeParse({'name': 'Bob'}));              // OK: age omitted
+  checkResult(userSchema.safeParse({'name': 'X', 'age': 25}));     // name too short
+  checkResult(userSchema.safeParse({'age': 40}));                  // name missing
+}
+
+void checkResult(SchemaResult result) {
+  if (result.isOk) {
+    print('OK:     ${result.getOrThrow()}');
+  } else {
+    final error = result.getError();
+    print('FAILED at ${error.path}: ${error.message}'); // path is a JSON Pointer
+  }
+}
+```
+
+See [Error Handling](/documentation/ack/essentials/error-handling) to read and display errors.
+
+## Next steps
+
+- [Schema Types](/documentation/ack/essentials/schemas) — all available schema types
+- [Validation Rules](/documentation/ack/essentials/validation) — built-in constraints
+- [Custom Validation](/documentation/ack/how-to-guides/custom-validation) — add your own logic
+- [JSON Serialization](/documentation/ack/essentials/json-serialization) — parse and encode JSON

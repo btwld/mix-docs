@@ -1,0 +1,365 @@
+---
+title: JSON Schema Integration
+---
+
+# JSON Schema Integration
+
+Your Ack [schema](/documentation/ack/essentials/schemas) already describes your data's shape — so you can export it as JSON Schema (Draft-7) and reuse it to document an API, drive a form library, or define an LLM tool, all from one source of truth.
+
+## Generating JSON schemas
+
+Call `toJsonSchema()` on any `AckSchema` instance. This is the same generic Draft-7 renderer used by `schema.toSchemaModel().toJsonSchema()`.
+
+```dart
+import 'dart:convert';
+
+import 'package:ack/ack.dart';
+
+enum UserRole { admin, user, guest }
+
+final userSchema = Ack.object({
+  'id': Ack.integer().positive().describe('Unique user identifier'),
+  'name': Ack.string()
+      .minLength(2)
+      .maxLength(50)
+      .describe("User's full name"),
+  'email': Ack.string().email().describe("User's email address"),
+  'role': Ack.enumValues(UserRole.values).withDefault(UserRole.user),
+  'isActive': Ack.boolean().withDefault(true),
+  'tags': Ack.list(Ack.string()).unique().describe('List of user tags').nullable(),
+  'age': Ack.integer().min(0).max(120).nullable().describe("User's age"),
+}).describe('Represents a user in the system');
+
+void main() {
+  // Convert the AckSchema to a JSON Schema Object Map
+  final jsonSchemaMap = userSchema.toJsonSchema();
+
+  // Pretty print the JSON representation of the JSON Schema
+  final jsonEncoder = JsonEncoder.withIndent('  ');
+  print(jsonEncoder.convert(jsonSchemaMap));
+}
+```
+
+> **Building an adapter package?** Most users only need `toJsonSchema()`
+> (above). To convert Ack schemas to another target format, render from
+> `schema.toSchemaModel()` (the canonical `AckSchemaModel`) rather than the JSON
+> Schema map. Start with the [adapter quickstart](/documentation/ack/advanced/schema-converter-quickstart),
+> then use the [complete adapter authoring guide](/documentation/ack/advanced/creating-schema-converter-packages)
+> for architecture and testing guidance.
+
+## Adapter model
+
+Use `toSchemaModel()` for a reusable, target-independent view of an Ack schema:
+
+```dart
+final model = userSchema.toSchemaModel();
+final jsonSchemaMap = model.toJsonSchema();
+
+for (final warning in model.warnings) {
+  print('${warning.code}: ${warning.message}');
+}
+```
+
+`AckSchemaModel` describes the boundary values a schema accepts and exports, keeping adapter metadata such as property ordering and discriminator info. Its JSON Schema renderer emits only generic Draft-7-compatible output; provider-specific hints belong in adapter renderers.
+
+**Output JSON (JSON Schema Object):**
+
+```json
+{
+  "type": "object",
+  "description": "Represents a user in the system",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique user identifier",
+      "exclusiveMinimum": 0
+    },
+    "name": {
+      "type": "string",
+      "description": "User's full name",
+      "minLength": 2,
+      "maxLength": 50
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "User's email address"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user",
+        "guest"
+      ],
+      "default": "user"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "tags": {
+      "anyOf": [
+        {
+          "type": "array",
+          "description": "List of user tags",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "age": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "description": "User's age",
+          "minimum": 0,
+          "maximum": 120
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "email",
+    "role",
+    "isActive",
+    "tags",
+    "age"
+  ],
+  "additionalProperties": false
+}
+```
+
+## How constraints map to JSON Schema
+
+Ack maps its [built-in constraints](/documentation/ack/essentials/validation) to corresponding JSON Schema keywords:
+
+| Ack Constraint or Schema | JSON Schema Keyword | Notes |
+| :----------------------- | :------------------ | :---- |
+| [`minLength(n)`](/documentation/ack/essentials/validation#string-constraints) | `minLength: n` | String |
+| [`maxLength(n)`](/documentation/ack/essentials/validation#string-constraints) | `maxLength: n` | String |
+| [`matches(p)`](/documentation/ack/essentials/validation#string-constraints) | `pattern: p` | String |
+| [`email()`](/documentation/ack/essentials/validation#string-constraints) | `format: email` | String |
+| [`date()`](/documentation/ack/essentials/validation#string-constraints) | `format: date` | String |
+| [`datetime()`](/documentation/ack/essentials/validation#string-constraints) | `format: date-time` | String |
+| [`time()`](/documentation/ack/essentials/validation#string-constraints) | `format: time` | String |
+| [`uri()`](/documentation/ack/essentials/validation#string-constraints) | `format: uri` | String |
+| [`uuid()`](/documentation/ack/essentials/validation#string-constraints) | `format: uuid` | String |
+| [`ipv4()`](/documentation/ack/essentials/validation#string-constraints) | `format: ipv4` | String |
+| [`ipv6()`](/documentation/ack/essentials/validation#string-constraints) | `format: ipv6` | String |
+| [`Ack.enumString([...])`](/documentation/ack/essentials/validation#string-constraints) | `enum: [...]` | String |
+| [`min(n)`](/documentation/ack/essentials/validation#number-constraints) | `minimum: n` | Number |
+| [`max(n)`](/documentation/ack/essentials/validation#number-constraints) | `maximum: n` | Number |
+| [`greaterThan(n)`](/documentation/ack/essentials/validation#number-constraints) | `exclusiveMinimum: n` | Number (exclusive) |
+| [`lessThan(n)`](/documentation/ack/essentials/validation#number-constraints) | `exclusiveMaximum: n` | Number (exclusive) |
+| [`multipleOf(n)`](/documentation/ack/essentials/validation#number-constraints) | `multipleOf: n` | Number |
+| [`minLength(n)`](/documentation/ack/essentials/validation#list-constraints) | `minItems: n` | List (array) |
+| [`maxLength(n)`](/documentation/ack/essentials/validation#list-constraints) | `maxItems: n` | List (array) |
+| [`unique()`](/documentation/ack/essentials/validation#list-constraints) | `uniqueItems: true` | List (array) |
+| [`nullable()`](/documentation/ack/essentials/schemas#optional-vs-nullable) | `anyOf: [<schema>, {type: null}]` | Any schema |
+| `withDefault(v)` | `default: v` | JSON/export-safe defaults only in `AckSchemaModel`; unsupported defaults are omitted with a warning |
+| `describe(d)` | `description: d` | Any schema |
+| [`Ack.integer()`](/documentation/ack/essentials/schemas#number) | `type: integer` | Type |
+| [`Ack.double()`](/documentation/ack/essentials/schemas#number) | `type: number` | Type |
+| [`Ack.string()`](/documentation/ack/essentials/schemas#string) | `type: string` | Type |
+| [`Ack.boolean()`](/documentation/ack/essentials/schemas#boolean) | `type: boolean` | Type |
+| [`Ack.list(...)`](/documentation/ack/essentials/schemas#list) | `type: array`, `items: {...}` | Type |
+| [`Ack.object(...)`](/documentation/ack/essentials/schemas#object) | `type: object`, `properties: {...}`, `required: [...]` | Type |
+| [`Ack.lazy(...)`](/documentation/ack/essentials/schemas#recursive-schemas) | `definitions`, `$ref` | Recursive type |
+
+## Shape stability notes
+
+`toJsonSchema()` renders generic Draft-7 JSON Schema with stable nullability rules:
+
+- Primitive/object/list/enum schemas marked with `.nullable()` are emitted as:
+  - `anyOf: [<base-schema>, { "type": "null" }]`
+- `Ack.anyOf([...]).nullable()` is emitted as
+  `anyOf: [{ "anyOf": [...] }, { "type": "null" }]`
+- `Ack.discriminated(...)` is emitted as `anyOf` with effective object
+  branches. Each branch contains the exact required discriminator `const`.
+- `Ack.discriminated(...).nullable()` wraps that `anyOf` union with a second
+  `{ "type": "null" }` branch.
+- `Ack.lazy(name, ...)` is emitted as a Draft-7 `definitions` entry and local
+  `$ref` values such as `{ "$ref": "#/definitions/Category" }`.
+- Non-null lazy refs that carry metadata such as `description` use `allOf`
+  around the `$ref` so Draft-7 validators do not ignore that metadata as a
+  `$ref` sibling. Nullable lazy refs keep metadata beside the top-level `anyOf`.
+
+This means nullable enums are represented as:
+
+```json
+{
+  "anyOf": [
+    { "type": "string", "enum": ["admin", "user", "guest"] },
+    { "type": "null" }
+  ]
+}
+```
+
+And nullable discriminated unions are represented as:
+
+```json
+{
+  "anyOf": [
+    { "anyOf": [/* effective discriminated object branches */] },
+    { "type": "null" }
+  ]
+}
+```
+
+If you build consumers that inspect generated schemas, treat nullability and union composition as separate concerns and don't assume enum values always live at the top level.
+
+The nested nullable-union shape is intentional for generic Draft-7 output and matches Zod v4's `toJSONSchema()` renderer. Don't flatten it in `AckSchema.toJsonSchema()`; provider-specific adapters that need a different shape should implement explicit adapter rendering.
+
+**Limitations:**
+
+-   **Custom Constraints:** [`Constraint<T>` + `Validator<T>`](/documentation/ack/how-to-guides/custom-validation)
+    instances added via `.constrain()` are **not** translated to JSON Schema
+    because there is no standard way to represent arbitrary logic.
+-   **`additionalProperties`:** `Ack.object(..., additionalProperties: false)`
+    becomes `additionalProperties: false`; `additionalProperties: true` is
+    emitted as the boolean `true`.
+-   **`Ack.any()`:** Runtime validation accepts non-null JSON-safe values.
+    JSON-like adapter exports represent those JSON-compatible values and attach
+    an `ack_any_json_boundary` warning to the `AckSchemaModel`.
+-   **`Ack.lazy()` runtime checks:** Recursive structure is exported with
+    Draft-7 `definitions` / `$ref`. Constraints and refinements added directly
+    to the lazy reference are runtime-only and are reported as schema-model
+    warnings rather than emitted beside `$ref`.
+-   **Date/time range constraints:** Draft-7 has no standard `formatMinimum` or
+    `formatMaximum` keywords. ACK validates `.min()` and `.max()` at runtime and
+    records schema-model warnings instead of rendering non-standard keywords.
+-   **List item nullability:** `Ack.list(...)` does not support nullable item
+    schemas yet. Make the list itself nullable with `Ack.list(item).nullable()`
+    when the whole field may be null.
+-   **Discriminated branches:** `Ack.discriminated(...)` owns the discriminator.
+    Branches may omit the discriminator field; compatible `Ack.literal(...)` or
+    `Ack.enumString(...)` fields are accepted; generated branches expose the
+    exact branch value as `const`.
+
+## Integrating into API documentation
+
+Use the generated JSON Schema map within a larger API documentation structure.
+
+```dart
+// Assume you have a function to build the full API spec
+Map<String, dynamic> buildApiSpecification() {
+  final userJsonSchema = userSchema.toJsonSchema();
+
+  return {
+    'schemas': {
+      'User': userJsonSchema
+    },
+    'endpoints': {
+      '/users': {
+        'post': {
+          'summary': 'Create a new user',
+          'requestBody': {
+            'required': true,
+            'content': {
+              'application/json': {
+                // Reference the generated schema
+                'schema': {
+                  '\$ref': '#/schemas/User'
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+}
+
+// Usage
+final fullApiSpec = buildApiSpecification();
+print(JsonEncoder.withIndent('  ').convert(fullApiSpec));
+```
+
+This keeps your validation logic and API documentation in one place.
+
+## Advanced JSON Schema features
+
+### Schema descriptions and metadata
+
+Add descriptions and metadata to your schemas for better documentation:
+
+```dart
+final userSchema = Ack.object({
+  'id': Ack.string().uuid().describe('Unique user identifier'),
+  'name': Ack.string().minLength(1).describe('User\'s full name'),
+  'email': Ack.string().email().describe('User\'s email address'),
+  'age': Ack.integer().min(0).max(150).describe('User\'s age in years').optional(),
+}).describe('Represents a user in the system');
+
+final jsonSchema = userSchema.toJsonSchema();
+// Output includes description fields
+```
+
+### Default values in JSON Schema
+
+Schemas with default values include them in the generated JSON Schema:
+
+```dart
+enum Theme { light, dark }
+
+final configSchema = Ack.object({
+  'theme': Ack.enumValues(Theme.values).withDefault(Theme.light),
+  'notifications': Ack.boolean().withDefault(true),
+  'maxItems': Ack.integer().min(1).max(100).withDefault(10),
+});
+
+final jsonSchema = configSchema.toJsonSchema();
+// Output includes "default" properties
+```
+
+### Complex schema patterns
+
+JSON Schema generation works with all Ack schema types:
+
+```dart
+// Union types
+final mixedValueSchema = Ack.anyOf([
+  Ack.string(),
+  Ack.integer(),
+  Ack.boolean(),
+]);
+
+// Discriminated unions
+final shapeSchema = Ack.discriminated(
+  discriminatorKey: 'type',
+  schemas: {
+    'circle': Ack.object({
+      'radius': Ack.double().positive(),
+    }),
+    'rectangle': Ack.object({
+      'width': Ack.double().positive(),
+      'height': Ack.double().positive(),
+    }),
+  },
+);
+
+// Nested arrays and objects
+final complexSchema = Ack.object({
+  'users': Ack.list(userSchema).minLength(1),
+  'metadata': Ack.object({
+    'version': Ack.string(),
+    'tags': Ack.list(Ack.string()).unique(),
+  }).optional(),
+});
+
+// All produce valid JSON Schema
+final mixedJson = mixedValueSchema.toJsonSchema();
+final shapeJson = shapeSchema.toJsonSchema();
+final complexJson = complexSchema.toJsonSchema();
+```

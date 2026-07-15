@@ -1,0 +1,126 @@
+---
+title: TypeSafe Schemas
+---
+
+# TypeSafe Schemas
+
+Tired of writing `data['name'] as String` after every parse? Annotate a top-level schema with `@AckType()` and run the generator once to get typed getters like `user.name`. The schema stays in your source file; the generator adds a typed wrapper around its validated representation.
+
+## Overview
+
+1. Define schemas with the Ack fluent API.
+2. Annotate each top-level schema variable or getter with `@AckType()`.
+3. Run `dart run build_runner build`.
+4. Use the generated `TypeName.parse()` / `TypeName.safeParse()` helpers.
+
+## Basic usage
+
+```dart
+import 'package:ack/ack.dart';
+import 'package:ack_annotations/ack_annotations.dart';
+
+part 'user_schema.g.dart';
+
+@AckType()
+final addressSchema = Ack.object({
+  'street': Ack.string(),
+  'city': Ack.string(),
+});
+
+@AckType()
+final userSchema = Ack.object({
+  'id': Ack.string(),
+  'email': Ack.string().email().nullable(),
+  'address': addressSchema,
+});
+```
+
+The generated part file contains `AddressType` and `UserType` extension types, each with typed field getters and `parse()` / `safeParse()` static methods.
+
+The type name drops a trailing `Schema` and adds `Type` (`userSchema` → `UserType`). Override it with `@AckType(name: 'AppUser')`, which generates `AppUserType`.
+
+## Supported schema shapes
+
+`@AckType()` supports:
+
+- `Ack.object(...)`
+- `Ack.string()`, `Ack.integer()`, `Ack.double()`, `Ack.boolean()`
+- `Ack.list(...)`
+- `Ack.literal(...)`, `Ack.enumString(...)`, `Ack.enumValues(...)`
+- non-object transforms with explicit output types
+- `Ack.discriminated(...)` with the constraints below
+
+`Ack.any()` and `Ack.anyOf()` are not supported.
+
+## Discriminated schemas
+
+`Ack.discriminated(...)` works with `@AckType()` when all of the following hold:
+
+- `schemas` is a non-empty map literal
+- the base schema is non-nullable
+- each branch is a top-level, non-nullable `@AckType` object schema in the same library
+- branch schemas omit the discriminator field, or include it as `Ack.literal(...)` matching the branch key, or `Ack.enumString(...)` containing the branch key
+
+Example:
+
+```dart
+@AckType()
+final catSchema = Ack.object({
+  'lives': Ack.integer(),
+});
+
+@AckType()
+final dogSchema = Ack.object({
+  'breed': Ack.string(),
+});
+
+@AckType()
+final petSchema = Ack.discriminated(
+  discriminatorKey: 'type',
+  schemas: {
+    'cat': catSchema,
+    'dog': dogSchema,
+  },
+);
+```
+
+`Ack.discriminated(...)` owns the discriminator property. Boundary payloads must include the discriminator key; branch schemas should usually omit it. When a branch includes the discriminator field, it must be an exact literal or enum containing the branch key:
+
+```dart
+@AckType()
+final catSchema = Ack.object({
+  'type': Ack.literal('cat'), // allowed, but usually unnecessary
+  'lives': Ack.integer(),
+});
+```
+
+Conflicting discriminator fields, broad `Ack.string()`, and transformed or refined discriminator fields are rejected. Generated subtype `parse()` / `safeParse()` methods validate through the union's effective branch.
+
+## Resolution rules
+
+- Nested object fields must reference a named top-level schema — inline anonymous objects are rejected.
+- `Ack.list(...)` element schemas must be statically resolvable.
+- Cross-file references work for direct imports, prefixed imports, and re-exports.
+- Unannotated object schema references fail generation rather than silently falling back to raw maps.
+- Circular alias/reference chains fail generation with a clear error.
+
+## Limitations
+
+- `@AckType()` only works on top-level schema variables and getters.
+- Nullable top-level schemas do not emit extension types.
+- `Ack.list(...)` rejects nullable item schemas. Make the list itself nullable
+  with `Ack.list(item).nullable()` when the whole field may be null.
+- Use `.transform<T>(...)` with an explicit output type so the generator can infer the representation type.
+
+## Build checklist
+
+1. Add `ack_annotations`, `ack_generator`, and `build_runner` to your pubspec.
+2. Add `part '<file>.g.dart';` to the file.
+3. Annotate top-level schema variables or getters with `@AckType()`.
+4. Run `dart run build_runner build`.
+
+## Next steps
+
+- [JSON Serialization](/documentation/ack/essentials/json-serialization) — parse JSON straight into generated types
+- [Common Recipes](/documentation/ack/how-to-guides/common-recipes) — patterns that combine schemas and generated types
+- [API Reference](/documentation/ack/reference/api-reference) — core API quick reference and generated API docs
