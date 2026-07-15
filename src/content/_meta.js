@@ -13,6 +13,19 @@ export default {
             typesetting: "article",
         }
     },
+    mix: {
+        title: 'Mix',
+        type: 'page',
+        display: 'hidden',
+        theme: {
+            layout: 'full',
+            sidebar: false,
+            breadcrumb: false,
+            toc: false,
+            timestamp: false,
+            typesetting: "article",
+        }
+    },
     remix: {
         title: 'Remix',
         type: 'page',
@@ -52,7 +65,7 @@ export default {
         items: {
             v2: {
                 title: 'Mix v2',
-                href: '/'
+                href: '/mix'
             },
             v1: {
                 title: 'Mix v1',
