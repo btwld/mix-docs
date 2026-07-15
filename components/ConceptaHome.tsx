@@ -28,10 +28,41 @@ const sectionReveal = {
   transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
 };
 
+/* ── Agency proof (from the published conceptatech.com copy) ────────── */
+
+const PROOF_TICKER = ["20 years", "600+ projects shipped", "98% delivery satisfaction"];
+
+const TRUSTED_BY = ["Truist", "AdventHealth", "FEMA", "Red Lobster", "Anago"];
+
+const TRUST_OUTCOMES = [
+  "27% more loan applications at Truist",
+  "$3M+ saved for FEMA",
+  "4.7★ across 16k reviews at AdventHealth",
+];
+
+const PILLARS = [
+  {
+    stat: "35+",
+    title: "Small by design.",
+    body: "A 35-person firm — small enough that our leadership stays in the actual work: in the decisions, through the release, not just the pitch.",
+  },
+  {
+    stat: "+27%",
+    title: "We ship what a business depends on.",
+    body: "Truist: 27% more loan applications. AdventHealth: 4.7 stars across 16,000 reviews. Proven in fintech, healthcare, and government.",
+  },
+  {
+    stat: "20yr",
+    title: "We don't start from scratch.",
+    body: "Two decades of building our own delivery foundation — the tools below — so every release starts from proven blocks, not a blank page.",
+  },
+];
+
 /* ── Per-project window visuals ──────────────────────────────────────
    Each block echoes the visual signature of its product page: Mix shows
-   a style snippet, Remix its component catalog, Stargate a workflow
-   graph, Code Analysis a scorecard. Same chrome, different content. */
+   a style snippet, Remix its component catalog, Ack a validation result,
+   Stargate a governed workflow, Code Analysis a scorecard. Same chrome,
+   different content. */
 
 const MIX_SNIPPET = `final cardStyle = BoxStyler()
     .color(Colors.blue)
@@ -68,6 +99,23 @@ function RemixVisual() {
         </span>
       ))}
       <span className="pv-chip pv-chip-more">+9 more</span>
+    </div>
+  );
+}
+
+const ACK_SNIPPET = `final result = userSchema.safeParse({
+  'name': 'Ada',
+  'email': 'not-an-email',
+});`;
+
+function AckVisual() {
+  return (
+    <div className="pv-ack">
+      <HighlightedCode code={ACK_SNIPPET} className="pv-code" />
+      <div className="pv-ack-error">
+        <span className="pv-ack-path">#/email</span>
+        <span>Value must be a valid email address.</span>
+      </div>
     </div>
   );
 }
@@ -137,6 +185,8 @@ type Project = {
   /** Mono label shown in the window chrome, like a filename. */
   windowLabel: string;
   Visual: React.ComponentType;
+  /** Last-row card spans both columns with a side-by-side layout. */
+  wide?: boolean;
 };
 
 const PROJECTS: Project[] = [
@@ -163,6 +213,17 @@ const PROJECTS: Project[] = [
     Visual: RemixVisual,
   },
   {
+    name: "Ack",
+    tagline: "Trust the boundary. Keep the types.",
+    description:
+      "Dart schemas for apps and structured AI — define the shape once, validate every response at runtime, and keep your types.",
+    href: "/ack",
+    accent: "#315CFF",
+    status: "Open source",
+    windowLabel: "user_schema.dart",
+    Visual: AckVisual,
+  },
+  {
     name: "Stargate",
     tagline: "Complex workflows for the enterprise.",
     description:
@@ -183,6 +244,7 @@ const PROJECTS: Project[] = [
     status: "Waitlist",
     windowLabel: "code-health.json",
     Visual: CodeAnalysisVisual,
+    wide: true,
   },
 ];
 
@@ -190,26 +252,35 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { Visual } = project;
   return (
     <motion.div
+      className={project.wide ? "md:col-span-2" : undefined}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{
         duration: 0.6,
-        delay: 0.08 * index,
+        delay: 0.08 * (index % 2),
         ease: [0.25, 0.4, 0.25, 1] as const,
       }}
     >
       <Link
         href={project.href}
-        className="project-card group"
+        className={
+          "project-card group" + (project.wide ? " project-card-wide" : "")
+        }
         style={{ "--card-accent": project.accent } as React.CSSProperties}
       >
-        <div className="flex items-center justify-between">
-          <span className="project-name">{project.name}</span>
-          <span className="project-status">{project.status}</span>
+        <div className="project-card-copy">
+          <div className="flex items-center justify-between">
+            <span className="project-name">{project.name}</span>
+            <span className="project-status">{project.status}</span>
+          </div>
+          <p className="project-tagline">{project.tagline}</p>
+          <p className="project-description">{project.description}</p>
+          <span className="project-link">
+            {project.status === "Open source" ? "Explore" : "Join the waitlist"}
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </span>
         </div>
-        <p className="project-tagline">{project.tagline}</p>
-        <p className="project-description">{project.description}</p>
 
         <div className="project-window" aria-hidden="true">
           <div className="project-window-bar">
@@ -224,11 +295,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <Visual />
           </div>
         </div>
-
-        <span className="project-link">
-          {project.status === "Open source" ? "Explore" : "Join the waitlist"}
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </span>
       </Link>
     </motion.div>
   );
@@ -241,7 +307,7 @@ export const ConceptaHome = () => {
 
       <Layout>
         <div className="relative z-10">
-          {/* Hero */}
+          {/* Hero — the agency stance, with the foundation below */}
           <div className="hero-section">
             <motion.div
               initial="hidden"
@@ -262,10 +328,14 @@ export const ConceptaHome = () => {
               custom={0.1}
               variants={fadeUp}
             >
+              <p className="hero-stance">
+                Building got faster. Shipping safely didn&apos;t.
+              </p>
               <h1 className="headline">
-                We build what others{" "}
+                We ship the systems{" "}
                 <br className="hidden sm:inline" />
-                build on<span className="headline-period">.</span>
+                your business runs on
+                <span className="headline-period">.</span>
               </h1>
             </motion.div>
 
@@ -276,9 +346,9 @@ export const ConceptaHome = () => {
               variants={fadeUp}
             >
               <p className="subtitle">
-                20 years of building our own delivery foundation — open-source
-                tools, accelerators, and platform technology. This is where
-                that work lives in the open.
+                Between code that&apos;s written and a system that&apos;s safely
+                live, there&apos;s a gap. We own it — the decisions, the
+                release, the outcome. And we build our own tools to do it.
               </p>
             </motion.div>
 
@@ -290,65 +360,103 @@ export const ConceptaHome = () => {
               variants={fadeUp}
             >
               <Button
-                href="#projects"
+                href="https://conceptatech.com"
+                target="_blank"
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
-                <>Explore the projects</>
+                <>Get a Delivery Readiness Assessment</>
               </Button>
               <Button
-                href="https://conceptatech.com"
+                href="#projects"
                 variant="secondary"
-                target="_blank"
                 className="w-full sm:w-auto"
               >
-                <>Work with us</>
+                <>Explore our projects</>
               </Button>
             </motion.div>
 
-            {/* Foundation index — the hero's structural signature: the four
-                projects as a directory listing, echoing the window blocks
-                below. Each entry hovers in its product accent. */}
-            <motion.nav
-              className="hero-index not-prose"
-              aria-label="Projects"
+            <motion.p
+              className="hero-ticker"
               initial="hidden"
               animate="visible"
               custom={0.4}
               variants={fadeUp}
             >
-              <span className="hero-index-cmd">
-                <span className="hero-index-prompt">$</span> ls foundation/
-              </span>
-              <span className="hero-index-row">
-                {PROJECTS.map((project) => (
-                  <Link
-                    key={project.name}
-                    href={project.href}
-                    className="hero-index-link"
-                    style={
-                      { "--idx-accent": project.accent } as React.CSSProperties
-                    }
-                  >
-                    {project.href.slice(1)}/
-                  </Link>
-                ))}
-              </span>
-            </motion.nav>
+              {PROOF_TICKER.map((item, i) => (
+                <span key={item}>
+                  {i > 0 && <span className="hero-ticker-sep"> / </span>}
+                  {item}
+                </span>
+              ))}
+            </motion.p>
           </div>
 
-          {/* Projects */}
+          {/* Trust bar */}
+          <motion.section className="trust-bar" {...sectionReveal}>
+            <p className="trust-label">Trusted with critical systems at</p>
+            <p className="trust-names">
+              {TRUSTED_BY.map((name, i) => (
+                <span key={name}>
+                  {i > 0 && <span className="trust-sep"> · </span>}
+                  {name}
+                </span>
+              ))}
+            </p>
+            <p className="trust-outcomes">
+              {TRUST_OUTCOMES.map((line, i) => (
+                <span key={line}>
+                  {i > 0 && <span className="hero-ticker-sep"> / </span>}
+                  {line}
+                </span>
+              ))}
+            </p>
+          </motion.section>
+
+          {/* What Concepta does */}
+          <section className="section-gap">
+            <motion.div className="section-header" {...sectionReveal}>
+              <span className="mono-label">What Concepta does</span>
+              <h2 className="section-title">
+                We don&apos;t advise from the sideline. We own the outcome.
+              </h2>
+              <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
+                One owner, from the first readiness call to the live release.
+                We make the hard technical decisions, stabilize or build, and
+                stand behind what ships.{" "}
+                <span className="text-white">
+                  Advice doesn&apos;t ship. We do.
+                </span>
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              {...sectionReveal}
+            >
+              {PILLARS.map((pillar) => (
+                <div key={pillar.title} className="pillar">
+                  <span className="pillar-stat">{pillar.stat}</span>
+                  <p className="pillar-title">{pillar.title}</p>
+                  <p className="pillar-body">{pillar.body}</p>
+                </div>
+              ))}
+            </motion.div>
+          </section>
+
+          {/* Projects — the delivery foundation */}
           <section id="projects" className="section-gap">
             <motion.div className="section-header" {...sectionReveal}>
-              <span className="mono-label">Projects</span>
+              <span className="mono-label">The delivery foundation</span>
               <h2 className="section-title">
                 Build faster without losing control.
               </h2>
-              <p className="mt-4 max-w-[540px] text-base leading-relaxed text-[var(--mix-text-muted)]">
+              <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
                 Every project here started inside real delivery work — then got
-                extracted, hardened, and shipped. Open source where the
-                community builds with us, product where the problem demands
-                more.
+                extracted, hardened, and shipped. Our open-source code already
+                runs inside products at Google, Toyota, and Nubank. Open source
+                where the community builds with us, product where the problem
+                demands more.
               </p>
             </motion.div>
 
@@ -359,37 +467,25 @@ export const ConceptaHome = () => {
             </div>
           </section>
 
-          {/* Statement */}
-          <motion.section className="section-gap" {...sectionReveal}>
-            <p className="statement">
-              Building got faster. Shipping safely didn&apos;t. These tools
-              close that gap —{" "}
-              <span className="statement-accent">
-                open-source code that already runs inside products at Google,
-                Toyota, and Nubank
-              </span>
-              .
-            </p>
-          </motion.section>
-
           {/* Bottom CTA */}
           <motion.section
             className="not-prose cta-section section-gap"
             {...sectionReveal}
           >
-            <h2 className="section-title">Build with us.</h2>
-            <p className="mt-4 text-[var(--mix-text-muted)] max-w-[440px] text-base leading-relaxed">
-              The open source lives on GitHub, and the community hangs out on
-              Discord. Come say hi.
+            <h2 className="section-title">Know whether it&apos;s safe to ship.</h2>
+            <p className="mt-4 text-[var(--mix-text-muted)] max-w-[480px] text-base leading-relaxed">
+              Start with a Delivery Readiness Assessment — in two to three
+              weeks you&apos;ll know exactly where your release stands, and
+              what to do next.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Button
-                href="https://github.com/btwld"
+                href="https://conceptatech.com"
                 target="_blank"
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
-                <>GitHub</>
+                <>Get a Delivery Readiness Assessment</>
               </Button>
               <Button
                 href="https://discord.com/invite/Ycn6GV3m2k"
@@ -401,13 +497,13 @@ export const ConceptaHome = () => {
               </Button>
             </div>
             <p className="cta-handoff">
-              Shipping something business-critical?{" "}
+              Prefer the code? The open source lives on{" "}
               <a
-                href="https://conceptatech.com"
+                href="https://github.com/btwld"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                We own releases end-to-end →
+                GitHub →
               </a>
             </p>
           </motion.section>
@@ -441,15 +537,24 @@ export const ConceptaHome = () => {
           box-shadow: 0 6px 25px rgba(58, 91, 255, 0.4) !important;
         }
 
+        /* Stance line — the worldview the page argues from */
+        .hero-stance {
+          margin-top: 2rem;
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 13px;
+          letter-spacing: 0.02em;
+          color: #00ebbc;
+        }
+
         /* Carbon-sharp display: solid white, heavy, tight — no gradient.
            The brand's confidence lives in the full stop, set in brand blue. */
         .headline {
           display: block;
-          font-size: min(5.5rem, max(9vw, 3.25rem));
+          font-size: min(5rem, max(8vw, 3rem));
           font-weight: 700;
           letter-spacing: -0.04em;
           line-height: 1.05;
-          margin-top: 1.75rem;
+          margin-top: 1rem;
           color: #fff;
           text-align: left;
         }
@@ -463,43 +568,57 @@ export const ConceptaHome = () => {
           line-height: 1.6;
           color: var(--mix-text-muted);
           margin-top: 1.5rem;
-          max-width: 520px;
+          max-width: 560px;
         }
 
-        /* Foundation index — mono directory listing under the CTAs */
-        .hero-index {
-          margin-top: 44px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
+        /* Proof ticker — numbers, mono, quiet */
+        .hero-ticker {
+          margin-top: 40px;
           font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
           font-size: 13px;
-        }
-
-        .hero-index-cmd {
           color: var(--mix-text-muted);
-          opacity: 0.65;
         }
 
-        .hero-index-prompt {
+        .hero-ticker-sep {
           color: #00ebbc;
-          opacity: 0.9;
+          opacity: 0.7;
         }
 
-        .hero-index-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px 24px;
+        /* Trust bar */
+        .trust-bar {
+          margin-top: 96px;
+          padding: 28px 0;
+          border-top: 1px solid var(--mix-border-card);
+          border-bottom: 1px solid var(--mix-border-card);
         }
 
-        .hero-index-link {
+        .trust-label {
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
           color: var(--mix-text-muted);
-          transition: color 0.2s;
+          opacity: 0.7;
         }
 
-        .hero-index-link:hover,
-        .hero-index-link:focus-visible {
-          color: var(--idx-accent);
+        .trust-names {
+          margin-top: 10px;
+          font-size: 1.125rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          color: #fff;
+        }
+
+        .trust-sep {
+          color: var(--mix-text-muted);
+          font-weight: 400;
+        }
+
+        .trust-outcomes {
+          margin-top: 10px;
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 12.5px;
+          color: var(--mix-text-muted);
         }
 
         .mono-label {
@@ -525,6 +644,36 @@ export const ConceptaHome = () => {
           margin-top: 12px;
         }
 
+        /* Pillars */
+        .pillar {
+          padding: 24px;
+          border-radius: 16px;
+          background: var(--mix-surface);
+          border: 1px solid var(--mix-border-card);
+        }
+
+        .pillar-stat {
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--mix-accent);
+          letter-spacing: -0.02em;
+        }
+
+        .pillar-title {
+          margin-top: 12px;
+          font-size: 1rem;
+          font-weight: 600;
+          color: #fff;
+        }
+
+        .pillar-body {
+          margin-top: 6px;
+          font-size: 0.9375rem;
+          line-height: 1.6;
+          color: var(--mix-text-muted);
+        }
+
         .project-card {
           display: flex;
           flex-direction: column;
@@ -541,6 +690,26 @@ export const ConceptaHome = () => {
           box-shadow: 0 0 28px -6px
             color-mix(in srgb, var(--card-accent) 30%, transparent);
           transform: translateY(-2px);
+        }
+
+        .project-card-copy {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+        }
+
+        /* Wide closer card: copy and window sit side by side on desktop */
+        @media (min-width: 768px) {
+          .project-card-wide {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: stretch;
+          }
+
+          .project-card-wide .project-window {
+            margin-top: 0;
+          }
         }
 
         .project-name {
@@ -575,12 +744,22 @@ export const ConceptaHome = () => {
           font-size: 0.9375rem;
           line-height: 1.6;
           color: var(--mix-text-muted);
+          flex-grow: 1;
+        }
+
+        .project-link {
+          margin-top: 16px;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: var(--card-accent);
         }
 
         /* ── Project window (shared chrome for the per-product visual) ── */
         .project-window {
           margin-top: 20px;
-          flex-grow: 1;
           display: flex;
           flex-direction: column;
           border-radius: 12px;
@@ -625,7 +804,7 @@ export const ConceptaHome = () => {
           justify-content: center;
         }
 
-        /* Mix: style snippet */
+        /* Mix / Ack: code snippets */
         .pv-code {
           font-size: 12.5px !important;
           overflow-x: auto;
@@ -633,6 +812,32 @@ export const ConceptaHome = () => {
         .pv-code code {
           font-size: 12.5px !important;
           line-height: 1.55 !important;
+        }
+
+        /* Ack: validation result row */
+        .pv-ack {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .pv-ack-error {
+          display: flex;
+          align-items: baseline;
+          gap: 10px;
+          padding: 8px 12px;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 107, 107, 0.25);
+          background: rgba(255, 107, 107, 0.07);
+          font-size: 12.5px;
+          color: var(--mix-text-muted);
+        }
+
+        .pv-ack-path {
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 11.5px;
+          color: #ff6b6b;
+          flex-shrink: 0;
         }
 
         /* Remix: component catalog chips */
@@ -770,29 +975,6 @@ export const ConceptaHome = () => {
           text-align: right;
         }
 
-        .project-link {
-          margin-top: 20px;
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          font-size: 0.875rem;
-          font-weight: 500;
-          color: var(--card-accent);
-        }
-
-        .statement {
-          max-width: 720px;
-          font-size: clamp(1.375rem, 3vw, 1.875rem);
-          font-weight: 500;
-          letter-spacing: -0.02em;
-          line-height: 1.4;
-          color: var(--mix-text-muted);
-        }
-
-        .statement-accent {
-          color: #fff;
-        }
-
         .cta-section {
           margin-bottom: 80px;
           border-top: 1px solid var(--mix-border-card);
@@ -803,7 +985,7 @@ export const ConceptaHome = () => {
           align-items: center;
         }
 
-        /* Quiet handoff to the services side — one line, once. */
+        /* Quiet handoff — one line, once. */
         .cta-handoff {
           margin-top: 28px;
           font-size: 0.875rem;
