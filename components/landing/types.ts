@@ -24,6 +24,8 @@ export interface LandingContent {
   };
   /** Per-product outputs/surfaces bento section. */
   OutputsBento: ComponentType;
+  /** Optional per-product feature-spotlight sections, rendered after OutputsBento. */
+  Spotlights?: ComponentType;
   marquee: { rowA: string[]; rowB: string[] };
   trustSplit: {
     eyebrow: string;
@@ -36,4 +38,6 @@ export interface LandingContent {
   };
   faq: { q: string; a: string }[];
   closingCta: { title: string; lead: string; finePrint: string };
+  /** Optional visual rendered inside the closing CTA card, below the waitlist form. */
+  ClosingVisual?: ComponentType;
 }

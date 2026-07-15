@@ -13,7 +13,18 @@ export function AckHome() {
 
       <section className="ack-hero ack-shell" aria-labelledby="ack-hero-title">
         <div className="ack-hero-copy">
-          <p className="ack-product-kicker">Dart schemas for apps &amp; structured AI</p>
+          <div className="ack-kicker-row">
+            <p className="ack-product-kicker">Dart schemas for apps &amp; structured AI</p>
+            <a
+              className="ack-byline"
+              href="https://conceptatech.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              by
+              <img src="/assets/logo_concepta.svg" alt="Concepta" />
+            </a>
+          </div>
 
           <h1 id="ack-hero-title">
             Trust the boundary.

@@ -229,7 +229,7 @@ const PROJECTS: Project[] = [
     description:
       "Turns APIs, workflows, and business rules into reusable capabilities with controls built in — permissions, approvals, human review, and audit. Agents act through approved capabilities, not broad system access.",
     href: "/stargate",
-    accent: "#A78BFA",
+    accent: "#3EB8C9",
     status: "Waitlist",
     windowLabel: "claims-approval.json",
     Visual: StargateVisual,
