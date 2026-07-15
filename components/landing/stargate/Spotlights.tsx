@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Check, Sparkles } from "lucide-react";
 import { SectionHead } from "../SectionHead";
 import { HighlightedCode } from "../HighlightedCode";
-import { EASE } from "../motion";
+import { EASE, staggerParent, staggerChild } from "../motion";
 import { EVAL_TS } from "./snippets";
 
 /* Two upcoming-feature spotlights: human-in-the-loop (stargate#149)
@@ -13,7 +13,27 @@ import { EVAL_TS } from "./snippets";
 const HITL_BULLETS = [
   "The model designs the form — fields and actions generated from context",
   "Respond in the studio or over the API; the run resumes where it paused",
-  "Every answer lands in the artifact as a human decision record",
+  "Auditable by default — every answer lands in the artifact as a human decision record",
+];
+
+/* Audiences mirror the demo workflows shipped with the feature:
+   customer recovery, incident command review, presentation tutor. */
+const HITL_AUDIENCES = [
+  {
+    kind: "APPROVAL",
+    who: "Support & finance ops",
+    body: "Refunds above the auto-approve limit wait for a lead's sign-off — not a model's guess.",
+  },
+  {
+    kind: "REVIEW",
+    who: "On-call & incident teams",
+    body: "The agent drafts the remediation plan; the commander authorizes it before anything runs.",
+  },
+  {
+    kind: "SELECTION",
+    who: "Client-facing teams",
+    body: "Tone, scope, and final wording stay a person's call — the human picks what ships.",
+  },
 ];
 
 function HumanInputSection() {
@@ -25,7 +45,7 @@ function HumanInputSection() {
             align="left"
             eyebrow="Coming soon · Human input"
             title="The workflow pauses. A person decides."
-            lead="Agents call a runtime-injected request_human_input tool when a step needs judgment — input, approval, review, or selection. The run pauses, the studio opens a form the model designed for that moment, and the answer changes the final artifact."
+            lead="Agents do the fast work; judgment stays with your team. When a step needs a sign-off, an edit, or a choice between options, the agent calls request_human_input — the run pauses, the right person decides, and the workflow resumes with that decision on the record."
           />
           <ul className="lp-checklist">
             {HITL_BULLETS.map((bullet) => (
@@ -82,6 +102,30 @@ function HumanInputSection() {
           </div>
         </motion.div>
       </div>
+
+      <motion.div
+        variants={staggerParent}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        <motion.p className="lp-hitl-aud-kicker" variants={staggerChild}>
+          Built for the moments a person must own
+        </motion.p>
+        <div className="lp-hitl-aud">
+          {HITL_AUDIENCES.map((a) => (
+            <motion.div
+              key={a.kind}
+              className="lp-hitl-aud-card"
+              variants={staggerChild}
+            >
+              <span className="lp-severity-chip lp-hitl-kind">{a.kind}</span>
+              <p className="lp-hitl-aud-who">{a.who}</p>
+              <p className="lp-hitl-aud-body">{a.body}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }

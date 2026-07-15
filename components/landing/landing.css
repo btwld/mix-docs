@@ -1426,6 +1426,45 @@ html[data-product='code-analysis'] {
   max-width: 340px;
   margin-top: 20px;
 }
+.lp-hitl-aud-kicker {
+  margin: 52px 0 14px;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+.lp-hitl-aud {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 780px) {
+  .lp-hitl-aud {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.lp-hitl-aud-card {
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--lp-border-card);
+  background: rgba(13, 11, 20, 0.5);
+}
+.lp-hitl-aud-card .lp-severity-chip {
+  display: inline-block;
+}
+.lp-hitl-aud-who {
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+}
+.lp-hitl-aud-body {
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--lp-text-muted);
+}
 
 /* ═══ Spotlight: eval scorecard ═════════════════════════ */
 .lp-spot-window {

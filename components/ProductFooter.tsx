@@ -27,7 +27,12 @@ export default function ProductFooter() {
 
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-sm text-[var(--mix-text-muted)]">
-            <span>&copy; 2026 Concepta Tech.</span>
+            <span className="flex items-center gap-2.5">
+                <Link href="/" aria-label="Concepta home" className="opacity-80 hover:opacity-100 transition-opacity">
+                    <img src="/assets/logo_concepta.svg" alt="Concepta" className="h-3.5 w-auto" />
+                </Link>
+                <span>&copy; 2026 Concepta Tech.</span>
+            </span>
             <div className="flex items-center gap-5">
                 <a href="https://github.com/btwld/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
                 <a href="https://pub.dev/packages/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
