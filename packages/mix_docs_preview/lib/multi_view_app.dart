@@ -86,7 +86,26 @@ class _PreviewView extends StatelessWidget {
         textDirection: ui.TextDirection.ltr,
         child: MediaQuery.fromView(
           view: view,
-          child: Center(child: PreviewRegistry.build(previewId, context)),
+          // Provide WidgetsLocalizations (required by framework widgets such
+          // as RawRadio, used by RemixRadio) plus an Overlay ancestor (required
+          // by overlay-based components — menu, select, tooltip — to mount
+          // their popups via RawMenuAnchor / OverlayPortal). The standalone
+          // `runMixApp` path gets both from MaterialApp; the embedded
+          // multi-view path must provide them explicitly.
+          child: Localizations(
+            locale: const Locale('en', 'US'),
+            delegates: const <LocalizationsDelegate<dynamic>>[
+              DefaultWidgetsLocalizations.delegate,
+            ],
+            child: Overlay(
+              initialEntries: [
+                OverlayEntry(
+                  builder: (context) =>
+                      Center(child: PreviewRegistry.build(previewId, context)),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
