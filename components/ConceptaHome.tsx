@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Button } from "./Button";
+import { CONCEPTA_GITHUB_URL } from "./constants";
 import { HeroBackground } from "./HeroBackground";
 import { HighlightedCode } from "./HighlightedCode";
 import Layout from "./Layout";
@@ -543,7 +544,7 @@ export const ConceptaHome = () => {
             <p className="cta-handoff">
               Prefer the code? The open source lives on{" "}
               <a
-                href="https://github.com/btwld"
+                href={CONCEPTA_GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -13,6 +13,13 @@ import {
     X,
 } from 'lucide-react'
 import clsx from 'clsx'
+import {
+    ACK_GITHUB_URL,
+    CONCEPTA_GITHUB_URL,
+    MIX_GITHUB_URL,
+    NAKED_UI_GITHUB_URL,
+    REMIX_GITHUB_URL,
+} from './constants'
 
 function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     return (
@@ -49,11 +56,6 @@ const VERSION_ITEMS = [
     { label: 'Mix v1', href: 'https://mix-docs-gosljkd74-fluttertools.vercel.app/' },
 ]
 
-const CONCEPTA_GITHUB_URL = 'https://github.com/btwld'
-const MIX_GITHUB_URL = 'https://github.com/btwld/mix'
-const REMIX_GITHUB_URL = 'https://github.com/btwld/remix'
-const NAKED_UI_GITHUB_URL = 'https://github.com/btwld/naked_ui'
-const ACK_GITHUB_URL = 'https://github.com/btwld/ack'
 const TWITTER_URL = 'https://twitter.com/leoafarias'
 const DISCORD_URL = 'https://discord.com/invite/Ycn6GV3m2k'
 const MIX_DOCS_URL = '/documentation/mix/overview/introduction'
