@@ -15,7 +15,7 @@ export const codeAnalysisContent: LandingContent = {
   product: "code-analysis",
   wordmarkName: "code-analysis",
   hero: {
-    titleTop: "Stop guessing your code's health.",
+    titleTop: "See your code's health clearly.",
     titleGradient: "Audit it. Grade it. Prove it.",
     lead: (
       <>
@@ -34,9 +34,10 @@ export const codeAnalysisContent: LandingContent = {
   ],
   statement: (
     <>
-      Gut-feel code reviews hand you opinions you then defend in meetings.{" "}
+      Expert review brings context. A repeatable baseline makes that judgment
+      easier to act on.{" "}
       <span className="lp-gradient-text">
-        Code Analysis hands you deterministic, evidence-backed scores
+        Code Analysis adds deterministic, evidence-backed scores
       </span>
       , so the conversation skips straight to what to fix.
     </>

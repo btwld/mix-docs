@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { CONCEPTA_GITHUB_URL, MIX_GITHUB_URL, REMIX_GITHUB_URL } from './constants'
 
 function isAckPath(pathname: string | null) {
     return pathname === '/ack'
@@ -11,6 +12,38 @@ function isAckPath(pathname: string | null) {
 
 function isNakedUiPath(pathname: string | null) {
     return pathname === '/naked-ui' || pathname?.startsWith('/naked-ui/')
+}
+
+function isRemixPath(pathname: string | null) {
+    return pathname === '/remix'
+        || pathname?.startsWith('/remix/')
+        || pathname?.startsWith('/documentation/remix')
+}
+
+function isMixPath(pathname: string | null) {
+    return pathname === '/mix'
+        || pathname?.startsWith('/mix/')
+        || pathname?.startsWith('/documentation/mix')
+}
+
+function isProductWithoutPublicRepo(pathname: string | null) {
+    return pathname === '/stargate'
+        || pathname?.startsWith('/stargate/')
+        || pathname === '/code-analysis'
+        || pathname?.startsWith('/code-analysis/')
+}
+
+function getGithubHref(pathname: string | null) {
+    if (isRemixPath(pathname)) return REMIX_GITHUB_URL
+    if (isMixPath(pathname)) return MIX_GITHUB_URL
+    if (isProductWithoutPublicRepo(pathname)) return null
+    return CONCEPTA_GITHUB_URL
+}
+
+function getPubDevHref(pathname: string | null) {
+    if (isRemixPath(pathname)) return 'https://pub.dev/packages/remix'
+    if (isMixPath(pathname)) return 'https://pub.dev/packages/mix'
+    return null
 }
 
 export default function ProductFooter() {
@@ -42,6 +75,11 @@ export default function ProductFooter() {
         )
     }
 
+    // Public products link their own repo/package. Concepta pages link the org,
+    // while products without a public repo omit GitHub, matching the navbar.
+    const githubHref = getGithubHref(pathname)
+    const pubDevHref = getPubDevHref(pathname)
+
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-sm text-[var(--mix-text-muted)]">
             <span className="flex items-center gap-2.5">
@@ -52,8 +90,12 @@ export default function ProductFooter() {
             </span>
             <div className="flex items-center gap-5">
                 <Link href="/reports" className="hover:text-white transition-colors">Reports</Link>
-                <a href="https://github.com/btwld/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
-                <a href="https://pub.dev/packages/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
+                {githubHref && (
+                    <a href={githubHref} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+                )}
+                {pubDevHref && (
+                    <a href={pubDevHref} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
+                )}
                 <a href="https://discord.com/invite/Ycn6GV3m2k" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Discord</a>
                 <a href="https://twitter.com/leoafarias" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Twitter</a>
             </div>

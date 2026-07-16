@@ -7,6 +7,7 @@ const description =
 export const metadata: Metadata = {
   title: "Reports | Concepta",
   description,
+  applicationName: "Concepta",
   openGraph: {
     title: "Concepta Reports",
     description,

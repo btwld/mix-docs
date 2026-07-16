@@ -257,7 +257,7 @@ const PROJECTS: Project[] = [
     name: "Remix",
     tagline: "Flutter components, headless by design.",
     description:
-      "20+ accessible components built on Mix — completely styleable, from primitives to a full theme, with zero override wars.",
+      "20+ accessible components built on Mix — completely styleable, from primitives to a full theme, with complete visual control.",
     href: "/remix",
     accent: "#00EB03",
     status: "Open source",

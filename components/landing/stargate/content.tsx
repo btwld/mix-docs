@@ -23,7 +23,7 @@ export const stargateContent: LandingContent = {
   },
   HeroWindow,
   stats: [
-    { value: "8", label: "Built-in components" },
+    { value: "I/O", label: "Schema-derived ports" },
     { value: "40", label: "Conformance cases" },
     { value: "3", label: "Expression languages" },
     { value: "1", label: "Portable spec" },
@@ -85,7 +85,6 @@ export const stargateContent: LandingContent = {
       "calculator",
       "model.echo",
       "model.google",
-      "createAction",
     ],
     rowB: [
       "Schema-derived ports",
