@@ -543,7 +543,7 @@ export const ConceptaHome = () => {
             <p className="cta-handoff">
               Prefer the code? The open source lives on{" "}
               <a
-                href="https://github.com/btwld"
+                href="https://github.com/conceptadev"
                 target="_blank"
                 rel="noopener noreferrer"
               >

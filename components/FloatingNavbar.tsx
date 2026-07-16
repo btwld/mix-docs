@@ -49,7 +49,7 @@ const VERSION_ITEMS = [
     { label: 'Mix v1', href: 'https://mix-docs-gosljkd74-fluttertools.vercel.app/' },
 ]
 
-const CONCEPTA_GITHUB_URL = 'https://github.com/btwld'
+const CONCEPTA_GITHUB_URL = 'https://github.com/conceptadev'
 const MIX_GITHUB_URL = 'https://github.com/btwld/mix'
 const REMIX_GITHUB_URL = 'https://github.com/btwld/remix'
 const NAKED_UI_GITHUB_URL = 'https://github.com/btwld/naked_ui'
