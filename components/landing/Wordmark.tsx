@@ -1,4 +1,10 @@
-export function Wordmark({ name }: { name: string }) {
+export function Wordmark({
+  name,
+  showByline = true,
+}: {
+  name: string;
+  showByline?: boolean;
+}) {
   return (
     <div className="lp-wordmark">
       <span className="lp-wordmark-text">
@@ -7,19 +13,21 @@ export function Wordmark({ name }: { name: string }) {
           ▊
         </span>
       </span>
-      <a
-        className="lp-byline"
-        href="https://conceptatech.com"
-        target="_blank"
-        rel="noreferrer"
-      >
-        by
-        <img
-          src="/assets/logo_concepta.svg"
-          alt="Concepta"
-          className="lp-byline-logo"
-        />
-      </a>
+      {showByline && (
+        <a
+          className="lp-byline"
+          href="https://conceptatech.com"
+          target="_blank"
+          rel="noreferrer"
+        >
+          by
+          <img
+            src="/assets/logo_concepta.svg"
+            alt="Concepta"
+            className="lp-byline-logo"
+          />
+        </a>
+      )}
     </div>
   );
 }

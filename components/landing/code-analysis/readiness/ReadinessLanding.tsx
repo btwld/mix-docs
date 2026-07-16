@@ -252,13 +252,13 @@ export function ReadinessLanding() {
             <div className="lp-cta-links">
               <Link href="/code-analysis">Powered by Code Analysis</Link>
               <span aria-hidden="true">·</span>
-              <a
-                href="https://conceptatech.com"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/"
+                className="lp-cta-concepta"
+                aria-label="Concepta home"
               >
-                Concepta ↗
-              </a>
+                <img src="/assets/logo_concepta.svg" alt="Concepta" />
+              </Link>
               <span aria-hidden="true">·</span>
               <span className="lp-cta-fine">© 2026 · a Concepta engagement</span>
             </div>

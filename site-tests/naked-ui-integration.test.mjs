@@ -67,6 +67,7 @@ test('keeps the interactive showcase keyboard and motion aware', () => {
   assert.match(page, /role="tablist"/)
   assert.match(page, /role="tab"/)
   assert.match(page, /role="tabpanel"/)
+  assert.match(page, /<Wordmark name="naked_ui" showByline=\{false\} \/>/)
   assert.match(page, /tabIndex=\{activeDemo === index \? 0 : -1\}/)
   assert.match(page, /event\.key === "ArrowRight"/)
   assert.match(page, /aria-checked=\{checked\}/)

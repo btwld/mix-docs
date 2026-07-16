@@ -676,7 +676,7 @@ export function NakedUiHome() {
             animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 1.1, ease: EASE }}
           >
-            <Wordmark name="naked_ui" />
+            <Wordmark name="naked_ui" showByline={false} />
           </motion.div>
 
           <motion.h1

@@ -27,6 +27,7 @@ type ProductId = 'concepta' | 'mix' | 'remix' | 'naked-ui' | 'ack' | 'stargate' 
 function getActiveProduct(pathname: string | null): ProductId {
     if (!pathname) return 'concepta'
     if (pathname === '/') return 'concepta'
+    if (pathname === '/reports' || pathname.startsWith('/reports/')) return 'concepta'
     if (pathname.startsWith('/documentation/remix')) return 'remix'
     if (pathname === '/remix' || pathname.startsWith('/remix/')) return 'remix'
     if (pathname === '/naked-ui' || pathname.startsWith('/naked-ui/')) return 'naked-ui'
@@ -533,13 +534,22 @@ function MobileDrawer({
                             Docs
                         </Link>
                     ) : activeProduct === 'concepta' ? (
-                        <Link
-                            href="/#projects"
-                            onClick={onClose}
-                            className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
-                        >
-                            Projects
-                        </Link>
+                        <>
+                            <Link
+                                href="/#projects"
+                                onClick={onClose}
+                                className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
+                            >
+                                Projects
+                            </Link>
+                            <Link
+                                href="/reports"
+                                onClick={onClose}
+                                className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                            >
+                                Reports
+                            </Link>
+                        </>
                     ) : (
                         <Link
                             href="#waitlist"
@@ -605,6 +615,7 @@ export default function FloatingNavbar() {
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false)
     const isDocsActive = pathname?.startsWith('/documentation') ?? false
+    const isReportsActive = pathname?.startsWith('/reports') ?? false
     const activeProduct = getActiveProduct(pathname)
     const homeHref =
         PRODUCTS.find((p) => p.id === activeProduct)?.href ?? '/'
@@ -653,6 +664,22 @@ export default function FloatingNavbar() {
                 <span className="h-4 w-px bg-white/10" />
                 <ProductMenu />
                 <span className="h-4 w-px bg-white/10" />
+                {activeProduct === 'concepta' && (
+                    <>
+                        <Link
+                            href="/reports"
+                            className={clsx(
+                                'px-3 py-1.5 text-sm transition-colors',
+                                isReportsActive
+                                    ? 'text-[color:var(--mix-accent)]'
+                                    : 'text-white/80 hover:text-white',
+                            )}
+                        >
+                            Reports
+                        </Link>
+                        <span className="h-4 w-px bg-white/10" />
+                    </>
+                )}
                 {activeProduct !== 'concepta' && (
                     <>
                         <Link
