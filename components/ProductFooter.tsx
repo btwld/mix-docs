@@ -9,6 +9,10 @@ function isAckPath(pathname: string | null) {
         || pathname?.startsWith('/documentation/ack')
 }
 
+function isNakedUiPath(pathname: string | null) {
+    return pathname === '/naked-ui' || pathname?.startsWith('/naked-ui/')
+}
+
 export default function ProductFooter() {
     const pathname = usePathname()
 
@@ -20,6 +24,19 @@ export default function ProductFooter() {
                     <a href="https://github.com/btwld/ack" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
                     <a href="https://pub.dev/packages/ack" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
                     <Link href="/ack/llms.txt" className="hover:text-white transition-colors">llms.txt</Link>
+                </div>
+            </div>
+        )
+    }
+
+    if (isNakedUiPath(pathname)) {
+        return (
+            <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-sm text-[var(--mix-text-muted)]">
+                <span>Behavior-first Flutter primitives. Styling is yours.</span>
+                <div className="flex items-center gap-5">
+                    <a href="https://github.com/btwld/naked_ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+                    <a href="https://pub.dev/packages/naked_ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
+                    <a href="https://docs.page/btwld/naked_ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Docs</a>
                 </div>
             </div>
         )

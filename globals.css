@@ -78,6 +78,17 @@ html.dark[data-product="code-analysis"] {
     --mix-accent-glow: rgba(0, 211, 255, 0.18);
 }
 
+/* Naked UI product: official blue, lifted for contrast on the dark shell. */
+html.dark[data-product="naked-ui"] {
+    --nextra-primary-hue: 213deg;
+    --nextra-primary-saturation: 94%;
+    --nextra-primary-lightness: 68%;
+
+    --mix-accent: #60A5FA;
+    --mix-accent-low: rgba(96, 165, 250, 0.1);
+    --mix-accent-glow: rgba(96, 165, 250, 0.2);
+}
+
 /* Ack product: blue/cyan validation palette */
 html.dark[data-product="ack"] {
     --nextra-primary-hue: 228deg;
