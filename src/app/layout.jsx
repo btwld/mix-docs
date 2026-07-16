@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 const description =
-    'Concepta ships the systems your business runs on — and builds the open-source delivery foundation behind them: Mix, Remix, Naked UI, Ack, Stargate, and Code Analysis.'
+    'Concepta ships the systems your business runs on — and builds the open-source delivery foundation behind them: Mix, Remix, Naked UI, Ack, FVM, Stargate, and Code Analysis.'
 
 export const viewport = {
     themeColor: '#111111',
