@@ -114,7 +114,7 @@ export const HomeContent = () => {
               custom={0.3}
               variants={fadeUp}
             >
-              <Button href="/documentation/overview/getting-started" arrow="right" className="w-full sm:w-auto">
+              <Button href="/documentation/mix/overview/getting-started" arrow="right" className="w-full sm:w-auto">
                 <>Get Started</>
               </Button>
               <Button href="https://discord.com/invite/Ycn6GV3m2k" variant="secondary" target="_blank" className="w-full sm:w-auto">
@@ -222,7 +222,7 @@ Box(style: cardStyle, child: ...)`} />
               Start building your first Mix-styled widget in under 5 minutes.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Button href="/documentation/overview/getting-started" variant="filled" arrow="right" className="w-full sm:w-auto">
+              <Button href="/documentation/mix/overview/getting-started" variant="filled" arrow="right" className="w-full sm:w-auto">
                 <>Get started in 5 minutes</>
               </Button>
             </div>

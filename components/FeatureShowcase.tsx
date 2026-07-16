@@ -27,7 +27,7 @@ const FEATURES: Feature[] = [
     title: "Intuitive Styling",
     subtitle:
       "Define size, color, and shape in a single fluent chain. Each method returns a new style — readable, composable, and type-safe.",
-    learnMoreHref: "/documentation/guides/styling",
+    learnMoreHref: "/documentation/mix/guides/styling",
     learnMoreLabel: "See the styling guide",
     previewId: "homepage/styling",
     colSpan: 2,
@@ -37,7 +37,7 @@ const FEATURES: Feature[] = [
     title: "Context-Reactive Variants",
     subtitle:
       "Declare hover behavior inline — color, scale, and shadow all react to state without conditional logic.",
-    learnMoreHref: "/documentation/guides/dynamic-styling",
+    learnMoreHref: "/documentation/mix/guides/dynamic-styling",
     learnMoreLabel: "Explore variants",
     previewId: "homepage/variants",
     layout: "stacked",
@@ -46,7 +46,7 @@ const FEATURES: Feature[] = [
     title: "Powerful Animations",
     subtitle:
       "Define keyframe timelines with multiple property tracks directly inside styles. No external animation controllers needed.",
-    learnMoreHref: "/documentation/guides/animations",
+    learnMoreHref: "/documentation/mix/guides/animations",
     learnMoreLabel: "Animation docs",
     previewId: "homepage/animation",
     layout: "stacked",
@@ -55,7 +55,7 @@ const FEATURES: Feature[] = [
     title: "Design System Buttons",
     subtitle:
       "Define a base button once, then compose variants by adding just what differs. Text styling flows through via inherited defaults.",
-    learnMoreHref: "/documentation/tutorials/creating-a-widget",
+    learnMoreHref: "/documentation/mix/tutorials/creating-a-widget",
     learnMoreLabel: "Build your own widget",
     previewId: "homepage/buttons",
     colSpan: 2,
@@ -65,7 +65,7 @@ const FEATURES: Feature[] = [
     title: "Text Directives",
     subtitle:
       "Apply uppercase and capitalize transforms directly in the style. Directives stay attached through merges and composition.",
-    learnMoreHref: "/documentation/guides/directives",
+    learnMoreHref: "/documentation/mix/guides/directives",
     learnMoreLabel: "Directives guide",
     previewId: "homepage/directives",
     colSpan: 2,

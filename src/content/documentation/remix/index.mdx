@@ -15,9 +15,9 @@ Remix is a Flutter component library built on top of [Mix](https://github.com/bt
 
 ## Why Remix?
 
-Building custom UI in Flutter usually means choosing between two painful paths: dropping down to raw widgets and rewriting hover, focus, and press handling every time — or fighting Material to make it look like something it isn't. Common friction points:
+Building fully custom UI in Flutter usually means starting from raw widgets — reimplementing hover, focus, and press handling for every component — or adapting a design language like Material to a look it wasn't designed for. Common friction points:
 
-- **Verbose styling**: deep widget trees make styles hard to read and harder to maintain.
+- **Scattered styling**: without a dedicated styling layer, visual decisions spread across build methods and are hard to keep consistent.
 - **Interaction state boilerplate**: hover, focus, and press require handlers, controllers, and state management for every component.
 - **Duplication**: reusable, themeable components tend to drift into copy-pasted variations.
 - **Animation overhead**: smooth transitions between states need explicit controllers and tweens.

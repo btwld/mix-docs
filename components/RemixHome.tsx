@@ -109,7 +109,7 @@ const THEMES = [
 const STATS = [
   { value: "20+", label: "Live components" },
   { value: "100%", label: "Headless & yours" },
-  { value: "0", label: "Override wars" },
+  { value: "0", label: "Style opinions" },
   { value: "BSD-3", label: "Free forever" },
 ];
 
@@ -167,7 +167,7 @@ const FAQ = [
   },
   {
     q: "How is it different from Material or Cupertino?",
-    a: "Material and Cupertino give you a look you then have to fight. Remix gives you behavior with no opinionated look, so you style every pixel with Mix. Full control, no override wars.",
+    a: "Material and Cupertino ship with a design language built in. Remix ships behavior with no opinionated look, so you style every pixel with Mix. Full control from the first line.",
   },
   {
     q: "Do I need to know Mix first?",
@@ -243,7 +243,7 @@ export const RemixHome = () => {
             custom={0.08}
             variants={fadeUp}
           >
-            Stop fighting the framework.
+            The behavior is built in.
             <br />
             <span className="rx-gradient-text">Style Flutter your way.</span>
           </motion.h1>
@@ -393,7 +393,7 @@ export const RemixHome = () => {
         {/* ══ Editorial statement ══════════════════════════════════ */}
         <section className="rx-shell rx-gap">
           <motion.p className="rx-statement" {...reveal}>
-            Material hands you a look you then spend weeks overriding.{" "}
+            Material and Cupertino come with a look of their own.{" "}
             <span className="rx-gradient-text">
               Remix hands you behavior and gets out of the way
             </span>
@@ -405,7 +405,7 @@ export const RemixHome = () => {
         <section className="rx-shell rx-gap">
           <SectionHead
             eyebrow="Why Remix"
-            title="Everything you need. Nothing you have to fight."
+            title="Everything you need. Nothing in your way."
             lead="A foundation that handles the hard parts — behavior, focus, accessibility — and then disappears so your design can take over."
           />
 
