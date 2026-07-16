@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { PRODUCTION_GAP_URL } from "./report-data";
 
 const INCOMING_BLOCKS = [
   [7, 18, 22, 0],
@@ -79,8 +78,8 @@ type ProductionGapCardProps = {
 };
 
 export function ProductionGapCard({
-  href = PRODUCTION_GAP_URL,
-  external = true,
+  href = "/reports/production-gap",
+  external = false,
   compact = false,
 }: ProductionGapCardProps) {
   const content = (
