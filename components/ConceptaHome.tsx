@@ -34,7 +34,38 @@ const sectionReveal = {
 
 const PROOF_TICKER = ["20 years", "600+ projects shipped", "98% delivery satisfaction"];
 
-const TRUSTED_BY = ["Truist", "AdventHealth", "FEMA", "Red Lobster", "Anago"];
+const TRUSTED_BY = [
+  {
+    name: "Truist",
+    className: "trust-logo-truist",
+    src: "/assets/client-logos/truist.svg",
+  },
+  {
+    name: "AdventHealth",
+    className: "trust-logo-adventhealth",
+    src: "/assets/client-logos/adventhealth.svg",
+  },
+  {
+    name: "FEMA",
+    className: "trust-logo-fema",
+    src: "/assets/client-logos/fema.svg",
+  },
+  {
+    name: "Red Lobster",
+    className: "trust-logo-red-lobster",
+    src: "/assets/client-logos/red-lobster.png",
+  },
+  {
+    name: "Warner Music Group",
+    className: "trust-logo-warner-music-group",
+    src: "/assets/client-logos/warner-music-group.svg",
+  },
+  {
+    name: "Google",
+    className: "trust-logo-google",
+    src: "/assets/client-logos/google.svg",
+  },
+] as const;
 
 const TRUST_OUTCOMES = [
   "27% more loan applications at Truist",
@@ -422,14 +453,27 @@ export const ConceptaHome = () => {
           {/* Trust bar */}
           <motion.section className="trust-bar" {...sectionReveal}>
             <p className="trust-label">Trusted with critical systems at</p>
-            <p className="trust-names">
-              {TRUSTED_BY.map((name, i) => (
-                <span key={name}>
-                  {i > 0 && <span className="trust-sep"> · </span>}
-                  {name}
-                </span>
+            <div
+              className="trust-logos"
+              role="list"
+              aria-label="Selected Concepta clients"
+            >
+              {TRUSTED_BY.map((client) => (
+                <div
+                  className={`trust-logo-card ${client.className}`}
+                  role="listitem"
+                  key={client.name}
+                >
+                  <img
+                    className="trust-logo-image"
+                    src={client.src}
+                    alt={`${client.name} logo`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               ))}
-            </p>
+            </div>
             <p className="trust-outcomes">
               {TRUST_OUTCOMES.map((line, i) => (
                 <span key={line}>
@@ -646,24 +690,70 @@ export const ConceptaHome = () => {
           opacity: 0.7;
         }
 
-        .trust-names {
-          margin-top: 10px;
-          font-size: 1.125rem;
-          font-weight: 600;
-          letter-spacing: -0.01em;
-          color: #fff;
+        .trust-logos {
+          display: grid;
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          gap: 12px;
+          margin-top: 18px;
         }
 
-        .trust-sep {
-          color: var(--mix-text-muted);
-          font-weight: 400;
+        .trust-logo-card {
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 16px;
+          background: transparent;
+        }
+
+        .trust-logo-image {
+          display: block;
+          width: 100%;
+          height: 100%;
+          max-width: 132px;
+          max-height: 38px;
+          object-fit: contain;
+          filter: grayscale(1) brightness(0) invert(1);
+          opacity: 0.76;
+        }
+
+        .trust-logo-red-lobster .trust-logo-image {
+          max-height: 42px;
+        }
+
+        .trust-logo-warner-music-group .trust-logo-image {
+          max-width: 112px;
+          max-height: 44px;
+        }
+
+        .trust-logo-google .trust-logo-image {
+          max-width: 100px;
+          max-height: 34px;
         }
 
         .trust-outcomes {
-          margin-top: 10px;
+          margin-top: 18px;
           font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
           font-size: 12.5px;
           color: var(--mix-text-muted);
+        }
+
+        @media (max-width: 1023px) {
+          .trust-logos {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 639px) {
+          .trust-logos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+          }
+
+          .trust-logo-card {
+            height: 68px;
+            padding: 14px;
+          }
         }
 
         .mono-label {
