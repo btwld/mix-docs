@@ -94,8 +94,8 @@ const PILLARS = [
 /* ── Per-project window visuals ──────────────────────────────────────
    Each block echoes the visual signature of its product page: Mix shows
    a style snippet, Remix its component catalog, Naked UI its observable state,
-   Ack a validation result, Stargate a governed workflow, and Code Analysis a
-   scorecard. Same chrome, different content. */
+   Ack a validation result, FVM a pinned SDK, Stargate a governed workflow, and
+   Code Analysis a scorecard. Same chrome, different content. */
 
 const MIX_SNIPPET = `final cardStyle = BoxStyler()
     .color(Colors.blue)
@@ -174,6 +174,30 @@ function AckVisual() {
   );
 }
 
+function FvmVisual() {
+  return (
+    <div className="pv-fvm">
+      <div className="pv-fvm-command">
+        <span className="pv-fvm-prompt">$</span>
+        <code>fvm use stable --pin</code>
+      </div>
+      <div className="pv-fvm-result">
+        <span className="pv-fvm-check">
+          <Check size={14} strokeWidth={2.4} />
+        </span>
+        <span>
+          <strong>Project configured</strong>
+          <small>Flutter stable is ready to use</small>
+        </span>
+      </div>
+      <div className="pv-fvm-file">
+        <code>.fvmrc</code>
+        <span>commit once · keep every environment in sync</span>
+      </div>
+    </div>
+  );
+}
+
 function StargateVisual() {
   return (
     <div className="pv-graph">
@@ -238,6 +262,8 @@ type Project = {
   status: "Open source" | "Waitlist";
   /** Mono label shown in the window chrome, like a filename. */
   windowLabel: string;
+  /** Opens projects hosted outside this site in a new tab. */
+  external?: boolean;
   Visual: React.ComponentType;
 };
 
@@ -287,6 +313,18 @@ const PROJECTS: Project[] = [
     Visual: AckVisual,
   },
   {
+    name: "FVM",
+    tagline: "Simple Flutter version management.",
+    description:
+      "Pin Flutter SDKs per project, switch versions without reinstalling, and keep local development and CI on the same toolchain.",
+    href: "https://fvm.app",
+    accent: "#38BDF8",
+    status: "Open source",
+    windowLabel: "project setup",
+    external: true,
+    Visual: FvmVisual,
+  },
+  {
     name: "Stargate",
     tagline: "Complex workflows for the enterprise.",
     description:
@@ -325,6 +363,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     >
       <Link
         href={project.href}
+        target={project.external ? "_blank" : undefined}
+        rel={project.external ? "noopener noreferrer" : undefined}
         className="project-card group"
         style={{ "--card-accent": project.accent } as React.CSSProperties}
       >
@@ -1063,6 +1103,95 @@ export const ConceptaHome = () => {
 
         .pv-naked-contract.is-presentation span {
           color: var(--mix-text-muted);
+        }
+
+        /* FVM: project-scoped SDK setup */
+        .pv-fvm {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .pv-fvm-command,
+        .pv-fvm-result,
+        .pv-fvm-file {
+          border-radius: 9px;
+          border: 1px solid var(--mix-border-card);
+          background: var(--mix-surface-bright);
+        }
+
+        .pv-fvm-command {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          padding: 10px 12px;
+          font-size: 12px;
+        }
+
+        .pv-fvm-command code,
+        .pv-fvm-file code {
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+        }
+
+        .pv-fvm-prompt {
+          color: var(--card-accent);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-weight: 700;
+        }
+
+        .pv-fvm-result {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 12px;
+        }
+
+        .pv-fvm-check {
+          display: grid;
+          width: 24px;
+          height: 24px;
+          flex-shrink: 0;
+          place-items: center;
+          border-radius: 999px;
+          color: #07111f;
+          background: var(--card-accent);
+        }
+
+        .pv-fvm-result strong,
+        .pv-fvm-result small {
+          display: block;
+        }
+
+        .pv-fvm-result strong {
+          color: #fff;
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        .pv-fvm-result small {
+          margin-top: 2px;
+          color: var(--mix-text-muted);
+          font-size: 10.5px;
+        }
+
+        .pv-fvm-file {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 9px 12px;
+          color: var(--mix-text-muted);
+          font-size: 10px;
+        }
+
+        .pv-fvm-file code {
+          flex-shrink: 0;
+          color: var(--card-accent);
+          font-size: 10.5px;
+        }
+
+        .pv-fvm-file span {
+          text-align: right;
         }
 
         /* Stargate: mini workflow graph */
