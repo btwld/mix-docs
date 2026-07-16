@@ -6,6 +6,7 @@ keywords: [flutter, remix, switch, toggle, binary, on-off, control]
 
 A toggle switch component for binary on/off states with smooth animations.
 
+
 ## Interactive preview
 
 <FlutterPreview
@@ -84,9 +85,9 @@ class _SwitchExampleState extends State<SwitchExample> {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Fortal widgets
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal-themed widget for this component:
 
 <CodeGroup title="Fortal variants" defaultLanguage="dart">
 ```dart
@@ -108,15 +109,13 @@ class _FortalSwitchExampleState extends State<FortalSwitchExample> {
     return Column(
       spacing: 16,
       children: [
-        RemixSwitch(
+        FortalSwitch.surface(
           selected: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: fortalSwitchStyler(variant: .surface),
         ),
-        RemixSwitch(
+        FortalSwitch.soft(
           selected: _value,
           onChanged: (v) => setState(() => _value = v),
-          style: fortalSwitchStyler(variant: .soft),
         ),
       ],
     );
@@ -126,7 +125,7 @@ class _FortalSwitchExampleState extends State<FortalSwitchExample> {
 </CodeGroup>
 
 <Info>
-  See the [fortalSwitchStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/switch/fortal_switch_styles.dart) for all available options.
+  See the [fortalSwitchStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/switch/fortal_switch_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -137,11 +136,11 @@ const RemixSwitch({
   required bool selected,
   ValueChanged<bool>? onChanged,
   bool enabled = true,
-  MouseCursor mouseCursor = SystemMouseCursors.click,
   bool enableFeedback = true,
   FocusNode? focusNode,
   bool autofocus = false,
   String? semanticLabel,
+  MouseCursor mouseCursor = SystemMouseCursors.click,
   RemixSwitchStyler style = const RemixSwitchStyler.create(),
   RemixSwitchSpec? styleSpec,
 })
@@ -152,33 +151,118 @@ const RemixSwitch({
 ## Properties
 ### Widget Properties
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
-| `enabled` | `bool` | Optional. Whether this switch is enabled. |
-| `selected` | `bool` | **Required**. Whether the switch is currently selected. |
-| `onChanged` | `ValueChanged<bool>?` | Optional. Called when the user toggles the switch. When null, the switch is disabled. |
-| `style` | `RemixSwitchStyler` | Optional. The style configuration for the switch. |
-| `styleSpec` | `RemixSwitchSpec?` | Optional. The style spec for the switch. |
-| `enableFeedback` | `bool` | Optional. Whether to enable haptic feedback when toggled. |
-| `focusNode` | `FocusNode?` | Optional. The focus node for the switch. |
-| `autofocus` | `bool` | Optional. Whether the switch should automatically request focus when it is created. |
-| `semanticLabel` | `String?` | Optional. The semantic label for the switch. |
-| `mouseCursor` | `MouseCursor` | Optional. Cursor when hovering over the switch. |
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `enabled` → `bool`
+
+Optional. Whether this switch is enabled.
+
+#### `selected` → `bool`
+
+**Required**. Whether the switch is currently selected.
+
+#### `onChanged` → `ValueChanged<bool>?`
+
+Optional. Called when the user toggles the switch. When omitted, the switch is disabled.
+
+#### `style` → `RemixSwitchStyler`
+
+Optional. The style configuration for the switch.
+
+#### `styleSpec` → `RemixSwitchSpec?`
+
+Optional. The style spec for the switch.
+
+#### `enableFeedback` → `bool`
+
+Optional. Whether to enable haptic feedback when toggled.
+
+#### `focusNode` → `FocusNode?`
+
+Optional. The focus node for the switch.
+
+#### `autofocus` → `bool`
+
+Optional. Whether the switch should automatically request focus when it is created.
+
+#### `semanticLabel` → `String?`
+
+Optional. The semantic label for the switch.
+
+#### `mouseCursor` → `MouseCursor`
+
+Optional. Cursor when hovering over the switch.
+
 
 ### Style Methods
 
-| Method | Description |
-|--------|-------------|
-| `thumbColor(Color value)` | Sets thumb color |
-| `thumb(BoxStyler value)` | Sets thumb styling |
-| `alignment(Alignment value)` | Sets container alignment |
-| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
-| `animate(AnimationConfig config)` | Configures implicit animation for style transitions. |
-| `constraints(BoxConstraintsMix value)` | Sets size constraints on the component. |
-| `decoration(DecorationMix value)` | Sets the container decoration. |
-| `margin(EdgeInsetsGeometryMix value)` | Sets the container margin. |
-| `padding(EdgeInsetsGeometryMix value)` | Sets the container padding. |
-| `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
-| `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
+#### `thumbColor(Color value)`
+
+Sets thumb color
+
+#### `thumb(BoxStyler value)`
+
+Sets thumb styling
+
+#### `container(BoxStyler value)`
+
+Configures the switch track container style.
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `trackColor(Color value)`
+
+Sets the track background color.
+
+#### `color(Color value)`
+
+Sets the track background color.
+
+#### `onSelected(RemixSwitchStyler value)`
+
+Applies a style while the switch is selected.
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `animate(AnimationConfig value)`
+
+Configures implicit animation for style transitions.
+
+#### `variants(List<VariantStyle<RemixSwitchSpec>> value)`
+
+Sets custom style variants.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `decoration(DecorationMix value)`
+
+Sets the container decoration.
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets the container margin.
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets the container padding.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, {Alignment alignment = .center})`
+
+Applies a matrix transformation to the component.
+
+#### `call({ ... })`
+
+Creates a `RemixSwitch` widget with this style applied.
 

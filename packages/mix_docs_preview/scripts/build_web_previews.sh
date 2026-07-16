@@ -36,7 +36,7 @@ if ! command -v flutter &> /dev/null; then
 fi
 
 FLUTTER_VERSION=$(flutter --version | head -1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-REQUIRED_VERSION="3.38.1"
+REQUIRED_VERSION="3.44.0"
 
 version_ge() {
     local IFS=.

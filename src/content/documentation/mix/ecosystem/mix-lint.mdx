@@ -137,8 +137,8 @@ MixScope(
 
 ```dart
 final style = BoxStyler()
-    .onHovered(BoxStyler().color(Colors.blue))
-    .onPressed(BoxStyler().color(Colors.green));
+    .onHovered(.color(Colors.blue))
+    .onPressed(.color(Colors.green));
 ```
 
 **Prefer:**
@@ -146,8 +146,8 @@ final style = BoxStyler()
 ```dart
 final style = BoxStyler()
     .color(Colors.grey)
-    .onHovered(BoxStyler().color(Colors.blue))
-    .onPressed(BoxStyler().color(Colors.green));
+    .onHovered(.color(Colors.blue))
+    .onPressed(.color(Colors.green));
 ```
 
 ### mix_max_number_of_attributes_per_style

@@ -57,18 +57,16 @@ class _AccordionPreviewState extends State<AccordionPreview> {
             child: ColumnBox(
               style: FlexBoxStyler().spacing(16),
               children: [
-                RemixAccordion(
+                FortalAccordion.surface(
                   value: 'accordion1',
                   title: 'How do I update my account information?',
-                  style: fortalAccordionStyler(),
                   child: const Text(
                     'Insert the accordion description here. It would look better as two lines of text.',
                   ),
                 ),
-                RemixAccordion(
+                FortalAccordion.soft(
                   value: 'accordion2',
                   title: 'What payment methods are accepted?',
-                  style: fortalAccordionStyler(),
                   child: const Text(
                     'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.',
                   ),
@@ -79,27 +77,5 @@ class _AccordionPreviewState extends State<AccordionPreview> {
         ],
       ),
     );
-  }
-
-  RemixAccordionStyler get itemStyle {
-    return RemixAccordionStyler()
-        .content(BoxStyler().padding(.horizontal(16).top(8)))
-        .wrap(.clipRRect(borderRadius: .circular(8)))
-        .padding(.horizontal(16).vertical(14))
-        .borderRadius(.circular(8))
-        .onHovered(RemixAccordionStyler().color(Colors.grey.shade100))
-        .color(Colors.white)
-        .border(.color(Colors.grey.shade300).width(1))
-        .trigger(
-          FlexBoxStyler()
-              .direction(.horizontal)
-              .mainAxisAlignment(.spaceBetween)
-              .spacing(12),
-        )
-        .leadingIcon(.color(Colors.grey.shade700).size(20))
-        .title(
-          .color(Colors.grey.shade900).fontWeight(FontWeight.w500).fontSize(14),
-        )
-        .trailingIcon(.color(Colors.grey.shade700).size(20));
   }
 }

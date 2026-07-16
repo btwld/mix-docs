@@ -65,25 +65,23 @@ const THEMES = [
     key: "default",
     name: "Classic",
     previewId: "homepage/hero-classic",
-    code: `final style = RemixButtonStyle()
+    code: `final style = RemixButtonStyler()
     .color(const Color(0xFF00EB03))
     .labelColor(const Color(0xFF05040A))
     .paddingX(22)
     .paddingY(11)
     .borderRadiusAll(const Radius.circular(10))
-    .onHovered(
-      RemixButtonStyle().color(const Color(0xFF33FF36)),
-    );`,
+    .onHovered(.color(const Color(0xFF33FF36)));`,
   },
   {
     key: "gradient",
     name: "Gradient",
     previewId: "homepage/hero-gradient",
-    code: `final style = RemixButtonStyle()
+    code: `final style = RemixButtonStyler()
     .gradient(
       LinearGradientMix(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        begin: .topLeft,
+        end: .bottomRight,
         colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
       ),
     )
@@ -96,7 +94,7 @@ const THEMES = [
     key: "neon",
     name: "Neon",
     previewId: "homepage/hero-neon",
-    code: `final style = RemixButtonStyle()
+    code: `final style = RemixButtonStyler()
     .color(const Color(0xFF0A0014))
     .labelColor(const Color(0xFF00F0FF))
     .paddingX(24)
@@ -157,8 +155,9 @@ const BENTO = [
 
 const COMPONENTS = [
   "Accordion", "Avatar", "Badge", "Button", "Callout", "Card", "Checkbox",
-  "Divider", "IconButton", "Menu", "Progress", "Radio", "Select", "Slider",
-  "Spinner", "Switch", "Tabs", "TextField", "Tooltip",
+  "Dialog", "Divider", "IconButton", "Menu", "Popover", "Progress", "Radio",
+  "Select", "Slider", "Spinner", "Switch", "Tabs", "TextField", "Toggle",
+  "Toggle Group", "Tooltip",
 ];
 
 const FAQ = [

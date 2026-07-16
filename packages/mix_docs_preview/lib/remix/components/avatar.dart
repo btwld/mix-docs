@@ -18,7 +18,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const AvatarPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const AvatarPreview(),
+    );
   }
 }
 
@@ -32,8 +36,8 @@ class AvatarPreview extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixAvatar(label: 'LF', style: fortalAvatarStyler(variant: .soft)),
-        RemixAvatar(icon: Icons.person, style: fortalAvatarStyler(variant: .solid)),
+        const FortalAvatar.soft(label: 'LF'),
+        const FortalAvatar.solid(icon: Icons.person),
       ],
     );
   }

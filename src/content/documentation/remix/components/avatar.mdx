@@ -6,6 +6,7 @@ keywords: [flutter, remix, avatar, profile, user, image, initials, icon]
 
 A customizable avatar component that can display an image, text label, or icon.
 
+
 ## Interactive preview
 
 <FlutterPreview
@@ -53,24 +54,23 @@ class AvatarExample extends StatelessWidget {
 
   RemixAvatarStyler get labelStyle {
     return RemixAvatarStyler()
-        .labelColor(Colors.deepPurpleAccent)
+        .backgroundColor(Colors.deepPurpleAccent)
         .size(50, 50)
         .shapeCircle()
-        .wrapClipOval()
-        .labelColor(Colors.white)
+        .wrap(.clipOval())
+        .foregroundColor(Colors.white)
         .labelFontWeight(FontWeight.bold)
         .labelFontSize(15);
   }
 
   RemixAvatarStyler get iconStyle {
     return RemixAvatarStyler()
-        .labelColor(Colors.deepOrangeAccent)
+        .backgroundColor(Colors.deepOrangeAccent)
         .size(70, 70)
-        .iconColor(Colors.white)
+        .foregroundColor(Colors.white)
         .iconSize(70)
-        .icon(IconStyler().wrapTranslate(x: 0, y: 12))
         .shapeCircle()
-        .wrapClipOval();
+        .wrap(.clipOval());
   }
 
   RemixAvatarStyler get image {
@@ -83,9 +83,9 @@ class AvatarExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Fortal widgets
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal-themed widget for this component:
 
 <CodeGroup title="Fortal variants" defaultLanguage="dart">
 ```dart
@@ -101,14 +101,12 @@ class FortalAvatarExample extends StatelessWidget {
       spacing: 16,
       children: [
         // Soft variant - Subtle background
-        RemixAvatar(
+        FortalAvatar.soft(
           label: 'AB',
-          style: fortalAvatarStyler(variant: .soft),
         ),
         // Solid variant - Bold background
-        RemixAvatar(
+        FortalAvatar.solid(
           label: 'CD',
-          style: fortalAvatarStyler(variant: .solid),
         ),
       ],
     );
@@ -118,7 +116,7 @@ class FortalAvatarExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [fortalAvatarStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/avatar/fortal_avatar_styles.dart) for all available options.
+  See the [fortalAvatarStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/avatar/fortal_avatar_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -145,62 +143,222 @@ const RemixAvatar({
 ## Properties
 ### Widget Properties
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `style` | `RemixAvatarStyler` | Optional. The style configuration for the avatar. Customize colors, sizing, shape, and state-based styling. |
-| `styleSpec` | `RemixAvatarSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
-| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
-| `backgroundImage` | `ImageProvider?` | Optional. The background image to display in the avatar. |
-| `foregroundImage` | `ImageProvider?` | Optional. The foreground image to display in the avatar. |
-| `onBackgroundImageError` | `ImageErrorListener?` | Optional. Callback function called when the background image fails to load. |
-| `onForegroundImageError` | `ImageErrorListener?` | Optional. Callback function called when the foreground image fails to load. |
-| `child` | `Widget?` | Optional. Custom content to display inside the avatar. When provided the caller is responsible for applying typography. |
-| `label` | `String?` | Optional. Optional text rendered within the avatar using the text spec. |
-| `labelBuilder` | `RemixAvatarLabelBuilder?` | Optional. Optional builder that exposes the resolved [TextSpec] for custom label rendering while keeping the configured typography. |
-| `icon` | `IconData?` | Optional. Optional icon rendered when no [child] or [label] is provided. |
-| `iconBuilder` | `RemixAvatarIconBuilder?` | Optional. Optional builder that exposes the resolved [IconSpec] for custom icon rendering while preserving configured icon styling. |
+#### `style` → `RemixAvatarStyler`
+
+Optional. The style configuration for the avatar. Customize colors, sizing, shape, and state-based styling.
+
+#### `styleSpec` → `RemixAvatarSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `backgroundImage` → `ImageProvider?`
+
+Optional. The background image to display in the avatar.
+
+#### `foregroundImage` → `ImageProvider?`
+
+Optional. The foreground image to display in the avatar.
+
+#### `onBackgroundImageError` → `ImageErrorListener?`
+
+Optional. Callback function called when the background image fails to load.
+
+#### `onForegroundImageError` → `ImageErrorListener?`
+
+Optional. Callback function called when the foreground image fails to load.
+
+#### `child` → `Widget?`
+
+Optional. Custom content to display inside the avatar. When provided the caller is responsible for applying typography.
+
+#### `label` → `String?`
+
+Optional. Optional text rendered within the avatar using the text spec.
+
+#### `labelBuilder` → `RemixAvatarLabelBuilder?`
+
+Optional. Optional builder that exposes the resolved [TextSpec] for custom label rendering while keeping the configured typography.
+
+#### `icon` → `IconData?`
+
+Optional. Optional icon rendered when no [child] or [label] is provided.
+
+#### `iconBuilder` → `RemixAvatarIconBuilder?`
+
+Optional. Optional builder that exposes the resolved [IconSpec] for custom icon rendering while preserving configured icon styling.
+
 
 ### Style Methods
 
-| Method | Description |
-|--------|-------------|
-| `square(double size)` | Sets avatar size to a square |
-| `sizeWH(double width, double height)` | Sets avatar size with width and height (alias) |
-| `color(Color value)` | Sets background color |
-| `borderRadius(BorderRadiusGeometryMix radius)` | Sets border radius |
-| `iconColor(Color value)` | Sets icon color |
-| `padding(EdgeInsetsGeometryMix value)` | Sets padding |
-| `margin(EdgeInsetsGeometryMix value)` | Sets margin |
-| `alignment(Alignment value)` | Sets container alignment |
-| `decoration(DecorationMix value)` | Sets decoration |
-| `constraints(BoxConstraintsMix value)` | Sets constraints |
-| `animate(AnimationConfig animation)` | Sets animation |
-| `clipBehavior(Clip clip)` | Sets the clip behavior for the avatar container. |
-| `label(TextStyler value)` | Configures the label text style using a TextStyler. |
-| `icon(IconStyler value)` | Configures the icon style using an IconStyler. |
-| `size(double width, double height)` | Sets avatar size with width and height |
-| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
-| `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
-| `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
-| `labelTextStyle(TextStyleMix value)` | Sets label/text style using TextStyleMix directly |
-| `labelColor(Color value)` | Sets label/text color |
-| `labelFontSize(double value)` | Sets label/text font size |
-| `labelFontWeight(FontWeight value)` | Sets label/text font weight |
-| `labelFontStyle(FontStyle value)` | Sets label/text font style (italic/normal) |
-| `labelLetterSpacing(double value)` | Sets label/text letter spacing |
-| `labelDecoration(TextDecoration value)` | Sets label/text decoration (underline, strikethrough, etc.) |
-| `labelFontFamily(String value)` | Sets label/text font family |
-| `labelHeight(double value)` | Sets label/text line height |
-| `labelWordSpacing(double value)` | Sets label/text word spacing |
-| `labelDecorationColor(Color value)` | Sets label/text decoration color |
-| `iconSize(double value)` | Sets icon size |
-| `iconOpacity(double value)` | Sets icon opacity |
-| `iconWeight(double value)` | Sets icon weight (useful for variable icons like Material Symbols) |
-| `iconGrade(double value)` | Sets icon grade (useful for Material Icons) |
-| `iconFill(double value)` | Sets icon fill (useful for Material Icons filled variants) |
-| `iconOpticalSize(double value)` | Sets icon optical size (useful for Material Icons) |
-| `iconBlendMode(BlendMode value)` | Sets icon blend mode |
-| `iconTextDirection(TextDirection value)` | Sets icon text direction |
-| `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
-| `iconShadow(ShadowMix value)` | Sets single icon shadow |
+#### `square(double size)`
+
+Sets avatar size to a square
+
+#### `sizeWH(double width, double height)`
+
+Sets avatar size with width and height (alias)
+
+#### `backgroundColor(Color value)`
+
+Sets background color
+
+#### `foregroundColor(Color value)`
+
+Sets the foreground color (label and icon) of the avatar.
+
+#### `color(Color value)`
+
+Sets background color
+
+#### `borderRadius(BorderRadiusGeometryMix radius)`
+
+Sets border radius
+
+#### `iconColor(Color value)`
+
+Sets icon color
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets padding
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets margin
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `decoration(DecorationMix value)`
+
+Sets decoration
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets constraints
+
+#### `animate(AnimationConfig value)`
+
+Sets animation
+
+#### `clipBehavior(Clip clip)`
+
+Sets the clip behavior for the avatar container.
+
+#### `label(TextStyler value)`
+
+Configures the label text style using a TextStyler.
+
+#### `icon(IconStyler value)`
+
+Configures the icon style using an IconStyler.
+
+#### `size(double width, double height)`
+
+Sets avatar size with width and height
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, {Alignment alignment = .center})`
+
+Applies a matrix transformation to the component.
+
+#### `call({Key? key, ImageProvider? backgroundImage, ImageProvider? foregroundImage, ImageErrorListener? onBackgroundImageError, ImageErrorListener? onForegroundImageError, Widget? child, String? label, RemixAvatarLabelBuilder? labelBuilder, IconData? icon, RemixAvatarIconBuilder? iconBuilder})`
+
+Creates a `RemixAvatar` widget with this style applied.
+
+#### `labelStyle(TextStyleMix value)`
+
+Sets label/text style using TextStyleMix directly
+
+#### `labelColor(Color value)`
+
+Sets label/text color
+
+#### `labelFontSize(double value)`
+
+Sets label/text font size
+
+#### `labelFontWeight(FontWeight value)`
+
+Sets label/text font weight
+
+#### `labelFontStyle(FontStyle value)`
+
+Sets label/text font style (italic/normal)
+
+#### `labelLetterSpacing(double value)`
+
+Sets label/text letter spacing
+
+#### `labelDecoration(TextDecoration value)`
+
+Sets label/text decoration (underline, strikethrough, etc.)
+
+#### `labelFontFamily(String value)`
+
+Sets label/text font family
+
+#### `labelHeight(double value)`
+
+Sets label/text line height
+
+#### `labelWordSpacing(double value)`
+
+Sets label/text word spacing
+
+#### `labelDecorationColor(Color value)`
+
+Sets label/text decoration color
+
+#### `iconSize(double value)`
+
+Sets icon size
+
+#### `iconOpacity(double value)`
+
+Sets icon opacity
+
+#### `iconWeight(double value)`
+
+Sets icon weight (useful for variable icons like Material Symbols)
+
+#### `iconGrade(double value)`
+
+Sets icon grade (useful for Material Icons)
+
+#### `iconFill(double value)`
+
+Sets icon fill (useful for Material Icons filled variants)
+
+#### `iconOpticalSize(double value)`
+
+Sets icon optical size (useful for Material Icons)
+
+#### `iconBlendMode(BlendMode value)`
+
+Sets icon blend mode
+
+#### `iconTextDirection(TextDirection value)`
+
+Sets icon text direction
+
+#### `iconShadows(List<ShadowMix> value)`
+
+Sets icon shadows
+
+#### `iconShadow(ShadowMix value)`
+
+Sets single icon shadow
 

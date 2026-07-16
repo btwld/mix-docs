@@ -1,69 +1,157 @@
 ---
 title: Divider
+description: A simple visual separator component for dividing content into distinct sections
+keywords: [flutter, remix, divider, separator, line, hr, horizontal-rule]
 ---
 
-# RemixDivider
+A visual separator component for dividing content into distinct sections.
 
-`RemixDivider` is a visual separator for splitting content into distinct sections. It renders a styled line — horizontal or vertical — with configurable thickness, color, spacing, and decoration.
 
-You can use `RemixDividerStyler` to create styles with a fluent API. Example:
-
-```dart
-final style = RemixDividerStyler()
-    .height(1)
-    .width(300)
-    .color(Colors.grey.shade400);
-
-RemixDivider(style: style)
-```
-
-The preview below shows this style applied.
-
-## Interactive Preview
+## Interactive preview
 
 <FlutterPreview
   previewId="components/divider.0"
   height={240}
 />
 
-## Fortal Styles
+## When to use this
 
-Remix ships prebuilt Fortal styles for this component. Call one of the helpers and pass it to the `style` parameter:
+- **Content separation**: Divide sections of content visually
+- **List items**: Separate items in lists or menus
+- **Form sections**: Group form fields into logical sections
+- **Visual hierarchy**: Create clear visual breaks in layouts
 
+## Basic implementation
+
+<CodeGroup title="Basic implementation" defaultLanguage="dart">
 ```dart
-RemixDivider(style: fortalDividerStyler(size: .size1))
-RemixDivider(style: fortalDividerStyler(size: .size2))
-```
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
 
-See the [fortalDividerStyler source](https://github.com/btwld/remix/blob/main/lib/src/components/divider/fortal_divider_styles.dart) for the full set of options.
+class DividerExample extends StatelessWidget {
+  const DividerExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RemixDivider(
+      style: style,
+    );
+  }
+
+  RemixDividerStyler get style {
+    return RemixDividerStyler()
+        .height(1)
+        .color(Colors.grey.shade400)
+        .width(300);
+  }
+}
+```
+</CodeGroup>
+
+## Fortal widgets
+
+Remix includes a generated Fortal-themed widget for this component:
+
+<CodeGroup title="Fortal widget" defaultLanguage="dart">
+```dart
+import 'package:flutter/material.dart';
+import 'package:remix/remix.dart';
+
+class FortalDividerExample extends StatelessWidget {
+  const FortalDividerExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      spacing: 16,
+      children: [
+        FortalDivider(size: FortalDividerSize.size1),
+        FortalDivider(size: FortalDividerSize.size3),
+      ],
+    );
+  }
+}
+```
+</CodeGroup>
+
+<Info>
+  See the [fortalDividerStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/divider/fortal_divider_styles.dart) for all available options.
+</Info>
 
 ## Constructor
+<CodeGroup title="Constructor" defaultLanguage="dart">
+```dart
+const RemixDivider({
+  Key? key,
+  RemixDividerStyler style = const RemixDividerStyler.create(),
+  RemixDividerSpec? styleSpec,
+})
+```
+</CodeGroup>
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `style` | `RemixDividerStyler` | Optional, defaults to `const RemixDividerStyler.create()` |
-| `styleSpec` | `RemixDividerSpec?` | Optional (resolved style spec) |
-| `key` | `Key?` | Optional |
 
-## Style API Reference
+## Properties
+### Widget Properties
 
-### Divider Methods
+#### `style` → `RemixDividerStyler`
 
-| Method | Description |
-|--------|-------------|
-| `color` | Sets the divider color. |
-| `thickness` | Sets the divider thickness (height for horizontal, width for vertical). |
-| `alignment` | Sets the container alignment. |
-| `decoration` | Sets the container decoration. |
-| `foregroundDecoration` | Sets a foreground decoration painted on top of the component. |
-| `constraints` | Sets size constraints on the component. |
-| `transform` | Applies a matrix transformation to the component. |
-| `animate` | Sets the animation configuration. |
-| `wrap` | Applies widget modifiers such as clipping, opacity, or scaling. |
+Optional. The style configuration for the divider. Customize color, thickness, and spacing.
 
-### Spacing
+#### `styleSpec` → `RemixDividerSpec?`
 
-| Method | Description |
-|--------|-------------|
-| `padding` | Sets container padding. |
-| `margin` | Sets container margin. |
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+
+### Style Methods
+
+#### `color(Color value)`
+
+Sets divider color
+
+#### `thickness(double value)`
+
+Sets divider thickness (height for horizontal, width for vertical)
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets container padding
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets container margin
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `decoration(DecorationMix value)`
+
+Sets container decoration
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `animate(AnimationConfig value)`
+
+Configures implicit animation for style transitions.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, {Alignment alignment = .center})`
+
+Applies a matrix transformation to the component.
+
+#### `call({Key? key})`
+
+Creates a `RemixDivider` widget with this style applied.

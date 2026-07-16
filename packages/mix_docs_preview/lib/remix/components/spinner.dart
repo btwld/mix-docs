@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const SpinnerPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const SpinnerPreview(),
+    );
   }
 }
 
@@ -30,10 +34,10 @@ class SpinnerPreview extends StatelessWidget {
       mainAxisAlignment: .center,
       mainAxisSize: .min,
       spacing: 16,
-      children: [
-        RemixSpinner(style: fortalSpinnerStyler(size: .size1)),
-        RemixSpinner(style: fortalSpinnerStyler(size: .size2)),
-        RemixSpinner(style: fortalSpinnerStyler(size: .size3)),
+      children: const [
+        FortalSpinner(size: .size1),
+        FortalSpinner(size: .size2),
+        FortalSpinner(size: .size3),
       ],
     );
   }

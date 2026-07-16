@@ -1,5 +1,6 @@
 export default {
-    index: 'Getting Started',
-    fortal: 'Fortal',
-    components: 'Components',
+  index: 'Getting Started',
+  'styler-api': 'Styler API',
+  fortal: 'Fortal',
+  components: 'Components',
 }

@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const IconButtonPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const IconButtonPreview(),
+    );
   }
 }
 
@@ -31,31 +35,11 @@ class IconButtonPreview extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 16,
       children: [
-        RemixIconButton(
-          icon: CupertinoIcons.heart,
-          onPressed: () {},
-          style: fortalIconButtonStyler(variant: .solid),
-        ),
-        RemixIconButton(
-          icon: CupertinoIcons.heart,
-          onPressed: () {},
-          style: fortalIconButtonStyler(variant: .soft),
-        ),
-        RemixIconButton(
-          icon: CupertinoIcons.heart,
-          onPressed: () {},
-          style: fortalIconButtonStyler(variant: .surface),
-        ),
-        RemixIconButton(
-          icon: CupertinoIcons.heart,
-          onPressed: () {},
-          style: fortalIconButtonStyler(variant: .outline),
-        ),
-        RemixIconButton(
-          icon: CupertinoIcons.heart,
-          onPressed: () {},
-          style: fortalIconButtonStyler(variant: .ghost),
-        ),
+        FortalIconButton.solid(icon: CupertinoIcons.heart, onPressed: () {}),
+        FortalIconButton.soft(icon: CupertinoIcons.heart, onPressed: () {}),
+        FortalIconButton.surface(icon: CupertinoIcons.heart, onPressed: () {}),
+        FortalIconButton.outline(icon: CupertinoIcons.heart, onPressed: () {}),
+        FortalIconButton.ghost(icon: CupertinoIcons.heart, onPressed: () {}),
       ],
     );
   }

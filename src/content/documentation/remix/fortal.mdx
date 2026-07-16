@@ -8,7 +8,7 @@ import { Callout } from "nextra/components";
 
 Fortal is a prebuilt design system that ships with Remix. It provides a full set of component styles — buttons, inputs, menus, badges, and everything else Remix offers — built on top of the [Radix](https://www.radix-ui.com/) color scales and spacing system. You can drop it into a Remix app and get a polished, modern look without defining a single token yourself.
 
-Fortal is also a *regular* Remix style underneath. Every `fortal*Styler` is built with the same fluent API you'd use to write your own — so you can extend, override, or fork any piece of it.
+Each Fortal widget delegates to a regular Remix `fortal*Styler` underneath. Those stylers use the same fluent API you'd use to write your own, so you can still extend, override, or fork any piece of the design system.
 
 ## What Fortal Gives You
 
@@ -25,7 +25,7 @@ Fortal ships with Remix — no extra package to add. Import it alongside Remix:
 import 'package:remix/remix.dart';
 ```
 
-Then wrap the part of your app that should use Fortal in a `FortalScope`. The scope provides the token values that every `fortal*Styler` and `FortalTokens.*` call resolves against:
+Then wrap the part of your app that should use Fortal in a `FortalScope`. The scope provides the token values that every Fortal widget, `fortal*Styler`, and `FortalTokens.*` call resolves against:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -38,10 +38,9 @@ class MyApp extends StatelessWidget {
       home: FortalScope(
         child: Scaffold(
           body: Center(
-            child: RemixButton(
+            child: FortalButton.solid(
               onPressed: () {},
               label: 'Fortal Button',
-              style: fortalButtonStyler(variant: .solid),
             ),
           ),
         ),
@@ -55,25 +54,27 @@ Without `FortalScope` in the widget tree above a Fortal-styled component, token 
 
 ## Component Variants
 
-Each Remix component exposes a `fortal*Styler` function that takes a `variant` argument. For example, `fortalButtonStyler` provides:
+Most Remix components expose generated `Fortal*` widgets with named constructors for fixed variants:
 
 ```dart
-fortalButtonStyler(variant: .solid)     // high-emphasis, filled
-fortalButtonStyler(variant: .soft)      // medium-emphasis, tinted
-fortalButtonStyler(variant: .surface)   // subtle, surface-colored
-fortalButtonStyler(variant: .outline)   // bordered, transparent fill
-fortalButtonStyler(variant: .ghost)     // minimal, text-only until hover
+FortalButton.solid(label: 'Save', onPressed: () {})
+FortalButton.soft(label: 'Save', onPressed: () {})
+FortalButton.surface(label: 'Save', onPressed: () {})
+FortalButton.outline(label: 'Save', onPressed: () {})
+FortalButton.ghost(label: 'Save', onPressed: () {})
 ```
 
-You choose the variant that matches the visual weight you want, then pass it to the component's `style` parameter:
+Use the unnamed constructor when the variant is selected dynamically:
 
 ```dart
-RemixButton(
+FortalButton(
+  variant: selectedVariant,
   onPressed: () {},
   label: 'Save',
-  style: fortalButtonStyler(variant: .soft),
 );
 ```
+
+Call the matching `fortal*Styler` directly when you need a custom Remix widget composition or want to extend the preset style.
 
 Not every component has every variant — a `RemixSpinner` doesn't need a `ghost` variant. Refer to each component's [reference page](/documentation/remix/components/button) for the full list of Fortal variants it ships.
 
@@ -126,9 +127,7 @@ Because every `fortal*Styler` returns a regular Remix style, you can chain addit
 final style = fortalButtonStyler(variant: .solid)
   .borderRadiusAll(const Radius.circular(8))
   .paddingX(32)
-  .onHovered(
-    RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 1.05, y: 1.05)),
-  );
+  .onHovered(.scale(1.05));
 ```
 
 The chain above starts from Fortal's `solid` button, overrides the border radius and horizontal padding, and adds a scale-on-hover modifier. Every other Fortal property — colors, state styling, typography — passes through untouched.
@@ -140,9 +139,7 @@ final style = RemixButtonStyler()
   .color(FortalTokens.accent9())
   .paddingAll(FortalTokens.space4())
   .borderRadiusAll(FortalTokens.radius3())
-  .onHovered(
-    RemixButtonStyler().color(FortalTokens.accent10()),
-  );
+  .onHovered(.color(FortalTokens.accent10()));
 ```
 
 This gives you Fortal's token consistency without starting from its component styles.

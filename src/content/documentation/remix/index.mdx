@@ -34,9 +34,7 @@ final button = RemixButtonStyler()
   .paddingY(10)
   .color(Colors.blue)
   .borderRadiusAll(const Radius.circular(8))
-  .onHovered(
-    RemixButtonStyler().color(Colors.blue.shade700),
-  )
+  .onHovered(.color(Colors.blue.shade700))
   .animate(AnimationConfig.spring(300.ms));
 
 button(label: 'Click me', onPressed: () {});
@@ -55,8 +53,8 @@ With Remix, you get:
 
 Before installing Remix, ensure you have:
 
-- **Dart SDK**: 3.11.0 or higher
-- **Flutter**: 3.41.0 or higher
+- **Dart SDK**: 3.12.0 or higher
+- **Flutter**: 3.44.0 or higher
 
 <Steps>
 
@@ -125,12 +123,8 @@ final style = RemixButtonStyler()
   .paddingY(10)
   .color(Colors.blue)
   .borderRadiusAll(const Radius.circular(8))
-  .onHovered(
-    RemixButtonStyler().color(Colors.blue.shade700),
-  )
-  .onPressed(
-    RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
-  );
+  .onHovered(.color(Colors.blue.shade700))
+  .onPressed(.scale(0.95));
 ```
 
 Remix tracks the interaction internally, so you don't wire up hover detectors, focus nodes, or gesture recognizers yourself.
@@ -146,12 +140,8 @@ final style = RemixButtonStyler()
   .color(Colors.blue)
   .borderRadiusAll(const Radius.circular(8))
   .animate(AnimationConfig.spring(300.ms))
-  .onHovered(
-    RemixButtonStyler().color(Colors.blue.shade700),
-  )
-  .onPressed(
-    RemixButtonStyler().wrap(WidgetModifierConfig.scale(x: 0.95, y: 0.95)),
-  );
+  .onHovered(.color(Colors.blue.shade700))
+  .onPressed(.scale(0.95));
 ```
 
 Both the color on hover and the scale on press animate through a single spring curve.
@@ -186,10 +176,9 @@ Each chain call returns a new style, so `baseButton` stays unchanged and every v
 Remix gives you the freedom to build any design system from scratch, but you don't have to start there. **Fortal** is a prebuilt set of component styles based on [Radix](https://www.radix-ui.com/), ready to drop in and customize. Reach for Fortal when you want a polished, modern look without defining every token yourself — and extend it when you need something specific.
 
 ```dart
-RemixButton(
+FortalButton.solid(
   onPressed: () {},
   label: 'Fortal Button',
-  style: fortalButtonStyler(variant: .solid),
 );
 ```
 

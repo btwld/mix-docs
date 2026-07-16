@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const ProgressPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const ProgressPreview(),
+    );
   }
 }
 
@@ -28,7 +32,7 @@ class ProgressPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
-      child: RemixProgress(value: 0.3, style: fortalProgressStyler(variant: .surface)),
+      child: const FortalProgress.surface(value: 0.3),
     );
   }
 }
