@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-
-export const PRODUCTION_GAP_URL =
-  "https://concepta-production-gap.adored-pony-7715.chatgpt.site/feature";
+import { PRODUCTION_GAP_URL } from "./report-data";
 
 const INCOMING_BLOCKS = [
   [7, 18, 22, 0],

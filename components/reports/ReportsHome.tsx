@@ -40,7 +40,10 @@ export function ReportsHome() {
             <h2 id="featured-report" className="sr-only">
               Featured report
             </h2>
-            <ProductionGapCard />
+            <ProductionGapCard
+              href="/reports/production-gap"
+              external={false}
+            />
           </motion.section>
 
           <motion.aside
