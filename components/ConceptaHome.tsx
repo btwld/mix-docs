@@ -37,32 +37,32 @@ const TRUSTED_BY = [
   {
     name: "Truist",
     className: "trust-logo-truist",
-    src: "https://static.truist.com/content/dam/global-images/truist-logo-purple.svg",
+    src: "/assets/client-logos/truist.svg",
   },
   {
     name: "AdventHealth",
     className: "trust-logo-adventhealth",
-    src: "https://www.adventhealth.com/themes/custom/ahs_theme/logo.svg",
+    src: "/assets/client-logos/adventhealth.svg",
   },
   {
     name: "FEMA",
     className: "trust-logo-fema",
-    src: "https://www.fema.gov/profiles/femad8_gov/themes/fema_uswds/images/fema-logo-blue.svg",
+    src: "/assets/client-logos/fema.svg",
   },
   {
     name: "Red Lobster",
     className: "trust-logo-red-lobster",
-    src: "https://img-ecomm-rl-prod-fye5gqbxdtbghqer.a03.azurefd.net/brandsite/images/RL-FullLogo-FullColor-RGB_2.original.png",
+    src: "/assets/client-logos/red-lobster.png",
   },
   {
     name: "Warner Music Group",
     className: "trust-logo-warner-music-group",
-    src: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Warner_Music_Group_logo_%282021%29.svg",
+    src: "/assets/client-logos/warner-music-group.svg",
   },
   {
     name: "Google",
     className: "trust-logo-google",
-    src: "https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg",
+    src: "/assets/client-logos/google.svg",
   },
 ] as const;
 
