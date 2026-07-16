@@ -54,14 +54,10 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   RemixCheckboxStyler get style {
     return RemixCheckboxStyler()
         .size(24, 24)
-        .icon(IconStyler().size(20).color(Colors.white))
+        .icon(.size(20).color(Colors.white))
         .onSelected(.color(Colors.grey.shade900))
-        .borderRadiusAll(const Radius.circular(3))
-        .border(
-          BoxBorderMix.all(
-            BorderSideMix().color(Colors.black87).width(2),
-          ),
-        );
+        .borderRadius(.circular(3))
+        .border(.all(.color(Colors.black87).width(2)));
   }
 }
 ```
@@ -335,4 +331,3 @@ Sets icon shadows
 #### `iconShadow(ShadowMix value)`
 
 Sets single icon shadow
-

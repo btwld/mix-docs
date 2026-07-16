@@ -30,12 +30,12 @@ Define a style with a fluent chain, then call it or pass it to a component:
 
 ```dart
 final button = RemixButtonStyler()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .onHovered(.color(Colors.blue.shade700))
-  .animate(AnimationConfig.spring(300.ms));
+    .paddingX(16)
+    .paddingY(10)
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .onHovered(.color(Colors.blue.shade700))
+    .animate(.spring(300.ms));
 
 button(label: 'Click me', onPressed: () {});
 ```
@@ -94,15 +94,12 @@ class Example extends StatelessWidget {
       .paddingX(16)
       .paddingY(10)
       .color(Colors.blue)
-      .borderRadiusAll(const Radius.circular(8))
-      .label(TextStyler().color(Colors.white));
+      .borderRadius(.circular(8))
+      .label(.color(Colors.white));
 
   @override
   Widget build(BuildContext context) {
-    return _button(
-      label: 'Click Me',
-      onPressed: () {},
-    );
+    return _button(label: 'Click Me', onPressed: () {});
   }
 }
 ```
@@ -119,12 +116,12 @@ Define how a component should look in hover, pressed, focused, and other states 
 
 ```dart
 final style = RemixButtonStyler()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .onHovered(.color(Colors.blue.shade700))
-  .onPressed(.scale(0.95));
+    .paddingX(16)
+    .paddingY(10)
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .onHovered(.color(Colors.blue.shade700))
+    .onPressed(.scale(0.95));
 ```
 
 Remix tracks the interaction internally, so you don't wire up hover detectors, focus nodes, or gesture recognizers yourself.
@@ -135,13 +132,13 @@ Attach animation directly to a style with `.animate()`. State-specific styles in
 
 ```dart
 final style = RemixButtonStyler()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .animate(AnimationConfig.spring(300.ms))
-  .onHovered(.color(Colors.blue.shade700))
-  .onPressed(.scale(0.95));
+    .paddingX(16)
+    .paddingY(10)
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .animate(.spring(300.ms))
+    .onHovered(.color(Colors.blue.shade700))
+    .onPressed(.scale(0.95));
 ```
 
 Both the color on hover and the scale on press animate through a single spring curve.
@@ -158,15 +155,13 @@ Build a base style once, then extend it for variants:
 final baseButton = RemixButtonStyler()
     .paddingX(16)
     .paddingY(10)
-    .borderRadiusAll(const Radius.circular(8));
+    .borderRadius(.circular(8));
 
-final primaryButton = baseButton
-    .color(Colors.blue)
-    .label(TextStyler().color(Colors.white));
+final primaryButton = baseButton.color(Colors.blue).label(.color(Colors.white));
 
 final destructiveButton = baseButton
     .color(Colors.red)
-    .label(TextStyler().color(Colors.white));
+    .label(.color(Colors.white));
 ```
 
 Each chain call returns a new style, so `baseButton` stays unchanged and every variant is independently mergeable.
@@ -176,10 +171,7 @@ Each chain call returns a new style, so `baseButton` stays unchanged and every v
 Remix gives you the freedom to build any design system from scratch, but you don't have to start there. **Fortal** is a prebuilt set of component styles based on [Radix](https://www.radix-ui.com/), ready to drop in and customize. Reach for Fortal when you want a polished, modern look without defining every token yourself — and extend it when you need something specific.
 
 ```dart
-FortalButton.solid(
-  onPressed: () {},
-  label: 'Fortal Button',
-);
+FortalButton.solid(onPressed: () {}, label: 'Fortal Button');
 ```
 
 See the [Fortal](/documentation/remix/fortal) page for variants, tokens, and customization.

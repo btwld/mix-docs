@@ -40,8 +40,7 @@ class DialogExample extends StatelessWidget {
           builder: (context) => Center(
             child: FortalDialog(
               title: 'Revoke access',
-              description:
-                  'This application will no longer be accessible.',
+              description: 'This application will no longer be accessible.',
               actions: [
                 FortalButton.ghost(
                   label: 'Cancel',
@@ -78,7 +77,8 @@ showRemixAlertDialog<void>(
   builder: (context) => Center(
     child: FortalDialog(
       title: 'Delete project?',
-      description: 'This permanently deletes the project and all of its data.',
+      description:
+          'This permanently deletes the project and all of its data.',
       actions: [
         FortalButton.ghost(
           label: 'Cancel',
@@ -117,10 +117,7 @@ class FortalDialogExample extends StatelessWidget {
           label: 'Cancel',
           onPressed: () => Navigator.pop(context),
         ),
-        FortalButton(
-          label: 'Save',
-          onPressed: () => Navigator.pop(context),
-        ),
+        FortalButton(label: 'Save', onPressed: () => Navigator.pop(context)),
       ],
     );
   }
@@ -144,7 +141,7 @@ Future<T?> showRemixDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
-  Duration transitionDuration = const Duration(milliseconds: 400),
+  Duration transitionDuration = const .new(milliseconds: 400),
   RouteTransitionsBuilder? transitionBuilder,
   bool requestFocus = true,
   TraversalEdgeBehavior? traversalEdgeBehavior,
@@ -164,7 +161,7 @@ Future<T?> showRemixAlertDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
-  Duration transitionDuration = const Duration(milliseconds: 400),
+  Duration transitionDuration = const .new(milliseconds: 400),
   RouteTransitionsBuilder? transitionBuilder,
   FocusNode? initialFocusNode,
 })

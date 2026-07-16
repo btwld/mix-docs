@@ -17,10 +17,7 @@ Directives transform values (text, numbers, colors) when a style is resolved. Un
 
 ```dart
 // The text "hello world" is transformed to "HELLO WORLD" at resolve time
-StyledText(
-  'hello world',
-  style: TextStyler().uppercase(),
-)
+StyledText('hello world', style: TextStyler().uppercase())
 ```
 
 ---
@@ -146,12 +143,10 @@ Transform colors by adjusting opacity, brightness, saturation, and more. Color d
 | `.brighten(double)` | Increase brightness |
 
 ```dart
-final style = BoxStyler()
-    .color(Colors.blue.withOpacity(0.5));
+final style = BoxStyler().color(Colors.blue.withOpacity(0.5));
 
 // Color directives also work with tokens
-final style = BoxStyler()
-    .color($primary().withOpacity(0.8));
+final style = BoxStyler().color($primary().withOpacity(0.8));
 ```
 
 ---
@@ -189,7 +184,7 @@ final class ReverseStringDirective extends Directive<String> {
 extension ReverseTextDirective on TextStyler {
   TextStyler reverse() {
     return merge(
-      TextStyler(textDirectives: [const ReverseStringDirective()]),
+      .textDirective(const ReverseStringDirective()),
     );
   }
 }

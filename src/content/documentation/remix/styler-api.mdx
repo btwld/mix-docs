@@ -47,7 +47,7 @@ variant:
 final style = RemixCardStyler()
     .paddingAll(12)
     .backgroundColor(Colors.white)
-    .onHovered(.padding(EdgeInsetsGeometryMix.all(16)))
+    .onHovered(.padding(.all(16)))
     .onPressed(.color(Colors.grey.shade100));
 ```
 
@@ -80,9 +80,7 @@ or `FlexBox` container. A composite root without one clear visual surface, such
 as `RemixMenuStyler`, exposes factories for its child fields instead:
 
 ```dart
-final style = RemixMenuStyler.trigger(
-  RemixMenuTriggerStyler.color(Colors.black),
-);
+final style = RemixMenuStyler.trigger(.color(Colors.black));
 ```
 
 `RemixSelectStyler` stores its popup container as a `FlexBox`, but intentionally
@@ -93,8 +91,13 @@ the root select styler.
 The upstream forwarded `transform` factory currently accepts `Alignment`
 rather than the wider `AlignmentGeometry` accepted by the former handwritten
 helpers. Use a direct child styler when a directional alignment is required,
-for example `RemixCardStyler.container(BoxStyler(transform: matrix,
-transformAlignment: AlignmentDirectional.centerStart))`.
+for example:
+
+```dart
+final style = RemixCardStyler.container(
+  .new(transform: matrix, transformAlignment: .centerStart),
+);
+```
 
 ### Variants and selected state
 

@@ -49,9 +49,7 @@ class MyApp extends StatelessWidget {
       textStyles: LightBlueTheme.textStyles,
       radii: LightBlueTheme.radii,
       spaces: LightBlueTheme.spaces,
-      child: const MaterialApp(
-        home: ProfilePage(),
-      ),
+      child: const MaterialApp(home: ProfilePage()),
     );
   }
 }
@@ -135,36 +133,36 @@ class LightBlueTheme {
   };
 
   static Map<TextStyleToken, TextStyle> get textStyles => {
-    CustomTextStyleTokens.headline1.token: const TextStyle(
+    CustomTextStyleTokens.headline1.token: const .new(
       fontSize: 22,
-      fontWeight: FontWeight.bold,
+      fontWeight: .bold,
       fontFamily: 'Roboto',
     ),
-    CustomTextStyleTokens.headline2.token: const TextStyle(
+    CustomTextStyleTokens.headline2.token: const .new(
       fontSize: 18,
-      fontWeight: FontWeight.bold,
+      fontWeight: .bold,
       fontFamily: 'Roboto',
     ),
-    CustomTextStyleTokens.button.token: const TextStyle(
+    CustomTextStyleTokens.button.token: const .new(
       fontSize: 14,
-      fontWeight: FontWeight.bold,
+      fontWeight: .bold,
       fontFamily: 'Roboto',
     ),
-    CustomTextStyleTokens.body.token: const TextStyle(
+    CustomTextStyleTokens.body.token: const .new(
       fontSize: 16,
-      fontWeight: FontWeight.normal,
+      fontWeight: .normal,
       fontFamily: 'Roboto',
     ),
-    CustomTextStyleTokens.callout.token: const TextStyle(
+    CustomTextStyleTokens.callout.token: const .new(
       fontSize: 14,
-      fontWeight: FontWeight.normal,
+      fontWeight: .normal,
       fontFamily: 'Roboto',
     ),
   };
 
   static Map<RadiusToken, Radius> get radii => {
-    MyThemeRadiusToken.large.token: const Radius.circular(100),
-    MyThemeRadiusToken.medium.token: const Radius.circular(12),
+    MyThemeRadiusToken.large.token: const .circular(100),
+    MyThemeRadiusToken.medium.token: const .circular(12),
   };
 
   static Map<SpaceToken, double> get spaces => {
@@ -187,36 +185,36 @@ class DarkPurpleTheme {
   };
 
   static Map<TextStyleToken, TextStyle> get textStyles => {
-    CustomTextStyleTokens.headline1.token: const TextStyle(
+    CustomTextStyleTokens.headline1.token: const .new(
       fontSize: 22,
-      fontWeight: FontWeight.bold,
+      fontWeight: .bold,
       fontFamily: 'Courier',
     ),
-    CustomTextStyleTokens.headline2.token: const TextStyle(
+    CustomTextStyleTokens.headline2.token: const .new(
       fontSize: 18,
-      fontWeight: FontWeight.bold,
+      fontWeight: .bold,
       fontFamily: 'Courier',
     ),
-    CustomTextStyleTokens.button.token: const TextStyle(
+    CustomTextStyleTokens.button.token: const .new(
       fontSize: 14,
-      fontWeight: FontWeight.bold,
+      fontWeight: .bold,
       fontFamily: 'Courier',
     ),
-    CustomTextStyleTokens.body.token: const TextStyle(
+    CustomTextStyleTokens.body.token: const .new(
       fontSize: 16,
-      fontWeight: FontWeight.normal,
+      fontWeight: .normal,
       fontFamily: 'Courier',
     ),
-    CustomTextStyleTokens.callout.token: const TextStyle(
+    CustomTextStyleTokens.callout.token: const .new(
       fontSize: 14,
-      fontWeight: FontWeight.normal,
+      fontWeight: .normal,
       fontFamily: 'Courier',
     ),
   };
 
   static Map<RadiusToken, Radius> get radii => {
-    MyThemeRadiusToken.large.token: const Radius.circular(12),
-    MyThemeRadiusToken.medium.token: const Radius.circular(8),
+    MyThemeRadiusToken.large.token: const .circular(12),
+    MyThemeRadiusToken.medium.token: const .circular(8),
   };
 
   static Map<SpaceToken, double> get spaces => {
@@ -276,11 +274,7 @@ Optional **`onThemeToggle`** / **`useDarkTheme`** parameters show how to wire a 
 
 ```dart
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({
-    super.key,
-    this.onThemeToggle,
-    this.useDarkTheme = false,
-  });
+  const ProfilePage({super.key, this.onThemeToggle, this.useDarkTheme = false});
 
   final VoidCallback? onThemeToggle;
   final bool useDarkTheme;
@@ -308,9 +302,7 @@ class ProfilePage extends StatelessWidget {
           if (onThemeToggle != null)
             IconButton(
               tooltip: 'Toggle theme',
-              icon: Icon(
-                useDarkTheme ? Icons.light_mode : Icons.dark_mode,
-              ),
+              icon: Icon(useDarkTheme ? Icons.light_mode : Icons.dark_mode),
               onPressed: onThemeToggle,
             ),
         ],
@@ -402,17 +394,17 @@ class _ThemingTutorialAppState extends State<ThemingTutorialApp> {
   @override
   Widget build(BuildContext context) {
     // Select theme based on state
-    final colors = _isDarkPurpleTheme 
-        ? DarkPurpleTheme.colors 
+    final colors = _isDarkPurpleTheme
+        ? DarkPurpleTheme.colors
         : LightBlueTheme.colors;
     final textStyles = _isDarkPurpleTheme
         ? DarkPurpleTheme.textStyles
         : LightBlueTheme.textStyles;
-    final radii = _isDarkPurpleTheme 
-        ? DarkPurpleTheme.radii 
+    final radii = _isDarkPurpleTheme
+        ? DarkPurpleTheme.radii
         : LightBlueTheme.radii;
-    final spaces = _isDarkPurpleTheme 
-        ? DarkPurpleTheme.spaces 
+    final spaces = _isDarkPurpleTheme
+        ? DarkPurpleTheme.spaces
         : LightBlueTheme.spaces;
 
     return MixScope(

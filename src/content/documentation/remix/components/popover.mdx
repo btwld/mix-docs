@@ -32,14 +32,14 @@ class AccountPopover extends StatelessWidget {
     return FortalPopover(
       semanticLabel: 'Show account details',
       positioning: const OverlayPositionConfig(
-        targetAnchor: Alignment.bottomCenter,
-        followerAnchor: Alignment.topCenter,
+        targetAnchor: .bottomCenter,
+        followerAnchor: .topCenter,
       ),
       popoverChild: const SizedBox(
         width: 240,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Text('Signed in as'),
             SizedBox(height: 8),
@@ -48,7 +48,7 @@ class AccountPopover extends StatelessWidget {
         ),
       ),
       child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: .symmetric(horizontal: 16, vertical: 10),
         child: Text('Account'),
       ),
     );
@@ -97,9 +97,9 @@ overlay and can apply an additional offset.
 
 ```dart
 const OverlayPositionConfig(
-  targetAnchor: Alignment.topRight,
-  followerAnchor: Alignment.bottomRight,
-  offset: Offset(0, -8),
+  targetAnchor: .topRight,
+  followerAnchor: .bottomRight,
+  offset: .new(0, -8),
 )
 ```
 
@@ -112,11 +112,10 @@ visual styling.
 
 ```dart
 RemixPopover(
-  style: RemixPopoverStyler()
-      .paddingAll(16)
-      .constraints(BoxConstraintsMix(maxWidth: 320))
+  style: .padding(.all(16))
+      .constraints(.maxWidth(320))
       .backgroundColor(Colors.white)
-      .borderRadiusAll(12),
+      .borderRadius(.circular(12)),
   popoverChild: const Text('Custom popover'),
   child: const Text('Open'),
 )

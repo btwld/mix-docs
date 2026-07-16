@@ -56,14 +56,11 @@ class _SliderExampleState extends State<SliderExample> {
 
   RemixSliderStyler get style {
     return RemixSliderStyler()
-        .thumbSize(const Size(24, 24))
+        .thumbSize(const .square(24))
         .thumb(
-          BoxStyler().shapeCircle().shadow(
-                BoxShadowMix()
-                    .color(Colors.black45)
-                    .blurRadius(4)
-                    .offset(const Offset(0, 2)),
-              ),
+          .shape(
+            .circle(),
+          ).shadow(.color(Colors.black45).blurRadius(4).offset(x: 0, y: 2)),
         )
         .thumbColor(Colors.black)
         .thickness(2)
@@ -306,4 +303,3 @@ Sets the widget modifier.
 #### `call({ ... })`
 
 Creates a RemixSlider widget with this style applied.
-

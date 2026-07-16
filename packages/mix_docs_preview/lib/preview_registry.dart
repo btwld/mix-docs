@@ -742,13 +742,13 @@ class _UnknownPreview extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const .all(16),
         child: Text(
           'Unknown previewId: $sanitizedId\n\n'
           'Available previewIds:\n'
           '${PreviewRegistry.availablePreviewIds.join('\n')}',
           style: const TextStyle(color: Color(0xFFEF4444), fontSize: 14),
-          textAlign: TextAlign.center,
+          textAlign: .center,
         ),
       ),
     );
@@ -771,9 +771,9 @@ class _ErrorPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const .all(16),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           spacing: 8,
           children: [
             const Text(
@@ -781,7 +781,7 @@ class _ErrorPreview extends StatelessWidget {
               style: TextStyle(
                 color: Color(0xFFEF4444),
                 fontSize: 16,
-                fontWeight: FontWeight.bold,
+                fontWeight: .bold,
               ),
             ),
             Text(
@@ -791,8 +791,8 @@ class _ErrorPreview extends StatelessWidget {
             Text(
               error.toString(),
               style: const TextStyle(color: Color(0xFFEF4444), fontSize: 12),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
+              textAlign: .center,
+              overflow: .ellipsis,
               maxLines: 5,
             ),
           ],

@@ -18,10 +18,7 @@ Some visual effects — opacity, clipping, visibility — aren't style propertie
 Use `.wrap()` with a modifier to add a widget wrapper to your style:
 
 ```dart
-final style = BoxStyler()
-    .color(Colors.red)
-    .size(100, 100)
-    .wrap(.opacity(0.4));
+final style = BoxStyler().color(Colors.red).size(100, 100).wrap(.opacity(0.4));
 ```
 
 <FlutterPreview previewId="guides/widget-modifiers.0" height={200} />
@@ -104,10 +101,12 @@ If the default pipeline doesn't fit your use case, you can override it with `.wr
 final style = BoxStyler()
     .wrap(.opacity(0.5))
     .wrap(.padding(.all(8)))
-    .wrap(.orderOfModifiers([
-      OpacityModifier,   // Apply opacity first (innermost)
-      PaddingModifier,   // Then padding (outermost)
-    ]));
+    .wrap(
+      .orderOfModifiers([
+        OpacityModifier, // Apply opacity first (innermost)
+        PaddingModifier, // Then padding (outermost)
+      ]),
+    );
 ```
 
 Your custom order takes priority. Any modifiers not listed in your custom order fall back to their default position.
@@ -126,7 +125,7 @@ MixScope(
     ClipRRectModifier,
     OpacityModifier,
   ],
-  colors: { /* ... */ },
+  colors: {/* ... */},
   child: MyApp(),
 );
 ```
@@ -196,7 +195,7 @@ class OpacityModifierMix extends ModifierMix<OpacityModifier> {
   const OpacityModifierMix.create({this.opacity});
 
   OpacityModifierMix({double? opacity})
-      : this.create(opacity: Prop.maybe(opacity));
+    : this.create(opacity: Prop.maybe(opacity));
 
   @override
   OpacityModifier resolve(BuildContext context) {

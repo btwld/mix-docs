@@ -60,7 +60,7 @@ class _TabsPreviewState extends State<TabsPreview> {
               child: FortalTabView(
                 tabId: 'tab1',
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: .all(16),
                   child: Align(
                     alignment: .topLeft,
                     child: Text('Content for Tab 1'),
@@ -72,7 +72,7 @@ class _TabsPreviewState extends State<TabsPreview> {
               child: FortalTabView(
                 tabId: 'tab2',
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: .all(16),
                   child: Align(
                     alignment: .topLeft,
                     child: Text('Content for Tab 2'),

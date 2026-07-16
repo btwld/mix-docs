@@ -29,7 +29,7 @@ class _HeroButton extends StatelessWidget {
         .labelColor(const Color(0xFF05040A))
         .paddingX(22)
         .paddingY(11)
-        .borderRadiusAll(const Radius.circular(10))
+        .borderRadius(.circular(10))
         .onHovered(.color(const Color(0xFF33FF36)));
     // #enddocregion style
 

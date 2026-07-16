@@ -35,7 +35,7 @@ class PopoverPreview extends StatelessWidget {
       positioning: const OverlayPositionConfig(
         targetAnchor: .bottomCenter,
         followerAnchor: .topCenter,
-        offset: Offset(0, 8),
+        offset: .new(0, 8),
       ),
       popoverChild: const SizedBox(
         width: 220,
@@ -50,7 +50,7 @@ class PopoverPreview extends StatelessWidget {
         ),
       ),
       child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: .symmetric(horizontal: 16, vertical: 10),
         child: Text('Account'),
       ),
     );

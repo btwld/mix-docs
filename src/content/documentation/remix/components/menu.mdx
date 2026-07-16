@@ -62,15 +62,15 @@ class _MenuExampleState extends State<MenuExample> {
           label: 'Logout',
           style: menuItemStyle.onHovered(
             .color(Colors.redAccent.withValues(alpha: 0.05))
-                .label(TextStyler().color(Colors.redAccent))
-                .leadingIcon(IconStyler().color(Colors.redAccent)),
+                .label(.color(Colors.redAccent))
+                .leadingIcon(.color(Colors.redAccent)),
           ),
         ),
       ],
       positioning: const OverlayPositionConfig(
-        offset: Offset(0, 8),
-        followerAnchor: Alignment.topCenter,
-        targetAnchor: Alignment.bottomCenter,
+        offset: .new(0, 8),
+        followerAnchor: .topCenter,
+        targetAnchor: .bottomCenter,
       ),
       style: menuStyle,
       onSelected: (value) {
@@ -83,43 +83,30 @@ class _MenuExampleState extends State<MenuExample> {
   RemixMenuStyler get menuStyle {
     return RemixMenuStyler()
         .trigger(
-          RemixMenuTriggerStyler()
-              .padding(EdgeInsetsMix.symmetric(horizontal: 14))
+          .padding(.symmetric(horizontal: 14))
               .decoration(
-                BoxDecorationMix()
-                    .color(Colors.white)
-                    .borderRadius(BorderRadiusMix.all(const Radius.circular(12)))
-                    .border(BorderMix.all(BorderSideMix(color: Colors.blueGrey.shade100)))
+                BoxDecorationMix.color(Colors.white)
+                    .borderRadius(.circular(12))
+                    .border(.all(.color(Colors.blueGrey.shade100)))
                     .boxShadow([
-                  BoxShadowMix(
-                    color: Colors.blueGrey.withValues(alpha: 0.1),
-                    blurRadius: 3,
-                    offset: const Offset(0, 3),
-                  ),
-                ]),
+                      .color(
+                        Colors.blueGrey.withValues(alpha: 0.1),
+                      ).blurRadius(3).offset(x: 0, y: 3),
+                    ]),
               )
-              .constraints(BoxConstraintsMix(minHeight: 40))
-              .label(
-                TextStyler()
-                    .color(Colors.blueGrey.shade700)
-                    .fontWeight(FontWeight.w400),
-              ),
+              .constraints(.minHeight(40))
+              .label(.color(Colors.blueGrey.shade700).fontWeight(.w400)),
         )
         .overlay(
-          FlexBoxStyler(
-            padding: EdgeInsetsMix.all(12),
-            decoration: BoxDecorationMix(
-              color: Colors.white,
-              borderRadius: BorderRadiusMix.all(const Radius.circular(12)),
-              border: BorderMix.all(BorderSideMix(color: Colors.blueGrey.shade100)),
-              boxShadow: [
-                BoxShadowMix(
-                  color: Colors.blueGrey.withValues(alpha: 0.1),
-                  blurRadius: 3,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
+          .padding(.all(12)).decoration(
+            BoxDecorationMix.color(Colors.white)
+                .borderRadius(.circular(12))
+                .border(.all(.color(Colors.blueGrey.shade100)))
+                .boxShadow([
+                  .color(
+                    Colors.blueGrey.withValues(alpha: 0.1),
+                  ).blurRadius(3).offset(x: 0, y: 3),
+                ]),
           ),
         );
   }
@@ -127,10 +114,10 @@ class _MenuExampleState extends State<MenuExample> {
   RemixMenuItemStyler get menuItemStyle {
     return RemixMenuItemStyler()
         .paddingAll(6)
-        .leadingIcon(IconStyler().size(20).color(Colors.blueGrey.shade800))
+        .leadingIcon(.size(20).color(Colors.blueGrey.shade800))
         .spacing(8)
-        .borderRadiusAll(const Radius.circular(8))
-        .label(TextStyler().color(Colors.blueGrey.shade800))
+        .borderRadius(.circular(8))
+        .label(.color(Colors.blueGrey.shade800))
         .onHovered(.color(Colors.blueGrey.shade50));
   }
 }
@@ -152,11 +139,7 @@ class FortalMenuExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <RemixMenuItemData<String>>[
-      RemixMenuItem(
-        value: 'edit',
-        label: 'Edit',
-        leadingIcon: Icons.edit,
-      ),
+      RemixMenuItem(value: 'edit', label: 'Edit', leadingIcon: Icons.edit),
       RemixMenuItem(
         value: 'delete',
         label: 'Delete',

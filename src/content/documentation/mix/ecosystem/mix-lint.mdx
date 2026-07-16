@@ -97,9 +97,7 @@ final style = BoxStyler()
 final primary = ColorToken('primary');
 final rounded = RadiusToken('rounded');
 
-final style = BoxStyler()
-    .color(primary())
-    .borderRadius(.topLeft(rounded()));
+final style = BoxStyler().color(primary()).borderRadius(.topLeft(rounded()));
 ```
 
 ### mix_avoid_defining_tokens_within_scope
@@ -109,12 +107,7 @@ final style = BoxStyler()
 **Avoid:**
 
 ```dart
-MixScope(
-  colors: {
-    ColorToken('primary'): Colors.blue,
-  },
-  child: child,
-);
+MixScope(colors: {ColorToken('primary'): Colors.blue}, child: child);
 ```
 
 **Prefer:**
@@ -122,12 +115,7 @@ MixScope(
 ```dart
 final primary = ColorToken('primary');
 
-MixScope(
-  colors: {
-    primary: Colors.blue,
-  },
-  child: child,
-);
+MixScope(colors: {primary: Colors.blue}, child: child);
 ```
 
 ### mix_avoid_empty_variants
@@ -162,10 +150,7 @@ The rule counts method invocations in the chain starting from the Styler constru
 **Prefer:**
 
 ```dart
-final layout = BoxStyler()
-    .padding(.all(8))
-    .margin(.all(4))
-    .alignment(.center);
+final layout = BoxStyler().padding(.all(8)).margin(.all(4)).alignment(.center);
 
 final appearance = BoxStyler()
     .color(Colors.blue)
@@ -183,9 +168,7 @@ final hovered = BoxStyler()
     .height(120)
     .opacity(1.0);
 
-final style = layout
-    .merge(appearance)
-    .onHovered(hovered);
+final style = layout.merge(appearance).onHovered(hovered);
 ```
 
 ### mix_variants_last
@@ -223,15 +206,13 @@ This rule includes a **quick fix** in supported clients: apply the suggested rew
 **Avoid:**
 
 ```dart
-final style = BoxStyler()
-    .padding(EdgeInsetsGeometryMix.all(10));
+final style = BoxStyler().padding(EdgeInsetsGeometryMix.all(10));
 ```
 
 **Prefer:**
 
 ```dart
-final style = BoxStyler()
-    .padding(.all(10));
+final style = BoxStyler().padding(.all(10));
 ```
 
 ### mix_mixable_styler_has_create

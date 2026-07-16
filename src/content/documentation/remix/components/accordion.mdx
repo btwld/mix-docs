@@ -66,7 +66,8 @@ class _AccordionExampleState extends State<AccordionExample> {
             leadingIcon: Icons.help_outline,
             style: itemStyle,
             child: const Text(
-                'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.'),
+              'Major credit and debit cards like Visa, MasterCard, and American Express, as well as digital payment options like PayPal and Apple Pay.',
+            ),
           ),
           RemixAccordion(
             value: 'accordion3',
@@ -74,7 +75,8 @@ class _AccordionExampleState extends State<AccordionExample> {
             leadingIcon: Icons.help_outline,
             style: itemStyle,
             child: const Text(
-                'You can track your order status in the "My Orders" section of your account.'),
+              'You can track your order status in the "My Orders" section of your account.',
+            ),
           ),
         ],
       ),
@@ -83,35 +85,23 @@ class _AccordionExampleState extends State<AccordionExample> {
 
   RemixAccordionStyler get itemStyle {
     return RemixAccordionStyler()
-        .content(BoxStyler().paddingX(16).paddingTop(8))
-        .wrap(.clipRRect(borderRadius: BorderRadiusGeometryMix.circular(8)))
+        .content(.padding(.horizontal(16).top(8)))
+        .wrap(.clipRRect(borderRadius: .circular(8)))
         .paddingX(16)
         .paddingY(14)
         .borderRounded(8)
         .onHovered(.color(Colors.grey.shade100))
         .decoration(
-          BoxDecorationMix(
-            color: Colors.white,
-            border: BoxBorderMix.all(
-              BorderSideMix().color(Colors.grey.shade300).width(1),
-            ),
-            borderRadius: BorderRadiusMix.circular(8),
-          ),
+          BoxDecorationMix.color(Colors.white)
+              .border(.all(.color(Colors.grey.shade300).width(1)))
+              .borderRadius(.circular(8)),
         )
         .trigger(
-          FlexBoxStyler()
-              .direction(Axis.horizontal)
-              .mainAxisAlignment(MainAxisAlignment.spaceBetween)
-              .spacing(12),
+          .direction(.horizontal).mainAxisAlignment(.spaceBetween).spacing(12),
         )
-        .leadingIcon(IconStyler().color(Colors.grey.shade700).size(20))
-        .title(
-          TextStyler()
-              .color(Colors.grey.shade900)
-              .fontWeight(FontWeight.w500)
-              .fontSize(14),
-        )
-        .trailingIcon(IconStyler().color(Colors.grey.shade700).size(20));
+        .leadingIcon(.color(Colors.grey.shade700).size(20))
+        .title(.color(Colors.grey.shade900).fontWeight(.w500).fontSize(14))
+        .trailingIcon(.color(Colors.grey.shade700).size(20));
   }
 }
 ```
@@ -349,7 +339,7 @@ Sets trigger border radius.
 
 Sets trigger foreground decoration.
 
-#### `transform(Matrix4 value, {AlignmentGeometry alignment = Alignment.center})`
+#### `transform(Matrix4 value, {AlignmentGeometry alignment = .center})`
 
 Applies a matrix transform to the trigger.
 

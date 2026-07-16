@@ -44,7 +44,7 @@ class KeyframeLoopExample extends StatelessWidget {
             return style
                 .transform(Matrix4.diagonal3Values(scale, scale, 1.0))
                 .color(values.get('color'))
-                .wrap(WidgetModifierConfig.opacity(opacity));
+                .wrap(.opacity(opacity));
           },
         );
 

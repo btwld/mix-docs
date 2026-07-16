@@ -59,12 +59,12 @@ Make it yours without starting from scratch. Define a look once with Mix's fluen
 
 ```dart
 final button = RemixButtonStyler()
-  .paddingX(16)
-  .paddingY(10)
-  .color(Colors.blue)
-  .borderRadiusAll(const Radius.circular(8))
-  .onHovered(.color(Colors.blue.shade700))
-  .animate(AnimationConfig.spring(300.ms));
+    .paddingX(16)
+    .paddingY(10)
+    .color(Colors.blue)
+    .borderRadius(.circular(8))
+    .onHovered(.color(Colors.blue.shade700))
+    .animate(.spring(300.ms));
 ```
 
 `Explore styling →`

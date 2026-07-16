@@ -35,17 +35,17 @@ class _ExampleState extends State<Example> {
         context,
       ).copyWith(platformBrightness: isDark ? .dark : .light),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           Box(style: style),
           SizedBox(height: 12),
           GestureDetector(
             onTap: () => setState(() => isDark = !isDark),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: .symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: .circular(8),
               ),
               child: Text(
                 isDark ? 'Dark mode' : 'Light mode',

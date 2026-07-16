@@ -48,13 +48,13 @@ class _RadioExampleState extends State<RadioExample> {
         });
       },
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: .center,
         spacing: 16,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           Row(
             spacing: 8,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               RemixRadio<String>(value: 'option1', style: style),
               const Text('Option 1'),
@@ -62,7 +62,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
           Row(
             spacing: 8,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               RemixRadio<String>(value: 'option2', style: style),
               const Text('Option 2'),
@@ -75,41 +75,37 @@ class _RadioExampleState extends State<RadioExample> {
 
   RemixRadioStyler get style {
     return RemixRadioStyler()
-        .borderRadiusAll(const Radius.circular(30))
+        .borderRadius(.circular(30))
         .size(22, 22)
         .border(
-          BoxBorderMix.all(
-            BorderSideMix()
-                .color(Colors.blueGrey.shade100)
-                .width(2.4)
-                .strokeAlign(BorderSide.strokeAlignInside),
+          .all(
+            .color(
+              Colors.blueGrey.shade100,
+            ).width(2.4).strokeAlign(BorderSide.strokeAlignInside),
           ),
         )
         .onHovered(
           .shadow(
-            BoxShadowMix()
-                .color(Colors.blueGrey.shade50.withValues(alpha: 0.7))
-                .blurRadius(0)
-                .spreadRadius(9),
+            .color(
+              Colors.blueGrey.shade50.withValues(alpha: 0.7),
+            ).blurRadius(0).spreadRadius(9),
           ),
         )
         .onPressed(
           .border(
-            BoxBorderMix.all(
-              BorderSideMix()
-                  .color(Colors.blueGrey.shade100)
-                  .width(6)
-                  .strokeAlign(BorderSide.strokeAlignInside),
+            .all(
+              .color(
+                Colors.blueGrey.shade100,
+              ).width(6).strokeAlign(BorderSide.strokeAlignInside),
             ),
           ),
         )
         .onSelected(
           .border(
-            BoxBorderMix.all(
-              BorderSideMix()
-                  .color(Colors.blueAccent.shade700)
-                  .width(6)
-                  .strokeAlign(BorderSide.strokeAlignInside),
+            .all(
+              .color(
+                Colors.blueAccent.shade700,
+              ).width(6).strokeAlign(BorderSide.strokeAlignInside),
             ),
           ),
         );
@@ -146,18 +142,14 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
         children: [
           Row(
             children: [
-              FortalRadio.surface(
-                value: 'surface',
-              ),
+              FortalRadio.surface(value: 'surface'),
               const SizedBox(width: 8),
               const Text('Surface'),
             ],
           ),
           Row(
             children: [
-              FortalRadio.soft(
-                value: 'soft',
-              ),
+              FortalRadio.soft(value: 'soft'),
               const SizedBox(width: 8),
               const Text('Soft'),
             ],
@@ -304,4 +296,3 @@ Applies a matrix transformation to the component.
 #### `call<T>({required T value, bool enabled = true, bool autofocus = false, bool toggleable = false, FocusNode? focusNode, MouseCursor? mouseCursor})`
 
 Creates a `RemixRadio<T>` widget with this style applied.
-

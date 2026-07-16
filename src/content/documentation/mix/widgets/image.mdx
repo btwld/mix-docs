@@ -19,10 +19,7 @@ final style = ImageStyler()
     .color(Colors.blue.withValues(alpha: 0.3))
     .colorBlendMode(.overlay);
 
-StyledImage(
-  image: NetworkImage('https://picsum.photos/160'),
-  style: style,
-)
+StyledImage(image: NetworkImage('https://picsum.photos/160'), style: style)
 ```
 
 The preview below shows a styled image with dimensions, fit, and color blend.

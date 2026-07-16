@@ -50,7 +50,7 @@ final rowStyle = FlexBoxStyler()
     .spacing(12)
     .padding(.all(16))
     .color(Colors.grey.shade100);
-    
+
 FlexBox(style: rowStyle, children: [...]);
 ```
 
@@ -110,9 +110,9 @@ Styles can adapt to user interactions and context using **variants**. Instead of
 
 ```dart
 final button = BoxStyler()
-  .color(Colors.blue)
-  .onHovered(.color(Colors.blue.shade700))
-  .onDark(.color(Colors.blue.shade200));
+    .color(Colors.blue)
+    .onHovered(.color(Colors.blue.shade700))
+    .onDark(.color(Colors.blue.shade200));
 ```
 
 Variants are covered in depth in the [Dynamic Styling](/documentation/mix/guides/dynamic-styling) guide.

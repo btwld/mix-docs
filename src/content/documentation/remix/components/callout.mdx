@@ -47,19 +47,17 @@ class CalloutExample extends StatelessWidget {
         .height(60)
         .paddingRight(12)
         .icon(
-          IconStyler()
-              .size(24)
+          .size(24)
               .color(Colors.white)
               .wrap(
                 .box(
-                  BoxStyler()
-                      .color(Colors.blue.shade900)
-                      .paddingX(12)
-                      .height(double.infinity),
+                  .color(
+                    Colors.blue.shade900,
+                  ).paddingX(12).height(double.infinity),
                 ),
               ),
         )
-        .mainAxisSize(MainAxisSize.min);
+        .mainAxisSize(.min);
   }
 }
 ```
@@ -86,10 +84,7 @@ class FortalCalloutExample extends StatelessWidget {
           text: 'Surface callout',
           icon: Icons.info_outline,
         ),
-        FortalCallout.soft(
-          text: 'Soft callout',
-          icon: Icons.lightbulb_outline,
-        ),
+        FortalCallout.soft(text: 'Soft callout', icon: Icons.lightbulb_outline),
         FortalCallout.outline(
           text: 'Outline callout',
           icon: Icons.border_outer,
@@ -268,4 +263,3 @@ Sets single icon shadow
 #### `call({Key? key, String? text, IconData? icon, Widget? child})`
 
 Creates a `RemixCallout` widget with this style applied.
-

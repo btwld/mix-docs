@@ -74,9 +74,7 @@ class Example extends StatelessWidget {
 Extract styles into top-level variables and reuse them across widgets. You can also pass styles via the `style` parameter using Mix's widget classes like `Box` and `StyledText`, and override individual properties by chaining:
 
 ```dart
-final primaryCard = BoxStyler()
-  .color(Colors.blue)
-  .borderRadius(.circular(12));
+final primaryCard = BoxStyler().color(Colors.blue).borderRadius(.circular(12));
 
 final box = Box(style: primaryCard, child: StyledText('Primary'));
 

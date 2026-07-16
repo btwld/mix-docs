@@ -37,11 +37,7 @@ The `$box`, `$text`, `$icon`, `$flex`, `$stack`, `$image`, `$flexbox`, and `$sta
 
 ```dart
 // DEPRECATED - v1.x
-final style = Style(
-  $box.color.blue(),
-  $box.padding(16),
-  $box.borderRadius(8),
-);
+final style = Style($box.color.blue(), $box.padding(16), $box.borderRadius(8));
 
 // v2.0
 final style = BoxStyler()
@@ -95,17 +91,12 @@ The `$with` namespace is replaced with the `.wrap()` method or shorthand modifie
 ```dart
 // v1.x
 MixTheme(
-  data: MixThemeData(
-    colors: {primaryColor: Colors.blue},
-  ),
+  data: MixThemeData(colors: {primaryColor: Colors.blue}),
   child: MyApp(),
 );
 
 // v2.0
-MixScope(
-  colors: {primaryColor: Colors.blue},
-  child: MyApp(),
-);
+MixScope(colors: {primaryColor: Colors.blue}, child: MyApp());
 ```
 
 #### Token Usage

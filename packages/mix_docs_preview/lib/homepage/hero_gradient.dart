@@ -25,17 +25,15 @@ class _HeroButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // #docregion style
     final style = RemixButtonStyler()
-        .gradient(
-          LinearGradientMix(
-            begin: .topLeft,
-            end: .bottomRight,
-            colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
-          ),
+        .linearGradient(
+          begin: .topLeft,
+          end: .bottomRight,
+          colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
         )
         .labelColor(const Color(0xFF05040A))
         .paddingX(22)
         .paddingY(11)
-        .borderRadiusAll(const Radius.circular(12));
+        .borderRadius(.circular(12));
     // #enddocregion style
 
     return RemixButton(label: 'Get started', onPressed: () {}, style: style);

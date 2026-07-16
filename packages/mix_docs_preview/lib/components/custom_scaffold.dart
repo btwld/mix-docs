@@ -12,7 +12,7 @@ final appHeaderContainer = BoxStyler.height(80)
     .padding(.all(16))
     .alignment(.center)
     .wrap(
-      .new().defaultText(
+      .defaultText(
         TextStyler.fontSize(20).fontWeight(.bold).color(Colors.white),
       ),
     );

@@ -70,7 +70,7 @@ const THEMES = [
     .labelColor(const Color(0xFF05040A))
     .paddingX(22)
     .paddingY(11)
-    .borderRadiusAll(const Radius.circular(10))
+    .borderRadius(.circular(10))
     .onHovered(.color(const Color(0xFF33FF36)));`,
   },
   {
@@ -78,17 +78,15 @@ const THEMES = [
     name: "Gradient",
     previewId: "homepage/hero-gradient",
     code: `final style = RemixButtonStyler()
-    .gradient(
-      LinearGradientMix(
-        begin: .topLeft,
-        end: .bottomRight,
-        colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
-      ),
+    .linearGradient(
+      begin: .topLeft,
+      end: .bottomRight,
+      colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
     )
     .labelColor(const Color(0xFF05040A))
     .paddingX(22)
     .paddingY(11)
-    .borderRadiusAll(const Radius.circular(12));`,
+    .borderRadius(.circular(12));`,
   },
   {
     key: "neon",
@@ -99,8 +97,8 @@ const THEMES = [
     .labelColor(const Color(0xFF00F0FF))
     .paddingX(24)
     .paddingY(11)
-    .borderRadiusAll(const Radius.circular(2))
-    .borderAll(color: const Color(0xFF00F0FF), width: 1)
+    .borderRadius(.circular(2))
+    .border(.all(.color(const Color(0xFF00F0FF)).width(1)))
     .shadowOnly(color: const Color(0xFFFF00E5), blurRadius: 22);`,
   },
 ];
