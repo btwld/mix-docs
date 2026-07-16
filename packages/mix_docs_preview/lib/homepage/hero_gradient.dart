@@ -27,8 +27,8 @@ class _HeroButton extends StatelessWidget {
     final style = RemixButtonStyler()
         .gradient(
           LinearGradientMix(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: .topLeft,
+            end: .bottomRight,
             colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
           ),
         )

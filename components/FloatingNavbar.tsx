@@ -205,6 +205,7 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
     ],
     remix: [
         { label: 'Getting Started', href: '/documentation/remix' },
+        { label: 'Styler API', href: '/documentation/remix/styler-api' },
         { label: 'Fortal', href: '/documentation/remix/fortal' },
         {
             label: 'Components',
@@ -216,9 +217,11 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
                 { label: 'Callout', href: '/documentation/remix/components/callout' },
                 { label: 'Card', href: '/documentation/remix/components/card' },
                 { label: 'Checkbox', href: '/documentation/remix/components/checkbox' },
+                { label: 'Dialog', href: '/documentation/remix/components/dialog' },
                 { label: 'Divider', href: '/documentation/remix/components/divider' },
                 { label: 'IconButton', href: '/documentation/remix/components/icon_button' },
                 { label: 'Menu', href: '/documentation/remix/components/menu' },
+                { label: 'Popover', href: '/documentation/remix/components/popover' },
                 { label: 'Progress', href: '/documentation/remix/components/progress' },
                 { label: 'Radio', href: '/documentation/remix/components/radio' },
                 { label: 'Select', href: '/documentation/remix/components/select' },
@@ -227,6 +230,8 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
                 { label: 'Switch', href: '/documentation/remix/components/switch' },
                 { label: 'Tabs', href: '/documentation/remix/components/tabs' },
                 { label: 'TextField', href: '/documentation/remix/components/textfield' },
+                { label: 'Toggle', href: '/documentation/remix/components/toggle' },
+                { label: 'Toggle Group', href: '/documentation/remix/components/toggle_group' },
                 { label: 'Tooltip', href: '/documentation/remix/components/tooltip' },
             ],
         },

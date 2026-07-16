@@ -19,7 +19,7 @@ This repository hosts the source for the Mix documentation website. It pairs a N
 | Layer       | Stack                                                             |
 | ----------- | ----------------------------------------------------------------- |
 | Docs site   | Next.js 15, Nextra 4, React 19, Tailwind CSS 4, TypeScript        |
-| Previews    | Flutter 3.41+, Dart 3.11+, [Mix](https://pub.dev/packages/mix) 2+ |
+| Previews    | Flutter 3.44+, Dart 3.12+, [Mix](https://pub.dev/packages/mix) 2+ |
 | Search      | Pagefind                                                          |
 | Deployment  | Vercel + GitHub Actions                                           |
 
@@ -27,7 +27,7 @@ This repository hosts the source for the Mix documentation website. It pairs a N
 
 - [Node.js](https://nodejs.org) 20+
 - [pnpm](https://pnpm.io) 10.29+
-- [Flutter](https://flutter.dev) 3.41+ (managed via [FVM](https://fvm.app), version pinned in `.fvmrc`)
+- [Flutter](https://flutter.dev) 3.44+ (managed via [FVM](https://fvm.app), version pinned in `.fvmrc`)
 
 ## Getting started
 

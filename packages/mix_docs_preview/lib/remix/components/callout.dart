@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const CalloutPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const CalloutPreview(),
+    );
   }
 }
 
@@ -26,10 +30,9 @@ class CalloutPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RemixCallout(
+    return const FortalCallout.surface(
       text: 'Callout important information for the user.',
       icon: Icons.info_outline,
-      style: fortalCalloutStyler(variant: .surface),
     );
   }
 }

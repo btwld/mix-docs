@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const RadioPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const RadioPreview(),
+    );
   }
 }
 
@@ -49,10 +53,7 @@ class _RadioPreviewState extends State<RadioPreview> {
             spacing: 8,
             mainAxisSize: .min,
             children: [
-              RemixRadio<String>(
-                value: 'option1',
-                style: fortalRadioStyler(variant: .surface),
-              ),
+              const FortalRadio<String>.surface(value: 'option1'),
               const Text('Option 1'),
             ],
           ),
@@ -60,10 +61,7 @@ class _RadioPreviewState extends State<RadioPreview> {
             spacing: 8,
             mainAxisSize: .min,
             children: [
-              RemixRadio<String>(
-                value: 'option2',
-                style: fortalRadioStyler(variant: .surface),
-              ),
+              const FortalRadio<String>.surface(value: 'option2'),
               const Text('Option 2'),
             ],
           ),

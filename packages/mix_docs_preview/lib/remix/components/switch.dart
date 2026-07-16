@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const SwitchPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const SwitchPreview(),
+    );
   }
 }
 
@@ -33,8 +37,7 @@ class _SwitchPreviewState extends State<SwitchPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixSwitch(
-      style: fortalSwitchStyler(variant: .surface),
+    return FortalSwitch.surface(
       selected: _selected,
       onChanged: (value) {
         setState(() {

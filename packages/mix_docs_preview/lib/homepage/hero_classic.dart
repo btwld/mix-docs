@@ -30,9 +30,7 @@ class _HeroButton extends StatelessWidget {
         .paddingX(22)
         .paddingY(11)
         .borderRadiusAll(const Radius.circular(10))
-        .onHovered(
-          RemixButtonStyler().color(const Color(0xFF33FF36)),
-        );
+        .onHovered(.color(const Color(0xFF33FF36)));
     // #enddocregion style
 
     return RemixButton(label: 'Get started', onPressed: () {}, style: style);

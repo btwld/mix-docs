@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const ButtonPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const ButtonPreview(),
+    );
   }
 }
 
@@ -31,31 +35,11 @@ class ButtonPreview extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 12,
       children: [
-        RemixButton(
-          onPressed: () {},
-          label: 'Solid',
-          style: fortalButtonStyler(variant: .solid),
-        ),
-        RemixButton(
-          onPressed: () {},
-          label: 'Soft',
-          style: fortalButtonStyler(variant: .soft),
-        ),
-        RemixButton(
-          onPressed: () {},
-          label: 'Surface',
-          style: fortalButtonStyler(variant: .surface),
-        ),
-        RemixButton(
-          onPressed: () {},
-          label: 'Outline',
-          style: fortalButtonStyler(variant: .outline),
-        ),
-        RemixButton(
-          onPressed: () {},
-          label: 'Ghost',
-          style: fortalButtonStyler(variant: .ghost),
-        ),
+        FortalButton.solid(onPressed: () {}, label: 'Solid'),
+        FortalButton.soft(onPressed: () {}, label: 'Soft'),
+        FortalButton.surface(onPressed: () {}, label: 'Surface'),
+        FortalButton.outline(onPressed: () {}, label: 'Outline'),
+        FortalButton.ghost(onPressed: () {}, label: 'Ghost'),
       ],
     );
   }

@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const CheckboxPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const CheckboxPreview(),
+    );
   }
 }
 
@@ -33,14 +37,13 @@ class _CheckboxPreviewState extends State<CheckboxPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixCheckbox(
+    return FortalCheckbox.surface(
       selected: _isChecked,
       onChanged: (value) {
         setState(() {
           _isChecked = value ?? false;
         });
       },
-      style: fortalCheckboxStyler(variant: .surface),
     );
   }
 }

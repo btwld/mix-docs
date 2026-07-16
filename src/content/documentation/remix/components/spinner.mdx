@@ -6,6 +6,7 @@ keywords: [flutter, remix, spinner, loading, progress, indicator, circular]
 
 An animated loading spinner component for indicating ongoing processes.
 
+
 ## Interactive preview
 
 <FlutterPreview
@@ -63,11 +64,11 @@ class SpinnerExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Fortal styles
+## Fortal widgets
 
-Remix includes Fortal-themed style helpers for this component:
+Remix includes a generated Fortal-themed widget for this component:
 
-<CodeGroup title="Fortal base style" defaultLanguage="dart">
+<CodeGroup title="Fortal widget" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -80,9 +81,8 @@ class FortalSpinnerExample extends StatelessWidget {
     return Row(
       spacing: 16,
       children: [
-        RemixSpinner(style: fortalSpinnerStyler(size: .size1)),
-        RemixSpinner(style: fortalSpinnerStyler(size: .size2)),
-        RemixSpinner(style: fortalSpinnerStyler(size: .size3)),
+        FortalSpinner(size: FortalSpinnerSize.size2),
+        FortalSpinner(size: FortalSpinnerSize.size3),
       ],
     );
   }
@@ -91,7 +91,7 @@ class FortalSpinnerExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [fortalSpinnerStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/spinner/fortal_spinner_styles.dart) for all available options.
+  See the [fortalSpinnerStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/spinner/fortal_spinner_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -109,22 +109,54 @@ const RemixSpinner({
 ## Properties
 ### Widget Properties
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `style` | `RemixSpinnerStyler` | Optional. The style configuration for the spinner. Customize colors, sizing, stroke, and animation duration. |
-| `styleSpec` | `RemixSpinnerSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
-| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
+#### `style` → `RemixSpinnerStyler`
+
+Optional. The style configuration for the spinner. Customize colors, sizing, stroke, and animation duration.
+
+#### `styleSpec` → `RemixSpinnerSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
 
 ### Style Methods
 
-| Method | Description |
-|--------|-------------|
-| `size(double value)` | Sets the spinner size (width and height). |
-| `indicatorColor(Color value)` | Sets the color of the spinning indicator. |
-| `trackColor(Color value)` | Sets the color of the track (background ring). |
-| `strokeWidth(double value)` | Sets the stroke width of the indicator. |
-| `trackStrokeWidth(double value)` | Sets the stroke width of the track. |
-| `duration(Duration value)` | Sets the duration of one full rotation. |
-| `animate(AnimationConfig animation)` | Configures implicit animation for style transitions. |
-| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
+#### `size(double value)`
+
+Sets the spinner size (width and height).
+
+#### `indicatorColor(Color value)`
+
+Sets the color of the spinning indicator.
+
+#### `trackColor(Color value)`
+
+Sets the color of the track (background ring).
+
+#### `strokeWidth(double value)`
+
+Sets the stroke width of the indicator.
+
+#### `trackStrokeWidth(double value)`
+
+Sets the stroke width of the track.
+
+#### `duration(Duration value)`
+
+Sets the duration of one full rotation.
+
+#### `animate(AnimationConfig value)`
+
+Configures implicit animation for style transitions.
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `call()`
+
+Creates a `RemixSpinner` widget with this style applied.
 
