@@ -7,6 +7,7 @@ import { Button } from "./Button";
 import { HeroBackground } from "./HeroBackground";
 import { HighlightedCode } from "./HighlightedCode";
 import Layout from "./Layout";
+import { ProductionGapCard } from "./reports/ProductionGapCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -440,6 +441,25 @@ export const ConceptaHome = () => {
                   <p className="pillar-body">{pillar.body}</p>
                 </div>
               ))}
+            </motion.div>
+          </section>
+
+          {/* Research — evidence behind the agency stance */}
+          <section id="research" className="section-gap">
+            <motion.div className="section-header" {...sectionReveal}>
+              <span className="mono-label">Concepta research</span>
+              <h2 className="section-title">
+                The evidence behind governed delivery.
+              </h2>
+              <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
+                Building is accelerating. The controls around review, release,
+                and production are not. Our latest report maps the gap — and
+                the operating model that closes it.
+              </p>
+            </motion.div>
+
+            <motion.div {...sectionReveal}>
+              <ProductionGapCard href="/reports" external={false} compact />
             </motion.div>
           </section>
 

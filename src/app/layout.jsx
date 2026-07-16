@@ -72,7 +72,7 @@ export default async function RootLayout({ children }) {
             <body>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p==='/')d='concepta';else if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p.startsWith('/documentation/ack')||p==='/ack'||p.startsWith('/ack/'))d='ack';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
+                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p==='/'||p==='/reports'||p.startsWith('/reports/'))d='concepta';else if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p.startsWith('/documentation/ack')||p==='/ack'||p.startsWith('/ack/'))d='ack';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
                     }}
                 />
                 <Layout

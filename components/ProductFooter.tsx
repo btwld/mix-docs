@@ -34,6 +34,7 @@ export default function ProductFooter() {
                 <span>&copy; 2026 Concepta Tech.</span>
             </span>
             <div className="flex items-center gap-5">
+                <Link href="/reports" className="hover:text-white transition-colors">Reports</Link>
                 <a href="https://github.com/btwld/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
                 <a href="https://pub.dev/packages/mix" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
                 <a href="https://discord.com/invite/Ycn6GV3m2k" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Discord</a>
