@@ -1,0 +1,7 @@
+/* ============================================================
+   CONCEPTA — Design System entry point
+   Link THIS file to consume the system. It re-exports the
+   token + type foundations. Kit-specific styles
+   (ui_kits/*/styles.css) stay scoped to their kit.
+   ============================================================ */
+@import url('./colors_and_type.css');

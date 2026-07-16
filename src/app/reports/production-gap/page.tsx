@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
-import { PRODUCTION_GAP_URL } from "../../../../components/reports/report-data";
+
+const REPORT_HTML_PATH = "/reports/production-gap/report.html";
 
 const description =
   "Why AI makes building faster and shipping harder — and what technology leaders can do about it.";
@@ -34,31 +35,29 @@ export default function ProductionGapReportPage() {
           </h1>
         </div>
         <a
-          href={PRODUCTION_GAP_URL}
+          href={REPORT_HTML_PATH}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ebbc]"
         >
-          Open the original report
+          Open the full-screen report
           <ArrowUpRight aria-hidden="true" size={15} />
         </a>
       </header>
 
       <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white shadow-[0_24px_80px_-46px_rgba(58,91,255,0.8)]">
         <iframe
-          src={PRODUCTION_GAP_URL}
+          src={REPORT_HTML_PATH}
           title="The Production Gap interactive report"
           className="block h-[calc(100svh-11rem)] min-h-[720px] w-full bg-white"
           loading="eager"
           referrerPolicy="strict-origin-when-cross-origin"
-          sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         />
       </div>
 
       <p className="px-2 pt-3 text-xs leading-relaxed text-white/45 sm:px-0">
-        The complete published report is displayed above from its canonical
-        source, so this page stays aligned with the version used in external
-        references.
+        The complete report is stored with this site and displayed above as a
+        versioned reference.
       </p>
     </main>
   );
