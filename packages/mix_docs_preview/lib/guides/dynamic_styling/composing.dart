@@ -22,10 +22,10 @@ class Example extends StatelessWidget {
     final styleB = styleA.onHovered(.color(Colors.green));
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       children: [
         Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             Box(style: styleA),
             SizedBox(height: 8),
@@ -34,7 +34,7 @@ class Example extends StatelessWidget {
         ),
         SizedBox(width: 16),
         Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             Box(style: styleB),
             SizedBox(height: 8),

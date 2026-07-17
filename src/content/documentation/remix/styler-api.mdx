@@ -7,8 +7,11 @@ Remix stylers expose matching named factories and fluent methods for canonical
 style operations. This symmetry lets a state variant use Dart's contextual dot
 shorthand without constructing another styler explicitly:
 
+For buttons, use `ButtonStyler`. `RemixButtonStyler` remains available as a
+deprecated compatibility alias during the beta releases.
+
 ```dart
-final style = RemixButtonStyler()
+final style = ButtonStyler()
     .color(Colors.blue)
     .onHovered(.color(Colors.indigo))
     .onPressed(.scale(0.97));
@@ -47,7 +50,7 @@ variant:
 final style = RemixCardStyler()
     .paddingAll(12)
     .backgroundColor(Colors.white)
-    .onHovered(.padding(EdgeInsetsGeometryMix.all(16)))
+    .onHovered(.padding(.all(16)))
     .onPressed(.color(Colors.grey.shade100));
 ```
 
@@ -80,9 +83,7 @@ or `FlexBox` container. A composite root without one clear visual surface, such
 as `RemixMenuStyler`, exposes factories for its child fields instead:
 
 ```dart
-final style = RemixMenuStyler.trigger(
-  RemixMenuTriggerStyler.color(Colors.black),
-);
+final style = RemixMenuStyler.trigger(.color(Colors.black));
 ```
 
 `RemixSelectStyler` stores its popup container as a `FlexBox`, but intentionally
@@ -93,8 +94,13 @@ the root select styler.
 The upstream forwarded `transform` factory currently accepts `Alignment`
 rather than the wider `AlignmentGeometry` accepted by the former handwritten
 helpers. Use a direct child styler when a directional alignment is required,
-for example `RemixCardStyler.container(BoxStyler(transform: matrix,
-transformAlignment: AlignmentDirectional.centerStart))`.
+for example:
+
+```dart
+final style = RemixCardStyler.container(
+  .new(transform: matrix, transformAlignment: .centerStart),
+);
+```
 
 ### Variants and selected state
 
@@ -116,7 +122,7 @@ names:
 | Styler | Canonical generated API | Component-specific helper |
 | --- | --- | --- |
 | `RemixTextFieldStyler` | `color` styles the container | `textColor` styles editable text |
-| `RemixButtonStyler` | `rotate` transforms the container | `modifierRotate` rotates the complete widget with a modifier |
+| `ButtonStyler` | `rotate` transforms the container | `modifierRotate` rotates the complete widget with a modifier |
 | `RemixCalloutStyler` | `textStyle(TextStyler)` applies the container text style | `contentTextStyle(TextStyleMix)` styles callout content |
 
 This keeps contextual shorthand predictable while preserving each specialized
@@ -124,7 +130,7 @@ operation without ambiguous overloads.
 
 ## Generated and hand-authored code
 
-`Remix*Styler` classes are generated from `@MixableSpec`. Fortal widget wrapper
+Component stylers are generated from `@MixableSpec`. Fortal widget wrapper
 classes are hand-authored source. Either way the public API is identical — the
 `fortal*Styler` recipes, constructors, fields, and widget behavior are the same
 whether a class is generated or written by hand, so nothing changes for code

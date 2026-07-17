@@ -17,12 +17,17 @@ final buttonStyle = BoxStyler()
     .padding(.symmetric(horizontal: 24, vertical: 12))
     .borderRadius(.circular(10))
     .shadow(
-      .color(Colors.blue.shade200).blurRadius(8).offset(x: 0, y: 2),
+      .color(Colors.blue.shade200)
+      .blurRadius(8)
+      .offset(x: 0, y: 2),
     )
     .onHovered(
-      .color(Colors.blue.shade700).shadow(
-            .color(Colors.blue.shade300).blurRadius(12).offset(x: 0, y: 4),
-          ),
+      .color(Colors.blue.shade700)
+      .shadow(
+        .color(Colors.blue.shade300)
+        .blurRadius(12)
+        .offset(x: 0, y: 4),
+      ),
     )
     .onPressed(.color(Colors.blue.shade900).scale(0.97))
     .animate(.ease(150.ms));
@@ -102,14 +107,13 @@ When `mouseCursor` is null, `Pressable` chooses `SystemMouseCursors.click` when 
 `PressableBox` combines the functionality of `Pressable` with `Box` styling capabilities, providing a pressable area with customizable visual styling.
 
 ```dart
-  PressableBox(
-    style: BoxStyler()
-      .color(Colors.blue)
-      .padding(.all(16))
-      .borderRadius(.circular(8)),
-    onPress: () => print('PressableBox pressed'),
-    child: StyledText('Styled Button'),
-  );
+PressableBox(
+  style: .color(Colors.blue)
+         .padding(.all(16))
+         .borderRadius(.circular(8)),
+  onPress: () => print('PressableBox pressed'),
+  child: StyledText('Styled Button'),
+);
 ```
 
 ### PressableBox Constructor
@@ -134,14 +138,13 @@ When `mouseCursor` is null, `Pressable` chooses `SystemMouseCursors.click` when 
 
 ```dart
 PressableBox(
-  style: BoxStyler()
-      .color(Colors.blue)
-      .padding(.all(16))
-      .borderRadius(.circular(8))
-      .onPressed(.color(Colors.red))
-      .onHovered(.color(Colors.green))
-      .onFocused(.border(.color(Colors.white).width(2)))
-      .onDisabled(.color(Colors.grey)),
+  style: .color(Colors.blue)
+         .padding(.all(16))
+         .borderRadius(.circular(8))
+         .onPressed(.color(Colors.red))
+         .onHovered(.color(Colors.green))
+         .onFocused(.border(.color(Colors.white).width(2)))
+         .onDisabled(.color(Colors.grey)),
   onPress: () => print('Interactive button pressed'),
   child: StyledText('Interactive Button'),
 );

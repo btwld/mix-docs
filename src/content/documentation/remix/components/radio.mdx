@@ -48,13 +48,13 @@ class _RadioExampleState extends State<RadioExample> {
         });
       },
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: .center,
         spacing: 16,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           Row(
             spacing: 8,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               RemixRadio(value: 'option1', style: style),
               const Text('Option 1'),
@@ -62,7 +62,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
           Row(
             spacing: 8,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               RemixRadio(value: 'option2', style: style),
               const Text('Option 2'),
@@ -75,42 +75,32 @@ class _RadioExampleState extends State<RadioExample> {
 
   RemixRadioStyler get style {
     return RemixRadioStyler()
-        .borderRadiusAll(const Radius.circular(30))
+        .borderRadius(.circular(30))
         .size(22, 22)
         .border(
-          BoxBorderMix.all(
-            BorderSideMix()
-                .color(Colors.blueGrey.shade100)
-                .width(2.4)
-                .strokeAlign(BorderSide.strokeAlignInside),
-          ),
+          .color(Colors.blueGrey.shade100)
+          .width(2.4)
+          .strokeAlign(BorderSide.strokeAlignInside),
         )
         .onHovered(
           .shadow(
-            BoxShadowMix()
-                .color(Colors.blueGrey.shade50.withValues(alpha: 0.7))
-                .blurRadius(0)
-                .spreadRadius(9),
+            .color(Colors.blueGrey.shade50.withValues(alpha: 0.7))
+            .blurRadius(0)
+            .spreadRadius(9),
           ),
         )
         .onPressed(
           .border(
-            BoxBorderMix.all(
-              BorderSideMix()
-                  .color(Colors.blueGrey.shade100)
-                  .width(6)
-                  .strokeAlign(BorderSide.strokeAlignInside),
-            ),
+            .color(Colors.blueGrey.shade100)
+            .width(6)
+            .strokeAlign(BorderSide.strokeAlignInside),
           ),
         )
         .onSelected(
           .border(
-            BoxBorderMix.all(
-              BorderSideMix()
-                  .color(Colors.blueAccent.shade700)
-                  .width(6)
-                  .strokeAlign(BorderSide.strokeAlignInside),
-            ),
+            .color(Colors.blueAccent.shade700)
+            .width(6)
+            .strokeAlign(BorderSide.strokeAlignInside),
           ),
         );
   }

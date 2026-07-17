@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/widgets.dart';
 
 import 'multi_view_stub.dart'
@@ -83,7 +81,7 @@ class _PreviewView extends StatelessWidget {
     return ColoredBox(
       color: const Color(0x00000000),
       child: Directionality(
-        textDirection: ui.TextDirection.ltr,
+        textDirection: .ltr,
         child: MediaQuery.fromView(
           view: view,
           // Provide WidgetsLocalizations (required by framework widgets such

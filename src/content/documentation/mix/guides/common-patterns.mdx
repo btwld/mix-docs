@@ -18,14 +18,13 @@ Making a styled container respond to taps, hovers, and focus in plain Flutter me
 ```dart
 PressableBox(
   onPress: () => print('tapped'),
-  style: BoxStyler()
-      .padding(.horizontal(24).vertical(12))
-      .borderRadius(.circular(8))
-      .color(Colors.blue)
-      .onHovered(.color(Colors.blue.shade700))
-      .onPressed(.color(Colors.blue.shade900).scale(0.97))
-      .onDisabled(.color(Colors.grey.shade300))
-      .animate(.ease(150.ms)),
+  style: .padding(.horizontal(24).vertical(12))
+         .borderRadius(.circular(8))
+         .color(Colors.blue)
+         .onHovered(.color(Colors.blue.shade700))
+         .onPressed(.color(Colors.blue.shade900).scale(0.97))
+         .onDisabled(.color(Colors.grey.shade300))
+         .animate(.ease(150.ms)),
   child: StyledText(
     'Submit',
     style: TextStyler()
@@ -132,7 +131,7 @@ MixScope(
     $spacingMd: 16.0,
   },
   radii: {
-    $radiusMd: Radius.circular(8),
+    $radiusMd: .circular(8),
   },
   child: MyApp(),
 )

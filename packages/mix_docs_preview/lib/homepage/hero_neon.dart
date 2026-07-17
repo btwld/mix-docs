@@ -24,14 +24,14 @@ class _HeroButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // #docregion style
-    final style = RemixButtonStyler()
-        .color(const Color(0xFF0A0014))
-        .labelColor(const Color(0xFF00F0FF))
+    final style = ButtonStyler()
+        .color(Colors.black)
+        .labelColor(Colors.cyanAccent.shade400)
         .paddingX(24)
         .paddingY(11)
-        .borderRadiusAll(const Radius.circular(2))
-        .borderAll(color: const Color(0xFF00F0FF), width: 1)
-        .shadowOnly(color: const Color(0xFFFF00E5), blurRadius: 22);
+        .borderRadius(.circular(2))
+        .border(.color(Colors.cyanAccent.shade400).width(1))
+        .shadow(.color(Colors.purpleAccent.shade400).blurRadius(22));
     // #enddocregion style
 
     return RemixButton(label: 'GET STARTED', onPressed: () {}, style: style);

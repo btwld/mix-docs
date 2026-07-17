@@ -183,8 +183,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/remix"
-      ref: fbfc069509ca955a459fcdc6b7de083201cbf2ca
-      resolved-ref: fbfc069509ca955a459fcdc6b7de083201cbf2ca
+      ref: bc95c45d5e5ddd269c83c3ede2c30a900882bf0e
+      resolved-ref: bc95c45d5e5ddd269c83c3ede2c30a900882bf0e
       url: "https://github.com/btwld/remix.git"
     source: git
     version: "1.0.0-beta.1"

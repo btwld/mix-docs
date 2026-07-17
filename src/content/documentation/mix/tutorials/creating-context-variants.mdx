@@ -50,8 +50,9 @@ BoxStyler()
     .color(Colors.red)
     .size(100, 100)
     .variant(
-      ContextVariant('custom_flag', (context) =>
-        CustomInheritedWidget.of(context)?.flag ?? false,
+      ContextVariant(
+        'custom_flag',
+        (context) => CustomInheritedWidget.of(context)?.flag ?? false,
       ),
       .color(Colors.blue),
     );
@@ -76,8 +77,9 @@ extension WidgetStateVariantMixinX<T extends Style<S>, S extends Spec<S>>
     on WidgetStateVariantMixin<T, S> {
   T onCustomFlag(T style) {
     return variant(
-      ContextVariant('custom_flag', (context) =>
-        CustomInheritedWidget.of(context)?.flag ?? false,
+      ContextVariant(
+        'custom_flag',
+        (context) => CustomInheritedWidget.of(context)?.flag ?? false,
       ),
       style,
     );
@@ -141,7 +143,7 @@ class _ExampleState extends State<Example> {
           ContextVariant('custom_flag', (context) {
             return CustomInheritedWidget.of(context)?.flag ?? false;
           }),
-          BoxStyler().color(Colors.blue),
+          .color(Colors.blue),
         );
 
     return CustomInheritedWidget(

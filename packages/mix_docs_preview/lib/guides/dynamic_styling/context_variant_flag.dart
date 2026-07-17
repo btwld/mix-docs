@@ -57,7 +57,7 @@ class _ExampleState extends State<Example> {
                 ContextVariant('custom_flag', (context) {
                   return CustomInheritedWidget.of(context)?.flag ?? false;
                 }),
-                BoxStyler().color(Colors.blue),
+                .color(Colors.blue),
               ),
         ),
       ),

@@ -36,7 +36,7 @@ class Example extends StatelessWidget {
 
     return Center(
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           Pressable(
             onPress: () {},

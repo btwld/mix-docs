@@ -96,14 +96,18 @@ The `$with` namespace is replaced with the `.wrap()` method or shorthand modifie
 // v1.x
 MixTheme(
   data: MixThemeData(
-    colors: {primaryColor: Colors.blue},
+    colors: {
+      primaryColor: Colors.blue,
+    },
   ),
   child: MyApp(),
 );
 
 // v2.0
 MixScope(
-  colors: {primaryColor: Colors.blue},
+  colors: {
+    primaryColor: Colors.blue,
+  },
   child: MyApp(),
 );
 ```

@@ -189,7 +189,7 @@ final class ReverseStringDirective extends Directive<String> {
 extension ReverseTextDirective on TextStyler {
   TextStyler reverse() {
     return merge(
-      TextStyler(textDirectives: [const ReverseStringDirective()]),
+      .textDirective(const ReverseStringDirective()),
     );
   }
 }
