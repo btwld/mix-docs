@@ -59,9 +59,9 @@ class _ToggleExampleState extends State<ToggleExample> {
         .onHovered(.color(Colors.grey.shade200))
         .onPressed(.scale(0.93))
         .onSelected(
-          .color(
-            Colors.deepPurple.shade50,
-          ).label(.color(Colors.deepPurple)).iconColor(Colors.deepPurple),
+          .color(Colors.deepPurple.shade50)
+              .label(.color(Colors.deepPurple))
+              .iconColor(Colors.deepPurple),
         )
         .animate(.easeOut(200.ms));
   }

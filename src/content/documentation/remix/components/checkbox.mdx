@@ -57,7 +57,12 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         .icon(.size(20).color(Colors.white))
         .onSelected(.color(Colors.grey.shade900))
         .borderRadius(.circular(3))
-        .border(.all(.color(Colors.black87).width(2)));
+        .border(
+          .all(
+            .color(Colors.black87)
+                .width(2),
+          ),
+        );
   }
 }
 ```

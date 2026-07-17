@@ -58,9 +58,12 @@ class _SliderExampleState extends State<SliderExample> {
     return RemixSliderStyler()
         .thumbSize(const .square(24))
         .thumb(
-          .shape(
-            .circle(),
-          ).shadow(.color(Colors.black45).blurRadius(4).offset(x: 0, y: 2)),
+          .shape(.circle())
+              .shadow(
+                .color(Colors.black45)
+                    .blurRadius(4)
+                    .offset(x: 0, y: 2),
+              ),
         )
         .thumbColor(Colors.black)
         .thickness(2)

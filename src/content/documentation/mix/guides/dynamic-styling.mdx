@@ -39,7 +39,10 @@ final styleA = BoxStyler()
     .height(100)
     .width(100)
     .borderRadius(.circular(10))
-    .onHovered(.color(Colors.blue).width(200));
+    .onHovered(
+      .color(Colors.blue)
+          .width(200),
+    );
 
 final styleB = styleA.onHovered(.color(Colors.green));
 ```
@@ -105,7 +108,9 @@ To override a property set by a variant, you need another variant:
 
 ```dart
 // Correct — use another onHovered to override the hover color
-final styleA = BoxStyler().color(Colors.red).onHovered(.color(Colors.blue));
+final styleA = BoxStyler()
+    .color(Colors.red)
+    .onHovered(.color(Colors.blue));
 
 final styleB = styleA.onHovered(.color(Colors.green)); // Now hover is green
 ```
@@ -212,7 +217,10 @@ You can negate any variant — widget states, breakpoints, platforms, and more:
 // Only apply a shadow when NOT on mobile
 final style = BoxStyler().onNot(
   .mobile(),
-  .shadow(color: Colors.black26, blurRadius: 10),
+  .shadow(
+    color: Colors.black26,
+    blurRadius: 10,
+  ),
 );
 ```
 
@@ -221,13 +229,15 @@ final style = BoxStyler().onNot(
 `onBuilder` gives you full access to `BuildContext` to compute a style at build time. Use it when none of the built-in variants cover your condition:
 
 ```dart
-final style = BoxStyler().color(Colors.grey).onBuilder((context) {
-  final hour = DateTime.now().hour;
-  if (hour >= 6 && hour < 18) {
-    return BoxStyler().color(Colors.amber);
-  }
-  return BoxStyler().color(Colors.indigo);
-});
+final style = BoxStyler()
+    .color(Colors.grey)
+    .onBuilder((context) {
+      final hour = DateTime.now().hour;
+      if (hour >= 6 && hour < 18) {
+        return BoxStyler().color(Colors.amber);
+      }
+      return BoxStyler().color(Colors.indigo);
+    });
 ```
 
 ---

@@ -17,13 +17,21 @@ final flexStyle = StackBoxStyler(
   stackAlignment: .bottomCenter,
 );
 
-final boxStyle = BoxStyler().color(Colors.deepOrange).height(100).width(100);
+final boxStyle = BoxStyler()
+    .color(Colors.deepOrange)
+    .height(100)
+    .width(100);
 
 StackBox(
   style: flexStyle,
   children: [
     Box(style: boxStyle),
-    Box(style: BoxStyler().color(Colors.grey.shade300).height(50).width(100)),
+    Box(
+      style: BoxStyler()
+          .color(Colors.grey.shade300)
+          .height(50)
+          .width(100),
+    ),
     Box(
       style: BoxStyler()
           .color(Colors.black)

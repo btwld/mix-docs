@@ -89,25 +89,29 @@ class _MenuExampleState extends State<MenuExample> {
                     .borderRadius(.circular(12))
                     .border(.all(.color(Colors.blueGrey.shade100)))
                     .boxShadow([
-                      .color(
-                        Colors.blueGrey.withValues(alpha: 0.1),
-                      ).blurRadius(3).offset(x: 0, y: 3),
+                      .color(Colors.blueGrey.withValues(alpha: 0.1))
+                          .blurRadius(3)
+                          .offset(x: 0, y: 3),
                     ]),
               )
               .constraints(.minHeight(40))
-              .label(.color(Colors.blueGrey.shade700).fontWeight(.w400)),
+              .label(
+                .color(Colors.blueGrey.shade700)
+                    .fontWeight(.w400),
+              ),
         )
         .overlay(
-          .padding(.all(12)).decoration(
-            BoxDecorationMix.color(Colors.white)
-                .borderRadius(.circular(12))
-                .border(.all(.color(Colors.blueGrey.shade100)))
-                .boxShadow([
-                  .color(
-                    Colors.blueGrey.withValues(alpha: 0.1),
-                  ).blurRadius(3).offset(x: 0, y: 3),
-                ]),
-          ),
+          .padding(.all(12))
+              .decoration(
+                BoxDecorationMix.color(Colors.white)
+                    .borderRadius(.circular(12))
+                    .border(.all(.color(Colors.blueGrey.shade100)))
+                    .boxShadow([
+                      .color(Colors.blueGrey.withValues(alpha: 0.1))
+                          .blurRadius(3)
+                          .offset(x: 0, y: 3),
+                    ]),
+              ),
         );
   }
 
@@ -139,7 +143,11 @@ class FortalMenuExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <RemixMenuItemData<String>>[
-      RemixMenuItem(value: 'edit', label: 'Edit', leadingIcon: Icons.edit),
+      RemixMenuItem(
+        value: 'edit',
+        label: 'Edit',
+        leadingIcon: Icons.edit,
+      ),
       RemixMenuItem(
         value: 'delete',
         label: 'Delete',

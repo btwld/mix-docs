@@ -33,7 +33,10 @@ class ProgressExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RemixProgress(value: 0.3, style: style);
+    return RemixProgress(
+      value: 0.3,
+      style: style,
+    );
   }
 
   RemixProgressStyler get style {
@@ -65,8 +68,12 @@ class FortalProgressExample extends StatelessWidget {
     return Column(
       spacing: 16,
       children: [
-        FortalProgress.surface(value: 0.6),
-        FortalProgress.soft(value: 0.4),
+        FortalProgress.surface(
+          value: 0.6,
+        ),
+        FortalProgress.soft(
+          value: 0.4,
+        ),
       ],
     );
   }

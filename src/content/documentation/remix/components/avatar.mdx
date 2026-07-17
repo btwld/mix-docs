@@ -37,9 +37,17 @@ class AvatarExample extends StatelessWidget {
       mainAxisAlignment: .center,
       spacing: 16,
       children: [
-        RemixAvatar(label: 'LF', style: labelStyle),
-        RemixAvatar(icon: Icons.person, style: iconStyle),
-        RemixAvatar(style: image),
+        RemixAvatar(
+          label: 'LF',
+          style: labelStyle,
+        ),
+        RemixAvatar(
+          icon: Icons.person,
+          style: iconStyle,
+        ),
+        RemixAvatar(
+          style: image,
+        ),
       ],
     );
   }
@@ -93,9 +101,13 @@ class FortalAvatarExample extends StatelessWidget {
       spacing: 16,
       children: [
         // Soft variant - Subtle background
-        FortalAvatar.soft(label: 'AB'),
+        FortalAvatar.soft(
+          label: 'AB',
+        ),
         // Solid variant - Bold background
-        FortalAvatar.solid(label: 'CD'),
+        FortalAvatar.solid(
+          label: 'CD',
+        ),
       ],
     );
   }

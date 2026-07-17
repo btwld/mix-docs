@@ -51,9 +51,9 @@ class CalloutExample extends StatelessWidget {
               .color(Colors.white)
               .wrap(
                 .box(
-                  .color(
-                    Colors.blue.shade900,
-                  ).paddingX(12).height(double.infinity),
+                  .color(Colors.blue.shade900)
+                      .paddingX(12)
+                      .height(double.infinity),
                 ),
               ),
         )
@@ -84,7 +84,10 @@ class FortalCalloutExample extends StatelessWidget {
           text: 'Surface callout',
           icon: Icons.info_outline,
         ),
-        FortalCallout.soft(text: 'Soft callout', icon: Icons.lightbulb_outline),
+        FortalCallout.soft(
+          text: 'Soft callout',
+          icon: Icons.lightbulb_outline,
+        ),
         FortalCallout.outline(
           text: 'Outline callout',
           icon: Icons.border_outer,

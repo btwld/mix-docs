@@ -61,7 +61,11 @@ class TooltipExample extends StatelessWidget {
         .padding(.symmetric(horizontal: 12, vertical: 8))
         .backgroundColor(Colors.black87)
         .borderRadius(.circular(6))
-        .wrap(.defaultTextStyle(style: .color(Colors.white).fontSize(14)));
+        .wrap(
+          .defaultTextStyle(
+            style: .color(Colors.white).fontSize(14),
+          ),
+        );
   }
 
   RemixTooltipStyler get styleFast {
@@ -72,7 +76,9 @@ class TooltipExample extends StatelessWidget {
   }
 
   RemixTooltipStyler get styleSlow {
-    return styleDefault.waitDuration(1.s).showDuration(3.s);
+    return styleDefault
+        .waitDuration(1.s)
+        .showDuration(3.s);
   }
 }
 
@@ -85,7 +91,10 @@ class _TriggerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const .symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(color: Colors.blue, borderRadius: .circular(8)),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: .circular(8),
+      ),
       child: Text(label, style: const .new(color: Colors.white)),
     );
   }

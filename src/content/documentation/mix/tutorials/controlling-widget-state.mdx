@@ -42,8 +42,8 @@ controller.dragged = true;
 controller.error = true;
 
 // Getters
-controller.pressed; // bool
-controller.selected; // bool
+controller.pressed;   // bool
+controller.selected;  // bool
 
 // Generic API
 controller.update(WidgetState.selected, true);
@@ -152,7 +152,9 @@ class _ToggleButtonState extends State<ToggleButton> {
           .color(Colors.blue.shade500)
               .border(.color(Colors.blue.shade600).width(2))
               .shadow(
-                .color(Colors.blue.shade200).blurRadius(10).spreadRadius(2),
+                .color(Colors.blue.shade200)
+                    .blurRadius(10)
+                    .spreadRadius(2),
               ),
         );
 

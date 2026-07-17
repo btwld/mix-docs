@@ -115,15 +115,15 @@ RemixToggleGroup<String>(
     RemixToggleGroupItem(
       value: 'published',
       label: 'Published',
-      style: .label(.color(Colors.green)).icon(.color(Colors.green)),
+      style: .label(.color(Colors.green))
+          .icon(.color(Colors.green)),
     ),
   ],
   selectedValue: value,
   onChanged: onChanged,
   style: .item(
-    .padding(
-      .horizontal(12).vertical(8),
-    ).onSelected(.color(Colors.green.shade50)),
+    .padding(.horizontal(12).vertical(8))
+        .onSelected(.color(Colors.green.shade50)),
   ),
 )
 ```

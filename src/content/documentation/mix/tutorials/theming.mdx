@@ -49,7 +49,9 @@ class MyApp extends StatelessWidget {
       textStyles: LightBlueTheme.textStyles,
       radii: LightBlueTheme.radii,
       spaces: LightBlueTheme.spaces,
-      child: const MaterialApp(home: ProfilePage()),
+      child: const MaterialApp(
+        home: ProfilePage(),
+      ),
     );
   }
 }
@@ -274,7 +276,11 @@ Optional **`onThemeToggle`** / **`useDarkTheme`** parameters show how to wire a 
 
 ```dart
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key, this.onThemeToggle, this.useDarkTheme = false});
+  const ProfilePage({
+    super.key,
+    this.onThemeToggle,
+    this.useDarkTheme = false,
+  });
 
   final VoidCallback? onThemeToggle;
   final bool useDarkTheme;
@@ -302,7 +308,9 @@ class ProfilePage extends StatelessWidget {
           if (onThemeToggle != null)
             IconButton(
               tooltip: 'Toggle theme',
-              icon: Icon(useDarkTheme ? Icons.light_mode : Icons.dark_mode),
+              icon: Icon(
+                useDarkTheme ? Icons.light_mode : Icons.dark_mode,
+              ),
               onPressed: onThemeToggle,
             ),
         ],

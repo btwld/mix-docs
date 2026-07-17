@@ -63,7 +63,9 @@ class _SwitchExampleState extends State<SwitchExample> {
         .trackColor(Colors.deepPurpleAccent.shade200)
         .size(65, 30)
         .borderRadius(.circular(40))
-        .alignment(_selected.value ? .centerRight : .centerLeft)
+        .alignment(
+          _selected.value ? .centerRight : .centerLeft,
+        )
         .animate(.easeOut(300.ms))
         .thumb(
           .color(Colors.white)

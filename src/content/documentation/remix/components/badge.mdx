@@ -37,8 +37,14 @@ class BadgeExample extends StatelessWidget {
       mainAxisAlignment: .center,
       spacing: 16,
       children: [
-        RemixBadge(label: '8', style: styleLabel),
-        RemixBadge(style: styleIcon, child: const Icon(Icons.camera_alt)),
+        RemixBadge(
+          label: '8',
+          style: styleLabel,
+        ),
+        RemixBadge(
+          style: styleIcon,
+          child: const Icon(Icons.camera_alt),
+        ),
       ],
     );
   }
@@ -48,9 +54,9 @@ class BadgeExample extends StatelessWidget {
         .size(24, 24)
         .wrap(.clipOval())
         .label(
-          .fontSize(
-            15,
-          ).textAlign(.center).fontFeatures([const .tabularFigures()]),
+          .fontSize(15)
+              .textAlign(.center)
+              .fontFeatures([const .tabularFigures()]),
         )
         .foregroundColor(Colors.greenAccent.shade700)
         .labelColor(Colors.white)
@@ -63,9 +69,9 @@ class BadgeExample extends StatelessWidget {
         .size(24, 24)
         .wrap(.clipOval())
         .label(
-          .fontSize(
-            15,
-          ).textAlign(.center).fontFeatures([const .tabularFigures()]),
+          .fontSize(15)
+              .textAlign(.center)
+              .fontFeatures([const .tabularFigures()]),
         )
         .foregroundColor(Colors.redAccent)
         .wrap(.iconTheme(color: Colors.white, size: 15));
@@ -91,10 +97,18 @@ class FortalBadgeExample extends StatelessWidget {
     return Row(
       spacing: 16,
       children: [
-        FortalBadge.solid(label: 'Solid'),
-        FortalBadge.soft(label: 'Soft'),
-        FortalBadge.surface(label: 'Surface'),
-        FortalBadge.outline(label: 'Outline'),
+        FortalBadge.solid(
+          label: 'Solid',
+        ),
+        FortalBadge.soft(
+          label: 'Soft',
+        ),
+        FortalBadge.surface(
+          label: 'Surface',
+        ),
+        FortalBadge.outline(
+          label: 'Outline',
+        ),
       ],
     );
   }

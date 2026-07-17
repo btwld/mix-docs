@@ -50,7 +50,10 @@ Define styles as top-level or class-level constants, then use the `call()` metho
 
 ```dart
 // Declare outside build — reusable across widgets
-final title = TextStyler().fontSize(24).fontWeight(.bold).color(Colors.black);
+final title = TextStyler()
+    .fontSize(24)
+    .fontWeight(.bold)
+    .color(Colors.black);
 
 final card = BoxStyler()
     .padding(.all(16))
@@ -63,7 +66,9 @@ final card = BoxStyler()
 // Inside build — call() converts the styler into its widget
 @override
 Widget build(BuildContext context) {
-  return card(child: title('Welcome back'));
+  return card(
+    child: title('Welcome back'),
+  );
 }
 ```
 
@@ -118,9 +123,16 @@ final cardStyle = BoxStyler()
 
 // 3. Provide values via MixScope
 MixScope(
-  colors: {$primary: Colors.blue, $surface: Colors.white},
-  spaces: {$spacingMd: 16.0},
-  radii: {$radiusMd: .circular(8)},
+  colors: {
+    $primary: Colors.blue,
+    $surface: Colors.white,
+  },
+  spaces: {
+    $spacingMd: 16.0,
+  },
+  radii: {
+    $radiusMd: .circular(8),
+  },
   child: MyApp(),
 )
 ```

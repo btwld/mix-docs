@@ -99,7 +99,10 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _button(label: 'Click Me', onPressed: () {});
+    return _button(
+      label: 'Click Me',
+      onPressed: () {},
+    );
   }
 }
 ```
@@ -157,7 +160,9 @@ final baseButton = ButtonStyler()
     .paddingY(10)
     .borderRadius(.circular(8));
 
-final primaryButton = baseButton.color(Colors.blue).label(.color(Colors.white));
+final primaryButton = baseButton
+    .color(Colors.blue)
+    .label(.color(Colors.white));
 
 final destructiveButton = baseButton
     .color(Colors.red)
@@ -171,7 +176,10 @@ Each chain call returns a new style, so `baseButton` stays unchanged and every v
 Remix gives you the freedom to build any design system from scratch, but you don't have to start there. **Fortal** is a prebuilt set of component styles based on [Radix](https://www.radix-ui.com/), ready to drop in and customize. Reach for Fortal when you want a polished, modern look without defining every token yourself — and extend it when you need something specific.
 
 ```dart
-FortalButton.solid(onPressed: () {}, label: 'Fortal Button');
+FortalButton.solid(
+  onPressed: () {},
+  label: 'Fortal Button',
+);
 ```
 
 See the [Fortal](/documentation/remix/fortal) page for variants, tokens, and customization.

@@ -40,7 +40,8 @@ class DialogExample extends StatelessWidget {
           builder: (context) => Center(
             child: FortalDialog(
               title: 'Revoke access',
-              description: 'This application will no longer be accessible.',
+              description:
+                  'This application will no longer be accessible.',
               actions: [
                 FortalButton.ghost(
                   label: 'Cancel',
@@ -117,7 +118,10 @@ class FortalDialogExample extends StatelessWidget {
           label: 'Cancel',
           onPressed: () => Navigator.pop(context),
         ),
-        FortalButton(label: 'Save', onPressed: () => Navigator.pop(context)),
+        FortalButton(
+          label: 'Save',
+          onPressed: () => Navigator.pop(context),
+        ),
       ],
     );
   }

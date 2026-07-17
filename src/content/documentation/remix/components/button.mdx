@@ -43,7 +43,11 @@ class ButtonExample extends StatelessWidget {
             label: 'Turn Off',
             style: destructiveStyle,
           ),
-          RemixButton(onPressed: () {}, label: 'Turn on', style: successStyle),
+          RemixButton(
+            onPressed: () {},
+            label: 'Turn on',
+            style: successStyle,
+          ),
         ],
       ),
     );
@@ -54,26 +58,54 @@ class ButtonExample extends StatelessWidget {
         .paddingX(16)
         .paddingY(10)
         .backgroundColor(const Color(0xFF4D1919))
-        .shadow(.color(Colors.redAccent).blurRadius(10).spreadRadius(0))
-        .label(.uppercase().color(Colors.redAccent))
+        .shadow(
+          .color(Colors.redAccent)
+              .blurRadius(10)
+              .spreadRadius(0),
+        )
+        .label(
+          .uppercase()
+              .color(Colors.redAccent),
+        )
         .shapeBeveledRectangle(
-          borderRadius: .bottomLeft(.circular(12)).topRight(.circular(12)),
+          borderRadius: .bottomLeft(.circular(12))
+              .topRight(.circular(12)),
           side: .width(1).color(Colors.redAccent),
         )
         .wrap(.scale(x: 1, y: 1))
-        .onPressed(.scale(0.90))
-        .onHovered(.color(const Color(0xFF732D2D)).animate(.spring(300.ms)))
-        .onFocused(.color(const Color(0xFF732D2D)));
+        .onPressed(
+          .scale(0.90),
+        )
+        .onHovered(
+          .color(const Color(0xFF732D2D))
+              .animate(.spring(300.ms)),
+        )
+        .onFocused(
+          .color(const Color(0xFF732D2D)),
+        );
   }
 
   ButtonStyler get successStyle {
     return destructiveStyle
         .backgroundColor(const Color.fromARGB(255, 15, 61, 15))
-        .label(.uppercase().color(Colors.greenAccent))
-        .shapeBeveledRectangle(side: .color(Colors.greenAccent))
-        .shadow(.color(Colors.greenAccent).blurRadius(10).spreadRadius(0))
-        .onHovered(.color(const Color(0xFF357857)))
-        .onFocused(.color(const Color(0xFF357857)));
+        .label(
+          .uppercase()
+              .color(Colors.greenAccent),
+        )
+        .shapeBeveledRectangle(
+          side: .color(Colors.greenAccent),
+        )
+        .shadow(
+          .color(Colors.greenAccent)
+              .blurRadius(10)
+              .spreadRadius(0),
+        )
+        .onHovered(
+          .color(const Color(0xFF357857)),
+        )
+        .onFocused(
+          .color(const Color(0xFF357857)),
+        );
   }
 }
 ```
@@ -97,15 +129,30 @@ class FortalButtonExample extends StatelessWidget {
       spacing: 16,
       children: [
         // Solid variant - High emphasis, primary actions
-        FortalButton.solid(label: 'Solid Button', onPressed: () {}),
+        FortalButton.solid(
+          label: 'Solid Button',
+          onPressed: () {},
+        ),
         // Soft variant - Medium emphasis, secondary actions
-        FortalButton.soft(label: 'Soft Button', onPressed: () {}),
+        FortalButton.soft(
+          label: 'Soft Button',
+          onPressed: () {},
+        ),
         // Surface variant - Subtle emphasis with border
-        FortalButton.surface(label: 'Surface Button', onPressed: () {}),
+        FortalButton.surface(
+          label: 'Surface Button',
+          onPressed: () {},
+        ),
         // Outline variant - Low emphasis, tertiary actions
-        FortalButton.outline(label: 'Outline Button', onPressed: () {}),
+        FortalButton.outline(
+          label: 'Outline Button',
+          onPressed: () {},
+        ),
         // Ghost variant - Minimal styling, inline actions
-        FortalButton.ghost(label: 'Ghost Button', onPressed: () {}),
+        FortalButton.ghost(
+          label: 'Ghost Button',
+          onPressed: () {},
+        ),
       ],
     );
   }

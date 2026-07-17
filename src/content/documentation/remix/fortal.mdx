@@ -39,7 +39,10 @@ class MyApp extends StatelessWidget {
       home: FortalScope(
         child: Scaffold(
           body: Center(
-            child: FortalButton.solid(onPressed: () {}, label: 'Fortal Button'),
+            child: FortalButton.solid(
+              onPressed: () {},
+              label: 'Fortal Button',
+            ),
           ),
         ),
       ),
@@ -65,7 +68,11 @@ FortalButton.ghost(label: 'Save', onPressed: () {})
 Use the unnamed constructor when the variant is selected dynamically:
 
 ```dart
-FortalButton(variant: selectedVariant, onPressed: () {}, label: 'Save');
+FortalButton(
+  variant: selectedVariant,
+  onPressed: () {},
+  label: 'Save',
+);
 ```
 
 Call the matching `fortal*Styler` directly when you need a custom Remix widget composition or want to extend the preset style.
@@ -118,9 +125,10 @@ This mapping is consistent across every Radix-based design system — if you kno
 Because every `fortal*Styler` returns a regular Remix style, you can chain additional methods to override or extend any piece of it:
 
 ```dart
-final style = fortalButtonStyler(
-  variant: .solid,
-).borderRadius(.circular(8)).paddingX(32).onHovered(.scale(1.05));
+final style = fortalButtonStyler(variant: .solid)
+    .borderRadius(.circular(8))
+    .paddingX(32)
+    .onHovered(.scale(1.05));
 ```
 
 The chain above starts from Fortal's `solid` button, overrides the border radius and horizontal padding, and adds a scale-on-hover modifier. Every other Fortal property — colors, state styling, typography — passes through untouched.

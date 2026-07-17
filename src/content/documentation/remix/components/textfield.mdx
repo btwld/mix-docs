@@ -60,17 +60,31 @@ class _TextfieldExampleState extends State<TextfieldExample> {
         .height(44)
         .paddingX(12)
         .spacing(8)
-        .label(.color(Colors.blueGrey.shade900).fontWeight(.w500))
-        .helperText(.fontWeight(.w300).color(Colors.blueGrey.shade600))
+        .label(
+          .color(Colors.blueGrey.shade900)
+              .fontWeight(.w500),
+        )
+        .helperText(
+          .fontWeight(.w300)
+              .color(Colors.blueGrey.shade600),
+        )
         .hintColor(Colors.blueGrey.shade500)
-        .shadow(.blurRadius(1).color(Colors.black12).offset(x: 0, y: 1))
-        .border(.all(.color(Colors.grey.shade300)))
+        .shadow(
+          .blurRadius(1)
+              .color(Colors.black12)
+              .offset(x: 0, y: 1),
+        )
+        .border(
+          .all(
+            .color(Colors.grey.shade300),
+          ),
+        )
         .onFocused(
           .border(
             .all(
-              .color(
-                Colors.deepPurpleAccent,
-              ).width(3).strokeAlign(BorderSide.strokeAlignCenter),
+              .color(Colors.deepPurpleAccent)
+                  .width(3)
+                  .strokeAlign(BorderSide.strokeAlignCenter),
             ),
           ),
         );

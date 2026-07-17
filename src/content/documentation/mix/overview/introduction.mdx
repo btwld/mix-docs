@@ -85,8 +85,12 @@ final $borderRadius = RadiusToken('borderRadius');
 
 // Provide token values through MixScope
 MixScope(
-  colors: {$primaryColor: Colors.blue},
-  radii: {$borderRadius: .circular(8)},
+  colors: {
+    $primaryColor: Colors.blue,
+  },
+  radii: {
+    $borderRadius: .circular(8),
+  },
   child: MyApp(),
 );
 ```

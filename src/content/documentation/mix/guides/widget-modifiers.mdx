@@ -18,7 +18,10 @@ Some visual effects — opacity, clipping, visibility — aren't style propertie
 Use `.wrap()` with a modifier to add a widget wrapper to your style:
 
 ```dart
-final style = BoxStyler().color(Colors.red).size(100, 100).wrap(.opacity(0.4));
+final style = BoxStyler()
+    .color(Colors.red)
+    .size(100, 100)
+    .wrap(.opacity(0.4));
 ```
 
 <FlutterPreview previewId="guides/widget-modifiers.0" height={200} />
@@ -125,7 +128,7 @@ MixScope(
     ClipRRectModifier,
     OpacityModifier,
   ],
-  colors: {/* ... */},
+  colors: { /* ... */ },
   child: MyApp(),
 );
 ```

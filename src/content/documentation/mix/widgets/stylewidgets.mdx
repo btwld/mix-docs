@@ -17,9 +17,13 @@ To make styling even more convenient, Mix provides a collection of **prebuilt St
 As already mentioned, the `Box` widget is like Flutter's `Container`, it can be styled with `BoxStyler`. Learn more [here](/documentation/mix/widgets/box).
 
 ```dart
-final style = BoxStyler().size(100, 100).color(Colors.blue);
+final style = BoxStyler()
+    .size(100, 100)
+    .color(Colors.blue);
 
-Box(style: style);
+Box(
+  style: style,
+);
 ```
 
 ### `FlexBox`, `ColumnBox` and `RowBox`
@@ -41,16 +45,23 @@ FlexBox(
 `StyledText` is equivalent to Flutter's `Text` widget, it can be styled with `TextStyler`. Learn more [here](/documentation/mix/widgets/text).
 
 ```dart
-final style = TextStyler().color(Colors.blue).fontSize(20);
+final style = TextStyler()
+    .color(Colors.blue)
+    .fontSize(20);
 
-StyledText('Hello, World!', style: style)
+StyledText(
+  'Hello, World!',
+  style: style,
+)
 ```
 
 ### `StyledIcon`
 `StyledIcon` is equivalent to Flutter's `Icon` widget, it can be styled with `IconStyler`. Learn more [here](/documentation/mix/widgets/icon).
 
 ```dart
-final iconStyle = IconStyler().color(Colors.blue).size(30);
+final iconStyle = IconStyler()
+    .color(Colors.blue)
+    .size(30);
 
 StyledIcon(icon: Icons.ac_unit, style: iconStyle);
 ```
@@ -59,7 +70,9 @@ StyledIcon(icon: Icons.ac_unit, style: iconStyle);
 `StyledImage` is equivalent to Flutter's `Image` widget, it can be styled with `ImageStyler`. Learn more [here](/documentation/mix/widgets/image).
 
 ```dart
-final imageStyle = ImageStyler().width(200).height(150);
+final imageStyle = ImageStyler()
+    .width(200)
+    .height(150);
 
 StyledImage(
   image: NetworkImage('https://example.com/image.png'),
@@ -106,7 +119,9 @@ Pressable(
 
 ```dart
 PressableBox(
-  style: .color(Colors.blue).padding(.all(16)).borderRadius(.circular(8)),
+  style: .color(Colors.blue)
+      .padding(.all(16))
+      .borderRadius(.circular(8)),
   onPress: () => print('PressableBox pressed'),
   child: StyledText('Styled Button'),
 );

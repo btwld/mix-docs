@@ -95,7 +95,10 @@ final box = BoxStyler()
     .size(_counter * 10, _counter * 10)
     .animate(.spring(1.s, bounce: 0.6));
 
-return Pressable(onPress: () => setState(() => _counter += 3), child: box());
+return Pressable(
+  onPress: () => setState(() => _counter += 3),
+  child: box(),
+);
 ```
 
 <FlutterPreview previewId="guides/animations.0" height={200} />
