@@ -39,13 +39,16 @@ All curve configs take a `duration` and an optional `delay`:
 
 ```dart
 // Standard easing — good default for most transitions
-.ease(300.ms)
-    // Starts fast, decelerates to a stop — natural for elements settling into place
-    .decelerate(200.ms)
-    // Smooth sinusoidal ease-out
-    .easeOutSine(400.ms)
-    // With a delay before starting
-    .easeInOut(500.ms, delay: 200.ms)
+final AnimationConfig ease = .ease(300.ms);
+
+// Starts fast, decelerates to a stop — natural for elements settling into place
+final AnimationConfig decelerate = .decelerate(200.ms);
+
+// Smooth sinusoidal ease-out
+final AnimationConfig easeOutSine = .easeOutSine(400.ms);
+
+// With a delay before starting
+final AnimationConfig easeInOut = .easeInOut(500.ms, delay: 200.ms);
 ```
 
 Available curves include: `linear`, `ease`, `easeIn`, `easeOut`, `easeInOut`, `decelerate`, `bounceIn`, `bounceOut`, `elasticOut`, and many more — each matching a Flutter `Curves` constant.
@@ -56,12 +59,20 @@ Springs produce natural, physics-driven motion. Mix offers three ways to configu
 
 ```dart
 // Duration-based spring — set duration and bounciness (0 = no bounce, 1 = very bouncy)
-.spring(800.ms, bounce: 0.6)
-    // Damping-ratio spring — ratio of 1.0 is critically damped (no overshoot),
-    // below 1.0 oscillates, above 1.0 is overdamped
-    .springWithDampingRatio(800.ms, ratio: 0.3)
-    // Raw physics spring — direct control over mass, stiffness, and damping force
-    .springDescription(mass: 1.0, stiffness: 180.0, damping: 12.0)
+final AnimationConfig durationSpring = .spring(800.ms, bounce: 0.6);
+
+// Damping-ratio spring — ratio of 1.0 is critically damped (no overshoot),
+// below 1.0 oscillates, above 1.0 is overdamped
+final AnimationConfig dampingRatioSpring = .springWithDampingRatio(
+  dampingRatio: 0.3,
+);
+
+// Raw physics spring — direct control over mass, stiffness, and damping force
+final AnimationConfig physicsSpring = .springDescription(
+  mass: 1.0,
+  stiffness: 180.0,
+  damping: 12.0,
+);
 ```
 
 ---
