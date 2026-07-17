@@ -104,3 +104,18 @@ test('resolves every Ack documentation and landing-page link', () => {
 
   assert.deepEqual(failures, [])
 })
+
+test('features codecs and code generation on Ack entry pages', () => {
+  const landing = readFileSync(ackLanding, 'utf8')
+  const overview = readFileSync(
+    join(ackContentRoot, 'getting-started/overview.mdx'),
+    'utf8',
+  )
+
+  for (const source of [landing, overview]) {
+    assert.match(source, /Codecs|CODECS/)
+    assert.match(source, /Code generation|CODE GENERATION/)
+    assert.match(source, /\/documentation\/ack\/advanced\/codecs/)
+    assert.match(source, /\/documentation\/ack\/advanced\/typesafe-schemas/)
+  }
+})

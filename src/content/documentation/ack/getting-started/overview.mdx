@@ -40,6 +40,36 @@ On success, `getOrThrow()` returns your **validated data** as a `Map<String, Obj
 - **Errors you can act on.** Every failure points at the exact field and the reason it failed.
 - **Just Dart.** A fluent API with no required build step — reach for code generation only when you want it.
 
+## Go beyond validation
+
+<div className="not-prose my-8 grid gap-4 md:grid-cols-2">
+  <a
+    href="/documentation/ack/advanced/codecs"
+    className="group rounded-2xl border border-white/10 bg-white/[0.035] p-6 transition-colors hover:border-[#6e8bff]/50 hover:bg-[#315cff]/[0.07]"
+  >
+    <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#6e8bff]">Codecs</span>
+    <h3 className="mt-3 text-lg font-semibold tracking-tight text-white">JSON at the edge. Rich Dart values inside.</h3>
+    <div className="mt-2 text-sm leading-6 text-[#9aa8c7]">
+      Validate and decode strings or numbers into DateTime, Uri, Duration, enums, or your own runtime type—then encode them for the next boundary.
+    </div>
+    <code className="mt-5 inline-block !border-white/10 !bg-black/20 text-[#72e1ff]">Ack.datetime()</code>
+    <span className="mt-5 block text-sm font-medium text-[#b8c5e3] transition-colors group-hover:text-[#62d8ff]">Explore codecs →</span>
+  </a>
+
+  <a
+    href="/documentation/ack/advanced/typesafe-schemas"
+    className="group rounded-2xl border border-white/10 bg-white/[0.035] p-6 transition-colors hover:border-[#6e8bff]/50 hover:bg-[#315cff]/[0.07]"
+  >
+    <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#6e8bff]">Code generation</span>
+    <h3 className="mt-3 text-lg font-semibold tracking-tight text-white">Keep the schema. Add a typed API.</h3>
+    <div className="mt-2 text-sm leading-6 text-[#9aa8c7]">
+      Add @AckType() to the schema you already trust and generate lightweight wrappers with typed getters, parse helpers, and no duplicated model.
+    </div>
+    <code className="mt-5 inline-block !border-white/10 !bg-black/20 text-[#72e1ff]">UserType.parse(json)</code>
+    <span className="mt-5 block text-sm font-medium text-[#b8c5e3] transition-colors group-hover:text-[#62d8ff]">Generate typed schemas →</span>
+  </a>
+</div>
+
 ## What do you want to do?
 
 - **Validate an API response** — [Quickstart Tutorial](/documentation/ack/getting-started/quickstart-tutorial), then [JSON Serialization](/documentation/ack/essentials/json-serialization)
