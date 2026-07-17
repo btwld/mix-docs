@@ -1,7 +1,7 @@
 import { RocketsLanding } from "../../../components/landing/rockets/RocketsLanding";
 
 const description =
-  "Rockets turns a typed backend definition into a secure NestJS micro app with shared identity, swappable storage, generated CRUD, hooks, owner scoping, and OpenAPI.";
+  "Rockets turns a typed backend definition into a secure, documented server with shared identity, swappable storage, generated CRUD, hooks, owner scoping, and OpenAPI.";
 
 export const viewport = {
   themeColor: "#05040A",

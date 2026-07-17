@@ -1,6 +1,6 @@
-export const DEFINE_ROCKETS_TS = [
+export const CREATE_SERVER_TS = [
   "export const billing =",
-  "  defineRockets({",
+  "  createServer({",
   "    auth: sharedIdentity,",
   "    repository: postgres,",
   "    resources: [",

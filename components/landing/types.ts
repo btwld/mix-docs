@@ -65,3 +65,8 @@ export interface LandingContent {
   /** Optional visual rendered inside the closing CTA card, below the waitlist form. */
   ClosingVisual?: ComponentType;
 }
+
+export type LandingHeroContent = Pick<
+  LandingContent,
+  "wordmarkName" | "showWordmarkByline" | "hero" | "HeroWindow"
+>;

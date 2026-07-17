@@ -31,6 +31,8 @@ test('wires Rockets into the shared product shell', () => {
   assert.match(pageMap, /rockets:/)
   assert.match(conceptaHome, /name: "Rockets"/)
   assert.match(conceptaHome, /href: "\/rockets"/)
+  assert.match(conceptaHome, /createServer/)
+  assert.doesNotMatch(conceptaHome, /NestJS|Nest API/)
   assert.match(globals, /data-product="rockets"/)
   assert.match(landingStyles, /data-product='rockets'/)
   assert.equal(
@@ -39,45 +41,66 @@ test('wires Rockets into the shared product shell', () => {
   )
 })
 
-test('presents the repository-backed Rockets vision', () => {
+test('presents Rockets as a standalone createServer product', () => {
+  const route = read('src/app/rockets/page.tsx')
+  const landing = read('components/landing/rockets/RocketsLanding.tsx')
   const content = read('components/landing/rockets/content.tsx')
   const hero = read('components/landing/rockets/HeroWindow.tsx')
   const providers = read('components/landing/rockets/ProviderSpotlights.tsx')
-  const outputs = read('components/landing/rockets/OutputsBento.tsx')
   const snippets = read('components/landing/rockets/snippets.ts')
 
   assert.match(content, /Your backend should be a spec/)
   assert.match(content, /showWordmarkByline: false/)
-  assert.match(content, /The definition is the product/)
-  assert.match(content, /One bounded domain, one micro app/)
-  assert.match(content, /One identity across the product/)
-  assert.match(content, /Infrastructure stays at the edge/)
-  assert.match(content, /The framework stops at the boundary/)
-  assert.match(content, /AuthAdapterInterface/)
-  assert.match(content, /RepositoryInterface/)
-  assert.match(content, /first-class backend artifact is the direction/)
-  assert.match(content, /not a language-neutral serialized artifact/)
-  assert.match(content, /How does Rockets relate to Stargate\?/)
-  assert.match(content, /Do I need Stargate to use Rockets\?/)
+  assert.match(content, /Describe your domain/)
+  assert.match(content, /What does createServer\(\) create\?/)
   assert.match(content, /pre-1\.0/)
+  assert.match(landing, /<ServerSurface\s*\/>/)
+  assert.match(landing, /<ProviderSpotlights\s*\/>/)
+  assert.match(landing, /<OwnershipBoundary\s*\/>/)
+  assert.doesNotMatch(landing, /LandingRoot/)
   assert.match(hero, /role="tablist"/)
   assert.match(hero, /role="tab"/)
   assert.match(hero, /aria-selected=/)
-  assert.match(hero, /name: "Spec"/)
+  assert.match(hero, /name: "Server"/)
   assert.match(hero, /name: "Auth"/)
   assert.match(hero, /name: "Storage"/)
-  assert.match(hero, /one backend definition → one domain micro app/)
-  assert.match(providers, /Vision · The definition is the product/)
-  assert.match(providers, /open-source product model/)
-  assert.match(providers, /DIRECTION/)
+  assert.match(hero, /onKeyDown=/)
+  assert.match(hero, /ArrowRight/)
+  assert.match(hero, /ArrowLeft/)
+  assert.equal(
+    fs.existsSync(path.join(root, 'components/landing/rockets/ServerSurface.tsx')),
+    true,
+  )
+  assert.equal(
+    fs.existsSync(path.join(root, 'components/landing/rockets/OwnershipBoundary.tsx')),
+    true,
+  )
+  const surface = read('components/landing/rockets/ServerSurface.tsx')
+  const boundary = read('components/landing/rockets/OwnershipBoundary.tsx')
+  const rocketsPageSource = [
+    route,
+    landing,
+    content,
+    hero,
+    providers,
+    snippets,
+    surface,
+    boundary,
+  ].join('\n')
+  assert.match(surface, /One call\. A complete server\./)
+  assert.match(surface, /resources/)
+  assert.match(surface, /accessControl/)
+  assert.match(providers, /Identity and storage/)
   assert.match(providers, /unmatched → try next · invalid match → stop/)
   assert.match(providers, /one RepositoryInterface<T>/)
-  assert.match(outputs, /One spec\. A complete domain surface\./)
-  assert.match(outputs, /Stargate orchestrates · micro apps execute/)
-  assert.match(snippets, /defineRockets/)
+  assert.match(boundary, /Rockets builds the foundation/)
+  assert.match(boundary, /Your team builds the product/)
+  assert.match(snippets, /createServer/)
   assert.match(snippets, /defineFirebaseAuth/)
   assert.match(snippets, /defineFirestoreRepository/)
-  assert.doesNotMatch(snippets, /RocketsModule\.forRoot/)
+  assert.doesNotMatch(rocketsPageSource, /\bdefineRockets\s*\(/)
+  assert.doesNotMatch(rocketsPageSource, /NestJS/)
+  assert.doesNotMatch(rocketsPageSource, /Stargate/)
 })
 
 test('keeps the open-source calls to action out of the waitlist flow', () => {

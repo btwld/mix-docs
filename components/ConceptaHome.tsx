@@ -207,15 +207,15 @@ function RocketsVisual() {
         <span className="pv-graph-name">options</span>
         <span className="pv-graph-comp">auth · resources · repository</span>
       </div>
-      <div className="pv-graph-edge">runtime planner · no generated files</div>
+      <div className="pv-graph-edge">createServer · no generated files</div>
       <div className="pv-graph-node">
         <span className="pv-graph-dot" />
-        <span className="pv-graph-name">Nest API</span>
+        <span className="pv-graph-name">server</span>
         <span className="pv-graph-comp">/me · /pets · /api</span>
       </div>
       <div className="pv-graph-run">
         <Check size={13} strokeWidth={2.4} />
-        guard · CRUD · hooks · Swagger
+        identity · CRUD · hooks · OpenAPI
       </div>
     </div>
   );
@@ -351,11 +351,11 @@ const PROJECTS: Project[] = [
     name: "Rockets",
     tagline: "Describe the backend. Ship the domain.",
     description:
-      "One typed NestJS configuration wires auth, dynamic repositories, generated CRUD, hooks, owner scoping, and Swagger at runtime.",
+      "One typed backend definition wires identity, storage, resources, access, hooks, and OpenAPI at runtime.",
     href: "/rockets",
     accent: "#FF5906",
     status: "Open source",
-    windowLabel: "app.module.ts",
+    windowLabel: "server.ts",
     Visual: RocketsVisual,
   },
   {

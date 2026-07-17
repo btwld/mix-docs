@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { LandingCtaButton } from "../LandingButton";
 import { Wordmark } from "../Wordmark";
 import { EASE, fadeUp } from "../motion";
-import type { LandingContent } from "../types";
+import type { LandingHeroContent } from "../types";
 
-export function Hero({ content }: { content: LandingContent }) {
+export function Hero({ content }: { content: LandingHeroContent }) {
   const { HeroWindow } = content;
   return (
     <section className="lp-shell lp-hero" id="top">
