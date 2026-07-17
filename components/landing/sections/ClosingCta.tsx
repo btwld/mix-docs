@@ -3,9 +3,10 @@
 import type { ComponentType } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { LandingCtaButton } from "../LandingButton";
 import { reveal } from "../motion";
 import { WaitlistForm } from "../WaitlistForm";
-import type { LandingContent } from "../types";
+import type { LandingContent, ProductSlug } from "../types";
 
 export function ClosingCta({
   closingCta,
@@ -13,16 +14,27 @@ export function ClosingCta({
   Visual,
 }: {
   closingCta: LandingContent["closingCta"];
-  product: LandingContent["product"];
+  product?: ProductSlug;
   Visual?: ComponentType;
 }) {
+  const action = closingCta.action;
+  const waitlistProduct = action?.kind === "waitlist" ? action.product : product;
+
   return (
-    <section className="lp-shell lp-gap" id="waitlist">
+    <section className="lp-shell lp-gap" id={closingCta.anchor ?? "waitlist"}>
       <motion.div className="lp-cta-card" {...reveal}>
         <div className="lp-cta-glow" aria-hidden="true" />
         <h2 className="lp-cta-title">{closingCta.title}</h2>
         <p className="lp-cta-lead">{closingCta.lead}</p>
-        <WaitlistForm product={product} />
+        {action?.kind === "links" ? (
+          <div className="lp-cta-row">
+            {action.links.map((cta) => (
+              <LandingCtaButton key={`${cta.label}-${cta.href}`} cta={cta} />
+            ))}
+          </div>
+        ) : waitlistProduct ? (
+          <WaitlistForm product={waitlistProduct} />
+        ) : null}
         {Visual ? <Visual /> : null}
         <div className="lp-cta-links">
           {closingCta.showConceptaBrand !== false ? (

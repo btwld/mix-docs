@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 const description =
-    'Concepta ships the systems your business runs on — and builds the open-source delivery foundation behind them: Mix, Remix, Naked UI, Ack, FVM, Stargate, and Code Analysis.'
+    'Concepta ships the systems your business runs on — and builds the open-source delivery foundation behind them: Mix, Remix, Naked UI, Ack, FVM, Rockets, Stargate, and Code Analysis.'
 
 export const viewport = {
     themeColor: '#111111',
@@ -72,7 +72,7 @@ export default async function RootLayout({ children }) {
             <body>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p==='/'||p==='/reports'||p.startsWith('/reports/')||p==='/fluttercon2026'||p.startsWith('/fluttercon2026/'))d='concepta';else if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p.startsWith('/documentation/ack')||p==='/ack'||p.startsWith('/ack/'))d='ack';else if(p==='/naked-ui'||p.startsWith('/naked-ui/'))d='naked-ui';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';else if(p==='/voyager'||p.startsWith('/voyager/'))d='voyager';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
+                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p==='/'||p==='/reports'||p.startsWith('/reports/')||p==='/fluttercon2026'||p.startsWith('/fluttercon2026/'))d='concepta';else if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p.startsWith('/documentation/ack')||p==='/ack'||p.startsWith('/ack/'))d='ack';else if(p==='/naked-ui'||p.startsWith('/naked-ui/'))d='naked-ui';else if(p==='/rockets'||p.startsWith('/rockets/'))d='rockets';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';else if(p==='/voyager'||p.startsWith('/voyager/'))d='voyager';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
                     }}
                 />
                 <Layout

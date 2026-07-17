@@ -22,7 +22,7 @@ test('wires Naked UI into the shared product shell', () => {
   assert.match(route, /<NakedUiHome\s*\/>/)
   assert.match(route, /Naked UI — Headless Flutter components/)
   assert.match(layout, /p==='\/naked-ui'/)
-  assert.match(layout, /Mix, Remix, Naked UI, Ack, FVM, Stargate, and Code Analysis/)
+  assert.match(layout, /Mix, Remix, Naked UI, Ack, FVM, Rockets, Stargate, and Code Analysis/)
   assert.match(navbar, /id: 'naked-ui'/)
   assert.match(navbar, /https:\/\/docs\.page\/btwld\/naked_ui/)
   assert.match(navbar, /NAKED_UI_GITHUB_URL/)

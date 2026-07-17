@@ -49,6 +49,11 @@ export default {
         type: 'page',
         display: 'hidden',
     },
+    rockets: {
+        title: 'Rockets',
+        type: 'page',
+        display: 'hidden',
+    },
     stargate: {
         title: 'Stargate',
         type: 'page',

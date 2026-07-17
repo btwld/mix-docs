@@ -2,7 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { CONCEPTA_GITHUB_URL, MIX_GITHUB_URL, REMIX_GITHUB_URL } from './constants'
+import {
+    CONCEPTA_GITHUB_URL,
+    MIX_GITHUB_URL,
+    REMIX_GITHUB_URL,
+    ROCKETS_GITHUB_URL,
+} from './constants'
 
 function isAckPath(pathname: string | null) {
     return pathname === '/ack'
@@ -12,6 +17,10 @@ function isAckPath(pathname: string | null) {
 
 function isNakedUiPath(pathname: string | null) {
     return pathname === '/naked-ui' || pathname?.startsWith('/naked-ui/')
+}
+
+function isRocketsPath(pathname: string | null) {
+    return pathname === '/rockets' || pathname?.startsWith('/rockets/')
 }
 
 function isRemixPath(pathname: string | null) {
@@ -42,6 +51,7 @@ function isProductWithoutPublicRepo(pathname: string | null) {
 function getGithubHref(pathname: string | null) {
     if (isRemixPath(pathname)) return REMIX_GITHUB_URL
     if (isMixPath(pathname)) return MIX_GITHUB_URL
+    if (isRocketsPath(pathname)) return ROCKETS_GITHUB_URL
     if (isProductWithoutPublicRepo(pathname)) return null
     return CONCEPTA_GITHUB_URL
 }
@@ -77,6 +87,19 @@ export default function ProductFooter() {
                     <a href="https://github.com/btwld/naked_ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
                     <a href="https://pub.dev/packages/naked_ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">pub.dev</a>
                     <a href="https://docs.page/btwld/naked_ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Docs</a>
+                </div>
+            </div>
+        )
+    }
+
+    if (isRocketsPath(pathname)) {
+        return (
+            <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-sm text-[var(--mix-text-muted)]">
+                <span>Describe the backend. Ship the domain.</span>
+                <div className="flex items-center gap-5">
+                    <a href={ROCKETS_GITHUB_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+                    <a href="https://www.npmjs.com/package/@bitwild/rockets" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">npm</a>
+                    <a href={ROCKETS_GITHUB_URL + '#readme'} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Guide</a>
                 </div>
             </div>
         )

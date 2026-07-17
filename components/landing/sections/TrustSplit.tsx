@@ -4,15 +4,22 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { SectionHead } from "../SectionHead";
 import { HighlightedCode } from "../HighlightedCode";
-import { LandingButton } from "../LandingButton";
+import { LandingCtaButton } from "../LandingButton";
 import { EASE, reveal } from "../motion";
-import type { LandingContent } from "../types";
+import type { LandingContent, LandingCta } from "../types";
 
 export function TrustSplit({
   trustSplit,
 }: {
   trustSplit: LandingContent["trustSplit"];
 }) {
+  const cta: LandingCta = trustSplit.cta ?? {
+    label: trustSplit.ctaLabel,
+    href: "#faq",
+    variant: "ghost",
+    arrow: "right",
+  };
+
   return (
     <section className="lp-shell lp-gap" id="trust">
       <div className="lp-split">
@@ -31,9 +38,7 @@ export function TrustSplit({
             ))}
           </ul>
           <motion.div className="lp-left-cta" {...reveal}>
-            <LandingButton href="#faq" variant="ghost" arrow="right">
-              {trustSplit.ctaLabel}
-            </LandingButton>
+            <LandingCtaButton cta={cta} />
           </motion.div>
         </div>
 
@@ -53,7 +58,10 @@ export function TrustSplit({
             <em className="lp-window-file">{trustSplit.snippetFile}</em>
           </div>
           <div className="lp-code-card-body">
-            <HighlightedCode code={trustSplit.snippet} lang="json" />
+            <HighlightedCode
+              code={trustSplit.snippet}
+              lang={trustSplit.snippetLang ?? "json"}
+            />
           </div>
         </motion.div>
       </div>

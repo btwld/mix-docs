@@ -110,6 +110,17 @@ html.dark[data-product="naked-ui"] {
     --mix-accent-glow: rgba(96, 165, 250, 0.2);
 }
 
+/* Rockets product: official launch-orange palette. */
+html.dark[data-product="rockets"] {
+    --nextra-primary-hue: 20deg;
+    --nextra-primary-saturation: 100%;
+    --nextra-primary-lightness: 51%;
+
+    --mix-accent: #FF5906;
+    --mix-accent-low: rgba(255, 89, 6, 0.1);
+    --mix-accent-glow: rgba(255, 89, 6, 0.2);
+}
+
 /* Ack product: blue/cyan validation palette */
 html.dark[data-product="ack"] {
     --nextra-primary-hue: 228deg;

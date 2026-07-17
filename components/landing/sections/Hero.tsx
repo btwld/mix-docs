@@ -1,12 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LandingButton } from "../LandingButton";
+import { LandingCtaButton } from "../LandingButton";
 import { Wordmark } from "../Wordmark";
 import { EASE, fadeUp } from "../motion";
-import type { LandingContent } from "../types";
+import type { LandingCta, LandingHeroContent } from "../types";
 
-export function Hero({ content }: { content: LandingContent }) {
+const DEFAULT_PRIMARY_CTA: LandingCta = {
+  label: "Join the waitlist",
+  href: "#waitlist",
+  arrow: "right",
+};
+
+const DEFAULT_SECONDARY_CTA: LandingCta = {
+  label: "See how it works",
+  href: "#how",
+  variant: "secondary",
+};
+
+export function Hero({ content }: { content: LandingHeroContent }) {
   const { HeroWindow } = content;
   return (
     <section className="lp-shell lp-hero" id="top">
@@ -50,12 +62,12 @@ export function Hero({ content }: { content: LandingContent }) {
         custom={0.28}
         variants={fadeUp}
       >
-        <LandingButton href="#waitlist" arrow="right">
-          Join the waitlist
-        </LandingButton>
-        <LandingButton href="#how" variant="secondary">
-          See how it works
-        </LandingButton>
+        <LandingCtaButton
+          cta={content.hero.primaryCta ?? DEFAULT_PRIMARY_CTA}
+        />
+        <LandingCtaButton
+          cta={content.hero.secondaryCta ?? DEFAULT_SECONDARY_CTA}
+        />
       </motion.div>
 
       <HeroWindow />
