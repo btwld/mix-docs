@@ -35,6 +35,8 @@ test('wires Rockets into the shared product shell', () => {
   assert.doesNotMatch(conceptaHome, /NestJS|Nest API/)
   assert.match(globals, /data-product="rockets"/)
   assert.match(landingStyles, /data-product='rockets'/)
+  assert.match(landingStyles, /\.lp-rockets-root \.lp-seg/)
+  assert.match(landingStyles, /min-height: 44px/)
   assert.equal(
     fs.existsSync(path.join(root, 'public/assets/logo_rockets_mark.svg')),
     true,

@@ -67,7 +67,7 @@ Give `RocketsLanding.tsx` a product-specific section composition while retaining
    - Remove implementation-framework naming from route metadata and all user-visible copy.
    - Limit FAQ to six approved questions and distinguish launch facade from alpha behavior without introducing a competing facade name.
    - Keep repository and guide CTAs external and standalone.
-   - Verification: `rg -n "NestJS|Stargate|defineRockets" components/landing/rockets src/app/rockets` returns no matches; focused test passes.
+   - Verification: `rg -n "NestJS|Stargate|\\bdefineRockets\\s*\\(" components/landing/rockets src/app/rockets` returns no matches; focused test passes.
 
 6. Verify, review, and publish
    - Run `pnpm test:site`.

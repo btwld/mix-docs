@@ -1107,6 +1107,11 @@ html[data-product='voyager'] .lp-aurora::after {
   }
 }
 @media (max-width: 480px) {
+  .lp-rockets-root .lp-seg {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
   .lp-server-capabilities {
     grid-template-columns: 1fr;
   }
