@@ -15,8 +15,10 @@ test('shows MixWidget from the Mix homepage through generated output', () => {
   assert.match(homepage, /@MixWidget/)
   assert.match(homepage, /AppCard/)
   assert.match(homepage, /\/documentation\/mix\/ecosystem\/mix-generator#mixwidget/)
+  assert.doesNotMatch(homepage, /widgetParameters/)
 
-  assert.match(generatorGuide, /@MixWidget\(widgetParameters: \.only\(\{'child'\}\)\)/)
+  assert.match(generatorGuide, /@MixWidget\(\)/)
+  assert.doesNotMatch(generatorGuide, /widgetParameters/)
   assert.match(generatorGuide, /class AppCard extends StatelessWidget/)
   assert.match(generatorGuide, /return appCardStyle\.call\(/)
   assert.match(generatorGuide, /dart run build_runner build --delete-conflicting-outputs/)

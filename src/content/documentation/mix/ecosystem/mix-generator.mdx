@@ -86,7 +86,7 @@ import 'package:mix_annotations/mix_annotations.dart';
 
 part 'app_card.g.dart';
 
-@MixWidget(widgetParameters: .only({'child'}))
+@MixWidget()
 final appCardStyle = BoxStyler()
     .color(const Color(0xFF6750A4))
     .paddingAll(16)
@@ -125,7 +125,7 @@ const AppCard(
 );
 ```
 
-The explicit `.only({'child'})` selection keeps the public constructor stable if `BoxStyler.call()` gains more optional parameters later. Use `@MixWidget()` when you deliberately want every supported call parameter, or `@MixWidget(name: 'Surface')` when the derived name is not the API you want.
+No parameter configuration is needed here: a variable-backed `BoxStyler` generates the `key` and `child` widget surface shown above. Use `@MixWidget(name: 'Surface')` when the derived name is not the API you want.
 
 <Callout type="info">
   `@MixWidget` requires an unprefixed Flutter widgets import because the generated part uses `Widget`, `StatelessWidget`, and `BuildContext` from the host library.
