@@ -40,7 +40,7 @@ class _RadioExampleState extends State<RadioExample> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixRadioGroup<String>(
+    return RemixRadioGroup(
       groupValue: _selectedValue,
       onChanged: (value) {
         setState(() {
@@ -56,7 +56,7 @@ class _RadioExampleState extends State<RadioExample> {
             spacing: 8,
             mainAxisSize: MainAxisSize.min,
             children: [
-              RemixRadio<String>(value: 'option1', style: style),
+              RemixRadio(value: 'option1', style: style),
               const Text('Option 1'),
             ],
           ),
@@ -64,7 +64,7 @@ class _RadioExampleState extends State<RadioExample> {
             spacing: 8,
             mainAxisSize: MainAxisSize.min,
             children: [
-              RemixRadio<String>(value: 'option2', style: style),
+              RemixRadio(value: 'option2', style: style),
               const Text('Option 2'),
             ],
           ),
@@ -139,7 +139,7 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixRadioGroup<String>(
+    return RemixRadioGroup(
       groupValue: _selected,
       onChanged: (value) => setState(() => _selected = value),
       child: Column(
@@ -304,4 +304,3 @@ Applies a matrix transformation to the component.
 #### `call<T>({required T value, bool enabled = true, bool autofocus = false, bool toggleable = false, FocusNode? focusNode, MouseCursor? mouseCursor})`
 
 Creates a `RemixRadio<T>` widget with this style applied.
-

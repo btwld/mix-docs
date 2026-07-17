@@ -37,7 +37,7 @@ class _RadioPreviewState extends State<RadioPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return RemixRadioGroup<String>(
+    return RemixRadioGroup(
       groupValue: _selectedValue,
       onChanged: (value) {
         setState(() {
@@ -53,7 +53,7 @@ class _RadioPreviewState extends State<RadioPreview> {
             spacing: 8,
             mainAxisSize: .min,
             children: [
-              const FortalRadio<String>.surface(value: 'option1'),
+              const FortalRadio.surface(value: 'option1'),
               const Text('Option 1'),
             ],
           ),
@@ -61,7 +61,7 @@ class _RadioPreviewState extends State<RadioPreview> {
             spacing: 8,
             mainAxisSize: .min,
             children: [
-              const FortalRadio<String>.surface(value: 'option2'),
+              const FortalRadio.surface(value: 'option2'),
               const Text('Option 2'),
             ],
           ),
