@@ -8,6 +8,8 @@ export type ProductSlug = "stargate" | "code-analysis" | "readiness";
 export interface LandingContent {
   product: ProductSlug;
   wordmarkName: string;
+  /** Defaults to true; products can hide the Concepta badge beneath the wordmark. */
+  wordmarkShowByline?: boolean;
   hero: {
     titleTop: ReactNode;
     titleGradient: ReactNode;
@@ -39,7 +41,13 @@ export interface LandingContent {
     snippetFile: string;
   };
   faq: { q: string; a: ReactNode }[];
-  closingCta: { title: string; lead: string; finePrint: string };
+  closingCta: {
+    title: string;
+    lead: string;
+    finePrint: string;
+    /** Defaults to true; set false for product-first pages without a parent-brand badge. */
+    showConceptaBrand?: boolean;
+  };
   /** Optional visual rendered inside the closing CTA card, below the waitlist form. */
   ClosingVisual?: ComponentType;
 }

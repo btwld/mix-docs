@@ -15,7 +15,10 @@ export function Hero({ content }: { content: LandingContent }) {
         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{ duration: 1.1, ease: EASE }}
       >
-        <Wordmark name={content.wordmarkName} />
+        <Wordmark
+          name={content.wordmarkName}
+          showByline={content.wordmarkShowByline}
+        />
       </motion.div>
 
       <motion.h1

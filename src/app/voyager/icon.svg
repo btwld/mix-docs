@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="voyager-icon" x1="12" y1="54" x2="48" y2="10" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#67E8F9"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#050812"/>
+  <path d="M32 7 53 55 32 44 11 55 32 7Z" fill="url(#voyager-icon)"/>
+</svg>
