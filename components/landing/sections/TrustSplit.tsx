@@ -6,13 +6,20 @@ import { SectionHead } from "../SectionHead";
 import { HighlightedCode } from "../HighlightedCode";
 import { LandingCtaButton } from "../LandingButton";
 import { EASE, reveal } from "../motion";
-import type { LandingContent } from "../types";
+import type { LandingContent, LandingCta } from "../types";
 
 export function TrustSplit({
   trustSplit,
 }: {
   trustSplit: LandingContent["trustSplit"];
 }) {
+  const cta: LandingCta = trustSplit.cta ?? {
+    label: trustSplit.ctaLabel,
+    href: "#faq",
+    variant: "ghost",
+    arrow: "right",
+  };
+
   return (
     <section className="lp-shell lp-gap" id="trust">
       <div className="lp-split">
@@ -31,7 +38,7 @@ export function TrustSplit({
             ))}
           </ul>
           <motion.div className="lp-left-cta" {...reveal}>
-            <LandingCtaButton cta={trustSplit.cta} />
+            <LandingCtaButton cta={cta} />
           </motion.div>
         </div>
 

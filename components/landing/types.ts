@@ -5,8 +5,6 @@ import type { LucideIcon } from "lucide-react";
    waitlist/Resend mechanism but has no LandingContent page of its own. */
 export type ProductSlug = "stargate" | "code-analysis" | "readiness";
 
-export type LandingProduct = Exclude<ProductSlug, "readiness"> | "rockets";
-
 export interface LandingCta {
   label: string;
   href: string;
@@ -16,7 +14,7 @@ export interface LandingCta {
 }
 
 export interface LandingContent {
-  product: LandingProduct;
+  product: ProductSlug;
   wordmarkName: string;
   /** Defaults to true; products can hide the Concepta badge beneath the wordmark. */
   wordmarkShowByline?: boolean;
@@ -24,8 +22,8 @@ export interface LandingContent {
     titleTop: ReactNode;
     titleGradient: ReactNode;
     lead: ReactNode;
-    primaryCta: LandingCta;
-    secondaryCta: LandingCta;
+    primaryCta?: LandingCta;
+    secondaryCta?: LandingCta;
   };
   /** Per-product hero visual rendered below the CTA row. */
   HeroWindow: ComponentType;
@@ -42,13 +40,14 @@ export interface LandingContent {
   OutputsBento: ComponentType;
   /** Optional per-product feature-spotlight sections, rendered after OutputsBento. */
   Spotlights?: ComponentType;
-  marquee: { rowA: string[]; rowB: string[]; cta: LandingCta };
+  marquee: { rowA: string[]; rowB: string[]; cta?: LandingCta };
   trustSplit: {
     eyebrow: string;
     title: ReactNode;
     lead?: ReactNode;
     bullets: string[];
-    cta: LandingCta;
+    ctaLabel: string;
+    cta?: LandingCta;
     snippet: string;
     snippetFile: string;
     snippetLang?: "bash" | "json" | "typescript";
@@ -59,7 +58,7 @@ export interface LandingContent {
     lead: string;
     finePrint: string;
     anchor?: string;
-    action:
+    action?:
       | { kind: "waitlist"; product: ProductSlug }
       | { kind: "links"; links: LandingCta[] };
     /** Defaults to true; set false for product-first pages without a parent-brand badge. */

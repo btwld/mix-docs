@@ -4,7 +4,19 @@ import { motion } from "framer-motion";
 import { LandingCtaButton } from "../LandingButton";
 import { Wordmark } from "../Wordmark";
 import { EASE, fadeUp } from "../motion";
-import type { LandingHeroContent } from "../types";
+import type { LandingCta, LandingHeroContent } from "../types";
+
+const DEFAULT_PRIMARY_CTA: LandingCta = {
+  label: "Join the waitlist",
+  href: "#waitlist",
+  arrow: "right",
+};
+
+const DEFAULT_SECONDARY_CTA: LandingCta = {
+  label: "See how it works",
+  href: "#how",
+  variant: "secondary",
+};
 
 export function Hero({ content }: { content: LandingHeroContent }) {
   const { HeroWindow } = content;
@@ -50,8 +62,12 @@ export function Hero({ content }: { content: LandingHeroContent }) {
         custom={0.28}
         variants={fadeUp}
       >
-        <LandingCtaButton cta={content.hero.primaryCta} />
-        <LandingCtaButton cta={content.hero.secondaryCta} />
+        <LandingCtaButton
+          cta={content.hero.primaryCta ?? DEFAULT_PRIMARY_CTA}
+        />
+        <LandingCtaButton
+          cta={content.hero.secondaryCta ?? DEFAULT_SECONDARY_CTA}
+        />
       </motion.div>
 
       <HeroWindow />

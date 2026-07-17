@@ -3,7 +3,14 @@
 import { motion } from "framer-motion";
 import { LandingCtaButton } from "../LandingButton";
 import { reveal } from "../motion";
-import type { LandingContent } from "../types";
+import type { LandingContent, LandingCta } from "../types";
+
+const DEFAULT_MARQUEE_CTA: LandingCta = {
+  label: "Get early access",
+  href: "#waitlist",
+  variant: "ghost",
+  arrow: "right",
+};
 
 export function Marquee({ marquee }: { marquee: LandingContent["marquee"] }) {
   return (
@@ -27,7 +34,7 @@ export function Marquee({ marquee }: { marquee: LandingContent["marquee"] }) {
         </div>
       </div>
       <motion.div className="lp-shell lp-center" {...reveal}>
-        <LandingCtaButton cta={marquee.cta} />
+        <LandingCtaButton cta={marquee.cta ?? DEFAULT_MARQUEE_CTA} />
       </motion.div>
     </section>
   );

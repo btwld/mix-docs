@@ -27,16 +27,6 @@ export const voyagerContent: LandingContent = {
         baseline that proves each fix made it better.
       </>
     ),
-    primaryCta: {
-      label: "Join the waitlist",
-      href: "#waitlist",
-      arrow: "right",
-    },
-    secondaryCta: {
-      label: "See how it works",
-      href: "#how",
-      variant: "secondary",
-    },
   },
   HeroWindow,
   stats: [
@@ -113,12 +103,6 @@ export const voyagerContent: LandingContent = {
       "Machine-readable output",
       "Shareable brief",
     ],
-    cta: {
-      label: "Get early access",
-      href: "#waitlist",
-      variant: "ghost",
-      arrow: "right",
-    },
   },
   trustSplit: {
     eyebrow: "Evidence trail",
@@ -130,12 +114,7 @@ export const voyagerContent: LandingContent = {
       "Coverage gaps and confidence disclosed",
       "Deterministic scoring — reruns are byte-equal",
     ],
-    cta: {
-      label: "How the evidence works",
-      href: "#faq",
-      variant: "ghost",
-      arrow: "right",
-    },
+    ctaLabel: "How the evidence works",
     snippet: EVIDENCE_JSON,
     snippetFile: "finding.json",
   },
@@ -189,7 +168,6 @@ export const voyagerContent: LandingContent = {
     title: "Your next codebase comes with a map.",
     lead: "Join the Voyager waitlist for early access, launch pricing, and progress updates.",
     finePrint: "© 2026 · macOS · Linux · Windows",
-    action: { kind: "waitlist", product: "code-analysis" },
     showConceptaBrand: false,
   },
 };

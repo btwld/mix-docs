@@ -24,16 +24,6 @@ export const codeAnalysisContent: LandingContent = {
         you can put in front of a client.
       </>
     ),
-    primaryCta: {
-      label: "Join the waitlist",
-      href: "#waitlist",
-      arrow: "right",
-    },
-    secondaryCta: {
-      label: "See how it works",
-      href: "#how",
-      variant: "secondary",
-    },
   },
   HeroWindow,
   stats: [
@@ -115,12 +105,6 @@ export const codeAnalysisContent: LandingContent = {
       "Flows",
       "Coverage",
     ],
-    cta: {
-      label: "Get early access",
-      href: "#waitlist",
-      variant: "ghost",
-      arrow: "right",
-    },
   },
   trustSplit: {
     eyebrow: "Determinism",
@@ -131,12 +115,7 @@ export const codeAnalysisContent: LandingContent = {
       "Budget caps, resumable runs, content-hash caching",
       "Deterministic scoring — reruns are byte-equal",
     ],
-    cta: {
-      label: "How scoring works",
-      href: "#faq",
-      variant: "ghost",
-      arrow: "right",
-    },
+    ctaLabel: "How scoring works",
     snippet: CODE_HEALTH_JSON,
     snippetFile: "code-health.json",
   },
@@ -185,6 +164,5 @@ export const codeAnalysisContent: LandingContent = {
     title: "Be first in line for the audit.",
     lead: "Code Analysis is launching soon. Join the waitlist for early access, launch pricing, and progress updates.",
     finePrint: "© 2026 · macOS · Linux · Windows",
-    action: { kind: "waitlist", product: "code-analysis" },
   },
 };
