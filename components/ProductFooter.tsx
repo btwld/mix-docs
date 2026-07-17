@@ -26,11 +26,17 @@ function isMixPath(pathname: string | null) {
         || pathname?.startsWith('/documentation/mix')
 }
 
+function isVoyagerPath(pathname: string | null) {
+    return pathname === '/voyager' || pathname?.startsWith('/voyager/')
+}
+
 function isProductWithoutPublicRepo(pathname: string | null) {
     return pathname === '/stargate'
         || pathname?.startsWith('/stargate/')
         || pathname === '/code-analysis'
         || pathname?.startsWith('/code-analysis/')
+        || pathname === '/voyager'
+        || pathname?.startsWith('/voyager/')
 }
 
 function getGithubHref(pathname: string | null) {
@@ -48,6 +54,7 @@ function getPubDevHref(pathname: string | null) {
 
 export default function ProductFooter() {
     const pathname = usePathname()
+    const isVoyager = isVoyagerPath(pathname)
 
     if (isAckPath(pathname)) {
         return (
@@ -83,10 +90,18 @@ export default function ProductFooter() {
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-sm text-[var(--mix-text-muted)]">
             <span className="flex items-center gap-2.5">
-                <Link href="/" aria-label="Concepta home" className="opacity-80 hover:opacity-100 transition-opacity">
-                    <img src="/assets/logo_concepta.svg" alt="Concepta" className="h-3.5 w-auto" />
+                <Link
+                    href={isVoyager ? '/voyager' : '/'}
+                    aria-label={isVoyager ? 'Voyager home' : 'Concepta home'}
+                    className="opacity-80 hover:opacity-100 transition-opacity"
+                >
+                    <img
+                        src={isVoyager ? '/assets/logo_voyager_mark.svg' : '/assets/logo_concepta.svg'}
+                        alt={isVoyager ? 'Voyager' : 'Concepta'}
+                        className={isVoyager ? 'h-4 w-auto' : 'h-3.5 w-auto'}
+                    />
                 </Link>
-                <span>&copy; 2026 Concepta Tech.</span>
+                <span>&copy; 2026 {isVoyager ? 'Voyager.' : 'Concepta Tech.'}</span>
             </span>
             <div className="flex items-center gap-5">
                 <Link href="/reports" className="hover:text-white transition-colors">Reports</Link>

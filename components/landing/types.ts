@@ -8,6 +8,8 @@ export type ProductSlug = "stargate" | "code-analysis" | "readiness";
 export interface LandingContent {
   product: ProductSlug;
   wordmarkName: string;
+  /** Defaults to true; products can hide the Concepta badge beneath the wordmark. */
+  wordmarkShowByline?: boolean;
   hero: {
     titleTop: ReactNode;
     titleGradient: ReactNode;
