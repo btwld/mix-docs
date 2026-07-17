@@ -59,11 +59,11 @@ class _SliderExampleState extends State<SliderExample> {
         .thumbSize(const .square(24))
         .thumb(
           .shape(.circle())
-              .shadow(
-                .color(Colors.black45)
-                    .blurRadius(4)
-                    .offset(x: 0, y: 2),
-              ),
+          .shadow(
+            .color(Colors.black45)
+            .blurRadius(4)
+            .offset(x: 0, y: 2),
+          ),
         )
         .thumbColor(Colors.black)
         .thickness(2)
@@ -71,8 +71,8 @@ class _SliderExampleState extends State<SliderExample> {
         .rangeColor(Colors.black)
         .onDisabled(
           .trackColor(Colors.grey.shade300)
-              .rangeColor(Colors.blueGrey)
-              .thumb(.color(Colors.white.withValues(alpha: 0.6))),
+          .rangeColor(Colors.blueGrey)
+          .thumb(.color(Colors.white.withValues(alpha: 0.6))),
         );
   }
 }

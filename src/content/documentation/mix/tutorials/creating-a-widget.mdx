@@ -287,7 +287,7 @@ enum ButtonVariant {
         return ButtonStyler()
             .container(
               .color(Colors.transparent)
-                  .border(.color(Colors.blueAccent).width(1.5)),
+              .border(.color(Colors.blueAccent).width(1.5)),
             )
             .textColor(Colors.blueAccent)
             .iconColor(Colors.blueAccent);
@@ -300,7 +300,7 @@ enum ButtonVariant {
             .container(
               .shadow(
                 .color(Colors.blueAccent.shade700)
-                    .offset(x: 0, y: 5),
+                .offset(x: 0, y: 5),
               ),
             );
 
@@ -308,7 +308,7 @@ enum ButtonVariant {
         return ButtonStyler()
             .container(
               .border(.style(.none))
-                  .color(Colors.transparent),
+              .color(Colors.transparent),
             )
             .textColor(Colors.blueAccent)
             .iconColor(Colors.blueAccent);
@@ -333,7 +333,7 @@ ButtonStyler buttonStyle(ButtonStyler? style, ButtonVariant? variant) {
 
   final label = TextStyler().style(
     .fontSize(16)
-        .fontWeight(.w500),
+    .fontWeight(.w500),
   );
 
   final icon = IconStyler().size(18);
@@ -350,12 +350,12 @@ ButtonStyler buttonStyle(ButtonStyler? style, ButtonVariant? variant) {
       )
       .onDisabled(
         .container(.color(Colors.blueGrey.shade100))
-            .label(
-              .style(
-                .color(Colors.blueGrey.shade700),
-              ),
-            )
-            .icon(.color(Colors.blueGrey.shade700)),
+        .label(
+          .style(
+            .color(Colors.blueGrey.shade700),
+          ),
+        )
+        .icon(.color(Colors.blueGrey.shade700)),
       )
       .merge(style);
 }

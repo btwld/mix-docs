@@ -62,8 +62,8 @@ class _MenuExampleState extends State<MenuExample> {
           label: 'Logout',
           style: menuItemStyle.onHovered(
             .color(Colors.redAccent.withValues(alpha: 0.05))
-                .label(.color(Colors.redAccent))
-                .leadingIcon(.color(Colors.redAccent)),
+            .label(.color(Colors.redAccent))
+            .leadingIcon(.color(Colors.redAccent)),
           ),
         ),
       ],
@@ -84,34 +84,34 @@ class _MenuExampleState extends State<MenuExample> {
     return RemixMenuStyler()
         .trigger(
           .padding(.symmetric(horizontal: 14))
-              .decoration(
-                BoxDecorationMix.color(Colors.white)
-                    .borderRadius(.circular(12))
-                    .border(.all(.color(Colors.blueGrey.shade100)))
-                    .boxShadow([
-                      .color(Colors.blueGrey.withValues(alpha: 0.1))
-                          .blurRadius(3)
-                          .offset(x: 0, y: 3),
-                    ]),
-              )
-              .constraints(.minHeight(40))
-              .label(
-                .color(Colors.blueGrey.shade700)
-                    .fontWeight(.w400),
-              ),
+          .decoration(
+            BoxDecorationMix.color(Colors.white)
+                .borderRadius(.circular(12))
+                .border(.all(.color(Colors.blueGrey.shade100)))
+                .boxShadow([
+                  .color(Colors.blueGrey.withValues(alpha: 0.1))
+                  .blurRadius(3)
+                  .offset(x: 0, y: 3),
+                ]),
+          )
+          .constraints(.minHeight(40))
+          .label(
+            .color(Colors.blueGrey.shade700)
+            .fontWeight(.w400),
+          ),
         )
         .overlay(
           .padding(.all(12))
-              .decoration(
-                BoxDecorationMix.color(Colors.white)
-                    .borderRadius(.circular(12))
-                    .border(.all(.color(Colors.blueGrey.shade100)))
-                    .boxShadow([
-                      .color(Colors.blueGrey.withValues(alpha: 0.1))
-                          .blurRadius(3)
-                          .offset(x: 0, y: 3),
-                    ]),
-              ),
+          .decoration(
+            BoxDecorationMix.color(Colors.white)
+                .borderRadius(.circular(12))
+                .border(.all(.color(Colors.blueGrey.shade100)))
+                .boxShadow([
+                  .color(Colors.blueGrey.withValues(alpha: 0.1))
+                  .blurRadius(3)
+                  .offset(x: 0, y: 3),
+                ]),
+          ),
         );
   }
 
