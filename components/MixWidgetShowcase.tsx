@@ -90,20 +90,15 @@ export function MixWidgetShowcase() {
             </div>
           </article>
 
-          <div className="grid gap-4 bg-[var(--mix-surface)] px-6 py-5 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:px-7 lg:col-start-1 lg:row-start-2">
-            <div>
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--mix-accent)]">
-                03 / Use it
-              </span>
-              <h3 className="mt-1.5 text-sm font-semibold tracking-[-0.01em] text-white">
-                Compose it anywhere.
-              </h3>
+          <article className="min-w-0 lg:col-start-1 lg:row-start-2">
+            <EditorFileHeader filename="usage.dart" label="Use it" />
+            <div className="px-6 py-6 sm:px-7">
+              <HighlightedCode
+                code={WIDGET_USAGE}
+                className="overflow-x-auto font-mono text-[13px] leading-[1.65]"
+              />
             </div>
-            <HighlightedCode
-              code={WIDGET_USAGE}
-              className="min-w-0 overflow-x-auto font-mono text-[12px] leading-[1.65]"
-            />
-          </div>
+          </article>
         </div>
       </div>
 
