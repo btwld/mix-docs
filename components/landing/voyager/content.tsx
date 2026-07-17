@@ -168,5 +168,6 @@ export const voyagerContent: LandingContent = {
     title: "Your next codebase comes with a map.",
     lead: "Join the Voyager waitlist for early access, launch pricing, and progress updates.",
     finePrint: "© 2026 · macOS · Linux · Windows",
+    showConceptaBrand: false,
   },
 };

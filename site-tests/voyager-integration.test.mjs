@@ -65,7 +65,8 @@ test('presents Voyager as developer equipment with a visual path forward', () =>
     [content, readiness, routeMetadata, readinessMetadata].join('\n'),
     /\bConcepta\b/,
   )
-  assert.match(closingCta, /product !== "voyager"/)
+  assert.match(content, /showConceptaBrand: false/)
+  assert.match(closingCta, /showConceptaBrand !== false/)
   assert.doesNotMatch(
     publicCopy,
     /\b(scc|gitleaks|trivy|opengrep|eslint|knip|jscpd|lizard|pipeline|analyzer|agent|sast|owasp|cwe)\b/i,

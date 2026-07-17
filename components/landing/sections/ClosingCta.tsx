@@ -25,7 +25,7 @@ export function ClosingCta({
         <WaitlistForm product={product} />
         {Visual ? <Visual /> : null}
         <div className="lp-cta-links">
-          {product !== "voyager" ? (
+          {closingCta.showConceptaBrand !== false ? (
             <>
               <Link
                 href="/"
