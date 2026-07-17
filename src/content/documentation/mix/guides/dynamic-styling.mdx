@@ -35,14 +35,14 @@ Styles are meant to be reused. When you add a variant to an existing style, it m
 
 ```dart
 final styleA = BoxStyler()
-  .color(Colors.red)
-  .height(100)
-  .width(100)
-  .borderRadius(.circular(10))
-  .onHovered(
-    .color(Colors.blue)
-      .width(200)
-  );
+    .color(Colors.red)
+    .height(100)
+    .width(100)
+    .borderRadius(.circular(10))
+    .onHovered(
+      .color(Colors.blue)
+      .width(200),
+    );
 
 final styleB = styleA.onHovered(.color(Colors.green));
 ```
@@ -51,10 +51,10 @@ final styleB = styleA.onHovered(.color(Colors.green));
 
 ```dart
 BoxStyler()
-  .color(Colors.green)
-  .height(100)
-  .width(200)
-  .borderRadius(.circular(10));
+    .color(Colors.green)
+    .height(100)
+    .width(200)
+    .borderRadius(.circular(10));
 ```
 
 Hover over each box below to see the difference — `styleA` turns blue while `styleB` turns green, but both expand to 200 width:
@@ -70,15 +70,15 @@ You can combine multiple conditions by nesting variants. For example, different 
 
 ```dart
 final hoverStyle = BoxStyler()
-  .onDark(.color(Colors.blue))
-  .onLight(.color(Colors.green));
+    .onDark(.color(Colors.blue))
+    .onLight(.color(Colors.green));
 
 final style = BoxStyler()
-  .color(Colors.red)
-  .height(100)
-  .width(100)
-  .borderRadius(.circular(10))
-  .onHovered(hoverStyle);
+    .color(Colors.red)
+    .height(100)
+    .width(100)
+    .borderRadius(.circular(10))
+    .onHovered(hoverStyle);
 ```
 
 When hovered in dark mode, the color is blue. When hovered in light mode, the color is green. The base color (red) applies when not hovered. Toggle the mode and hover to see the difference:
@@ -99,7 +99,7 @@ Context variants are applied **after** all regular style properties. This means 
 final style = BoxStyler()
     .color(Colors.red)
     .onHovered(.color(Colors.blue))
-    .color(Colors.green); // This overrides the base color, but NOT the hover color
+    .color(Colors.green);
 ```
 
 To override a property set by a variant, you need another variant:
@@ -143,9 +143,8 @@ Pressable(
 // Or use PressableBox for convenience
 PressableBox(
   onPress: () {},
-  style: BoxStyler()
-      .color(Colors.grey)
-      .onFocused(.color(Colors.blue)),
+  style: .color(Colors.grey)
+         .onFocused(.color(Colors.blue)),
   child: Text('Focus me'),
 )
 ```
@@ -207,18 +206,20 @@ PressableBox(
 final style = BoxStyler()
     .color(Colors.blue)
     // Use white color when NOT in dark mode
-    .onNot(ContextVariant.brightness(.dark), .color(Colors.white));
+    .onNot(.brightness(.dark), .color(Colors.white));
 ```
 
 You can negate any variant — widget states, breakpoints, platforms, and more:
 
 ```dart
 // Only apply a shadow when NOT on mobile
-final style = BoxStyler()
-    .onNot(ContextVariant.mobile(), .shadow(
-      color: Colors.black26,
-      blurRadius: 10,
-    ));
+final style = BoxStyler().onNot(
+  .mobile(),
+  .shadow(
+    color: Colors.black26,
+    blurRadius: 10,
+  ),
+);
 ```
 
 #### `onBuilder` — fully dynamic variants

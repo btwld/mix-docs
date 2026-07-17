@@ -50,7 +50,7 @@ test('presents Rockets as a standalone createServer product', () => {
   const snippets = read('components/landing/rockets/snippets.ts')
 
   assert.match(content, /Your backend should be a spec/)
-  assert.match(content, /showWordmarkByline: false/)
+  assert.match(content, /wordmarkShowByline: false/)
   assert.match(content, /Describe your domain/)
   assert.match(content, /What does createServer\(\) create\?/)
   assert.match(content, /pre-1\.0/)

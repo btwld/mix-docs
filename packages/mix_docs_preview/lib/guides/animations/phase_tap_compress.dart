@@ -48,7 +48,10 @@ class _PhaseTapCompressExampleState extends State<PhaseTapCompressExample> {
             .initial => style.scale(1),
             .compress => style.scale(0.75).color(Colors.red.shade800),
             .expanded =>
-              style.scale(1.25).borderRadius(.circular(20)).color(Colors.yellow.shade300),
+              style
+                  .scale(1.25)
+                  .borderRadius(.circular(20))
+                  .color(Colors.yellow.shade300),
           },
           configBuilder: (phase) => switch (phase) {
             .initial => .springWithDampingRatio(800.ms, ratio: 0.3),

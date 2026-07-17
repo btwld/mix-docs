@@ -43,6 +43,7 @@ test('wires Ack into the shared product shell', () => {
   assert.match(docsMeta, /ack: 'Ack'/)
   assert.match(rootMeta, /ack:[\s\S]*?display: 'hidden'/)
   assert.ok(existsSync(join(root, 'src/app/ack/page.tsx')))
+  assert.ok(existsSync(join(root, 'src/app/ack/icon.svg')))
   assert.ok(existsSync(join(root, 'public/assets/logo_ack_sidebar.svg')))
   assert.ok(existsSync(join(root, 'public/assets/ack-social.png')))
   assert.ok(existsSync(join(root, 'public/ack/llms.txt')))
@@ -103,4 +104,19 @@ test('resolves every Ack documentation and landing-page link', () => {
   }
 
   assert.deepEqual(failures, [])
+})
+
+test('features codecs and code generation on Ack entry pages', () => {
+  const landing = readFileSync(ackLanding, 'utf8')
+  const overview = readFileSync(
+    join(ackContentRoot, 'getting-started/overview.mdx'),
+    'utf8',
+  )
+
+  for (const source of [landing, overview]) {
+    assert.match(source, /Codecs|CODECS/)
+    assert.match(source, /Code generation|CODE GENERATION/)
+    assert.match(source, /\/documentation\/ack\/advanced\/codecs/)
+    assert.match(source, /\/documentation\/ack\/advanced\/typesafe-schemas/)
+  }
 })

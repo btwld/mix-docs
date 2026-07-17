@@ -41,7 +41,7 @@ class ProgressExample extends StatelessWidget {
 
   RemixProgressStyler get style {
     return RemixProgressStyler()
-        .wrap(.clipRRect(borderRadius: BorderRadiusGeometryMix.circular(10)))
+        .wrap(.clipRRect(borderRadius: .circular(10)))
         .trackColor(Colors.grey.shade300)
         .indicatorColor(Colors.grey.shade900)
         .width(300)
@@ -187,4 +187,3 @@ Applies a matrix transformation to the component.
 #### `call({Key? key, required double value})`
 
 Creates a `RemixProgress` widget with this style applied.
-

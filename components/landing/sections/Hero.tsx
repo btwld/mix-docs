@@ -17,7 +17,7 @@ export function Hero({ content }: { content: LandingHeroContent }) {
       >
         <Wordmark
           name={content.wordmarkName}
-          showByline={content.showWordmarkByline}
+          showByline={content.wordmarkShowByline}
         />
       </motion.div>
 

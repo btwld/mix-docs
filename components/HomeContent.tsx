@@ -10,6 +10,7 @@ import { HeroBackground } from "./HeroBackground";
 import { HighlightedCode } from "./HighlightedCode";
 import Layout from "./Layout";
 import { Logo } from "./Logo";
+import { MixWidgetShowcase } from "./MixWidgetShowcase";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -148,11 +149,10 @@ export const HomeContent = () => {
                   Without Mix
                 </span>
                 <HighlightedCode code={`Container(
-  padding: EdgeInsets.all(16),
+  padding: .all(16),
   decoration: BoxDecoration(
     color: Colors.blue,
-    borderRadius:
-      BorderRadius.circular(8),
+    borderRadius: .circular(8),
   ),
   child: ...
 )`} />
@@ -202,6 +202,8 @@ Box(style: cardStyle, child: ...)`} />
       {/* Install + CTA — constrained width */}
       <Layout>
         <div className="relative z-10">
+          <MixWidgetShowcase />
+
           {/* Install */}
           <motion.section
             className="not-prose cli-section section-gap"

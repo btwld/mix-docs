@@ -19,7 +19,9 @@ final style = BoxStyler()
     .borderRadius(.circular(12))
     .padding(.all(16))
     .shadow(
-      .color(Colors.blue.shade200).blurRadius(12).offset(x: 0, y: 4),
+      .color(Colors.blue.shade200)
+      .blurRadius(12)
+      .offset(x: 0, y: 4),
     );
 
 final label = TextStyler()
@@ -27,7 +29,10 @@ final label = TextStyler()
     .fontSize(18)
     .fontWeight(.w600);
 
-Box(style: style, child: StyledText('Hello Mix', style: label))
+Box(
+  style: style,
+  child: StyledText('Hello Mix', style: label),
+)
 ```
 
 The preview below shows this style applied.

@@ -18,7 +18,8 @@ export interface LandingCta {
 export interface LandingContent {
   product: LandingProduct;
   wordmarkName: string;
-  showWordmarkByline?: boolean;
+  /** Defaults to true; products can hide the Concepta badge beneath the wordmark. */
+  wordmarkShowByline?: boolean;
   hero: {
     titleTop: ReactNode;
     titleGradient: ReactNode;
@@ -61,6 +62,8 @@ export interface LandingContent {
     action:
       | { kind: "waitlist"; product: ProductSlug }
       | { kind: "links"; links: LandingCta[] };
+    /** Defaults to true; set false for product-first pages without a parent-brand badge. */
+    showConceptaBrand?: boolean;
   };
   /** Optional visual rendered inside the closing CTA card, below the waitlist form. */
   ClosingVisual?: ComponentType;
@@ -68,5 +71,5 @@ export interface LandingContent {
 
 export type LandingHeroContent = Pick<
   LandingContent,
-  "wordmarkName" | "showWordmarkByline" | "hero" | "HeroWindow"
+  "wordmarkName" | "wordmarkShowByline" | "hero" | "HeroWindow"
 >;

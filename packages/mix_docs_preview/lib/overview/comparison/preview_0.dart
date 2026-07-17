@@ -13,10 +13,7 @@ class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [CustomMixWidget()],
-      ),
+      child: Row(mainAxisAlignment: .center, children: [CustomMixWidget()]),
     );
   }
 }
@@ -93,17 +90,17 @@ class _CustomFlutterWidgetState extends State<CustomFlutterWidget> {
           child: AnimatedContainer(
             duration: _duration,
             curve: _curve,
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: .symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: bgColor,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: .circular(10),
               border: Border.all(color: borderColor),
             ),
             child: Text(
               'Click me',
               style: TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: .w500,
                 color: accentColor,
               ),
             ),

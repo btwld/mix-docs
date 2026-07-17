@@ -32,10 +32,18 @@ export function ClosingCta({
         )}
         {Visual ? <Visual /> : null}
         <div className="lp-cta-links">
-          <Link href="/" className="lp-cta-concepta" aria-label="Concepta home">
-            <img src="/assets/logo_concepta.svg" alt="Concepta" />
-          </Link>
-          <span aria-hidden="true">·</span>
+          {closingCta.showConceptaBrand !== false ? (
+            <>
+              <Link
+                href="/"
+                className="lp-cta-concepta"
+                aria-label="Concepta home"
+              >
+                <img src="/assets/logo_concepta.svg" alt="Concepta" />
+              </Link>
+              <span aria-hidden="true">·</span>
+            </>
+          ) : null}
           <span className="lp-cta-fine">{closingCta.finePrint}</span>
         </div>
       </motion.div>

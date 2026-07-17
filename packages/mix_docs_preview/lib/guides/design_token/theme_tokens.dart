@@ -33,7 +33,7 @@ class Example extends StatelessWidget {
     return MixScope(
       colors: {$primaryColor: Colors.blue},
       spaces: {$spacing: 16.0},
-      radii: {$pill: Radius.circular(20)},
+      radii: {$pill: .circular(20)},
       child: _Example(),
     );
   }
@@ -59,7 +59,7 @@ class _Example extends StatelessWidget {
           'Hello, World!',
           style: TextStyler.color(
             $primaryColor(),
-          ).wrap(.new().padding(.all($spacing()))),
+          ).wrap(.padding(.all($spacing()))),
         ),
       ),
     );

@@ -30,7 +30,7 @@ function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     )
 }
 
-type ProductId = 'concepta' | 'mix' | 'remix' | 'naked-ui' | 'ack' | 'rockets' | 'stargate' | 'code-analysis'
+type ProductId = 'concepta' | 'mix' | 'remix' | 'naked-ui' | 'ack' | 'rockets' | 'stargate' | 'code-analysis' | 'voyager'
 
 function getActiveProduct(pathname: string | null): ProductId {
     if (!pathname) return 'concepta'
@@ -45,6 +45,7 @@ function getActiveProduct(pathname: string | null): ProductId {
     if (pathname === '/rockets' || pathname.startsWith('/rockets/')) return 'rockets'
     if (pathname === '/stargate' || pathname.startsWith('/stargate/')) return 'stargate'
     if (pathname === '/code-analysis' || pathname.startsWith('/code-analysis/')) return 'code-analysis'
+    if (pathname === '/voyager' || pathname.startsWith('/voyager/')) return 'voyager'
     return 'mix'
 }
 
@@ -154,6 +155,22 @@ const PRODUCTS: Product[] = [
         showLabel: true,
     },
 ]
+
+// Voyager is intentionally available only by direct URL while its positioning
+// is being tested. It needs a real shell identity without appearing in either
+// desktop or mobile product menus.
+const VOYAGER_PRODUCT: Product = {
+    id: 'voyager',
+    label: 'Voyager',
+    href: '/voyager',
+    logo: '/assets/logo_voyager_mark.svg',
+    showLabel: true,
+}
+
+function getProductMeta(id: ProductId) {
+    if (id === 'voyager') return VOYAGER_PRODUCT
+    return PRODUCTS.find((product) => product.id === id)
+}
 
 type DocsEntry =
     | { label: string; href: string }
@@ -352,7 +369,7 @@ function ProductMenu() {
     const pathname = usePathname()
     const active = getActiveProduct(pathname)
     // Undefined on the Concepta home — the trigger falls back to "Projects".
-    const activeProduct = PRODUCTS.find((p) => p.id === active)
+    const activeProduct = getProductMeta(active)
 
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
@@ -459,12 +476,16 @@ function MobileDrawer({
     onClose,
     docsHref,
     githubHref,
+    productCtaHref,
+    productCtaLabel,
     activeProduct,
     isDocsActive,
 }: {
     onClose: () => void
     docsHref: string | null
     githubHref: string | null
+    productCtaHref: string
+    productCtaLabel: string
     activeProduct: ProductId
     isDocsActive: boolean
 }) {
@@ -572,11 +593,11 @@ function MobileDrawer({
                         </>
                     ) : (
                         <Link
-                            href="#waitlist"
+                            href={productCtaHref}
                             onClick={onClose}
                             className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
                         >
-                            Join waitlist
+                            {productCtaLabel}
                         </Link>
                     )}
                     {hasVersionMenu(activeProduct) && (
@@ -637,11 +658,13 @@ export default function FloatingNavbar() {
     const isDocsActive = pathname?.startsWith('/documentation') ?? false
     const isReportsActive = pathname?.startsWith('/reports') ?? false
     const activeProduct = getActiveProduct(pathname)
-    const homeHref =
-        PRODUCTS.find((p) => p.id === activeProduct)?.href ?? '/'
+    const homeHref = getProductMeta(activeProduct)?.href ?? '/'
     const isHomeActive = pathname === homeHref
     const docsHref = getDocsHref(activeProduct)
     const githubHref = getGithubHref(activeProduct)
+    const isVoyagerReadiness = pathname?.startsWith('/voyager/readiness') ?? false
+    const productCtaHref = isVoyagerReadiness ? '#request' : '#waitlist'
+    const productCtaLabel = isVoyagerReadiness ? 'Request assessment' : 'Join waitlist'
 
     useEffect(() => {
         setDrawerOpen(false)
@@ -728,10 +751,10 @@ export default function FloatingNavbar() {
                             </Link>
                         ) : (
                             <Link
-                                href="#waitlist"
+                                href={productCtaHref}
                                 className="px-3 py-1.5 text-sm text-white/80 hover:text-white transition-colors"
                             >
-                                Join waitlist
+                                {productCtaLabel}
                             </Link>
                         )}
                         <span className="h-4 w-px bg-white/10" />
@@ -851,6 +874,8 @@ export default function FloatingNavbar() {
                     onClose={() => setDrawerOpen(false)}
                     docsHref={docsHref}
                     githubHref={githubHref}
+                    productCtaHref={productCtaHref}
+                    productCtaLabel={productCtaLabel}
                     activeProduct={activeProduct}
                     isDocsActive={isDocsActive}
                 />

@@ -115,16 +115,15 @@ RemixToggleGroup<String>(
     RemixToggleGroupItem(
       value: 'published',
       label: 'Published',
-      style: RemixToggleGroupItemStyler().foregroundColor(Colors.green),
+      style: .label(.color(Colors.green))
+             .icon(.color(Colors.green)),
     ),
   ],
   selectedValue: value,
   onChanged: onChanged,
-  style: RemixToggleGroupStyler().item(
-    RemixToggleGroupItemStyler()
-        .paddingX(12)
-        .paddingY(8)
-        .onSelected(.color(Colors.green.shade50)),
+  style: .item(
+    .padding(.horizontal(12).vertical(8))
+    .onSelected(.color(Colors.green.shade50)),
   ),
 )
 ```
@@ -140,7 +139,7 @@ const RemixToggleGroup<T>({
   required T? selectedValue,
   ValueChanged<T?>? onChanged,
   bool enabled = true,
-  Axis orientation = Axis.horizontal,
+  Axis orientation = .horizontal,
   bool loop = true,
   String? semanticLabel,
   bool excludeSemantics = false,

@@ -78,6 +78,27 @@ html.dark[data-product="code-analysis"] {
     --mix-accent-glow: rgba(0, 211, 255, 0.18);
 }
 
+/* Voyager is intentionally distinct from Code Analysis while it is tested as
+   an unlisted product: deeper navigation surfaces, cyan signal, violet orbit. */
+html.dark[data-product="voyager"] {
+    --nextra-primary-hue: 187deg;
+    --nextra-primary-saturation: 86%;
+    --nextra-primary-lightness: 69%;
+
+    --mix-bg: #050812;
+    --mix-surface: #0A1020;
+    --mix-surface-bright: #111A31;
+    --mix-accent: #67E8F9;
+    --mix-accent-low: rgba(103, 232, 249, 0.1);
+    --mix-accent-glow: rgba(103, 232, 249, 0.2);
+    --mix-surface-code: #0A1020;
+    --mix-surface-card: #0A1020;
+    --mix-surface-table-body: #0A1020;
+    --mix-surface-table-head: #111A31;
+    --mix-border-card: rgba(165, 180, 252, 0.12);
+    --mix-border-table: rgba(165, 180, 252, 0.14);
+}
+
 /* Naked UI product: official blue, lifted for contrast on the dark shell. */
 html.dark[data-product="naked-ui"] {
     --nextra-primary-hue: 213deg;

@@ -52,7 +52,7 @@ MixScope(
     $spacingMd: 16.0,
   },
   radii: {
-    $radiusMd: Radius.circular(8),
+    $radiusMd: .circular(8),
   },
   child: MaterialApp(home: MyHomePage()),
 );
@@ -171,9 +171,15 @@ The most common reason to reach for a context token is **bridging Material's the
 
 ```dart
 // Map Material's ColorScheme into Mix tokens — declared once, app-wide.
-final $primary    = ContextToken<Color>((context) => Theme.of(context).colorScheme.primary);
-final $surface    = ContextToken<Color>((context) => Theme.of(context).colorScheme.surface);
-final $onSurface  = ContextToken<Color>((context) => Theme.of(context).colorScheme.onSurface);
+final $primary = ContextToken<Color>(
+  (context) => Theme.of(context).colorScheme.primary,
+);
+final $surface = ContextToken<Color>(
+  (context) => Theme.of(context).colorScheme.surface,
+);
+final $onSurface = ContextToken<Color>(
+  (context) => Theme.of(context).colorScheme.onSurface,
+);
 
 // Use them like any other token — they track the active ThemeData automatically.
 final cardStyle = BoxStyler()
@@ -197,8 +203,12 @@ A matching entry in `MixScope` still wins, so the resolver acts as a context-der
 
 ```dart
 MixScope(
-  tokens: {$primary: Colors.green}, // overrides the resolver for this subtree
-  child: Box(style: BoxStyler().color($primary())),
+  tokens: {
+    $primary: Colors.green,
+  }, // overrides the resolver for this subtree
+  child: Box(
+    style: BoxStyler().color($primary()),
+  ),
 );
 ```
 

@@ -78,7 +78,8 @@ showRemixAlertDialog<void>(
   builder: (context) => Center(
     child: FortalDialog(
       title: 'Delete project?',
-      description: 'This permanently deletes the project and all of its data.',
+      description:
+          'This permanently deletes the project and all of its data.',
       actions: [
         FortalButton.ghost(
           label: 'Cancel',
@@ -144,7 +145,7 @@ Future<T?> showRemixDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
-  Duration transitionDuration = const Duration(milliseconds: 400),
+  Duration transitionDuration = const .new(milliseconds: 400),
   RouteTransitionsBuilder? transitionBuilder,
   bool requestFocus = true,
   TraversalEdgeBehavior? traversalEdgeBehavior,
@@ -164,7 +165,7 @@ Future<T?> showRemixAlertDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
-  Duration transitionDuration = const Duration(milliseconds: 400),
+  Duration transitionDuration = const .new(milliseconds: 400),
   RouteTransitionsBuilder? transitionBuilder,
   FocusNode? initialFocusNode,
 })

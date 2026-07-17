@@ -9,7 +9,7 @@ type RocketsContent = LandingHeroContent &
 
 export const rocketsContent: RocketsContent = {
   wordmarkName: "rockets",
-  showWordmarkByline: false,
+  wordmarkShowByline: false,
   hero: {
     titleTop: "Your backend should be a spec.",
     titleGradient: "Rockets makes it run.",

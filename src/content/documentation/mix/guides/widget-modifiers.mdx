@@ -104,10 +104,12 @@ If the default pipeline doesn't fit your use case, you can override it with `.wr
 final style = BoxStyler()
     .wrap(.opacity(0.5))
     .wrap(.padding(.all(8)))
-    .wrap(.orderOfModifiers([
-      OpacityModifier,   // Apply opacity first (innermost)
-      PaddingModifier,   // Then padding (outermost)
-    ]));
+    .wrap(
+      .orderOfModifiers([
+        OpacityModifier, // Apply opacity first (innermost)
+        PaddingModifier, // Then padding (outermost)
+      ]),
+    );
 ```
 
 Your custom order takes priority. Any modifiers not listed in your custom order fall back to their default position.
@@ -126,7 +128,9 @@ MixScope(
     ClipRRectModifier,
     OpacityModifier,
   ],
-  colors: { /* ... */ },
+  colors: {
+    // ...
+  },
   child: MyApp(),
 );
 ```
@@ -196,7 +200,7 @@ class OpacityModifierMix extends ModifierMix<OpacityModifier> {
   const OpacityModifierMix.create({this.opacity});
 
   OpacityModifierMix({double? opacity})
-      : this.create(opacity: Prop.maybe(opacity));
+    : this.create(opacity: Prop.maybe(opacity));
 
   @override
   OpacityModifier resolve(BuildContext context) {

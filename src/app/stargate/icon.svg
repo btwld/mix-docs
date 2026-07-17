@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="stargate-icon" x1="12" y1="52" x2="51" y2="12" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3EB8C9"/>
+      <stop offset="1" stop-color="#F5B544"/>
+    </linearGradient>
+  </defs>
   <rect width="64" height="64" rx="14" fill="#05040A"/>
-  <rect width="64" height="64" rx="14" fill="none" stroke="rgba(62,184,201,0.35)" stroke-width="2"/>
-  <circle cx="32" cy="32" r="17" fill="none" stroke="#3EB8C9" stroke-width="5"/>
-  <path d="M32 10 L32 16" stroke="#3EB8C9" stroke-width="4" stroke-linecap="round"/>
-  <path d="M32 48 L32 54" stroke="#3EB8C9" stroke-width="4" stroke-linecap="round"/>
-  <path d="M10 32 L16 32" stroke="#3EB8C9" stroke-width="4" stroke-linecap="round"/>
-  <path d="M48 32 L54 32" stroke="#3EB8C9" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="32" cy="32" r="6" fill="#F5B544"/>
+  <path fill="url(#stargate-icon)" fill-rule="evenodd" d="M32 8 56 32 32 56 8 32 32 8Zm0 15-9 9 9 9 9-9-9-9Z"/>
 </svg>

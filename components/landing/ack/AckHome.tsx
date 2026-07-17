@@ -47,8 +47,8 @@ export function AckHome() {
 
           <ul className="ack-hero-notes" aria-label="Ack highlights">
             <li>Runtime-first validation</li>
-            <li>Structured AI output</li>
-            <li>Provider-ready model</li>
+            <li>Bidirectional codecs</li>
+            <li>Optional code generation</li>
           </ul>
         </div>
 
@@ -240,7 +240,7 @@ export function AckHome() {
 
           <article className="ack-feature-card ack-feature-types">
             <div className="ack-feature-copy">
-              <span className="ack-feature-index">OPTIONAL CODE GENERATION</span>
+              <span className="ack-feature-index">TYPE-SAFE CODE GENERATION</span>
               <h3>Generate types, not duplicate models.</h3>
               <p>Annotate the schema you already trust. Ack generates a lightweight wrapper with typed getters and parse helpers—without changing the runtime schema.</p>
               <Link href="/documentation/ack/advanced/typesafe-schemas">Generate typed schemas <span aria-hidden="true">→</span></Link>
@@ -253,7 +253,7 @@ export function AckHome() {
 
           <article className="ack-feature-card ack-feature-codecs">
             <div className="ack-feature-copy">
-              <span className="ack-feature-index">AI-READY CODECS</span>
+              <span className="ack-feature-index">BIDIRECTIONAL CODECS</span>
               <h3>Decode the wire. Keep rich Dart values.</h3>
               <p>AI providers exchange JSON strings. <code>Ack.datetime()</code> validates that wire value, decodes it to UTC <code>DateTime</code>, and encodes it back for the next boundary.</p>
               <Link href="/documentation/ack/advanced/codecs">Meet codecs <span aria-hidden="true">→</span></Link>
