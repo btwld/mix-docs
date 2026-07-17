@@ -401,7 +401,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export const ConceptaHome = () => {
   return (
-    <>
+    <div className="concepta-home">
       <HeroBackground />
 
       <Layout>
@@ -640,6 +640,16 @@ export const ConceptaHome = () => {
       </Layout>
 
       <style jsx global>{`
+        html[data-product="concepta"],
+        html[data-product="concepta"] body {
+          overflow-x: clip;
+        }
+
+        .concepta-home {
+          position: relative;
+          isolation: isolate;
+        }
+
         .hero-section {
           padding-top: 80px;
           padding-bottom: 40px;
@@ -1332,6 +1342,6 @@ export const ConceptaHome = () => {
           color: var(--mix-accent);
         }
       `}</style>
-    </>
+    </div>
   );
 };
