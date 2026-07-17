@@ -1,3 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <path fill="#315CFF" fill-rule="evenodd" d="M40 180 100 30l60 150h-30l-30-50-30 50H40Zm30-40h60l20 40H50Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="ack-mark" x1="12" y1="54" x2="48" y2="10" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#315CFF"/>
+      <stop offset="1" stop-color="#67E8F9"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#ack-mark)" fill-rule="evenodd" d="M32 7 57 55H44l-6-12H26l-6 12H7L32 7Zm0 17-6 13h12l-6-13Z"/>
 </svg>

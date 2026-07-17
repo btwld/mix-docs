@@ -43,6 +43,7 @@ test('wires Ack into the shared product shell', () => {
   assert.match(docsMeta, /ack: 'Ack'/)
   assert.match(rootMeta, /ack:[\s\S]*?display: 'hidden'/)
   assert.ok(existsSync(join(root, 'src/app/ack/page.tsx')))
+  assert.ok(existsSync(join(root, 'src/app/ack/icon.svg')))
   assert.ok(existsSync(join(root, 'public/assets/logo_ack_sidebar.svg')))
   assert.ok(existsSync(join(root, 'public/assets/ack-social.png')))
   assert.ok(existsSync(join(root, 'public/ack/llms.txt')))

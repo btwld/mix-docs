@@ -1,12 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="voyager-orbit" x1="8" y1="52" x2="56" y2="12" gradientUnits="userSpaceOnUse">
+    <linearGradient id="voyager-icon" x1="12" y1="54" x2="48" y2="10" gradientUnits="userSpaceOnUse">
       <stop stop-color="#8B5CF6"/>
       <stop offset="1" stop-color="#67E8F9"/>
     </linearGradient>
   </defs>
   <rect width="64" height="64" rx="14" fill="#050812"/>
-  <ellipse cx="32" cy="32" rx="24" ry="11" fill="none" stroke="url(#voyager-orbit)" stroke-width="4" transform="rotate(-24 32 32)"/>
-  <circle cx="32" cy="32" r="7" fill="#050812" stroke="#67E8F9" stroke-width="4"/>
-  <circle cx="50" cy="19" r="4" fill="#67E8F9"/>
+  <path d="M32 7 53 55 32 44 11 55 32 7Z" fill="url(#voyager-icon)"/>
 </svg>

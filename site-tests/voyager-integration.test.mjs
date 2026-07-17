@@ -86,3 +86,18 @@ test('keeps Code Analysis intact and makes readiness plan-oriented', () => {
   assert.match(readiness, /a grounded baseline and a working plan/)
   assert.doesNotMatch(readiness, /\b(audit|verdict|graded)\b/i)
 })
+
+test('uses one-shape gradient marks across Voyager, Stargate, and Ack', () => {
+  const marks = [
+    'public/assets/logo_voyager_mark.svg',
+    'public/assets/logo_stargate_mark.svg',
+    'public/assets/logo_ack_sidebar.svg',
+  ]
+
+  for (const path of marks) {
+    const svg = read(path)
+    assert.match(svg, /<linearGradient\b/)
+    assert.equal(svg.match(/<path\b/g)?.length, 1)
+    assert.doesNotMatch(svg, /<(circle|ellipse|rect)\b/)
+  }
+})
