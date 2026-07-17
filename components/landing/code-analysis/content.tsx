@@ -157,7 +157,7 @@ export const codeAnalysisContent: LandingContent = {
     },
     {
       q: "When can I use it?",
-      a: "Code Analysis is launching soon. Join the waitlist for early access, launch pricing, and progress updates. Built by Concepta (conceptatech.com).",
+      a: "Code Analysis is launching soon. Join the waitlist for early access, launch pricing, and progress updates.",
     },
   ],
   closingCta: {
