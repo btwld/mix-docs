@@ -94,8 +94,9 @@ const PILLARS = [
 /* ── Per-project window visuals ──────────────────────────────────────
    Each block echoes the visual signature of its product page: Mix shows
    a style snippet, Remix its component catalog, Naked UI its observable state,
-   Ack a validation result, FVM a pinned SDK, Stargate a governed workflow, and
-   Code Analysis a scorecard. Same chrome, different content. */
+   Ack a validation result, FVM a pinned SDK, Rockets its configuration plan,
+   Stargate a governed workflow, and Code Analysis a scorecard. Same chrome,
+   different content. */
 
 const MIX_SNIPPET = `final cardStyle = BoxStyler()
     .color(Colors.blue)
@@ -193,6 +194,28 @@ function FvmVisual() {
       <div className="pv-fvm-file">
         <code>.fvmrc</code>
         <span>commit once · keep every environment in sync</span>
+      </div>
+    </div>
+  );
+}
+
+function RocketsVisual() {
+  return (
+    <div className="pv-graph">
+      <div className="pv-graph-node">
+        <span className="pv-graph-dot" />
+        <span className="pv-graph-name">options</span>
+        <span className="pv-graph-comp">auth · resources · repository</span>
+      </div>
+      <div className="pv-graph-edge">runtime planner · no generated files</div>
+      <div className="pv-graph-node">
+        <span className="pv-graph-dot" />
+        <span className="pv-graph-name">Nest API</span>
+        <span className="pv-graph-comp">/me · /pets · /api</span>
+      </div>
+      <div className="pv-graph-run">
+        <Check size={13} strokeWidth={2.4} />
+        guard · CRUD · hooks · Swagger
       </div>
     </div>
   );
@@ -323,6 +346,17 @@ const PROJECTS: Project[] = [
     windowLabel: "project setup",
     external: true,
     Visual: FvmVisual,
+  },
+  {
+    name: "Rockets",
+    tagline: "Describe the backend. Ship the domain.",
+    description:
+      "One typed NestJS configuration wires auth, dynamic repositories, generated CRUD, hooks, owner scoping, and Swagger at runtime.",
+    href: "/rockets",
+    accent: "#FF5906",
+    status: "Open source",
+    windowLabel: "app.module.ts",
+    Visual: RocketsVisual,
   },
   {
     name: "Stargate",

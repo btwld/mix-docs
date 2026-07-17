@@ -98,7 +98,12 @@ const TRUST_SPLIT: LandingContent["trustSplit"] = {
     "Deterministic evidence — rerun it, get the same numbers",
     "Policy-backed ceilings — an unrotated secret caps the grade, no matter what else is right",
   ],
-  ctaLabel: "Questions, answered",
+  cta: {
+    label: "Questions, answered",
+    href: "#faq",
+    variant: "ghost",
+    arrow: "right",
+  },
   snippet: METHODOLOGY_JSON,
   snippetFile: "methodology.json",
 };

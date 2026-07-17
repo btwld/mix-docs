@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LandingButton } from "../LandingButton";
+import { LandingCtaButton } from "../LandingButton";
 import { Wordmark } from "../Wordmark";
 import { EASE, fadeUp } from "../motion";
 import type { LandingContent } from "../types";
@@ -15,7 +15,10 @@ export function Hero({ content }: { content: LandingContent }) {
         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{ duration: 1.1, ease: EASE }}
       >
-        <Wordmark name={content.wordmarkName} />
+        <Wordmark
+          name={content.wordmarkName}
+          showByline={content.showWordmarkByline}
+        />
       </motion.div>
 
       <motion.h1
@@ -47,12 +50,8 @@ export function Hero({ content }: { content: LandingContent }) {
         custom={0.28}
         variants={fadeUp}
       >
-        <LandingButton href="#waitlist" arrow="right">
-          Join the waitlist
-        </LandingButton>
-        <LandingButton href="#how" variant="secondary">
-          See how it works
-        </LandingButton>
+        <LandingCtaButton cta={content.hero.primaryCta} />
+        <LandingCtaButton cta={content.hero.secondaryCta} />
       </motion.div>
 
       <HeroWindow />

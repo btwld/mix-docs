@@ -19,6 +19,7 @@ import {
     MIX_GITHUB_URL,
     NAKED_UI_GITHUB_URL,
     REMIX_GITHUB_URL,
+    ROCKETS_GITHUB_URL,
 } from './constants'
 
 function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -29,7 +30,7 @@ function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     )
 }
 
-type ProductId = 'concepta' | 'mix' | 'remix' | 'naked-ui' | 'ack' | 'stargate' | 'code-analysis'
+type ProductId = 'concepta' | 'mix' | 'remix' | 'naked-ui' | 'ack' | 'rockets' | 'stargate' | 'code-analysis'
 
 function getActiveProduct(pathname: string | null): ProductId {
     if (!pathname) return 'concepta'
@@ -41,6 +42,7 @@ function getActiveProduct(pathname: string | null): ProductId {
     if (pathname === '/naked-ui' || pathname.startsWith('/naked-ui/')) return 'naked-ui'
     if (pathname.startsWith('/documentation/ack')) return 'ack'
     if (pathname === '/ack' || pathname.startsWith('/ack/')) return 'ack'
+    if (pathname === '/rockets' || pathname.startsWith('/rockets/')) return 'rockets'
     if (pathname === '/stargate' || pathname.startsWith('/stargate/')) return 'stargate'
     if (pathname === '/code-analysis' || pathname.startsWith('/code-analysis/')) return 'code-analysis'
     return 'mix'
@@ -63,6 +65,7 @@ const MIX_DOCS_URL = '/documentation/mix/overview/introduction'
 const REMIX_DOCS_URL = '/documentation/remix'
 const NAKED_UI_DOCS_URL = 'https://docs.page/btwld/naked_ui'
 const ACK_DOCS_URL = '/documentation/ack/getting-started/overview'
+const ROCKETS_DOCS_URL = 'https://github.com/btwld/rockets#readme'
 
 // Stargate and Code Analysis have no public docs or repos yet.
 function getDocsHref(product: ProductId): string | null {
@@ -70,6 +73,7 @@ function getDocsHref(product: ProductId): string | null {
     if (product === 'remix') return REMIX_DOCS_URL
     if (product === 'naked-ui') return NAKED_UI_DOCS_URL
     if (product === 'ack') return ACK_DOCS_URL
+    if (product === 'rockets') return ROCKETS_DOCS_URL
     return null
 }
 
@@ -79,6 +83,7 @@ function getGithubHref(product: ProductId): string | null {
     if (product === 'remix') return REMIX_GITHUB_URL
     if (product === 'naked-ui') return NAKED_UI_GITHUB_URL
     if (product === 'ack') return ACK_GITHUB_URL
+    if (product === 'rockets') return ROCKETS_GITHUB_URL
     return null
 }
 
@@ -123,6 +128,13 @@ const PRODUCTS: Product[] = [
         label: 'Ack',
         href: '/ack',
         logo: '/assets/logo_ack_sidebar.svg',
+        showLabel: true,
+    },
+    {
+        id: 'rockets' as const,
+        label: 'Rockets',
+        href: '/rockets',
+        logo: '/assets/logo_rockets_mark.svg',
         showLabel: true,
     },
     {

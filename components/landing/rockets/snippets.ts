@@ -1,0 +1,47 @@
+export const DEFINE_ROCKETS_TS = [
+  "export const billing =",
+  "  defineRockets({",
+  "    auth: sharedIdentity,",
+  "    repository: postgres,",
+  "    resources: [",
+  "      customers,",
+  "      invoices,",
+  "      ledger,",
+  "    ],",
+  "    accessControl:",
+  "      billingPolicy,",
+  "  });",
+].join("\n");
+
+export const AUTH_PROVIDERS_TS = [
+  "const externalAuth = [",
+  "  defineFirebaseAuth({",
+  "    firebaseApp,",
+  "  }),",
+  "  defineApiKeyAuth(),",
+  "];",
+  "",
+  "const ownedAuth =",
+  "  defineRocketsAuth(",
+  "    authOptions,",
+  "  );",
+].join("\n");
+
+export const STORAGE_PROVIDERS_TS = [
+  "const sql =",
+  "  defineTypeOrmRepository(",
+  "    connection,",
+  "  );",
+  "const firestore =",
+  "  defineFirestoreRepository();",
+  "",
+  "const analytics =",
+  "  defineModuleResource({",
+  "    entities: [{",
+  "      entity: AnalyticsEvent,",
+  "      repository: firestore,",
+  "      collection:",
+  "        \"analytics_events\",",
+  "    }],",
+  "  });",
+].join("\n");

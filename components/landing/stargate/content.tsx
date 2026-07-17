@@ -20,6 +20,16 @@ export const stargateContent: LandingContent = {
         WorkflowSpec before and after each handler runs.
       </>
     ),
+    primaryCta: {
+      label: "Join the waitlist",
+      href: "#waitlist",
+      arrow: "right",
+    },
+    secondaryCta: {
+      label: "See how it works",
+      href: "#how",
+      variant: "secondary",
+    },
   },
   HeroWindow,
   stats: [
@@ -103,6 +113,12 @@ export const stargateContent: LandingContent = {
       "Human-in-the-loop",
       "Workflow evals",
     ],
+    cta: {
+      label: "Get early access",
+      href: "#waitlist",
+      variant: "ghost",
+      arrow: "right",
+    },
   },
   trustSplit: {
     eyebrow: "Portability",
@@ -113,7 +129,12 @@ export const stargateContent: LandingContent = {
       "No handlers, no executable strings in the artifact",
       "Validated at authoring, at load, and at every node boundary",
     ],
-    ctaLabel: "How validation works",
+    cta: {
+      label: "How validation works",
+      href: "#faq",
+      variant: "ghost",
+      arrow: "right",
+    },
     snippet: WORKFLOW_SPEC_JSON,
     snippetFile: "ask-the-agent.json",
   },
@@ -147,6 +168,7 @@ export const stargateContent: LandingContent = {
     title: "Be first through the gate.",
     lead: "Stargate is launching soon. Join the waitlist for early access and progress updates.",
     finePrint: "© 2026 · Studio · CLI · API · MCP",
+    action: { kind: "waitlist", product: "stargate" },
   },
   ClosingVisual: StudioPrototype,
 };

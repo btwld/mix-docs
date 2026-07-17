@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LandingButton } from "../LandingButton";
+import { LandingCtaButton } from "../LandingButton";
 import { reveal } from "../motion";
 import type { LandingContent } from "../types";
 
@@ -27,9 +27,7 @@ export function Marquee({ marquee }: { marquee: LandingContent["marquee"] }) {
         </div>
       </div>
       <motion.div className="lp-shell lp-center" {...reveal}>
-        <LandingButton href="#waitlist" variant="ghost" arrow="right">
-          Get early access
-        </LandingButton>
+        <LandingCtaButton cta={marquee.cta} />
       </motion.div>
     </section>
   );

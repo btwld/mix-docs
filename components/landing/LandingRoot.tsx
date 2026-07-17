@@ -30,7 +30,6 @@ export function LandingRoot({ content }: { content: LandingContent }) {
         <Faq faq={content.faq} />
         <ClosingCta
           closingCta={content.closingCta}
-          product={content.product}
           Visual={content.ClosingVisual}
         />
       </main>

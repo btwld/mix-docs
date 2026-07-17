@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import React from "react";
+import type { LandingCta } from "./types";
 
 function ArrowIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -70,5 +71,19 @@ export function LandingButton({
     <Link className={className} {...props}>
       {inner}
     </Link>
+  );
+}
+
+export function LandingCtaButton({ cta }: { cta: LandingCta }) {
+  return (
+    <LandingButton
+      href={cta.href}
+      variant={cta.variant}
+      arrow={cta.arrow}
+      target={cta.external ? "_blank" : undefined}
+      rel={cta.external ? "noopener noreferrer" : undefined}
+    >
+      {cta.label}
+    </LandingButton>
   );
 }
