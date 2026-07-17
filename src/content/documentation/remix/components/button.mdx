@@ -57,7 +57,7 @@ class ButtonExample extends StatelessWidget {
     return ButtonStyler()
         .paddingX(16)
         .paddingY(10)
-        .backgroundColor(const Color(0xFF4D1919))
+        .backgroundColor(Colors.red.shade900)
         .shadow(
           .color(Colors.redAccent)
           .blurRadius(10)
@@ -75,15 +75,15 @@ class ButtonExample extends StatelessWidget {
         .wrap(.scale(x: 1, y: 1))
         .onPressed(.scale(0.90))
         .onHovered(
-          .color(const Color(0xFF732D2D))
+          .color(Colors.red.shade800)
           .animate(.spring(300.ms)),
         )
-        .onFocused(.color(const Color(0xFF732D2D)));
+        .onFocused(.color(Colors.red.shade800));
   }
 
   ButtonStyler get successStyle {
     return destructiveStyle
-        .backgroundColor(const Color.fromARGB(255, 15, 61, 15))
+        .backgroundColor(Colors.green.shade900)
         .label(
           .uppercase()
           .color(Colors.greenAccent),
@@ -96,8 +96,8 @@ class ButtonExample extends StatelessWidget {
           .blurRadius(10)
           .spreadRadius(0),
         )
-        .onHovered(.color(const Color(0xFF357857)))
-        .onFocused(.color(const Color(0xFF357857)));
+        .onHovered(.color(Colors.green.shade700))
+        .onFocused(.color(Colors.green.shade700));
   }
 }
 ```

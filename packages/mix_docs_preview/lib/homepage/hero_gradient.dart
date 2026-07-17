@@ -28,9 +28,12 @@ class _HeroButton extends StatelessWidget {
         .linearGradient(
           begin: .topLeft,
           end: .bottomRight,
-          colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
+          colors: [
+            Colors.greenAccent.shade400,
+            Colors.deepPurpleAccent.shade200,
+          ],
         )
-        .labelColor(const Color(0xFF05040A))
+        .labelColor(Colors.black)
         .paddingX(22)
         .paddingY(11)
         .borderRadius(.circular(12));

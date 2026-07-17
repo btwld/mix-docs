@@ -127,11 +127,11 @@ Here's the `LightBlueTheme`:
 ```dart
 class LightBlueTheme {
   static Map<ColorToken, Color> get colors => {
-    CustomColorTokens.primary.token: const Color(0xFF0093B9),
-    CustomColorTokens.onPrimary.token: const Color(0xFFFAFAFA),
-    CustomColorTokens.surface.token: const Color(0xFFFAFAFA),
-    CustomColorTokens.onSurface.token: const Color(0xFF141C24),
-    CustomColorTokens.onSurfaceVariant.token: const Color(0xFF405473),
+    CustomColorTokens.primary.token: Colors.cyan.shade700,
+    CustomColorTokens.onPrimary.token: Colors.grey.shade50,
+    CustomColorTokens.surface.token: Colors.grey.shade50,
+    CustomColorTokens.onSurface.token: Colors.blueGrey.shade900,
+    CustomColorTokens.onSurfaceVariant.token: Colors.blueGrey.shade700,
   };
 
   static Map<TextStyleToken, TextStyle> get textStyles => {
@@ -179,11 +179,11 @@ And the `DarkPurpleTheme`:
 ```dart
 class DarkPurpleTheme {
   static Map<ColorToken, Color> get colors => {
-    CustomColorTokens.primary.token: const Color(0xFF617AFA),
-    CustomColorTokens.onPrimary.token: const Color(0xFFFAFAFA),
-    CustomColorTokens.surface.token: const Color(0xFF1C1C21),
-    CustomColorTokens.onSurface.token: const Color(0xFFFAFAFA),
-    CustomColorTokens.onSurfaceVariant.token: const Color(0xFFD6D6DE),
+    CustomColorTokens.primary.token: Colors.indigoAccent.shade200,
+    CustomColorTokens.onPrimary.token: Colors.grey.shade50,
+    CustomColorTokens.surface.token: Colors.grey.shade900,
+    CustomColorTokens.onSurface.token: Colors.grey.shade50,
+    CustomColorTokens.onSurfaceVariant.token: Colors.grey.shade300,
   };
 
   static Map<TextStyleToken, TextStyle> get textStyles => {

@@ -66,12 +66,12 @@ const THEMES = [
     name: "Classic",
     previewId: "homepage/hero-classic",
     code: `final style = ButtonStyler()
-    .color(const Color(0xFF00EB03))
-    .labelColor(const Color(0xFF05040A))
+    .color(Colors.greenAccent.shade400)
+    .labelColor(Colors.black)
     .paddingX(22)
     .paddingY(11)
     .borderRadius(.circular(10))
-    .onHovered(.color(const Color(0xFF33FF36)));`,
+    .onHovered(.color(Colors.lightGreenAccent.shade400));`,
   },
   {
     key: "gradient",
@@ -81,9 +81,12 @@ const THEMES = [
     .linearGradient(
       begin: .topLeft,
       end: .bottomRight,
-      colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
+      colors: [
+        Colors.greenAccent.shade400,
+        Colors.deepPurpleAccent.shade200,
+      ],
     )
-    .labelColor(const Color(0xFF05040A))
+    .labelColor(Colors.black)
     .paddingX(22)
     .paddingY(11)
     .borderRadius(.circular(12));`,
@@ -93,17 +96,17 @@ const THEMES = [
     name: "Neon",
     previewId: "homepage/hero-neon",
     code: `final style = ButtonStyler()
-    .color(const Color(0xFF0A0014))
-    .labelColor(const Color(0xFF00F0FF))
+    .color(Colors.black)
+    .labelColor(Colors.cyanAccent.shade400)
     .paddingX(24)
     .paddingY(11)
     .borderRadius(.circular(2))
     .border(
-      .color(const Color(0xFF00F0FF))
+      .color(Colors.cyanAccent.shade400)
       .width(1),
     )
     .shadow(
-      .color(const Color(0xFFFF00E5))
+      .color(Colors.purpleAccent.shade400)
       .blurRadius(22),
     );`,
   },
