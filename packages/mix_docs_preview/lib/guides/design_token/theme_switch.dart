@@ -54,7 +54,7 @@ class _ExampleState extends State<Example> {
     return MixScope(
       colors: _isDark ? _darkColors : _lightColors,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         spacing: 16,
         children: [
           Box(
@@ -67,14 +67,14 @@ class _ExampleState extends State<Example> {
           GestureDetector(
             onTap: () => setState(() => _isDark = !_isDark),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: .symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: .circular(8),
               ),
               child: Text(
                 'Toggle Theme',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 14, fontWeight: .w500),
               ),
             ),
           ),

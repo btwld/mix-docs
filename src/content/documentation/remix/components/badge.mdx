@@ -34,7 +34,7 @@ class BadgeExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       spacing: 16,
       children: [
         RemixBadge(
@@ -54,14 +54,13 @@ class BadgeExample extends StatelessWidget {
         .size(24, 24)
         .wrap(.clipOval())
         .label(
-          TextStyler()
-              .fontSize(15)
-              .textAlign(TextAlign.center)
-              .fontFeatures([const FontFeature.tabularFigures()]),
+          .fontSize(15)
+          .textAlign(.center)
+          .fontFeatures([const .tabularFigures()]),
         )
         .foregroundColor(Colors.greenAccent.shade700)
         .labelColor(Colors.white)
-        .labelFontWeight(FontWeight.bold)
+        .labelFontWeight(.bold)
         .labelFontSize(15);
   }
 
@@ -70,10 +69,9 @@ class BadgeExample extends StatelessWidget {
         .size(24, 24)
         .wrap(.clipOval())
         .label(
-          TextStyler()
-              .fontSize(15)
-              .textAlign(TextAlign.center)
-              .fontFeatures([const FontFeature.tabularFigures()]),
+          .fontSize(15)
+          .textAlign(.center)
+          .fontFeatures([const .tabularFigures()]),
         )
         .foregroundColor(Colors.redAccent)
         .wrap(.iconTheme(color: Colors.white, size: 15));
@@ -266,4 +264,3 @@ Sets label/text decoration color
 #### `call({Key? key, String? label, Widget? child, RemixBadgeLabelBuilder? labelBuilder})`
 
 Creates a `RemixBadge` widget with this style applied.
-

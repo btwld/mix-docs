@@ -37,7 +37,7 @@ class _SelectPreviewState extends State<SelectPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return FortalSelect<String>.surface(
+    return FortalSelect.surface(
       trigger: const RemixSelectTrigger(placeholder: 'Text Value'),
       items: [
         RemixSelectItem(value: 'option1', label: 'Option 1', enabled: true),

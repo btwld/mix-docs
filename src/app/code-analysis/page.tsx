@@ -12,13 +12,13 @@ export const metadata = {
   description,
   applicationName: "Code Analysis",
   openGraph: {
-    title: "Code Analysis by Concepta",
+    title: "Code Analysis",
     description,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Code Analysis by Concepta",
+    title: "Code Analysis",
     description,
   },
 };

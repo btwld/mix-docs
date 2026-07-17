@@ -62,7 +62,8 @@ You can create your own shorthand by defining helper functions or extending `Box
 
 ```dart
 // Custom helper function
-BoxStyler accentBorder(Color color) => BoxStyler().border(.top(color: color, width: 2));
+BoxStyler accentBorder(Color color) =>
+    BoxStyler().border(.top(color: color, width: 2));
 
 // Use the helper
 accentBorder(Colors.red);

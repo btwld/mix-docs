@@ -149,11 +149,10 @@ export const HomeContent = () => {
                   Without Mix
                 </span>
                 <HighlightedCode code={`Container(
-  padding: EdgeInsets.all(16),
+  padding: .all(16),
   decoration: BoxDecoration(
     color: Colors.blue,
-    borderRadius:
-      BorderRadius.circular(8),
+    borderRadius: .circular(8),
   ),
   child: ...
 )`} />

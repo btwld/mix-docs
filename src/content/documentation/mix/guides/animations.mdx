@@ -39,16 +39,16 @@ All curve configs take a `duration` and an optional `delay`:
 
 ```dart
 // Standard easing — good default for most transitions
-.ease(300.ms)
+final AnimationConfig ease = .ease(300.ms);
 
 // Starts fast, decelerates to a stop — natural for elements settling into place
-.decelerate(200.ms)
+final AnimationConfig decelerate = .decelerate(200.ms);
 
 // Smooth sinusoidal ease-out
-.easeOutSine(400.ms)
+final AnimationConfig easeOutSine = .easeOutSine(400.ms);
 
 // With a delay before starting
-.easeInOut(500.ms, delay: 200.ms)
+final AnimationConfig easeInOut = .easeInOut(500.ms, delay: 200.ms);
 ```
 
 Available curves include: `linear`, `ease`, `easeIn`, `easeOut`, `easeInOut`, `decelerate`, `bounceIn`, `bounceOut`, `elasticOut`, and many more — each matching a Flutter `Curves` constant.
@@ -59,14 +59,20 @@ Springs produce natural, physics-driven motion. Mix offers three ways to configu
 
 ```dart
 // Duration-based spring — set duration and bounciness (0 = no bounce, 1 = very bouncy)
-.spring(800.ms, bounce: 0.6)
+final AnimationConfig durationSpring = .spring(800.ms, bounce: 0.6);
 
 // Damping-ratio spring — ratio of 1.0 is critically damped (no overshoot),
 // below 1.0 oscillates, above 1.0 is overdamped
-.springWithDampingRatio(800.ms, ratio: 0.3)
+final AnimationConfig dampingRatioSpring = .springWithDampingRatio(
+  dampingRatio: 0.3,
+);
 
 // Raw physics spring — direct control over mass, stiffness, and damping force
-.springDescription(mass: 1.0, stiffness: 180.0, damping: 12.0)
+final AnimationConfig physicsSpring = .springDescription(
+  mass: 1.0,
+  stiffness: 180.0,
+  damping: 12.0,
+);
 ```
 
 ---
@@ -144,7 +150,10 @@ final box = BoxStyler()
         .initial => style.scale(1),
         .compress => style.scale(0.75).color(Colors.red.shade800),
         .expanded =>
-          style.scale(1.25).borderRadius(.circular(20)).color(Colors.yellow.shade300),
+          style
+              .scale(1.25)
+              .borderRadius(.circular(20))
+              .color(Colors.yellow.shade300),
       },
       configBuilder: (phase) => switch (phase) {
         .initial => .springWithDampingRatio(800.ms, ratio: 0.3),
@@ -219,7 +228,7 @@ Several tracks run in parallel to create one looping animation. Since no `trigge
 This example shows two advanced patterns:
 
 - **Custom tweens:** The color track passes `tweenBuilder: ColorTween.new` so Mix can interpolate between `Color` values correctly. You can use any `Tween` subclass this way.
-- **`.wrap()` for widget-level effects:** Opacity cannot be interpolated as a style property, so `.wrap(WidgetModifierConfig.opacity(...))` wraps the widget in Flutter's `Opacity` widget. The `.transform()` call similarly applies a `Matrix4` scale — useful when you need to animate a raw transform matrix rather than using the `.scale()` shorthand.
+- **`.wrap()` for widget-level effects:** Opacity cannot be interpolated as a style property, so `.wrap(.opacity(...))` wraps the widget in Flutter's `Opacity` widget. The `.transform()` call similarly applies a `Matrix4` scale — useful when you need to animate a raw transform matrix rather than using the `.scale()` shorthand.
 
 ```dart
 final box = BoxStyler()

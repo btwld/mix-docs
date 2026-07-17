@@ -30,7 +30,7 @@ class Example extends StatelessWidget {
     final labelStyle = TextStyler().color(Colors.white).fontSize(14);
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       spacing: 16,
       children: [
         Box(

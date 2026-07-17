@@ -97,11 +97,11 @@ Fortal is built on a scale-based token system that mirrors Radix's conventions:
 Each token is a function on the `FortalTokens` class. Call it from any style:
 
 ```dart
-final style = RemixButtonStyler()
-  .color(FortalTokens.accent9())
-  .paddingAll(FortalTokens.space4())
-  .borderRadiusAll(FortalTokens.radius3())
-  .label(TextStyler().color(FortalTokens.accentContrast()));
+final style = ButtonStyler()
+    .color(FortalTokens.accent9())
+    .paddingAll(FortalTokens.space4())
+    .borderRadius(.all(FortalTokens.radius3()))
+    .label(.color(FortalTokens.accentContrast()));
 ```
 
 The `accent9` step is the "solid" color — the strongest fill suitable for primary actions. The 12-step scale maps numbered steps to specific uses:
@@ -126,9 +126,9 @@ Because every `fortal*Styler` returns a regular Remix style, you can chain addit
 
 ```dart
 final style = fortalButtonStyler(variant: .solid)
-  .borderRadiusAll(const Radius.circular(8))
-  .paddingX(32)
-  .onHovered(.scale(1.05));
+    .borderRadius(.circular(8))
+    .paddingX(32)
+    .onHovered(.scale(1.05));
 ```
 
 The chain above starts from Fortal's `solid` button, overrides the border radius and horizontal padding, and adds a scale-on-hover modifier. Every other Fortal property — colors, state styling, typography — passes through untouched.
@@ -136,11 +136,11 @@ The chain above starts from Fortal's `solid` button, overrides the border radius
 You can also mix Fortal tokens into a completely custom style:
 
 ```dart
-final style = RemixButtonStyler()
-  .color(FortalTokens.accent9())
-  .paddingAll(FortalTokens.space4())
-  .borderRadiusAll(FortalTokens.radius3())
-  .onHovered(.color(FortalTokens.accent10()));
+final style = ButtonStyler()
+    .color(FortalTokens.accent9())
+    .paddingAll(FortalTokens.space4())
+    .borderRadius(.all(FortalTokens.radius3()))
+    .onHovered(.color(FortalTokens.accent10()));
 ```
 
 This gives you Fortal's token consistency without starting from its component styles.

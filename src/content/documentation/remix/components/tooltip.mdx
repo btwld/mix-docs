@@ -34,7 +34,7 @@ class TooltipExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       spacing: 24,
       children: [
         RemixTooltip(
@@ -58,23 +58,27 @@ class TooltipExample extends StatelessWidget {
 
   RemixTooltipStyler get styleDefault {
     return RemixTooltipStyler()
-        .padding(EdgeInsetsGeometryMix.symmetric(horizontal: 12, vertical: 8))
+        .padding(.symmetric(horizontal: 12, vertical: 8))
         .backgroundColor(Colors.black87)
-        .borderRadius(BorderRadiusGeometryMix.all(const Radius.circular(6)))
-        .wrap(.defaultTextStyle(style: TextStyleMix().color(Colors.white).fontSize(14)));
+        .borderRadius(.circular(6))
+        .wrap(
+          .defaultTextStyle(
+            style: .color(Colors.white).fontSize(14),
+          ),
+        );
   }
 
   RemixTooltipStyler get styleFast {
     return styleDefault
-        .waitDuration(const Duration(milliseconds: 100))
-        .showDuration(const Duration(milliseconds: 800)) // touch wait
-        .dismissDuration(const Duration(milliseconds: 100)); // hover exit
+        .waitDuration(100.ms)
+        .showDuration(800.ms) // touch wait
+        .dismissDuration(100.ms); // hover exit
   }
 
   RemixTooltipStyler get styleSlow {
     return styleDefault
-        .waitDuration(const Duration(seconds: 1))
-        .showDuration(const Duration(seconds: 3));
+        .waitDuration(1.s)
+        .showDuration(3.s);
   }
 }
 
@@ -86,12 +90,12 @@ class _TriggerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const .symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.blue,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: .circular(8),
       ),
-      child: Text(label, style: const TextStyle(color: Colors.white)),
+      child: Text(label, style: const .new(color: Colors.white)),
     );
   }
 }
@@ -263,4 +267,3 @@ Sets the widget modifier.
 #### `call({Key? key, required Widget tooltipChild, required Widget child, String? tooltipSemantics, OverlayPositionConfig positioning = const OverlayPositionConfig()})`
 
 Creates a `RemixTooltip` widget with this style applied.
-

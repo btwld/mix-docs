@@ -47,19 +47,17 @@ class CalloutExample extends StatelessWidget {
         .height(60)
         .paddingRight(12)
         .icon(
-          IconStyler()
-              .size(24)
-              .color(Colors.white)
-              .wrap(
-                .box(
-                  BoxStyler()
-                      .color(Colors.blue.shade900)
-                      .paddingX(12)
-                      .height(double.infinity),
-                ),
-              ),
+          .size(24)
+          .color(Colors.white)
+          .wrap(
+            .box(
+              .color(Colors.blue.shade900)
+              .paddingX(12)
+              .height(double.infinity),
+            ),
+          ),
         )
-        .mainAxisSize(MainAxisSize.min);
+        .mainAxisSize(.min);
   }
 }
 ```
@@ -268,4 +266,3 @@ Sets single icon shadow
 #### `call({Key? key, String? text, IconData? icon, Widget? child})`
 
 Creates a `RemixCallout` widget with this style applied.
-

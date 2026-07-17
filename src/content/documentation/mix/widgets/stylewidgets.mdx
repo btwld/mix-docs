@@ -18,8 +18,8 @@ As already mentioned, the `Box` widget is like Flutter's `Container`, it can be 
 
 ```dart
 final style = BoxStyler()
-  .size(100, 100)
-  .color(Colors.blue);
+    .size(100, 100)
+    .color(Colors.blue);
 
 Box(
   style: style,
@@ -46,8 +46,8 @@ FlexBox(
 
 ```dart
 final style = TextStyler()
-  .color(Colors.blue)
-  .fontSize(20);
+    .color(Colors.blue)
+    .fontSize(20);
 
 StyledText(
   'Hello, World!',
@@ -60,8 +60,8 @@ StyledText(
 
 ```dart
 final iconStyle = IconStyler()
-  .color(Colors.blue)
-  .size(30);
+    .color(Colors.blue)
+    .size(30);
 
 StyledIcon(icon: Icons.ac_unit, style: iconStyle);
 ```
@@ -71,8 +71,8 @@ StyledIcon(icon: Icons.ac_unit, style: iconStyle);
 
 ```dart
 final imageStyle = ImageStyler()
-  .width(200)
-  .height(150);
+    .width(200)
+    .height(150);
 
 StyledImage(
   image: NetworkImage('https://example.com/image.png'),
@@ -87,7 +87,9 @@ All Styler classes support a **callable pattern** — you can call a styler inst
 ```dart
 // BoxStyler creates a Box when called
 final box = BoxStyler().color(Colors.blue).paddingAll(16);
-box(child: Text('Hello')); // Equivalent to Box(style: box, child: Text('Hello'))
+box(
+  child: Text('Hello'),
+); // Equivalent to Box(style: box, child: Text('Hello'))
 
 // TextStyler creates a StyledText when called
 final text = TextStyler().fontSize(18).color(Colors.white);
@@ -95,7 +97,9 @@ text('Hello'); // Equivalent to StyledText('Hello', style: text)
 
 // IconStyler creates a StyledIcon when called
 final icon = IconStyler().size(24).color(Colors.red);
-icon(icon: Icons.star); // Equivalent to StyledIcon(icon: Icons.star, style: icon)
+icon(
+  icon: Icons.star,
+); // Equivalent to StyledIcon(icon: Icons.star, style: icon)
 ```
 
 This is useful for concise widget composition, especially when building reusable components.
@@ -114,12 +118,11 @@ Pressable(
 ```
 
 ```dart
-  PressableBox(
-    style: BoxStyler()
-      .color(Colors.blue)
-      .padding(.all(16))
-      .borderRadius(.circular(8)),
-    onPress: () => print('PressableBox pressed'),
-    child: StyledText('Styled Button'),
-  );
+PressableBox(
+  style: .color(Colors.blue)
+         .padding(.all(16))
+         .borderRadius(.circular(8)),
+  onPress: () => print('PressableBox pressed'),
+  child: StyledText('Styled Button'),
+);
 ```

@@ -16,7 +16,11 @@ void main() {
 class Example extends StatelessWidget {
   const Example({super.key});
 
-  Widget _buildButton(String label, BoxStyler boxStyle, TextStyler textStyle) {
+  Widget _buildButton({
+    required String label,
+    required BoxStyler boxStyle,
+    required TextStyler textStyle,
+  }) {
     return Pressable(
       onPress: () {},
       child: Box(
@@ -32,28 +36,25 @@ class Example extends StatelessWidget {
       mainAxisSize: .min,
       children: [
         _buildButton(
-          'Filled',
-          BoxStyler()
-              .color(Colors.blueAccent)
-              .padding(.horizontal(24).vertical(12))
-              .borderRadius(.circular(8)),
-          TextStyler().color(Colors.white).fontSize(16).fontWeight(.w500),
+          label: 'Filled',
+          boxStyle: .color(
+            Colors.blueAccent,
+          ).padding(.horizontal(24).vertical(12)).borderRadius(.circular(8)),
+          textStyle: .color(Colors.white).fontSize(16).fontWeight(.w500),
         ),
         const SizedBox(height: 12),
         _buildButton(
-          'Outlined',
-          BoxStyler()
-              .color(Colors.transparent)
+          label: 'Outlined',
+          boxStyle: .color(Colors.transparent)
               .border(.color(Colors.blueAccent).width(1.5))
               .padding(.horizontal(24).vertical(12))
               .borderRadius(.circular(8)),
-          TextStyler().color(Colors.blueAccent).fontSize(16).fontWeight(.w500),
+          textStyle: .color(Colors.blueAccent).fontSize(16).fontWeight(.w500),
         ),
         const SizedBox(height: 12),
         _buildButton(
-          'Elevated',
-          BoxStyler()
-              .color(Colors.blueAccent)
+          label: 'Elevated',
+          boxStyle: .color(Colors.blueAccent)
               .padding(.horizontal(24).vertical(12))
               .borderRadius(.circular(8))
               .shadow(
@@ -61,20 +62,17 @@ class Example extends StatelessWidget {
                   Colors.blueAccent.shade700.withValues(alpha: 0.5),
                 ).offset(x: 0, y: 4).blurRadius(8),
               ),
-          TextStyler().color(Colors.white).fontSize(16).fontWeight(.w500),
+          textStyle: .color(Colors.white).fontSize(16).fontWeight(.w500),
         ),
         const SizedBox(height: 12),
         _buildButton(
-          'Link',
-          BoxStyler()
-              .color(Colors.transparent)
-              .padding(.horizontal(24).vertical(12))
-              .borderRadius(.circular(8)),
-          TextStyler()
-              .color(Colors.blueAccent)
-              .fontSize(16)
-              .fontWeight(.w500)
-              .decoration(.underline),
+          label: 'Link',
+          boxStyle: .color(
+            Colors.transparent,
+          ).padding(.horizontal(24).vertical(12)).borderRadius(.circular(8)),
+          textStyle: .color(
+            Colors.blueAccent,
+          ).fontSize(16).fontWeight(.w500).decoration(.underline),
         ),
         const SizedBox(height: 12),
         Pressable(

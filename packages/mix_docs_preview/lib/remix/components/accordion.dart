@@ -55,7 +55,7 @@ class _AccordionPreviewState extends State<AccordionPreview> {
           RemixAccordionGroup(
             controller: controller,
             child: ColumnBox(
-              style: FlexBoxStyler().spacing(16),
+              style: FlexBoxStyler.spacing(16),
               children: [
                 FortalAccordion.surface(
                   value: 'accordion1',

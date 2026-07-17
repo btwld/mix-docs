@@ -140,7 +140,7 @@ export const stargateContent: LandingContent = {
     },
     {
       q: "When can I use it?",
-      a: "Stargate is launching soon. Join the waitlist for early access and progress updates. Built by Concepta (conceptatech.com).",
+      a: "Stargate is launching soon. Join the waitlist for early access and progress updates.",
     },
   ],
   closingCta: {

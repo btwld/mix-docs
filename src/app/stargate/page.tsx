@@ -12,13 +12,13 @@ export const metadata = {
   description,
   applicationName: "Stargate",
   openGraph: {
-    title: "Stargate by Concepta",
+    title: "Stargate",
     description,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stargate by Concepta",
+    title: "Stargate",
     description,
   },
 };

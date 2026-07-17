@@ -65,43 +65,50 @@ const THEMES = [
     key: "default",
     name: "Classic",
     previewId: "homepage/hero-classic",
-    code: `final style = RemixButtonStyler()
-    .color(const Color(0xFF00EB03))
-    .labelColor(const Color(0xFF05040A))
+    code: `final style = ButtonStyler()
+    .color(Colors.greenAccent.shade400)
+    .labelColor(Colors.black)
     .paddingX(22)
     .paddingY(11)
-    .borderRadiusAll(const Radius.circular(10))
-    .onHovered(.color(const Color(0xFF33FF36)));`,
+    .borderRadius(.circular(10))
+    .onHovered(.color(Colors.lightGreenAccent.shade400));`,
   },
   {
     key: "gradient",
     name: "Gradient",
     previewId: "homepage/hero-gradient",
-    code: `final style = RemixButtonStyler()
-    .gradient(
-      LinearGradientMix(
-        begin: .topLeft,
-        end: .bottomRight,
-        colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
-      ),
+    code: `final style = ButtonStyler()
+    .linearGradient(
+      begin: .topLeft,
+      end: .bottomRight,
+      colors: [
+        Colors.greenAccent.shade400,
+        Colors.deepPurpleAccent.shade200,
+      ],
     )
-    .labelColor(const Color(0xFF05040A))
+    .labelColor(Colors.black)
     .paddingX(22)
     .paddingY(11)
-    .borderRadiusAll(const Radius.circular(12));`,
+    .borderRadius(.circular(12));`,
   },
   {
     key: "neon",
     name: "Neon",
     previewId: "homepage/hero-neon",
-    code: `final style = RemixButtonStyler()
-    .color(const Color(0xFF0A0014))
-    .labelColor(const Color(0xFF00F0FF))
+    code: `final style = ButtonStyler()
+    .color(Colors.black)
+    .labelColor(Colors.cyanAccent.shade400)
     .paddingX(24)
     .paddingY(11)
-    .borderRadiusAll(const Radius.circular(2))
-    .borderAll(color: const Color(0xFF00F0FF), width: 1)
-    .shadowOnly(color: const Color(0xFFFF00E5), blurRadius: 22);`,
+    .borderRadius(.circular(2))
+    .border(
+      .color(Colors.cyanAccent.shade400)
+      .width(1),
+    )
+    .shadow(
+      .color(Colors.purpleAccent.shade400)
+      .blurRadius(22),
+    );`,
   },
 ];
 
