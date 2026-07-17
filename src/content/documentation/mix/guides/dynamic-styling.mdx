@@ -99,9 +99,7 @@ Context variants are applied **after** all regular style properties. This means 
 final style = BoxStyler()
     .color(Colors.red)
     .onHovered(.color(Colors.blue))
-    .color(
-      Colors.green,
-    ); // This overrides the base color, but NOT the hover color
+    .color(Colors.green);
 ```
 
 To override a property set by a variant, you need another variant:
@@ -146,7 +144,7 @@ Pressable(
 PressableBox(
   onPress: () {},
   style: .color(Colors.grey)
-      .onFocused(.color(Colors.blue)),
+         .onFocused(.color(Colors.blue)),
   child: Text('Focus me'),
 )
 ```

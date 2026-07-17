@@ -78,11 +78,9 @@ class _RadioExampleState extends State<RadioExample> {
         .borderRadius(.circular(30))
         .size(22, 22)
         .border(
-          .all(
-            .color(Colors.blueGrey.shade100)
-            .width(2.4)
-            .strokeAlign(BorderSide.strokeAlignInside),
-          ),
+          .color(Colors.blueGrey.shade100)
+          .width(2.4)
+          .strokeAlign(BorderSide.strokeAlignInside),
         )
         .onHovered(
           .shadow(
@@ -93,20 +91,16 @@ class _RadioExampleState extends State<RadioExample> {
         )
         .onPressed(
           .border(
-            .all(
-              .color(Colors.blueGrey.shade100)
-              .width(6)
-              .strokeAlign(BorderSide.strokeAlignInside),
-            ),
+            .color(Colors.blueGrey.shade100)
+            .width(6)
+            .strokeAlign(BorderSide.strokeAlignInside),
           ),
         )
         .onSelected(
           .border(
-            .all(
-              .color(Colors.blueAccent.shade700)
-              .width(6)
-              .strokeAlign(BorderSide.strokeAlignInside),
-            ),
+            .color(Colors.blueAccent.shade700)
+            .width(6)
+            .strokeAlign(BorderSide.strokeAlignInside),
           ),
         );
   }

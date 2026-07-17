@@ -87,7 +87,7 @@ class _TabsExampleState extends State<TabsExample> {
         .paddingAll(4)
         .borderRounded(12)
         .color(const Color(0xFFF4F6FF))
-        .border(.all(.color(Colors.indigo.shade100)));
+        .border(.color(Colors.indigo.shade100));
   }
 
   RemixTabStyler get tabStyle {
@@ -106,7 +106,7 @@ class _TabsExampleState extends State<TabsExample> {
         )
         .onSelected(
           .color(Colors.white)
-          .border(.all(.color(Colors.indigo.shade400).width(2)))
+          .border(.color(Colors.indigo.shade400).width(2))
           .label(.color(Colors.indigo.shade700))
           .iconColor(Colors.indigo.shade600),
         );
@@ -117,7 +117,7 @@ class _TabsExampleState extends State<TabsExample> {
         .paddingAll(20)
         .borderRounded(14)
         .color(Colors.white)
-        .border(.all(.color(Colors.indigo.shade100)));
+        .border(.color(Colors.indigo.shade100));
   }
 }
 ```

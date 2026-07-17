@@ -74,18 +74,12 @@ class _TextfieldExampleState extends State<TextfieldExample> {
           .color(Colors.black12)
           .offset(x: 0, y: 1),
         )
-        .border(
-          .all(
-            .color(Colors.grey.shade300),
-          ),
-        )
+        .border(.color(Colors.grey.shade300))
         .onFocused(
           .border(
-            .all(
-              .color(Colors.deepPurpleAccent)
-              .width(3)
-              .strokeAlign(BorderSide.strokeAlignCenter),
-            ),
+            .color(Colors.deepPurpleAccent)
+            .width(3)
+            .strokeAlign(BorderSide.strokeAlignCenter),
           ),
         );
   }

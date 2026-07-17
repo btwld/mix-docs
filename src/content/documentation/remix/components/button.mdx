@@ -69,20 +69,16 @@ class ButtonExample extends StatelessWidget {
         )
         .shapeBeveledRectangle(
           borderRadius: .bottomLeft(.circular(12))
-              .topRight(.circular(12)),
+                        .topRight(.circular(12)),
           side: .width(1).color(Colors.redAccent),
         )
         .wrap(.scale(x: 1, y: 1))
-        .onPressed(
-          .scale(0.90),
-        )
+        .onPressed(.scale(0.90))
         .onHovered(
           .color(const Color(0xFF732D2D))
           .animate(.spring(300.ms)),
         )
-        .onFocused(
-          .color(const Color(0xFF732D2D)),
-        );
+        .onFocused(.color(const Color(0xFF732D2D)));
   }
 
   ButtonStyler get successStyle {
@@ -100,12 +96,8 @@ class ButtonExample extends StatelessWidget {
           .blurRadius(10)
           .spreadRadius(0),
         )
-        .onHovered(
-          .color(const Color(0xFF357857)),
-        )
-        .onFocused(
-          .color(const Color(0xFF357857)),
-        );
+        .onHovered(.color(const Color(0xFF357857)))
+        .onFocused(.color(const Color(0xFF357857)));
   }
 }
 ```

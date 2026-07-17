@@ -19,12 +19,12 @@ Making a styled container respond to taps, hovers, and focus in plain Flutter me
 PressableBox(
   onPress: () => print('tapped'),
   style: .padding(.horizontal(24).vertical(12))
-      .borderRadius(.circular(8))
-      .color(Colors.blue)
-      .onHovered(.color(Colors.blue.shade700))
-      .onPressed(.color(Colors.blue.shade900).scale(0.97))
-      .onDisabled(.color(Colors.grey.shade300))
-      .animate(.ease(150.ms)),
+         .borderRadius(.circular(8))
+         .color(Colors.blue)
+         .onHovered(.color(Colors.blue.shade700))
+         .onPressed(.color(Colors.blue.shade900).scale(0.97))
+         .onDisabled(.color(Colors.grey.shade300))
+         .animate(.ease(150.ms)),
   child: StyledText(
     'Submit',
     style: TextStyler()
