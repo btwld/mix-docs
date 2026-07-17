@@ -64,7 +64,7 @@ class _AccordionPreviewState extends State<AccordionPreview> {
                     'Insert the accordion description here. It would look better as two lines of text.',
                   ),
                 ),
-                FortalAccordion.surface(
+                FortalAccordion.soft(
                   value: 'accordion2',
                   title: 'What payment methods are accepted?',
                   child: const Text(
@@ -77,27 +77,5 @@ class _AccordionPreviewState extends State<AccordionPreview> {
         ],
       ),
     );
-  }
-
-  RemixAccordionStyler get itemStyle {
-    return RemixAccordionStyler()
-        .content(BoxStyler().padding(.horizontal(16).top(8)))
-        .wrap(.clipRRect(borderRadius: .circular(8)))
-        .padding(.horizontal(16).vertical(14))
-        .borderRadius(.circular(8))
-        .onHovered(RemixAccordionStyler().color(Colors.grey.shade100))
-        .color(Colors.white)
-        .border(.color(Colors.grey.shade300).width(1))
-        .trigger(
-          FlexBoxStyler()
-              .direction(.horizontal)
-              .mainAxisAlignment(.spaceBetween)
-              .spacing(12),
-        )
-        .leadingIcon(.color(Colors.grey.shade700).size(20))
-        .title(
-          .color(Colors.grey.shade900).fontWeight(FontWeight.w500).fontSize(14),
-        )
-        .trailingIcon(.color(Colors.grey.shade700).size(20));
   }
 }

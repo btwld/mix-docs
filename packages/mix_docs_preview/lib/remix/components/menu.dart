@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const MenuPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const MenuPreview(),
+    );
   }
 }
 
@@ -40,20 +44,17 @@ class _MenuPreviewState extends State<MenuPreview> {
           value: 'History',
           leadingIcon: Icons.history,
           label: 'History',
-          style: fortalMenuItemStyler(variant: .soft),
         ),
         RemixMenuItem(
           value: 'Settings',
           leadingIcon: Icons.settings,
           label: 'Settings',
-          style: fortalMenuItemStyler(variant: .soft),
         ),
         const RemixMenuDivider(),
         RemixMenuItem(
           value: 'Logout',
           leadingIcon: Icons.logout,
           label: 'Logout',
-          style: fortalMenuItemStyler(variant: .soft),
         ),
       ],
       onSelected: (_) {},

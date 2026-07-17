@@ -12,7 +12,7 @@ import {
   BAND_COLORS,
 } from "./snippets";
 
-/* Run stage: the 7-phase pipeline mid-flight */
+/* Run stage: static analysis + the 7-phase AI pipeline mid-flight */
 const RUN_PHASES = [
   { label: "Static analysis", state: "done" },
   { label: "Indexing", state: "done" },
@@ -123,7 +123,7 @@ const TABS = [
     name: "Run",
     code: AUDIT_CMD,
     lang: "bash" as const,
-    stageLabel: "Pipeline · 7 phases",
+    stageLabel: "Static analysis + 7 AI phases",
     Stage: RunStage,
   },
   {

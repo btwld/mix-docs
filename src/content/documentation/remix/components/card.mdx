@@ -6,6 +6,7 @@ keywords: [flutter, remix, card, container, panel, surface, content]
 
 A versatile container component for grouping related content.
 
+
 ## Interactive preview
 
 <FlutterPreview
@@ -34,13 +35,18 @@ class CardExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return RemixCard(
       style: style,
+      child: const Text(
+        'Card content',
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 
   RemixCardStyler get style {
     return RemixCardStyler()
         .size(300, 200)
-        .textColor(Colors.white)
+        .backgroundColor(const Color(0xFF111827))
+        .padding(EdgeInsetsGeometryMix.all(24))
         .borderRadiusAll(const Radius.circular(4))
         .borderAll(color: Colors.grey.shade300);
   }
@@ -48,11 +54,11 @@ class CardExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Generated Fortal component
+## Fortal widgets
 
-Remix includes a generated Fortal component with prebuilt variants:
+Remix includes a generated Fortal-themed widget for this component:
 
-<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -67,6 +73,7 @@ class FortalCardExample extends StatelessWidget {
       children: [
         FortalCard.classic(),
         FortalCard.surface(),
+        FortalCard.ghost(),
       ],
     );
   }
@@ -75,7 +82,7 @@ class FortalCardExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [fortalCardStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/card/fortal_card_styles.dart) for all available options.
+  See the [fortalCardStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/card/fortal_card_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -94,25 +101,70 @@ const RemixCard({
 ## Properties
 ### Widget Properties
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `style` | `RemixCardStyler` | Optional. The style configuration for the card. Customize colors, sizing, borders, and state-based styling. |
-| `styleSpec` | `RemixCardSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
-| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
-| `child` | `Widget?` | Optional. The widget below this widget in the tree. This widget can only have one child. To lay out multiple children, let this widget's child be a widget such as [RowBox], [ColumnBox], or [StackBox], which have a children property, and then provide the children to that widget. |
+#### `style` → `RemixCardStyler`
+
+Optional. The style configuration for the card. Customize colors, sizing, borders, and state-based styling.
+
+#### `styleSpec` → `RemixCardSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `child` → `Widget?`
+
+Optional. The widget below this widget in the tree.  This widget can only have one child. To lay out multiple children, let this widget's child be a widget such as [RowBox], [ColumnBox], or [StackBox], which have a children property, and then provide the children to that widget.
+
 
 ### Style Methods
 
-| Method | Description |
-|--------|-------------|
-| `padding(EdgeInsetsGeometryMix value)` | Sets container padding |
-| `textColor(Color value)` | Sets text color |
-| `borderRadius(BorderRadiusGeometryMix radius)` | Sets container border radius |
-| `margin(EdgeInsetsGeometryMix value)` | Sets container margin |
-| `alignment(Alignment value)` | Sets container alignment |
-| `decoration(DecorationMix value)` | Sets container decoration |
-| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
-| `animate(AnimationConfig config)` | Configures implicit animation for style transitions. |
-| `constraints(BoxConstraintsMix value)` | Sets size constraints on the component. |
-| `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
-| `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets container padding
+
+#### `backgroundColor(Color value)`
+
+Sets card background color
+
+#### `borderRadius(BorderRadiusGeometryMix radius)`
+
+Sets container border radius
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets container margin
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `decoration(DecorationMix value)`
+
+Sets container decoration
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `animate(AnimationConfig value)`
+
+Configures implicit animation for style transitions.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, {Alignment alignment = .center})`
+
+Applies a matrix transformation to the component.
+
+#### `call({Key? key, Widget? child})`
+
+Creates a `RemixCard` widget with this style applied.
+

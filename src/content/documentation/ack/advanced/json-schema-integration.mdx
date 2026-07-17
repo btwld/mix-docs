@@ -1,5 +1,6 @@
 ---
 title: JSON Schema Integration
+description: Export Ack schemas as JSON Schema to document APIs, forms, and LLM tools
 ---
 
 # JSON Schema Integration
@@ -237,7 +238,7 @@ The nested nullable-union shape is intentional for generic Draft-7 output and ma
     to the lazy reference are runtime-only and are reported as schema-model
     warnings rather than emitted beside `$ref`.
 -   **Date/time range constraints:** Draft-7 has no standard `formatMinimum` or
-    `formatMaximum` keywords. ACK validates `.min()` and `.max()` at runtime and
+    `formatMaximum` keywords. Ack validates `.min()` and `.max()` at runtime and
     records schema-model warnings instead of rendering non-standard keywords.
 -   **List item nullability:** `Ack.list(...)` does not support nullable item
     schemas yet. Make the list itself nullable with `Ack.list(item).nullable()`

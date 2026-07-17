@@ -1,0 +1,258 @@
+/* ============================================================
+   CONCEPTA — Colors & Type Foundations
+   Source of truth for the Concepta brand design system.
+   Type voice: Hanken Grotesk (clean neo-grotesque, display + UI)
+   paired with JetBrains Mono for all structural labels / data —
+   a sharp, technical, Carbon-influenced pairing.
+   Import this once at the document root, then use the vars below.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap');
+
+/* ============================================================
+   JetBrains Mono — self-hosted brand monospace.
+   Used for --font-mono (code, labels, token readouts).
+   ============================================================ */
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/JetBrainsMono-Italic.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/JetBrainsMono-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: italic; font-weight: 500; font-display: swap; src: url('fonts/JetBrainsMono-MediumItalic.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/JetBrainsMono-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: italic; font-weight: 600; font-display: swap; src: url('fonts/JetBrainsMono-SemiBoldItalic.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/JetBrainsMono-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: italic; font-weight: 700; font-display: swap; src: url('fonts/JetBrainsMono-BoldItalic.woff2') format('woff2'); }
+
+:root {
+  color-scheme: light;
+
+  /* ----------------------------------------------------------
+     CORE PALETTE
+     ---------------------------------------------------------- */
+
+  /* Brand blue — the signature Concepta electric blue.
+     #0C31FF is the primary action / button color. */
+  --blue-50:   #EEF1FF;
+  --blue-100:  #DCE2FF;
+  --blue-200:  #B7C2FF;
+  --blue-400:  #2A50FF;
+  --blue-500:  #0C31FF;   /* PRIMARY — buttons, links, brand */
+  --blue-600:  #0021DD;
+  --blue-700:  #0923B9;
+  --blue-800:  #06175E;
+
+  /* Navy — deep backgrounds, dark surfaces */
+  --navy-900:  #050D3A;   /* primary dark surface */
+  --navy-950:  #02092D;   /* deepest background */
+  --navy-850:  #090E29;
+
+  /* Aqua / Mint — the green accent, tuned to match the blue's intensity.
+     400 (#00D29A) is the CORE green — same visual weight as --blue-500, so
+     the two read as a deliberate pair. 300 (#00EBBC) is the brighter mint
+     kept for highlights, surface glows and the accent-on-black hero use. */
+  --aqua-100:  #D2FEF6;   /* light aqua tint surface */
+  --aqua-200:  #ADFFF2;
+  --aqua-300:  #00EBBC;   /* bright mint — highlights, accent-on-black */
+  --aqua-400:  #00D29A;   /* ACCENT — core green, paired with --blue-500 */
+  --aqua-500:  #00B384;   /* press / deep green */
+
+  /* Data-viz cyans (charts, gradients) */
+  --cyan-400:  #04C3DB;
+  --sky-400:   #1BBAEC;
+  --sky-500:   #069AE5;
+
+  /* Neutrals */
+  --white:     #FFFFFF;
+  --paper:     #F5F6FF;   /* off-white page background (cool tint) */
+  --gray-100:  #E3E3E3;
+  --gray-200:  #D9D9D9;
+  --gray-300:  #BFBFBF;
+  --gray-500:  #737786;
+  --gray-700:  #333333;
+  --ink:       #0B0F1A;   /* near-black text */
+  --black:     #000000;
+
+  /* ----------------------------------------------------------
+     SEMANTIC ROLES (light surfaces)
+     ---------------------------------------------------------- */
+  --bg:            var(--paper);
+  --bg-elevated:   var(--white);
+  --surface-dark:  var(--navy-900);
+  --surface-aqua:  var(--aqua-100);
+
+  --fg1:           var(--ink);      /* primary text */
+  --fg2:           var(--gray-500); /* secondary text */
+  --fg3:           var(--gray-300); /* tertiary / disabled */
+  --fg-on-dark:    var(--white);
+  --fg-on-blue:    var(--white);
+
+  --primary:       var(--blue-500);
+  --primary-hover: var(--blue-600);
+  --primary-press: var(--blue-700);
+  --accent:        var(--aqua-400);
+  --accent-press:  var(--aqua-500);
+
+  --border:        var(--gray-300);
+  --border-strong: var(--ink);
+  --border-subtle: rgba(11,15,26,0.14);
+
+  /* Status — error/warning are ADDED (not in source file), tuned to palette */
+  --success:       #00B384;
+  --warning:       #FFB020;
+  --error:         #FF4D4D;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY
+     ---------------------------------------------------------- */
+  --font-sans: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Hanken Grotesk', sans-serif; /* display = Hanken Grotesk 800, tight tracking */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Type scale (rem, 16px base) */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.375rem;  /* 22px */
+  --text-2xl:  1.75rem;   /* 28px */
+  --text-3xl:  2.25rem;   /* 36px */
+  --text-4xl:  3rem;      /* 48px */
+  --text-5xl:  4rem;      /* 64px */
+  --text-6xl:  5.5rem;    /* 88px display */
+
+  --leading-tight: 1.05;
+  --leading-snug:  1.2;
+  --leading-normal:1.5;
+  --leading-relaxed:1.65;
+
+  --tracking-tight: -0.03em;  /* display headlines */
+  --tracking-snug:  -0.015em; /* headings */
+  --tracking-normal: 0em;
+  --tracking-wide:   0.08em;  /* eyebrows / labels, uppercase */
+
+  /* ----------------------------------------------------------
+     RADII / SPACING / ELEVATION
+     ---------------------------------------------------------- */
+  /* Flat corner system — Concepta runs square. Buttons, chips, cards,
+     inputs and surfaces all sit at 0. Only avatars, status dots and the
+     signature circular → arrow use the pill radius. */
+  --radius-xs:  0;
+  --radius-sm:  0;
+  --radius-md:  0;
+  --radius-lg:  0;
+  --radius-xl:  0;
+  --radius-pill: 999px;
+
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px;
+
+  /* Carbon-sharp: surfaces read via borders, not shadows. Cards are
+     FLAT; only true overlays (modals, menus) get a contained shadow. */
+  --shadow-sm:  none;
+  --shadow-md:  none;
+  --shadow-lg:  0 8px 28px rgba(5,13,58,0.16);
+  --shadow-blue: none;
+  --shadow-aqua: none;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* @kind other */
+  --dur:  180ms; /* @kind other */
+}
+
+/* ============================================================
+   DARK MODE  —  CARBON-SHARP BLACK (the priority dark theme)
+   Apply data-theme="dark" (or class .dark) to a root container.
+   Near-black surfaces with a faint cool tint, assertive borders,
+   brightened blue, and FLAT depth (no shadows/glows).
+   For the original navy treatment, use data-theme="navy".
+   ============================================================ */
+[data-theme="dark"], .dark {
+  color-scheme: dark;
+  --bg:            #060709;   /* page — near-black, faint cool tint */
+  --bg-elevated:   #0E0F13;   /* cards / panels — lighter than page */
+  --surface-dark:  #0A0B0E;   /* deepest (sidebar, wells) */
+  --surface-aqua:  rgba(0,235,188,0.10);
+
+  --fg1:           #F4F4F4;   /* primary text */
+  --fg2:           rgba(244,244,244,0.62);
+  --fg3:           rgba(244,244,244,0.40);
+  --fg-on-dark:    #FFFFFF;
+
+  --primary:       #3A5BFF;   /* brightened so it holds contrast on black */
+  --primary-hover: #5570FF;
+  --primary-press: #2A50FF;
+  --accent:        #00EBBC;   /* aqua pops hardest on black — hero accent */
+
+  --border:        rgba(255,255,255,0.18);  /* assertive, structural */
+  --border-strong: rgba(255,255,255,0.55);
+  --border-subtle: rgba(255,255,255,0.10);
+
+  --success:       #1FE0B8;
+  --warning:       #FFC04D;
+  --error:         #FF6B6B;
+
+  /* flat — depth comes from borders, not shadows */
+  --shadow-sm:  none;
+  --shadow-md:  none;
+  --shadow-lg:  0 16px 40px rgba(0,0,0,0.6);
+  --shadow-blue: none;
+  --shadow-aqua: none;
+}
+
+/* ── NAVY dark (original treatment, opt-in via data-theme="navy") ── */
+[data-theme="navy"] {
+  color-scheme: dark;
+  --bg:            #02092D;
+  --bg-elevated:   #0A1240;
+  --surface-dark:  #060C2E;
+  --surface-aqua:  rgba(0,235,188,0.10);
+
+  --fg1:           #EEF1FF;
+  --fg2:           rgba(238,241,255,0.60);
+  --fg3:           rgba(238,241,255,0.34);
+  --fg-on-dark:    #FFFFFF;
+
+  --primary:       #2A50FF;
+  --primary-hover: #4063FF;
+  --primary-press: #0C31FF;
+  --accent:        #00EBBC;
+
+  --border:        rgba(255,255,255,0.13);
+  --border-strong: rgba(255,255,255,0.45);
+  --border-subtle: rgba(255,255,255,0.07);
+
+  --success:       #1FE0B8;
+  --warning:       #FFC04D;
+  --error:         #FF6B6B;
+
+  --shadow-sm:  none;
+  --shadow-md:  none;
+  --shadow-lg:  0 18px 44px rgba(0,0,0,0.55);
+  --shadow-blue: none;
+  --shadow-aqua: none;
+}
+
+/* ============================================================
+   SEMANTIC TYPE CLASSES
+   ============================================================ */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-6xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg1);
+}
+.h1 { font-family: var(--font-display); font-weight: 800; font-size: var(--text-4xl);
+      line-height: var(--leading-snug); letter-spacing: var(--tracking-snug); color: var(--fg1); }
+.h2 { font-weight: 700; font-size: var(--text-3xl); line-height: var(--leading-snug);
+      letter-spacing: var(--tracking-snug); color: var(--fg1); }
+.h3 { font-weight: 700; font-size: var(--text-2xl); line-height: var(--leading-snug);
+      letter-spacing: var(--tracking-snug); color: var(--fg1); }
+.h4 { font-weight: 600; font-size: var(--text-xl); line-height: var(--leading-snug); color: var(--fg1); }
+.body-lg { font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--fg1); }
+.body    { font-weight: 400; font-size: var(--text-base); line-height: var(--leading-normal); color: var(--fg1); }
+.body-sm { font-weight: 400; font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--fg2); }
+.eyebrow { font-family: var(--font-mono); font-weight: 500; font-size: var(--text-xs); line-height: 1; letter-spacing: var(--tracking-wide);
+           text-transform: uppercase; color: var(--primary); }
+.label   { font-family: var(--font-mono); font-weight: 500; font-size: var(--text-xs); line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: var(--fg2); }
+.code    { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg1); }

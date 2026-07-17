@@ -4,9 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Button } from "./Button";
+import { CONCEPTA_GITHUB_URL } from "./constants";
 import { HeroBackground } from "./HeroBackground";
 import { HighlightedCode } from "./HighlightedCode";
 import Layout from "./Layout";
+import { ProductionGapCard } from "./reports/ProductionGapCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -32,7 +34,38 @@ const sectionReveal = {
 
 const PROOF_TICKER = ["20 years", "600+ projects shipped", "98% delivery satisfaction"];
 
-const TRUSTED_BY = ["Truist", "AdventHealth", "FEMA", "Red Lobster", "Anago"];
+const TRUSTED_BY = [
+  {
+    name: "Truist",
+    className: "trust-logo-truist",
+    src: "/assets/client-logos/truist.svg",
+  },
+  {
+    name: "AdventHealth",
+    className: "trust-logo-adventhealth",
+    src: "/assets/client-logos/adventhealth.svg",
+  },
+  {
+    name: "FEMA",
+    className: "trust-logo-fema",
+    src: "/assets/client-logos/fema.svg",
+  },
+  {
+    name: "Red Lobster",
+    className: "trust-logo-red-lobster",
+    src: "/assets/client-logos/red-lobster.png",
+  },
+  {
+    name: "Warner Music Group",
+    className: "trust-logo-warner-music-group",
+    src: "/assets/client-logos/warner-music-group.svg",
+  },
+  {
+    name: "Google",
+    className: "trust-logo-google",
+    src: "/assets/client-logos/google.svg",
+  },
+] as const;
 
 const TRUST_OUTCOMES = [
   "27% more loan applications at Truist",
@@ -60,9 +93,9 @@ const PILLARS = [
 
 /* ── Per-project window visuals ──────────────────────────────────────
    Each block echoes the visual signature of its product page: Mix shows
-   a style snippet, Remix its component catalog, Ack a validation result,
-   Stargate a governed workflow, Code Analysis a scorecard. Same chrome,
-   different content. */
+   a style snippet, Remix its component catalog, Naked UI its observable state,
+   Ack a validation result, FVM a pinned SDK, Stargate a governed workflow, and
+   Code Analysis a scorecard. Same chrome, different content. */
 
 const MIX_SNIPPET = `final cardStyle = BoxStyler()
     .color(Colors.blue)
@@ -103,6 +136,27 @@ function RemixVisual() {
   );
 }
 
+function NakedUiVisual() {
+  return (
+    <div className="pv-naked">
+      <span className="pv-naked-button">Save changes</span>
+      <div className="pv-naked-states">
+        <span className="is-active">hovered</span>
+        <span>focused</span>
+        <span>pressed</span>
+      </div>
+      <div className="pv-naked-contract">
+        <span>behavior</span>
+        <strong>semantics · keyboard · focus</strong>
+      </div>
+      <div className="pv-naked-contract is-presentation">
+        <span>presentation</span>
+        <strong>entirely yours</strong>
+      </div>
+    </div>
+  );
+}
+
 const ACK_SNIPPET = `final result = userSchema.safeParse({
   'name': 'Ada',
   'email': 'not-an-email',
@@ -115,6 +169,30 @@ function AckVisual() {
       <div className="pv-ack-error">
         <span className="pv-ack-path">#/email</span>
         <span>Value must be a valid email address.</span>
+      </div>
+    </div>
+  );
+}
+
+function FvmVisual() {
+  return (
+    <div className="pv-fvm">
+      <div className="pv-fvm-command">
+        <span className="pv-fvm-prompt">$</span>
+        <code>fvm use stable --pin</code>
+      </div>
+      <div className="pv-fvm-result">
+        <span className="pv-fvm-check">
+          <Check size={14} strokeWidth={2.4} />
+        </span>
+        <span>
+          <strong>Project configured</strong>
+          <small>Flutter stable is ready to use</small>
+        </span>
+      </div>
+      <div className="pv-fvm-file">
+        <code>.fvmrc</code>
+        <span>commit once · keep every environment in sync</span>
       </div>
     </div>
   );
@@ -184,9 +262,9 @@ type Project = {
   status: "Open source" | "Waitlist";
   /** Mono label shown in the window chrome, like a filename. */
   windowLabel: string;
+  /** Opens projects hosted outside this site in a new tab. */
+  external?: boolean;
   Visual: React.ComponentType;
-  /** Last-row card spans both columns with a side-by-side layout. */
-  wide?: boolean;
 };
 
 const PROJECTS: Project[] = [
@@ -205,12 +283,23 @@ const PROJECTS: Project[] = [
     name: "Remix",
     tagline: "Flutter components, headless by design.",
     description:
-      "20+ accessible components built on Mix — completely styleable, from primitives to a full theme, with zero override wars.",
+      "20+ accessible components built on Mix — completely styleable, from primitives to a full theme, with complete visual control.",
     href: "/remix",
     accent: "#00EB03",
     status: "Open source",
     windowLabel: "components",
     Visual: RemixVisual,
+  },
+  {
+    name: "Naked UI",
+    tagline: "Behavior-first Flutter primitives.",
+    description:
+      "Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state — without imposed styling.",
+    href: "/naked-ui",
+    accent: "#60A5FA",
+    status: "Open source",
+    windowLabel: "builder state",
+    Visual: NakedUiVisual,
   },
   {
     name: "Ack",
@@ -222,6 +311,18 @@ const PROJECTS: Project[] = [
     status: "Open source",
     windowLabel: "user_schema.dart",
     Visual: AckVisual,
+  },
+  {
+    name: "FVM",
+    tagline: "Simple Flutter version management.",
+    description:
+      "Pin Flutter SDKs per project, switch versions without reinstalling, and keep local development and CI on the same toolchain.",
+    href: "https://fvm.app",
+    accent: "#38BDF8",
+    status: "Open source",
+    windowLabel: "project setup",
+    external: true,
+    Visual: FvmVisual,
   },
   {
     name: "Stargate",
@@ -244,7 +345,6 @@ const PROJECTS: Project[] = [
     status: "Waitlist",
     windowLabel: "code-health.json",
     Visual: CodeAnalysisVisual,
-    wide: true,
   },
 ];
 
@@ -252,7 +352,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { Visual } = project;
   return (
     <motion.div
-      className={project.wide ? "md:col-span-2" : undefined}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -264,9 +363,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     >
       <Link
         href={project.href}
-        className={
-          "project-card group" + (project.wide ? " project-card-wide" : "")
-        }
+        target={project.external ? "_blank" : undefined}
+        rel={project.external ? "noopener noreferrer" : undefined}
+        className="project-card group"
         style={{ "--card-accent": project.accent } as React.CSSProperties}
       >
         <div className="project-card-copy">
@@ -394,14 +493,27 @@ export const ConceptaHome = () => {
           {/* Trust bar */}
           <motion.section className="trust-bar" {...sectionReveal}>
             <p className="trust-label">Trusted with critical systems at</p>
-            <p className="trust-names">
-              {TRUSTED_BY.map((name, i) => (
-                <span key={name}>
-                  {i > 0 && <span className="trust-sep"> · </span>}
-                  {name}
-                </span>
+            <div
+              className="trust-logos"
+              role="list"
+              aria-label="Selected Concepta clients"
+            >
+              {TRUSTED_BY.map((client) => (
+                <div
+                  className={`trust-logo-card ${client.className}`}
+                  role="listitem"
+                  key={client.name}
+                >
+                  <img
+                    className="trust-logo-image"
+                    src={client.src}
+                    alt={`${client.name} logo`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               ))}
-            </p>
+            </div>
             <p className="trust-outcomes">
               {TRUST_OUTCOMES.map((line, i) => (
                 <span key={line}>
@@ -440,6 +552,25 @@ export const ConceptaHome = () => {
                   <p className="pillar-body">{pillar.body}</p>
                 </div>
               ))}
+            </motion.div>
+          </section>
+
+          {/* Research — evidence behind the agency stance */}
+          <section id="research" className="section-gap">
+            <motion.div className="section-header" {...sectionReveal}>
+              <span className="mono-label">Concepta research</span>
+              <h2 className="section-title">
+                The evidence behind governed delivery.
+              </h2>
+              <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
+                Building is accelerating. The controls around review, release,
+                and production are not. Our latest report maps the gap — and
+                the operating model that closes it.
+              </p>
+            </motion.div>
+
+            <motion.div {...sectionReveal}>
+              <ProductionGapCard href="/reports" external={false} compact />
             </motion.div>
           </section>
 
@@ -497,7 +628,7 @@ export const ConceptaHome = () => {
             <p className="cta-handoff">
               Prefer the code? The open source lives on{" "}
               <a
-                href="https://github.com/btwld"
+                href={CONCEPTA_GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -599,24 +730,70 @@ export const ConceptaHome = () => {
           opacity: 0.7;
         }
 
-        .trust-names {
-          margin-top: 10px;
-          font-size: 1.125rem;
-          font-weight: 600;
-          letter-spacing: -0.01em;
-          color: #fff;
+        .trust-logos {
+          display: grid;
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          gap: 12px;
+          margin-top: 18px;
         }
 
-        .trust-sep {
-          color: var(--mix-text-muted);
-          font-weight: 400;
+        .trust-logo-card {
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 16px;
+          background: transparent;
+        }
+
+        .trust-logo-image {
+          display: block;
+          width: 100%;
+          height: 100%;
+          max-width: 132px;
+          max-height: 38px;
+          object-fit: contain;
+          filter: grayscale(1) brightness(0) invert(1);
+          opacity: 0.76;
+        }
+
+        .trust-logo-red-lobster .trust-logo-image {
+          max-height: 42px;
+        }
+
+        .trust-logo-warner-music-group .trust-logo-image {
+          max-width: 112px;
+          max-height: 44px;
+        }
+
+        .trust-logo-google .trust-logo-image {
+          max-width: 100px;
+          max-height: 34px;
         }
 
         .trust-outcomes {
-          margin-top: 10px;
+          margin-top: 18px;
           font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
           font-size: 12.5px;
           color: var(--mix-text-muted);
+        }
+
+        @media (max-width: 1023px) {
+          .trust-logos {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 639px) {
+          .trust-logos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+          }
+
+          .trust-logo-card {
+            height: 68px;
+            padding: 14px;
+          }
         }
 
         .mono-label {
@@ -694,20 +871,6 @@ export const ConceptaHome = () => {
           display: flex;
           flex-direction: column;
           flex-grow: 1;
-        }
-
-        /* Wide closer card: copy and window sit side by side on desktop */
-        @media (min-width: 768px) {
-          .project-card-wide {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-            align-items: stretch;
-          }
-
-          .project-card-wide .project-window {
-            margin-top: 0;
-          }
         }
 
         .project-name {
@@ -860,6 +1023,175 @@ export const ConceptaHome = () => {
           color: var(--card-accent);
           background: color-mix(in srgb, var(--card-accent) 8%, transparent);
           border-color: color-mix(in srgb, var(--card-accent) 25%, transparent);
+        }
+
+        /* Naked UI: behavior/presentation split */
+        .pv-naked {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 9px;
+        }
+
+        .pv-naked-button {
+          grid-column: 1 / -1;
+          justify-self: start;
+          border-radius: 9px;
+          padding: 9px 14px;
+          background: var(--card-accent);
+          color: #07111f;
+          font-size: 12px;
+          font-weight: 650;
+          box-shadow: 0 8px 22px
+            color-mix(in srgb, var(--card-accent) 24%, transparent);
+        }
+
+        .pv-naked-states {
+          grid-column: 1 / -1;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+
+        .pv-naked-states span {
+          border: 1px solid var(--mix-border-card);
+          border-radius: 999px;
+          padding: 3px 8px;
+          color: var(--mix-text-muted);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 10px;
+        }
+
+        .pv-naked-states .is-active {
+          border-color: color-mix(in srgb, var(--card-accent) 30%, transparent);
+          background: color-mix(in srgb, var(--card-accent) 9%, transparent);
+          color: var(--card-accent);
+        }
+
+        .pv-naked-contract {
+          min-width: 0;
+          border: 1px solid color-mix(in srgb, var(--card-accent) 22%, transparent);
+          border-radius: 9px;
+          padding: 9px 10px;
+          background: color-mix(in srgb, var(--card-accent) 6%, transparent);
+        }
+
+        .pv-naked-contract span,
+        .pv-naked-contract strong {
+          display: block;
+        }
+
+        .pv-naked-contract span {
+          color: var(--card-accent);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 9px;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .pv-naked-contract strong {
+          margin-top: 5px;
+          color: #fff;
+          font-size: 10px;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+
+        .pv-naked-contract.is-presentation {
+          border-color: var(--mix-border-card);
+          background: var(--mix-surface-bright);
+        }
+
+        .pv-naked-contract.is-presentation span {
+          color: var(--mix-text-muted);
+        }
+
+        /* FVM: project-scoped SDK setup */
+        .pv-fvm {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .pv-fvm-command,
+        .pv-fvm-result,
+        .pv-fvm-file {
+          border-radius: 9px;
+          border: 1px solid var(--mix-border-card);
+          background: var(--mix-surface-bright);
+        }
+
+        .pv-fvm-command {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          padding: 10px 12px;
+          font-size: 12px;
+        }
+
+        .pv-fvm-command code,
+        .pv-fvm-file code {
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+        }
+
+        .pv-fvm-prompt {
+          color: var(--card-accent);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-weight: 700;
+        }
+
+        .pv-fvm-result {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 12px;
+        }
+
+        .pv-fvm-check {
+          display: grid;
+          width: 24px;
+          height: 24px;
+          flex-shrink: 0;
+          place-items: center;
+          border-radius: 999px;
+          color: #07111f;
+          background: var(--card-accent);
+        }
+
+        .pv-fvm-result strong,
+        .pv-fvm-result small {
+          display: block;
+        }
+
+        .pv-fvm-result strong {
+          color: #fff;
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        .pv-fvm-result small {
+          margin-top: 2px;
+          color: var(--mix-text-muted);
+          font-size: 10.5px;
+        }
+
+        .pv-fvm-file {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 9px 12px;
+          color: var(--mix-text-muted);
+          font-size: 10px;
+        }
+
+        .pv-fvm-file code {
+          flex-shrink: 0;
+          color: var(--card-accent);
+          font-size: 10.5px;
+        }
+
+        .pv-fvm-file span {
+          text-align: right;
         }
 
         /* Stargate: mini workflow graph */

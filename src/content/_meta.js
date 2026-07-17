@@ -39,6 +39,11 @@ export default {
             typesetting: "article",
         }
     },
+    'naked-ui': {
+        title: 'Naked UI',
+        type: 'page',
+        display: 'hidden',
+    },
     ack: {
         title: 'Ack',
         type: 'page',

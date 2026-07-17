@@ -1,0 +1,405 @@
+/* Naked UI product layer on top of the shared landing-page foundations. */
+
+.nui-root {
+  --nui-blue: #60a5fa;
+  --nui-blue-strong: #2563eb;
+  --nui-ink: #08111f;
+}
+
+.nui-root :is(button, a, input):focus-visible {
+  outline: 2px solid var(--lp-accent);
+  outline-offset: 3px;
+}
+
+.nui-hero .lp-hero-title {
+  max-width: 64rem;
+}
+
+.nui-hero .lp-hero-sub {
+  max-width: 43rem;
+}
+
+.nui-window-wrap {
+  max-width: 68rem;
+}
+
+.nui-window-body {
+  min-height: 450px;
+}
+
+.nui-window-code {
+  min-width: 0;
+  max-height: 450px;
+  overflow: auto;
+  border-bottom: 1px solid var(--lp-border-card);
+}
+
+.nui-window-code pre,
+.nui-pattern-code pre {
+  white-space: pre;
+}
+
+.nui-stage {
+  min-height: 330px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(96, 165, 250, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 48%, rgba(96, 165, 250, 0.12), transparent 56%);
+  background-size: 30px 30px, 30px 30px, 100% 100%;
+}
+
+.nui-demo-slot {
+  width: 100%;
+}
+
+.nui-demo {
+  display: flex;
+  width: min(100%, 340px);
+  min-height: 240px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+}
+
+.nui-demo > p {
+  max-width: 280px;
+  color: var(--lp-text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.nui-state-readout {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--lp-border-card);
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: rgba(5, 4, 10, 0.72);
+  color: #cbd5e1;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 10px;
+}
+
+.nui-state-readout > span {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--lp-accent);
+  box-shadow: 0 0 10px var(--lp-accent);
+}
+
+.nui-demo-button {
+  min-height: 48px;
+  border: 1px solid rgba(147, 197, 253, 0.28);
+  border-radius: 12px;
+  padding: 0 22px;
+  background: var(--nui-blue-strong);
+  box-shadow: 0 13px 34px rgba(37, 99, 235, 0.3), inset 0 1px rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 14px;
+  font-weight: 650;
+  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms ease;
+}
+
+.nui-demo-button:hover {
+  transform: translateY(-1px);
+  background: #3b82f6;
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.38), inset 0 1px rgba(255, 255, 255, 0.24);
+}
+
+.nui-demo-button:active {
+  transform: translateY(1px) scale(0.98);
+  background: #1d4ed8;
+}
+
+.nui-demo-checkbox-row {
+  display: grid;
+  min-width: min(100%, 292px);
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 13px;
+  border: 1px solid var(--lp-border-card);
+  border-radius: 14px;
+  padding: 15px 17px;
+  background: rgba(13, 11, 20, 0.78);
+  color: white;
+  text-align: left;
+  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+}
+
+.nui-demo-checkbox-row:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(22, 20, 33, 0.9);
+}
+
+.nui-demo-checkbox-row:active {
+  transform: scale(0.99);
+}
+
+.nui-demo-checkbox {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border: 1px solid #64748b;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.02);
+  color: white;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+
+.nui-demo-checkbox-row[aria-checked="true"] .nui-demo-checkbox {
+  border-color: #60a5fa;
+  background: #2563eb;
+}
+
+.nui-demo-checkbox-row strong,
+.nui-demo-checkbox-row small {
+  display: block;
+}
+
+.nui-demo-checkbox-row strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nui-demo-checkbox-row small {
+  margin-top: 3px;
+  color: var(--lp-text-muted);
+  font-size: 11px;
+}
+
+.nui-slider-demo {
+  align-items: stretch;
+  width: min(100%, 310px);
+}
+
+.nui-slider-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #dbeafe;
+  font-size: 13px;
+}
+
+.nui-slider-heading strong {
+  color: white;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.nui-slider-demo input[type="range"] {
+  width: 100%;
+  height: 6px;
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--lp-accent) 0 var(--nui-slider-value),
+    rgba(255, 255, 255, 0.12) var(--nui-slider-value) 100%
+  );
+  cursor: pointer;
+}
+
+.nui-slider-demo input[type="range"]::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  border: 3px solid #08111f;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 0 2px var(--lp-accent), 0 5px 16px rgba(0, 0, 0, 0.4);
+}
+
+.nui-slider-demo input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border: 3px solid #08111f;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 0 2px var(--lp-accent), 0 5px 16px rgba(0, 0, 0, 0.4);
+}
+
+.nui-slider-demo > p {
+  align-self: center;
+}
+
+.nui-catalog {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.nui-catalog-card {
+  min-width: 0;
+  border: 1px solid var(--lp-border-card);
+  border-radius: 18px;
+  padding: 25px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.006));
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.nui-catalog-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--lp-accent) 34%, transparent);
+}
+
+.nui-catalog-card h3 {
+  color: white;
+  font-size: 1.08rem;
+  font-weight: 620;
+}
+
+.nui-catalog-card > p {
+  min-height: 46px;
+  margin-top: 7px;
+  color: var(--lp-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.nui-component-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 21px;
+}
+
+.nui-component-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--lp-border-card);
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(13, 11, 20, 0.68);
+  color: #dbeafe;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 11px;
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+
+.nui-component-links a:hover {
+  border-color: rgba(96, 165, 250, 0.36);
+  background: var(--lp-accent-low);
+  color: white;
+}
+
+.nui-component-links a span {
+  color: var(--lp-accent);
+}
+
+.nui-pattern-code {
+  max-height: 520px;
+  overflow: auto;
+}
+
+.nui-install {
+  display: grid;
+  width: min(100%, 500px);
+  min-height: 54px;
+  margin: 30px auto 0;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--lp-border-card);
+  border-radius: 13px;
+  padding: 6px 7px 6px 17px;
+  background: rgba(5, 4, 10, 0.72);
+  text-align: left;
+}
+
+.nui-install > span {
+  color: var(--lp-accent);
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+.nui-install code {
+  overflow: hidden;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nui-install button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--lp-border-card);
+  border-radius: 9px;
+  padding: 0 12px;
+  background: var(--lp-surface-bright);
+  color: #dbeafe;
+  font-size: 12px;
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+
+.nui-install button:hover {
+  border-color: rgba(96, 165, 250, 0.35);
+  background: rgba(96, 165, 250, 0.09);
+  color: white;
+}
+
+@media (min-width: 720px) {
+  .nui-window-body {
+    grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
+  }
+
+  .nui-window-code {
+    border-right: 1px solid var(--lp-border-card);
+    border-bottom: 0;
+  }
+
+  .nui-catalog {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .nui-catalog-card {
+    grid-column: span 2;
+  }
+
+  .nui-catalog-card-1,
+  .nui-catalog-card-2 {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 719px) {
+  .nui-window-body {
+    min-height: 0;
+  }
+
+  .nui-window-code {
+    max-height: 350px;
+  }
+
+  .nui-stage {
+    min-height: 350px;
+  }
+
+  .nui-install {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .nui-install button span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nui-demo-button,
+  .nui-demo-checkbox-row,
+  .nui-demo-checkbox,
+  .nui-catalog-card {
+    transition: none;
+  }
+}

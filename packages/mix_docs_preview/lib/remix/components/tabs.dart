@@ -47,7 +47,7 @@ class _TabsPreviewState extends State<TabsPreview> {
           mainAxisSize: .max,
           crossAxisAlignment: .stretch,
           children: [
-            FortalTabBar(
+            const FortalTabBar(
               child: Row(
                 mainAxisSize: .max,
                 children: [

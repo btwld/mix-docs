@@ -13,6 +13,13 @@ import {
     X,
 } from 'lucide-react'
 import clsx from 'clsx'
+import {
+    ACK_GITHUB_URL,
+    CONCEPTA_GITHUB_URL,
+    MIX_GITHUB_URL,
+    NAKED_UI_GITHUB_URL,
+    REMIX_GITHUB_URL,
+} from './constants'
 
 function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     return (
@@ -22,13 +29,16 @@ function DiscordIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     )
 }
 
-type ProductId = 'concepta' | 'mix' | 'remix' | 'ack' | 'stargate' | 'code-analysis'
+type ProductId = 'concepta' | 'mix' | 'remix' | 'naked-ui' | 'ack' | 'stargate' | 'code-analysis'
 
 function getActiveProduct(pathname: string | null): ProductId {
     if (!pathname) return 'concepta'
     if (pathname === '/') return 'concepta'
+    if (pathname === '/reports' || pathname.startsWith('/reports/')) return 'concepta'
+    if (pathname === '/fluttercon2026' || pathname.startsWith('/fluttercon2026/')) return 'concepta'
     if (pathname.startsWith('/documentation/remix')) return 'remix'
     if (pathname === '/remix' || pathname.startsWith('/remix/')) return 'remix'
+    if (pathname === '/naked-ui' || pathname.startsWith('/naked-ui/')) return 'naked-ui'
     if (pathname.startsWith('/documentation/ack')) return 'ack'
     if (pathname === '/ack' || pathname.startsWith('/ack/')) return 'ack'
     if (pathname === '/stargate' || pathname.startsWith('/stargate/')) return 'stargate'
@@ -47,20 +57,18 @@ const VERSION_ITEMS = [
     { label: 'Mix v1', href: 'https://mix-docs-gosljkd74-fluttertools.vercel.app/' },
 ]
 
-const CONCEPTA_GITHUB_URL = 'https://github.com/btwld'
-const MIX_GITHUB_URL = 'https://github.com/btwld/mix'
-const REMIX_GITHUB_URL = 'https://github.com/btwld/remix'
-const ACK_GITHUB_URL = 'https://github.com/btwld/ack'
 const TWITTER_URL = 'https://twitter.com/leoafarias'
 const DISCORD_URL = 'https://discord.com/invite/Ycn6GV3m2k'
 const MIX_DOCS_URL = '/documentation/mix/overview/introduction'
 const REMIX_DOCS_URL = '/documentation/remix'
+const NAKED_UI_DOCS_URL = 'https://docs.page/btwld/naked_ui'
 const ACK_DOCS_URL = '/documentation/ack/getting-started/overview'
 
 // Stargate and Code Analysis have no public docs or repos yet.
 function getDocsHref(product: ProductId): string | null {
     if (product === 'mix') return MIX_DOCS_URL
     if (product === 'remix') return REMIX_DOCS_URL
+    if (product === 'naked-ui') return NAKED_UI_DOCS_URL
     if (product === 'ack') return ACK_DOCS_URL
     return null
 }
@@ -69,6 +77,7 @@ function getGithubHref(product: ProductId): string | null {
     if (product === 'concepta') return CONCEPTA_GITHUB_URL
     if (product === 'mix') return MIX_GITHUB_URL
     if (product === 'remix') return REMIX_GITHUB_URL
+    if (product === 'naked-ui') return NAKED_UI_GITHUB_URL
     if (product === 'ack') return ACK_GITHUB_URL
     return null
 }
@@ -101,6 +110,13 @@ const PRODUCTS: Product[] = [
         label: 'Remix',
         href: '/remix',
         logo: '/assets/logo_remix_sidebar.png',
+    },
+    {
+        id: 'naked-ui' as const,
+        label: 'Naked UI',
+        href: '/naked-ui',
+        logo: '/assets/logo_naked_ui_sidebar.svg',
+        showLabel: true,
     },
     {
         id: 'ack' as const,
@@ -190,6 +206,7 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
     ],
     remix: [
         { label: 'Getting Started', href: '/documentation/remix' },
+        { label: 'Styler API', href: '/documentation/remix/styler-api' },
         { label: 'Fortal', href: '/documentation/remix/fortal' },
         {
             label: 'Components',
@@ -201,9 +218,11 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
                 { label: 'Callout', href: '/documentation/remix/components/callout' },
                 { label: 'Card', href: '/documentation/remix/components/card' },
                 { label: 'Checkbox', href: '/documentation/remix/components/checkbox' },
+                { label: 'Dialog', href: '/documentation/remix/components/dialog' },
                 { label: 'Divider', href: '/documentation/remix/components/divider' },
                 { label: 'IconButton', href: '/documentation/remix/components/icon_button' },
                 { label: 'Menu', href: '/documentation/remix/components/menu' },
+                { label: 'Popover', href: '/documentation/remix/components/popover' },
                 { label: 'Progress', href: '/documentation/remix/components/progress' },
                 { label: 'Radio', href: '/documentation/remix/components/radio' },
                 { label: 'Select', href: '/documentation/remix/components/select' },
@@ -212,6 +231,8 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
                 { label: 'Switch', href: '/documentation/remix/components/switch' },
                 { label: 'Tabs', href: '/documentation/remix/components/tabs' },
                 { label: 'TextField', href: '/documentation/remix/components/textfield' },
+                { label: 'Toggle', href: '/documentation/remix/components/toggle' },
+                { label: 'Toggle Group', href: '/documentation/remix/components/toggle_group' },
                 { label: 'Tooltip', href: '/documentation/remix/components/tooltip' },
             ],
         },
@@ -521,13 +542,22 @@ function MobileDrawer({
                             Docs
                         </Link>
                     ) : activeProduct === 'concepta' ? (
-                        <Link
-                            href="/#projects"
-                            onClick={onClose}
-                            className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
-                        >
-                            Projects
-                        </Link>
+                        <>
+                            <Link
+                                href="/#projects"
+                                onClick={onClose}
+                                className="px-3 py-2 text-white/90 hover:bg-white/5 rounded mt-2"
+                            >
+                                Projects
+                            </Link>
+                            <Link
+                                href="/reports"
+                                onClick={onClose}
+                                className="px-3 py-2 text-white/90 hover:bg-white/5 rounded"
+                            >
+                                Reports
+                            </Link>
+                        </>
                     ) : (
                         <Link
                             href="#waitlist"
@@ -593,6 +623,7 @@ export default function FloatingNavbar() {
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false)
     const isDocsActive = pathname?.startsWith('/documentation') ?? false
+    const isReportsActive = pathname?.startsWith('/reports') ?? false
     const activeProduct = getActiveProduct(pathname)
     const homeHref =
         PRODUCTS.find((p) => p.id === activeProduct)?.href ?? '/'
@@ -641,6 +672,22 @@ export default function FloatingNavbar() {
                 <span className="h-4 w-px bg-white/10" />
                 <ProductMenu />
                 <span className="h-4 w-px bg-white/10" />
+                {activeProduct === 'concepta' && (
+                    <>
+                        <Link
+                            href="/reports"
+                            className={clsx(
+                                'px-3 py-1.5 text-sm transition-colors',
+                                isReportsActive
+                                    ? 'text-[color:var(--mix-accent)]'
+                                    : 'text-white/80 hover:text-white',
+                            )}
+                        >
+                            Reports
+                        </Link>
+                        <span className="h-4 w-px bg-white/10" />
+                    </>
+                )}
                 {activeProduct !== 'concepta' && (
                     <>
                         <Link

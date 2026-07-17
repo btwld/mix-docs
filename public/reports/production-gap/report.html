@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/concepta-design-system-bdff11cd-f579-4d0b-bcf7-0ff8bb87ffb2/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/concepta-design-system-bdff11cd-f579-4d0b-bcf7-0ff8bb87ffb2/styles.css">
+  <script src="_ds/concepta-design-system-bdff11cd-f579-4d0b-bcf7-0ff8bb87ffb2/_ds_bundle.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap');
+    :root { color-scheme: light only; }
+    html, body { color-scheme: light only; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F9; }
+    a { color: #0C31FF; text-decoration: none; }
+    a:hover { color: #0021DD; text-decoration: underline; }
+    ::selection { background: #00D29A; color: #050D3A; }
+
+    /* Editorial feature layer: continuous reading rhythm, not slide frames. */
+    :root {
+      --feature-paper: #F7F6F9;
+      --feature-line: rgba(5,13,58,.16);
+      --feature-coral: #FF7657;
+      --type-editorial: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --type-reading: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --type-utility: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      --feature-serif: var(--type-editorial);
+      --font-display: var(--type-editorial);
+      --font-sans: var(--type-reading);
+      --font-mono: var(--type-utility);
+      --measure-body: 68ch;
+      --measure-deck: 52ch;
+      --measure-caption: 38ch;
+    }
+    body { background: var(--feature-paper); }
+    .sc-host > div { background: var(--feature-paper) !important; }
+    header[data-screen-label="Masthead"] { backdrop-filter: blur(16px); }
+    header[data-screen-label="Masthead"] > div:first-child { min-height: 34px; }
+    header[data-screen-label="Masthead"] .label { letter-spacing: .06em; }
+
+    section[data-screen-label] { position: relative; scroll-margin-top: 76px; }
+    section[data-screen-label]:not([data-screen-label="Hero"]):not([data-screen-label="04 Where speed is overstated"]):not([data-screen-label="10 How Concepta helps"]) {
+      background: transparent;
+    }
+    section[data-screen-label]:not([data-screen-label="Hero"]) > div { position: relative; z-index: 1; }
+    section[data-screen-label] h2 {
+      font-family: var(--feature-serif) !important;
+      font-weight: 500 !important;
+      letter-spacing: -.035em !important;
+      line-height: 1 !important;
+      font-size: clamp(3rem, 4.8vw, 4.65rem) !important;
+      max-width: 16.5ch !important;
+      text-wrap: balance;
+    }
+    section[data-screen-label] .body-lg { font-size: 1.075rem !important; line-height: 1.72; letter-spacing: -.006em; }
+    section[data-screen-label] .body { line-height: 1.62; }
+    section[data-screen-label] .body-sm { line-height: 1.58; }
+    section[data-screen-label] .eyebrow { font-size: .69rem; letter-spacing: .105em; line-height: 1.35; }
+    section[data-screen-label] .label { font-size: .68rem; letter-spacing: .045em; line-height: 1.45; }
+    section[data-screen-label] h3,
+    section[data-screen-label] .h3,
+    section[data-screen-label] .h4 { font-family: var(--font-sans); letter-spacing: -.02em; }
+    section[data-screen-label] figure,
+    section[data-screen-label] blockquote { box-shadow: none; }
+
+    .feature-hero { min-height: min(860px, calc(100vh - 52px)); display: grid; align-items: stretch; }
+    .feature-hero__grid {
+      max-width: none !important;
+      padding: 0 !important;
+      display: grid !important;
+      grid-template-columns: minmax(320px, .86fr) minmax(520px, 1.14fr) !important;
+      gap: 0 !important;
+      align-items: stretch !important;
+    }
+    .feature-hero__copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(72px, 9vw, 140px) clamp(32px, 6vw, 96px);
+      position: relative;
+      z-index: 2;
+    }
+    .feature-hero__copy h1 {
+      font-family: var(--feature-serif) !important;
+      font-weight: 500 !important;
+      font-size: clamp(4.5rem, 8.4vw, 8rem) !important;
+      line-height: .82 !important;
+      letter-spacing: -.055em !important;
+      max-width: 7ch;
+    }
+    .feature-hero__copy h1 em { color: var(--aqua-300); font-weight: 400; }
+    .feature-hero__copy > p { font-size: clamp(1.08rem, 1.45vw, 1.3rem) !important; line-height: 1.48 !important; max-width: 31ch !important; }
+    .feature-hero__art { margin: 0; min-height: 640px; position: relative; overflow: hidden; }
+    .feature-hero__art img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 50%; display: block; }
+    .feature-hero__art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--navy-950), transparent 20%); pointer-events: none; }
+    .feature-hero__caption {
+      position: absolute; right: 24px; bottom: 20px; max-width: 28ch; color: rgba(255,255,255,.72);
+      font: 500 .66rem/1.45 var(--font-mono); letter-spacing: .06em; text-transform: uppercase;
+      padding: 10px 12px; background: rgba(2,9,45,.74); backdrop-filter: blur(10px); z-index: 2;
+    }
+    .feature-hero__meta {
+      position: relative; left: auto; right: auto; bottom: auto; z-index: 3; max-width: none !important;
+      margin: 0 !important; padding: 22px clamp(32px, 6vw, 96px) 34px !important;
+      background: rgba(2,9,45,.96); border-top: 1px solid rgba(255,255,255,.14);
+    }
+    .feature-hero__meta > div {
+      max-width: 1120px;
+      margin: 0 auto;
+      border-top: 0 !important;
+      padding-top: 0 !important;
+      align-items: start;
+    }
+
+    /* On cinema-width displays, pull the headline toward the image seam. */
+    @media (min-width: 1600px) {
+      .feature-hero__copy {
+        padding-left: clamp(210px, 12.5vw, 280px);
+        padding-right: clamp(32px, 2.5vw, 52px);
+      }
+    }
+
+    .editorial-figure__image { display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; margin-top:22px; }
+    .editorial-figure__note {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:0; background:transparent;
+      border-top:1px solid var(--feature-line); border-bottom:1px solid var(--feature-line);
+      font:600 .66rem/1.45 var(--font-mono); letter-spacing:.045em; text-transform:uppercase;
+    }
+    .editorial-figure__note span { background:transparent; padding:14px 16px; color:var(--fg2); }
+    .editorial-figure__note span + span { border-left:1px solid var(--feature-line); }
+    .editorial-figure__note b { display:block; margin-bottom:3px; color:var(--fg1); }
+
+    .production-spread { max-width: 1280px !important; }
+    .production-spread--steps { margin-bottom: 0 !important; }
+    .production-spread--steps > div { border-bottom: 0 !important; padding-bottom: 28px !important; }
+    .production-spread--image { margin-top: 0 !important; }
+    .production-spread--image > div { background: var(--feature-paper) !important; }
+    .production-spread--image .editorial-figure__image {
+      aspect-ratio: 2.3 / 1; object-fit: cover; object-position: center; margin-top: 18px;
+      background: var(--feature-paper);
+    }
+    .delivery-phases { display: grid; grid-template-columns: 1.15fr .7fr 1.15fr 1.45fr; gap: 0; background: transparent; border-top: 1px solid var(--feature-line); border-bottom: 1px solid var(--feature-line); }
+    .delivery-phase { background: transparent; padding: 17px 18px 19px; min-width: 0; position: relative; }
+    .delivery-phase + .delivery-phase { border-left: 1px solid var(--feature-line); }
+    .delivery-phase + .delivery-phase::before {
+      content: '→'; position: absolute; left: -9px; top: 50%; transform: translateY(-50%); z-index: 2;
+      display: grid; place-items: center; width: 18px; height: 18px; background: var(--feature-paper); color: var(--fg2);
+      font: 600 .7rem/1 var(--font-mono);
+    }
+    .delivery-phase__label { display: block; margin-bottom: 13px; color: var(--fg2); font: 600 .64rem/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .delivery-phase__steps { display: flex; flex-wrap: wrap; gap: 7px; }
+    .delivery-step {
+      display: inline-flex; align-items: center; min-height: 29px; padding: 5px 8px; border: 1px solid rgba(5,13,58,.28);
+      background: transparent; color: var(--ink); font: 500 .68rem/1.25 var(--font-mono); letter-spacing: -.01em;
+    }
+    .delivery-step--accelerated { background: var(--blue-500); border-color: var(--blue-500); color: #fff; font-weight: 700; }
+    .delivery-step--constraint { background: var(--navy-900); border-color: var(--navy-900); color: #fff; }
+
+    /* Cinematic Chapters: spacious editorial pacing and full-width story stages. */
+    .chapter { padding-top: clamp(96px, 7vw, 124px) !important; overflow: clip; }
+    .chapter > div:first-of-type { max-width: 1240px !important; }
+    .chapter > div:first-of-type > div { border-top-width: 1px !important; padding-top: 24px !important; }
+    section[data-screen-label].chapter h2 {
+      margin-bottom: clamp(30px,3.2vw,52px) !important;
+    }
+    .chapter > div:nth-of-type(2) {
+      max-width: 1240px !important; display: grid; grid-template-columns: minmax(0,7fr) minmax(320px,5fr);
+      column-gap: clamp(44px,7vw,110px); align-items: start;
+    }
+    .chapter > div:nth-of-type(2) > p { grid-column: 2; }
+    .chapter figure { max-width: 1280px !important; margin-top: clamp(48px,5vw,76px) !important; }
+    .chapter figure > div { box-shadow: none !important; }
+    .chapter--light figure > div { background: transparent !important; border-color: rgba(5,13,58,.16) !important; }
+    .chapter--light figure figcaption { padding-left: 0; padding-right: 0; }
+    .chapter--light aside { background: transparent !important; }
+
+    .chapter--adoption figure > div { border-left: 0 !important; border-right: 0 !important; padding: 34px 0 44px !important; }
+
+    .chapter--gap .production-spread { max-width: 1380px !important; padding-left: 0 !important; padding-right: 0 !important; }
+    .chapter--gap .production-spread--steps > div { border-left: 0 !important; border-right: 0 !important; }
+    .chapter--gap .production-spread--image > div { border-left: 0 !important; border-right: 0 !important; }
+    .chapter--gap .editorial-figure__image { width: 100vw; max-width: none; margin-left: 50%; transform: translateX(-50%); }
+    .chapter--gap .production-spread--image .editorial-figure__image {
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 94%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 94%, transparent 100%);
+    }
+
+    .chapter--causal figure > div { border: 0 !important; background: transparent !important; gap: clamp(48px,8vw,120px) !important; }
+    .chapter--causal figure > div > div { padding: 12px 0 42px !important; border-top: 1px solid var(--ink); background: transparent !important; }
+    .chapter--causal figure > div > div > div:nth-child(2) { flex-wrap: wrap; row-gap: 8px !important; }
+    .chapter--causal figure > div > div > div:nth-child(2) > .body-sm { flex: 1 1 13rem; min-width: 0; }
+
+    .chapter--review figure > div { border-left: 0 !important; border-right: 0 !important; padding: 38px 0 46px !important; }
+    .chapter--review figure > div > div:first-of-type { background: transparent !important; border: 0 !important; gap: clamp(22px,4vw,60px) !important; }
+    .chapter--review figure > div > div:first-of-type > div { background: transparent !important; padding: 24px 0 !important; border-top: 1px solid var(--ink); }
+    .chapter--review figure > div > div:first-of-type > div > div:first-child { font-size: clamp(3.2rem,5vw,5.2rem) !important; letter-spacing: -.05em; }
+
+    .chapter--risk figure > div { border-left: 0 !important; border-right: 0 !important; gap: clamp(42px,6vw,100px) !important; background: transparent !important; }
+    .chapter--risk figure > div > div { background: transparent !important; padding-left: 0 !important; padding-right: 0 !important; }
+    .chapter--risk figure > div > div:last-child { border-top: 1px solid var(--feature-coral); }
+    .chapter--risk figure > div > div:last-child > div > div:first-child { font-size: clamp(3.4rem,5vw,5rem) !important; }
+
+    .chapter--playbook > div:nth-of-type(2) { grid-template-columns: minmax(0,4fr) minmax(420px,7fr); }
+    .chapter--playbook > div:nth-of-type(2) > * { grid-column: 2; }
+    .chapter--playbook > div:nth-of-type(2) > div > div { padding-top: 34px !important; padding-bottom: 34px !important; }
+    .chapter--playbook > div:nth-of-type(2) [style*="font-size:2.2rem"] { font-size: 3rem !important; }
+
+    .chapter--metrics > div:nth-of-type(2) > div { grid-column: 1 / -1; margin-top: 54px; grid-template-columns: repeat(4,1fr) !important; gap: 0 !important; background: transparent !important; border: 0 !important; }
+    .chapter--metrics > div:nth-of-type(2) > div > div { padding: 30px 26px !important; background: transparent !important; border-top: 1px solid var(--ink); min-height: 116px; }
+
+    .chapter--close { padding-top: clamp(96px,7vw,124px) !important; }
+    .chapter--reversal,
+    .chapter--close { margin-top: 0 !important; }
+    .chapter--close > div:nth-of-type(3) { max-width: 1240px !important; }
+    .chapter--close > div:nth-of-type(3) > div { background: transparent !important; border-left: 0 !important; border-right: 0 !important; }
+    .chapter--close > div:nth-of-type(3) > div > div { background: transparent !important; padding: 34px 34px 48px !important; border-top: 1px solid rgba(255,255,255,.24); }
+
+    .cinematic-stage {
+      position:relative; min-height:min(920px,88vw); margin-top:30px; overflow:hidden; isolation:isolate;
+      background:var(--navy-950);
+    }
+    .cinematic-stage__art { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; object-position:center; }
+    .chapter--reversal > figure { display: none; }
+
+    .perception-stage { position: relative; min-height: clamp(520px,60vw,760px); width: 100%; margin-top: clamp(60px,8vw,110px); }
+    .perception-stage__art {
+      width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; object-position: center;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+    }
+    .perception-stage__numbers { position: relative; z-index: 2; max-width: 1180px; min-height: inherit; margin: 0 auto; padding: clamp(50px,7vw,100px) 28px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 30%; }
+    .perception-stage__number { font: 700 clamp(4rem,8vw,8rem)/.86 var(--font-mono); letter-spacing: -.07em; color: var(--blue-500); }
+    .perception-stage__measure:last-child { text-align: right; }
+    .perception-stage__measure:last-child .perception-stage__number { color: var(--feature-coral); }
+    .perception-stage__measure .label { display: block; margin-top: 12px; }
+
+    @media (min-width: 1181px) {
+      .chapter > div:first-of-type,
+      .chapter > div:nth-of-type(2) { padding-left: 86px !important; padding-right: 56px !important; }
+    }
+
+    @media (max-width: 900px) {
+      .chapter { padding-top: 112px !important; }
+      .chapter > div:nth-of-type(2), .chapter--playbook > div:nth-of-type(2) { grid-template-columns: 1fr; }
+      .chapter > div:nth-of-type(2) > *, .chapter--playbook > div:nth-of-type(2) > * { grid-column: 1; }
+      .chapter--metrics > div:nth-of-type(2) > div { grid-template-columns: repeat(2,1fr) !important; }
+    }
+
+    @media (max-width: 620px) {
+      .chapter { padding-top: 92px !important; }
+      .chapter > div:nth-of-type(2) { padding-left: 22px !important; padding-right: 22px !important; }
+      .chapter figure { margin-top: 58px !important; padding-left: 22px !important; padding-right: 22px !important; }
+      .chapter--gap .editorial-figure__image { width: 145vw; }
+      .chapter--metrics > div:nth-of-type(2) > div { grid-template-columns: 1fr !important; }
+      .perception-stage { min-height: 680px; }
+      .perception-stage__art { object-position: center; }
+      .perception-stage__numbers { grid-template-columns: 1fr; align-content: space-between; gap: 0; }
+      .perception-stage__measure:last-child { text-align: right; }
+    }
+
+    /* Desktop chapter openings: headline, introduction, and evidence share one frame. */
+    @media (min-width: 901px) {
+      .chapter {
+        display: grid;
+        grid-template-columns: minmax(72px,1fr) minmax(0,720px) minmax(320px,480px) minmax(36px,1fr);
+        column-gap: clamp(36px,4vw,64px);
+      }
+      .chapter > * { grid-column: 2 / 4; min-width: 0; }
+      .chapter > div:first-of-type {
+        grid-column: 2; grid-row: 1; align-self: start;
+        width: auto !important; max-width: none !important; margin: 0 !important; padding: 0 !important;
+      }
+      .chapter > div:first-of-type > div { height: 100%; }
+      .chapter > div:first-of-type h2 { margin-bottom: 0 !important; }
+      .chapter > div:nth-of-type(2) {
+        grid-column: 3; grid-row: 1; align-self: end;
+        width: auto !important; max-width: none !important; margin: 0 !important; padding: 58px 0 0 !important;
+        display: block;
+      }
+      .chapter > figure { grid-column: 2 / 4; width: 100%; }
+      .chapter > .cinematic-stage,
+      .chapter > .perception-stage { grid-column: 1 / -1; width: 100%; }
+
+      .chapter--playbook > div:nth-of-type(2),
+      .chapter--metrics > div:nth-of-type(2),
+      .chapter--adoption > div:nth-of-type(2),
+      .chapter--close > div:nth-of-type(2) { display: contents !important; }
+      .chapter--playbook > div:nth-of-type(2) > p:first-child,
+      .chapter--metrics > div:nth-of-type(2) > p:first-child,
+      .chapter--adoption > div:nth-of-type(2) > p:first-child,
+      .chapter--close > div:nth-of-type(2) > p:first-child {
+        grid-column: 3; grid-row: 1; align-self: end; margin: 0 !important; padding: 58px 0 0 !important;
+      }
+      .chapter--adoption > div:nth-of-type(2) > p:not(:first-child),
+      .chapter--close > div:nth-of-type(2) > p:not(:first-child) {
+        grid-column: 2 / 4; grid-row: 2; justify-self: center;
+        width: min(100%,760px); margin: 48px 0 0 !important; padding: 0 !important;
+      }
+      .chapter--playbook > div:nth-of-type(2) > div,
+      .chapter--metrics > div:nth-of-type(2) > div {
+        grid-column: 2 / 4 !important; grid-row: 2; width: 100%; margin-top: 64px !important;
+      }
+      .chapter--playbook > div:nth-of-type(2) > p:last-child {
+        grid-column: 2 / 4 !important; grid-row: 3; width: auto; margin-top: 36px !important;
+      }
+    }
+
+    @media (min-width: 901px) and (max-width: 1180px) {
+      .chapter { grid-template-columns: 24px minmax(0,1.45fr) minmax(320px,1fr) 24px; }
+    }
+
+
+    .story-rail {
+      position: fixed; z-index: 42; left: 18px; top: 50%; transform: translateY(-42%);
+      display: flex; flex-direction: column; gap: 5px; padding: 10px 8px;
+      background: rgba(247,246,249,.9); border: 1px solid rgba(5,13,58,.12); backdrop-filter: blur(14px);
+    }
+    .story-rail button {
+      width: 27px; height: 27px; padding: 0; border: 0; background: transparent; color: #737786;
+      cursor: pointer; transition: color .2s ease, background .2s ease, transform .2s ease;
+    }
+    .story-rail button:hover, .story-rail button:focus-visible { color: var(--blue-500); background: var(--blue-50); outline: none; transform: translateX(2px); }
+    .story-rail button[aria-current="true"] { background: var(--navy-900); color: var(--aqua-300); }
+    .story-rail::before, .story-rail::after { content: ''; position: absolute; left: 50%; width: 1px; height: 28px; background: rgba(5,13,58,.2); }
+    .story-rail::before { bottom: 100%; } .story-rail::after { top: 100%; }
+
+    .task-lab { margin: 112px auto 8px; max-width: 1060px; padding: 0 28px; }
+    .task-lab__shell { background: var(--navy-950); color: white; padding: clamp(30px, 5vw, 64px); position: relative; overflow: hidden; }
+    .task-lab__shell::before { content: 'TEST THE CLAIM'; position: absolute; right: -12px; top: 14px; color: rgba(255,255,255,.045); font: 800 clamp(3rem,8vw,7rem)/1 var(--font-sans); letter-spacing: -.06em; white-space: nowrap; }
+    .task-lab h3 { margin: 10px 0 18px; max-width: 12ch; }
+    .task-lab__choices { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,.18); margin: 34px 0 0; border: 1px solid rgba(255,255,255,.18); }
+    .task-lab__choice { text-align: left; border: 0; padding: 18px; background: var(--navy-900); color: rgba(255,255,255,.7); cursor: pointer; text-transform: uppercase; }
+    .task-lab__choice:hover, .task-lab__choice:focus-visible { background: #0a174f; color: white; outline: 2px solid var(--aqua-300); outline-offset: -2px; }
+    .task-lab__choice[aria-pressed="true"] { background: var(--blue-500); color: white; }
+    .task-lab__result { display: grid; grid-template-columns: 1fr minmax(220px,.75fr); gap: 42px; align-items: end; padding-top: 34px; }
+    .task-lab__meter { height: 8px; background: rgba(255,255,255,.14); overflow: hidden; margin: 14px 0 8px; }
+    .task-lab__meter span { display: block; height: 100%; width: 78%; background: var(--aqua-300); transition: width .55s var(--ease), background .3s ease; }
+    .task-lab__score { color: rgba(255,255,255,.58); text-transform: uppercase; }
+    .task-lab__answer { color: rgba(255,255,255,.8); margin: 0; max-width: 42ch; }
+
+    [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    [data-reveal].is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } [data-reveal] { opacity: 1; transform: none; transition: none; } }
+    @media (max-width: 1180px) { .story-rail { display: none; } }
+    @media (max-width: 820px) {
+      header[data-screen-label="Masthead"] .label:first-of-type { display: none; }
+      .feature-hero { min-height: auto; }
+      .feature-hero__grid { grid-template-columns: 1fr !important; }
+      .feature-hero__copy { padding: 68px 24px 54px; }
+      .feature-hero__copy h1 { font-size: clamp(4rem, 18vw, 6.5rem) !important; }
+      .feature-hero__art { min-height: 430px; }
+      .feature-hero__art::after { background: linear-gradient(180deg, var(--navy-950), transparent 24%); }
+      .feature-hero__meta { position: relative; left: auto; right: auto; bottom: auto; padding: 28px 24px 46px !important; }
+      .feature-hero__meta > div { grid-template-columns: 1fr !important; }
+      section[data-screen-label] h2 { font-size: clamp(2.7rem, 12vw, 4rem) !important; }
+      .editorial-figure__note { grid-template-columns:1fr; }
+      .delivery-phases { grid-template-columns: 1fr 1fr; }
+      .task-lab__choices { grid-template-columns: 1fr; }
+      .task-lab__result { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 560px) {
+      .delivery-phases { grid-template-columns: 1fr; }
+      .delivery-phase + .delivery-phase::before { left: 50%; top: -9px; transform: translateX(-50%) rotate(90deg); }
+      .production-spread--image .editorial-figure__image { aspect-ratio: 1.45 / 1; }
+    }
+
+    /* Chapter folios: one typographic system for part, source, title, and deck. */
+    .chapter {
+      padding-top: clamp(82px, 6.5vw, 104px) !important;
+    }
+    .chapter > div:first-of-type > div {
+      border-top-width: 1px !important;
+      padding-top: 16px !important;
+    }
+    .chapter > div:first-of-type > div > div:first-child {
+      display: grid !important;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center !important;
+      column-gap: 28px !important;
+      margin-bottom: clamp(34px, 3.2vw, 46px) !important;
+    }
+    .chapter-folio {
+      display: inline-grid;
+      grid-template-columns: auto auto auto;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue-500);
+      white-space: nowrap;
+    }
+    .chapter-folio__part { color: var(--fg2); }
+    .chapter-folio__number {
+      color: var(--blue-500);
+    }
+    .chapter-folio__label {
+      padding-left: 9px;
+      border-left: 1px solid rgba(5,13,58,.24);
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+    .chapter-source {
+      justify-self: end;
+      max-width: 60ch;
+      color: #737786 !important;
+      text-align: right;
+      text-transform: uppercase;
+    }
+    .chapter h2 {
+      margin: 0 !important;
+    }
+    .chapter--dark .chapter-folio__part,
+    .chapter--dark .chapter-source { color: rgba(255,255,255,.5) !important; }
+    .chapter--dark .chapter-folio__number,
+    .chapter--dark .chapter-folio__label { color: var(--aqua-300); }
+    .chapter--dark .chapter-folio__label { border-left-color: rgba(255,255,255,.24); }
+
+    @media (min-width: 901px) {
+      .chapter > div:first-of-type { grid-column: 2 / 4; }
+      .chapter > div:first-of-type > div {
+        display: grid;
+        grid-template-columns: minmax(0,720px) minmax(320px,480px);
+        column-gap: clamp(36px,4vw,64px);
+        height: auto;
+      }
+      .chapter > div:first-of-type > div > div:first-child { grid-column: 1 / -1; }
+      .chapter > div:first-of-type h2 { grid-column: 1; }
+      .chapter > div:nth-of-type(2) {
+        align-self: start;
+        padding-top: clamp(66px, 5.4vw, 76px) !important;
+      }
+      .chapter--playbook > div:nth-of-type(2) > p:first-child,
+      .chapter--metrics > div:nth-of-type(2) > p:first-child,
+      .chapter--adoption > div:nth-of-type(2) > p:first-child,
+      .chapter--close > div:nth-of-type(2) > p:first-child {
+        align-self: start;
+        padding-top: clamp(66px, 5.4vw, 76px) !important;
+      }
+      .chapter--adoption > div:nth-of-type(2) > p:not(:first-child),
+      .chapter--close > div:nth-of-type(2) > p:not(:first-child) { margin-top: 42px !important; }
+      .chapter figure { margin-top: clamp(52px, 4.4vw, 68px) !important; }
+    }
+
+    @media (min-width: 901px) and (max-width: 1180px) {
+      .chapter > div:first-of-type > div { grid-template-columns: minmax(0,1.45fr) minmax(320px,1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .chapter { padding-top: 82px !important; }
+      .chapter > div:first-of-type > div > div:first-child { margin-bottom: 30px !important; }
+      .chapter > div:nth-of-type(2),
+      .chapter--playbook > div:nth-of-type(2),
+      .chapter--metrics > div:nth-of-type(2),
+      .chapter--adoption > div:nth-of-type(2),
+      .chapter--close > div:nth-of-type(2) {
+        display: block !important;
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+      }
+      .chapter > div:nth-of-type(2) { padding-left: 28px !important; padding-right: 28px !important; }
+    }
+
+    @media (max-width: 620px) {
+      .chapter { padding-top: 72px !important; }
+      .chapter > div:first-of-type { padding-left: 22px !important; padding-right: 22px !important; }
+      .chapter > div:first-of-type > div > div:first-child {
+        grid-template-columns: 1fr;
+        row-gap: 12px;
+        margin-bottom: 28px !important;
+      }
+      .chapter-source { justify-self: start; text-align: left; }
+      .chapter > div:nth-of-type(2) { padding-left: 22px !important; padding-right: 22px !important; }
+    }
+    /* Editorial evidence figures: one claim per figure, with quieter data furniture. */
+    .value-drop, .process-story { border-top:1px solid var(--feature-line); border-bottom:1px solid var(--feature-line); padding:30px 0 34px; }
+    .value-drop__header, .process-story__header { display:flex; justify-content:space-between; align-items:baseline; gap:20px; margin-bottom:30px; }
+    .value-drop__header .label, .process-story__header .label { text-align:right; color:var(--fg2); }
+    .value-drop__groups { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--feature-line); }
+    .value-drop__group { background:var(--feature-paper); padding:24px 26px 26px; min-width:0; }
+    .value-drop__group-title { display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding-bottom:18px; margin-bottom:22px; border-bottom:1px solid var(--feature-line); }
+    .value-drop__group-title strong { font:500 1.45rem/1 var(--feature-serif); letter-spacing:-.025em; }
+    .value-drop__group-title span { color:var(--fg2); font:600 .75rem/1.4 var(--font-mono); letter-spacing:.055em; text-transform:uppercase; }
+    .value-drop__item + .value-drop__item { margin-top:24px; }
+    .value-drop__value { display:block; font:700 clamp(2.2rem,3.5vw,3.45rem)/.85 var(--font-mono); letter-spacing:-.065em; color:var(--ink); margin-bottom:12px; }
+    .value-drop__item--value .value-drop__value { color:var(--aqua-500); }
+    .value-drop__bar { height:8px; background:var(--blue-100); overflow:hidden; }
+    .value-drop__bar span { display:block; width:var(--value); height:100%; background:var(--blue-500); }
+    .value-drop__group:nth-child(2) .value-drop__bar span { background:var(--blue-600); }
+    .value-drop__item--high .value-drop__bar span { background:var(--navy-900); }
+    .value-drop__item--value .value-drop__bar span { background:var(--aqua-400); }
+    .value-drop__item .label { display:block; margin-top:9px; color:var(--fg2); max-width:34ch; }
+    .value-drop__item--value .label { color:#008d70; }
+    .value-drop__takeaway { display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:baseline; margin-top:26px; }
+    .value-drop__takeaway strong { color:var(--blue-500); font:700 clamp(2rem,3vw,3rem)/1 var(--font-mono); letter-spacing:-.06em; }
+    .value-drop__takeaway p { margin:0; max-width:60ch; font:500 1rem/1.45 var(--feature-serif); }
+
+    .process-story__thesis { font:500 clamp(1.9rem,3.2vw,3.2rem)/1.02 var(--feature-serif); letter-spacing:-.04em; max-width:20ch; margin:0 0 34px; text-wrap:balance; }
+    .process-story__thesis em { color:var(--blue-500); font-weight:400; }
+    .process-story__path { display:grid; grid-template-columns:minmax(170px,.72fr) minmax(230px,.92fr) minmax(390px,1.55fr); gap:0; align-items:stretch; border:1px solid var(--feature-line); background:rgba(255,255,255,.22); overflow:hidden; }
+    .process-story__stage { position:relative; min-width:0; padding:26px 28px; display:flex; flex-direction:column; justify-content:center; }
+    .process-story__stage + .process-story__stage { border-left:1px solid var(--feature-line); }
+    .process-story__stage:not(:last-child)::after { content:'\2192'; position:absolute; z-index:4; right:-16px; top:50%; width:32px; height:32px; display:grid; place-items:center; transform:translateY(-50%); border:1px solid var(--feature-line); border-radius:50%; background:var(--feature-paper); color:var(--blue-500); font:700 1rem/1 var(--font-sans); }
+    .process-story__kicker { display:block; color:var(--fg2); font-weight:600; text-transform:uppercase; margin-bottom:12px; }
+    .process-story__simple-steps { display:grid; gap:8px; }
+    .process-story__pill { display:flex; align-items:center; min-height:42px; padding:8px 12px; border:1px solid rgba(5,13,58,.18); background:rgba(255,255,255,.28); font:650 .76rem/1.25 var(--font-sans); letter-spacing:-.01em; }
+    .process-story__stage--ai { background:var(--blue-500); color:white; }
+    .process-story__stage--ai .process-story__kicker { color:rgba(255,255,255,.72); }
+    .process-story__stage--ai::after { border-color:rgba(255,255,255,.42) !important; background:var(--blue-500) !important; color:white !important; }
+    .process-story__speed { display:block; font:700 clamp(3.4rem,6vw,5.6rem)/.82 var(--font-mono); letter-spacing:-.075em; margin-bottom:12px; }
+    .process-story__stage p { margin:0; font-size:.92rem; line-height:1.4; }
+    .process-story__queue { background:rgba(255,255,255,.22); display:grid; grid-template-rows:auto auto 1fr; }
+    .process-story__queue-note { max-width:46ch; margin:-3px 0 18px !important; color:var(--fg2); font-size:.82rem !important; }
+    .process-story__queue-stack { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:8px; align-items:end; min-height:118px; }
+    .process-story__queue-block { background:var(--navy-900); color:white; display:flex; align-items:center; justify-content:center; min-height:44px; padding:8px; font:700 .68rem/1.15 var(--font-sans); text-align:center; letter-spacing:-.01em; }
+    .process-story__queue-block:nth-child(1) { min-height:72px; }
+    .process-story__queue-block:nth-child(2) { min-height:96px; }
+    .process-story__queue-block:nth-child(3) { min-height:118px; background:var(--blue-500); }
+    .process-story__queue-block:nth-child(n+4) { background:transparent; color:var(--fg2); border:1px solid var(--feature-line); font-weight:650; }
+    .process-story__constraint { display:grid; grid-template-columns:minmax(220px,.75fr) minmax(300px,1fr); gap:clamp(24px,5vw,80px); margin-top:0; padding:22px 28px 24px; border:1px solid var(--feature-line); border-top:0; background:rgba(255,255,255,.36); align-items:center; }
+    .process-story__constraint strong { font:500 clamp(1.35rem,2.2vw,1.8rem)/1.05 var(--feature-serif); letter-spacing:-.025em; max-width:18ch; }
+    .process-story__constraint .body-sm { color:var(--fg2); max-width:44ch; }
+    @media (max-width:820px) {
+      .value-drop__groups { grid-template-columns:1fr; }
+      .value-drop__group { padding:22px 0 24px; }
+      .process-story__path { grid-template-columns:1fr; }
+      .process-story__stage + .process-story__stage { border-left:0; border-top:1px solid var(--feature-line); }
+      .process-story__stage:not(:last-child)::after { content:'\2193'; right:auto; left:50%; top:auto; bottom:-16px; transform:translateX(-50%); }
+      .process-story__queue-stack { min-height:0; }
+      .process-story__constraint { grid-template-columns:1fr; gap:14px; }
+    }
+    @media (max-width:560px) {
+      .value-drop__header, .process-story__header { display:block; }
+      .value-drop__header .label, .process-story__header .label { display:block; text-align:left; margin-top:8px; }
+      .value-drop__takeaway { grid-template-columns:1fr; gap:8px; }
+      .process-story__constraint { display:block; }
+      .process-story__constraint .label { display:block; margin-top:10px; }
+    }
+
+    /* Figure introductions explain the editorial claim instead of adding more metadata rails. */
+    .figure-intro { display:grid !important; grid-template-columns:72px minmax(0,1.15fr) minmax(260px,.85fr); gap:28px !important; align-items:end; padding:0 0 22px !important; }
+    .figure-intro__number { color:var(--blue-500); font:600 .68rem/1.3 var(--font-mono); letter-spacing:.1em; text-transform:uppercase; }
+    .figure-intro__title { margin:0; color:var(--ink); }
+    .figure-intro__deck { margin:0; padding-left:24px; border-left:1px solid var(--feature-line); color:var(--fg2); font-size:.92rem; line-height:1.5; max-width:38ch; }
+    @media (max-width:560px) {
+      .figure-intro { grid-template-columns:1fr; gap:10px !important; padding-bottom:18px !important; }
+      .figure-intro__deck { padding-left:0; border-left:0; margin-top:5px; }
+    }
+
+    /* Evidence split: source detail on the long rail, interpretation on the short rail. */
+    .evidence-split { max-width:1060px; margin:clamp(64px,5.5vw,84px) auto 0; padding:0 28px; display:grid; grid-template-columns:minmax(0,1.85fr) minmax(280px,1fr); gap:clamp(34px,5vw,72px); align-items:start; }
+    .evidence-list { display:flex; flex-direction:column; gap:0; }
+    .evidence-list__item { display:grid; grid-template-columns:120px minmax(0,1fr); gap:20px; padding:18px 0; border-bottom:1px solid var(--feature-line); }
+    .evidence-list__item:last-child { border-bottom:0; }
+    .evidence-list__item .label { color:var(--primary); padding-top:3px; }
+    .evidence-sidebar { padding-top:0; }
+    .evidence-sidebar__note { margin:0 0 26px; font-size:clamp(1.05rem,1.5vw,1.28rem) !important; line-height:1.55 !important; letter-spacing:-.012em; }
+    .evidence-sidebar__takeaway { border-left:3px solid var(--primary); background:var(--bg-elevated); padding:20px 22px; margin:0; }
+    .evidence-sidebar__takeaway .eyebrow { display:block; margin-bottom:10px; }
+    .evidence-split--table { max-width:1160px; grid-template-columns:minmax(0,2fr) minmax(300px,1fr); gap:clamp(36px,4vw,56px); align-items:stretch; }
+    .evidence-split--table .evidence-sidebar__takeaway { min-height:100%; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; }
+    .evidence-table-wrap { min-width:0; overflow-x:auto; }
+    @media (max-width:760px) {
+      .evidence-split { grid-template-columns:1fr; gap:30px; margin-top:48px; }
+      .evidence-list__item { grid-template-columns:1fr; gap:8px; padding:17px 0; }
+      .evidence-sidebar__note { margin-bottom:20px; }
+      .evidence-split--table .evidence-sidebar__takeaway { min-height:0; display:block; }
+      .evidence-table-wrap table { min-width:680px; }
+    }
+
+    /* Expectation/reality stage: data frames the illustration instead of covering it. */
+    .cinematic-stage::before {
+      content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:linear-gradient(180deg, var(--navy-950) 0%, transparent 11%, transparent 86%, var(--navy-950) 100%);
+    }
+    .cinematic-stage::after {
+      content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:
+        linear-gradient(90deg, rgba(2,9,45,.88) 0%, rgba(2,9,45,.54) 20%, transparent 43%),
+        linear-gradient(270deg, rgba(2,9,45,.82) 0%, rgba(2,9,45,.44) 18%, transparent 40%);
+    }
+    .cinematic-stage__content {
+      max-width:1280px; min-height:inherit; margin:0 auto; padding:clamp(64px,8vw,118px) 44px;
+      display:grid; grid-template-columns:minmax(250px,.72fr) minmax(360px,1.35fr) minmax(270px,.78fr);
+      gap:clamp(34px,5vw,72px); align-items:center; position:relative; z-index:2;
+    }
+    .cinematic-stage__numbers {
+      grid-column:1; display:grid; gap:clamp(24px,3.4vw,46px); width:100%;
+    }
+    .cinematic-stage__metric {
+      display:grid; gap:8px; align-content:center; min-height:116px; padding:14px 12px 14px 20px;
+      border-left:1px solid rgba(255,255,255,.28);
+      background:linear-gradient(90deg, rgba(2,9,45,.58), rgba(2,9,45,0));
+    }
+    .cinematic-stage__value {
+      color:#fff; font-size:clamp(3.7rem,4.8vw,5rem); line-height:.84; white-space:nowrap;
+      text-shadow:0 2px 2px rgba(2,9,45,.9), 0 0 28px rgba(12,49,255,.72);
+    }
+    .cinematic-stage__metric .label {
+      margin:0; color:rgba(255,255,255,.88) !important; max-width:22ch;
+    }
+    .cinematic-stage__metric .label::before {
+      content:'Perception'; display:block; margin-bottom:6px; color:var(--aqua-300);
+    }
+    .cinematic-stage__metric:last-child { border-left-color:rgba(255,118,87,.72); }
+    .cinematic-stage__metric:last-child .cinematic-stage__value {
+      color:var(--feature-coral); text-shadow:0 2px 2px rgba(2,9,45,.92), 0 0 26px rgba(255,118,87,.34);
+    }
+    .cinematic-stage__metric:last-child .label::before { content:'Reality'; color:var(--feature-coral); }
+    .cinematic-stage__note {
+      grid-column:3; align-self:center; padding:24px 0 24px 24px; color:#fff;
+      border-left:1px solid var(--aqua-300);
+      background:linear-gradient(90deg, rgba(2,9,45,.52), rgba(2,9,45,0));
+      text-shadow:0 1px 2px rgba(2,9,45,.95);
+    }
+    .cinematic-stage__note .eyebrow { display:block; margin-bottom:16px; color:var(--aqua-300); }
+    .cinematic-stage__note .body { color:#fff !important; font-size:1rem; line-height:1.58; }
+    @media (max-width:900px) {
+      .cinematic-stage { min-height:900px; }
+      .cinematic-stage__content { grid-template-columns:1fr; align-content:space-between; gap:34px; padding:56px 32px; }
+      .cinematic-stage__numbers { grid-column:1; grid-template-columns:repeat(3,1fr); align-self:start; }
+      .cinematic-stage__metric { min-height:126px; padding:14px 12px; }
+      .cinematic-stage__value { font-size:clamp(2.7rem,8vw,4rem); }
+      .cinematic-stage__note { grid-column:1; align-self:end; width:min(100%,430px); padding:22px 0 22px 22px; }
+    }
+    @media (max-width:620px) {
+      .cinematic-stage { min-height:980px; }
+      .cinematic-stage__art { object-position:50% 50%; }
+      .cinematic-stage__content { padding:92px 22px 42px; }
+      .cinematic-stage__numbers { grid-template-columns:1fr; gap:12px; width:min(72%,250px); }
+      .cinematic-stage__metric { min-height:92px; padding:10px 12px 10px 16px; }
+      .cinematic-stage__value { font-size:clamp(2.85rem,15vw,4rem); }
+      .cinematic-stage__metric .label { max-width:20ch; }
+      .cinematic-stage__note { width:auto; max-width:31ch; }
+    }
+
+    /* Clean-sheet editorial pass: fewer voices, clearer evidence, preserved source detail. */
+    .chapter--adoption > figure { margin-top:34px !important; }
+    .value-drop--editorial { padding-top:0 !important; padding-bottom:30px; }
+    .value-drop--editorial, .process-story { border-top:0; border-bottom:0; }
+    .adoption-contrast__thesis { margin:0 0 clamp(42px,5vw,64px); max-width:13ch; font-family:var(--feature-serif) !important; font-size:clamp(2.7rem,5.2vw,5.3rem) !important; font-weight:500 !important; line-height:.94 !important; letter-spacing:-.045em !important; }
+    .adoption-contrast__thesis em { color:var(--blue-500); font-weight:400; }
+    .adoption-contrast { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1.05fr) minmax(280px,.9fr); gap:clamp(40px,6vw,92px); align-items:stretch; }
+    .adoption-contrast__lead { padding:0 0 34px; }
+    .adoption-contrast__lead--value { padding:0 0 34px; }
+    .adoption-contrast__source, .adoption-support__source { display:block; margin-bottom:18px; color:var(--fg2); font-weight:600; text-transform:uppercase; }
+    .adoption-contrast__lead strong { display:block; font:700 clamp(5rem,9vw,8.5rem)/.78 var(--font-mono); letter-spacing:-.08em; color:var(--blue-500); }
+    .adoption-contrast__lead--value strong { color:var(--aqua-500); }
+    .adoption-contrast__lead p { max-width:18ch; margin:20px 0 14px; font:500 clamp(1.35rem,2.2vw,2rem)/1.08 var(--feature-serif); letter-spacing:-.025em; }
+    .adoption-contrast__turn { display:flex; flex-direction:column; justify-content:center; align-items:center; gap:8px; padding:0 20px; color:var(--fg2); text-align:center; }
+    .adoption-contrast__turn span { font:600 .75rem/1.4 var(--font-mono); letter-spacing:.055em; text-transform:uppercase; }
+    .adoption-contrast__turn b { color:var(--blue-500); font:400 italic 1.7rem/1 var(--feature-serif); letter-spacing:-.035em; }
+    .adoption-contrast__takeaway { align-self:stretch; display:flex; flex-direction:column; justify-content:center; border-left:3px solid var(--primary); background:var(--bg-elevated); padding:24px 26px; }
+    .adoption-contrast__takeaway .eyebrow { display:block; margin-bottom:12px; }
+    .adoption-contrast__takeaway p { margin:0; }
+
+    .perception-stage__numbers { max-width:1180px; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(48px,9vw,140px); }
+    .perception-stage__measure { min-height:230px; padding:30px 34px 34px; background:rgba(247,246,249,.94); border-top:4px solid var(--blue-500); box-shadow:0 18px 52px rgba(5,13,58,.12); backdrop-filter:blur(12px); text-align:left; }
+    .perception-stage__measure:last-child { border-top-color:var(--feature-coral); text-align:left; }
+    .perception-stage__kicker { display:block; margin-bottom:24px; color:var(--fg2); font:600 .64rem/1.3 var(--font-mono); letter-spacing:.1em; text-transform:uppercase; }
+    .perception-stage__number { display:block; font-size:clamp(4rem,7vw,7rem); }
+    .perception-stage__label { display:block; max-width:22ch; margin-top:18px; color:var(--ink); font:500 clamp(1.15rem,1.7vw,1.45rem)/1.22 var(--feature-serif); letter-spacing:-.02em; }
+
+    .adoption-support { display:grid; grid-template-columns:repeat(4,1fr); margin-top:28px; }
+    .adoption-support > div { padding:0 20px; min-width:0; }
+    .adoption-support > div:first-child { padding-left:0; }
+    .adoption-support > div + div { border-left:1px solid var(--feature-line); }
+    .adoption-support__source { margin-bottom:10px; }
+    .adoption-support b { display:block; margin-bottom:8px; font:700 1.5rem/1 var(--font-mono); letter-spacing:-.045em; }
+    .adoption-support p { margin:0; color:var(--fg2); font-size:.84rem; line-height:1.5; }
+
+    .process-story__intro { display:block; margin-bottom:28px; }
+    .process-story__intro h3 { margin:0; max-width:34ch; font-size:clamp(1.55rem,2.4vw,2.3rem); line-height:1.08; }
+    .process-story__stage:last-child .process-story__steps { gap:6px; }
+    .process-story__stage:last-child .process-story__step { padding:5px 7px; }
+    .process-story__path { border-color:var(--feature-line); }
+    .process-story__constraint { border-top:0; }
+    .production-spread--image > div { border:0 !important; }
+    .figure-intro { grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr); }
+    .figure-intro__deck { border-left:0; padding-left:0; }
+    .process-story__constraint .body-sm { max-width:48ch; color:var(--fg2); }
+
+    .chapter--causal figure > .causal-cards { display:grid !important; grid-template-columns:repeat(2,1fr) !important; gap:1px !important; padding:1px !important; background:var(--feature-line) !important; border:0 !important; }
+    .chapter--causal figure > .causal-cards > .causal-card { padding:34px 36px 30px !important; border:0 !important; background:var(--feature-paper) !important; }
+    .causal-card__context { display:block; margin-bottom:34px; color:var(--fg2); font:600 .65rem/1.3 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; }
+    .causal-card__metric { display:block; color:var(--blue-500); font:700 clamp(3.7rem,6vw,6rem)/.82 var(--font-mono); letter-spacing:-.075em; }
+    .causal-card h3 { margin:12px 0 22px; max-width:15ch; }
+    .causal-card .body { max-width:42ch; color:var(--fg2); }
+    .causal-card footer { display:flex; justify-content:space-between; gap:18px; margin-top:34px; padding-top:16px; border-top:1px solid var(--feature-line); color:var(--fg2); font-weight:600; text-transform:uppercase; }
+    .workflow-edit { display:grid; grid-template-columns:minmax(0,2fr) minmax(300px,1fr); gap:clamp(36px,4vw,56px); align-items:stretch; margin-top:clamp(72px,6vw,92px) !important; }
+    .workflow-edit__title { margin:0 0 24px; max-width:28ch; }
+    .workflow-edit__table { width:100%; border-collapse:collapse; margin:0; }
+    .workflow-edit__table td { padding:16px 14px; border-bottom:1px solid var(--feature-line); color:var(--fg2); font-size:.88rem; line-height:1.45; vertical-align:top; }
+    .workflow-edit__table td:first-child { padding-left:0; color:var(--ink); width:31%; }
+    .workflow-edit__table td:last-child { padding-right:0; }
+    .workflow-edit__table b, .workflow-edit__table small { display:block; }
+    .workflow-edit__table small { margin-top:4px; color:var(--fg2); font-size:.75rem; font-weight:400; }
+    .workflow-edit__takeaway { align-self:end; min-height:calc(100% - 46px); box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; border-left:3px solid var(--primary); background:var(--bg-elevated); padding:22px 26px; margin:0; }
+    .workflow-edit__takeaway .eyebrow { display:block; margin-bottom:10px; }
+
+    .task-lab { max-width:1240px; margin:clamp(84px,8vw,124px) auto 0; }
+    .task-lab__shell { display:grid; grid-template-columns:minmax(280px,.72fr) minmax(520px,1.28fr); gap:42px 70px; padding:clamp(42px,5vw,70px); }
+    .task-lab__shell::before { display:none; }
+    .task-lab__intro { grid-column:1; grid-row:1 / 3; }
+    .task-lab__intro h3 { font-size:clamp(3rem,5vw,5rem); max-width:8ch; margin:12px 0 22px; }
+    .task-lab__intro .task-lab__answer { max-width:30ch; }
+    .task-lab__choices { grid-column:2; grid-row:1; margin:0; grid-template-columns:repeat(3,1fr); }
+    .task-lab__choice { min-height:118px; padding:18px 16px; text-transform:none; letter-spacing:0; }
+    .task-lab__choice b { display:block; color:#fff; font-weight:600; line-height:1.3; }
+    .task-lab__choice span { display:block; margin-top:10px; color:rgba(255,255,255,.48); font-weight:600; line-height:1.3; text-transform:uppercase; }
+    .task-lab__choice[aria-pressed="true"] span { color:rgba(255,255,255,.78); }
+    .task-lab__result { grid-column:2; grid-row:2; padding-top:0; align-items:start; }
+    .task-lab__meter { height:10px; margin-top:16px; }
+
+    @media (max-width:900px) {
+      .adoption-support { grid-template-columns:repeat(2,1fr); row-gap:28px; }
+      .adoption-support > div:nth-child(3) { padding-left:0; border-left:0; }
+      .chapter--causal figure > .causal-cards { grid-template-columns:1fr !important; }
+      .workflow-edit { grid-template-columns:1fr; gap:30px; }
+      .workflow-edit__takeaway { min-height:0; align-self:stretch; display:block; }
+      .task-lab__shell { grid-template-columns:1fr; gap:34px; }
+      .task-lab__intro, .task-lab__choices, .task-lab__result { grid-column:1; grid-row:auto; }
+      .task-lab__intro h3 { max-width:11ch; }
+      .perception-stage__numbers { grid-template-columns:1fr; gap:18px; align-content:center; }
+      .perception-stage__measure { min-height:0; }
+    }
+    @media (max-width:620px) {
+      .adoption-contrast { grid-template-columns:1fr; gap:0; }
+      .adoption-contrast__lead, .adoption-contrast__lead--value { padding:26px 0; }
+      .adoption-contrast__takeaway { margin-top:18px; padding:22px 24px; }
+      .adoption-contrast__turn { flex-direction:row; justify-content:flex-start; padding:18px 0; border:0; }
+      .adoption-contrast__turn b { font-size:1.45rem; }
+      .adoption-support { grid-template-columns:1fr; }
+      .adoption-support > div { padding:18px 0 !important; border-left:0 !important; border-top:1px solid var(--feature-line); }
+      .chapter--gap .production-spread--steps { padding-left:22px !important; padding-right:22px !important; }
+      .figure-intro { grid-template-columns:1fr; gap:10px !important; }
+      .figure-intro__deck { margin-top:4px; }
+      .workflow-edit { overflow:hidden; }
+      .workflow-edit__table thead { display:none; }
+      .workflow-edit__table tr { display:block; padding:18px 0; border-top:1px solid var(--feature-line); }
+      .workflow-edit__table td { display:block; width:auto !important; border:0; padding:5px 0; }
+      .task-lab { padding:0; }
+      .task-lab__shell { padding:36px 22px; }
+      .task-lab__choices { grid-template-columns:1fr; }
+      .task-lab__choice { min-height:84px; }
+      .task-lab__result { grid-template-columns:1fr; }
+      .perception-stage { min-height:820px; }
+      .perception-stage__numbers { padding-left:22px; padding-right:22px; }
+      .perception-stage__measure { padding:24px 24px 26px; }
+      .perception-stage__kicker { margin-bottom:18px; }
+      .perception-stage__label { font-size:1.15rem; }
+    }
+
+    /* Final editorial type system: Newsreader for voice, Hanken for reading,
+       JetBrains Mono only where fixed-width metadata or data alignment helps. */
+    body, button, input, textarea, select { font-family:var(--type-reading); }
+    section[data-screen-label] h2,
+    .feature-hero__copy h1,
+    .figure-intro__title,
+    .workflow-edit__title,
+    .causal-card h3,
+    .task-lab h3 {
+      font-family:var(--type-editorial) !important;
+      font-weight:500 !important;
+      font-optical-sizing:auto;
+    }
+    section[data-screen-label].chapter h2 {
+      max-width:13ch !important;
+      font-size:clamp(4rem,5.4vw,4.875rem) !important;
+      line-height:.96 !important;
+      letter-spacing:-.038em !important;
+      margin-bottom:clamp(30px,3vw,48px) !important;
+    }
+    section[data-screen-label].chapter .body-lg {
+      max-width:var(--measure-deck);
+      font-family:var(--type-reading) !important;
+      font-size:clamp(1.125rem,1.3vw,1.1875rem) !important;
+      font-weight:400 !important;
+      line-height:1.64 !important;
+      letter-spacing:-.003em !important;
+    }
+    section[data-screen-label] .body { font-size:max(.875rem,14px); line-height:1.62; }
+    section[data-screen-label] .body-sm { font-size:max(.875rem,14px); line-height:1.55; }
+    section[data-screen-label] .eyebrow,
+    section[data-screen-label] .label,
+    .feature-hero__caption,
+    .editorial-figure__note,
+    .task-lab__choice,
+    .task-lab__choice b,
+    .task-lab__choice span {
+      font-family:var(--type-reading) !important;
+    }
+    section[data-screen-label] .eyebrow,
+    section[data-screen-label] .label {
+      font-size:.75rem !important;
+      font-weight:600 !important;
+      line-height:1.35 !important;
+      letter-spacing:.055em !important;
+    }
+    .feature-hero__caption,
+    .editorial-figure__note { font-size:.75rem; line-height:1.45; letter-spacing:.035em; }
+    .figure-intro__title,
+    .workflow-edit__title,
+    .causal-card h3 {
+      font-size:clamp(1.875rem,3vw,2.625rem) !important;
+      line-height:1.06 !important;
+      letter-spacing:-.028em !important;
+    }
+    .process-story__intro h3,
+    section[data-screen-label] .h3,
+    section[data-screen-label] .h4 {
+      font-family:var(--type-reading) !important;
+      font-weight:600 !important;
+      letter-spacing:-.025em !important;
+    }
+    .adoption-contrast__lead strong,
+    .adoption-support b,
+    .causal-card__metric,
+    .cinematic-stage__value,
+    .perception-stage__number,
+    .value-drop__value,
+    .value-drop__takeaway strong,
+    .process-story__speed {
+      font-family:var(--type-reading) !important;
+      font-variant-numeric:lining-nums tabular-nums;
+      letter-spacing:-.055em !important;
+    }
+    .adoption-support p,
+    .workflow-edit__table td,
+    .causal-card .body,
+    .process-story__stage p { font-family:var(--type-reading); font-size:.875rem; line-height:1.55; }
+    table th {
+      font-family:var(--type-reading) !important;
+      font-size:.75rem !important;
+      font-weight:600 !important;
+      line-height:1.35 !important;
+      letter-spacing:.045em !important;
+    }
+    table td { font-family:var(--type-reading); font-size:max(.875rem,14px) !important; line-height:1.5; }
+    table td:last-child[style*="font-family:var(--font-mono)"] { font-family:var(--type-utility) !important; font-size:.75rem !important; }
+    .adoption-contrast__source,
+    .adoption-support__source,
+    .causal-card__context,
+    .causal-card footer,
+    .perception-stage__kicker,
+    .process-story__kicker,
+    .delivery-phase__label,
+    .task-lab__score {
+      font-family:var(--type-utility) !important;
+      font-size:.75rem !important;
+      line-height:1.4 !important;
+      letter-spacing:.055em !important;
+    }
+    .story-rail button {
+      font-family:var(--type-reading) !important;
+      font-size:.75rem !important;
+      font-weight:650 !important;
+      line-height:1 !important;
+      letter-spacing:.015em !important;
+    }
+    .chapter-folio {
+      font-family:var(--type-reading) !important;
+      font-size:.75rem !important;
+      font-weight:650 !important;
+      line-height:1.25 !important;
+      letter-spacing:.055em !important;
+    }
+    .chapter-folio__number,
+    .chapter-folio__label {
+      font-size:.75rem !important;
+    }
+    .chapter-source {
+      font-family:var(--type-utility) !important;
+      font-size:.75rem !important;
+      line-height:1.4 !important;
+      letter-spacing:.055em !important;
+    }
+    .process-story__step,
+    .process-story__stage:last-child .process-story__step {
+      font-family:var(--type-reading) !important;
+      font-size:.75rem !important;
+      font-weight:600 !important;
+      line-height:1.25 !important;
+      letter-spacing:.005em !important;
+    }
+    .task-lab__choice { font-size:.9375rem; line-height:1.35; letter-spacing:0; }
+    .task-lab__choice b { font-size:.9375rem; }
+    .task-lab__choice span { font-size:.75rem; letter-spacing:.04em; }
+    .task-lab__answer { font-family:var(--type-reading); font-size:1.0625rem; line-height:1.58; }
+
+    /* Closing spread: one offer, two supporting capabilities, three proof points. */
+    .concepta-close { margin-top:0; padding:clamp(88px,8vw,132px) 0 0; background:var(--navy-950); color:#fff; }
+    .concepta-close__inner { width:min(100% - 56px,1240px); margin:0 auto; }
+    .concepta-close__folio { display:flex; align-items:center; justify-content:space-between; gap:24px; padding-top:16px; border-top:1px solid rgba(255,255,255,.72); }
+    .concepta-close__folio .chapter-source { color:rgba(255,255,255,.52) !important; text-align:right; }
+    .concepta-close__hero { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr); gap:clamp(56px,8vw,118px); align-items:end; padding:clamp(54px,6vw,84px) 0 clamp(64px,7vw,96px); }
+    .concepta-close__hero h2 { max-width:9ch; margin:0; color:#fff; font:500 clamp(4.5rem,8vw,8rem)/.86 var(--feature-serif); letter-spacing:-.055em; text-wrap:balance; }
+    .concepta-close__thesis { margin:0; padding-left:28px; border-left:2px solid var(--aqua-300); color:rgba(255,255,255,.82); font:500 clamp(1.2rem,1.65vw,1.5rem)/1.52 var(--type-reading); letter-spacing:-.012em; }
+    .concepta-close__thesis strong { display:block; margin-bottom:14px; color:var(--aqua-300); font:650 .75rem/1.4 var(--type-utility); letter-spacing:.07em; text-transform:uppercase; }
+    .concepta-close__record { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.18); border-bottom:1px solid rgba(255,255,255,.18); }
+    .concepta-close__record > div { padding:24px 24px 26px 0; }
+    .concepta-close__record > div + div { padding-left:28px; border-left:1px solid rgba(255,255,255,.18); }
+    .concepta-close__record b { display:block; margin-bottom:7px; color:#fff; font:700 clamp(1.9rem,3vw,3rem)/1 var(--font-mono); letter-spacing:-.055em; }
+    .concepta-close__record span { color:rgba(255,255,255,.58); font:600 .75rem/1.4 var(--type-utility); letter-spacing:.045em; text-transform:uppercase; }
+    .concepta-close__start { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr); margin-top:clamp(66px,7vw,98px); border:1px solid rgba(255,255,255,.2); }
+    .concepta-close__offer { padding:clamp(34px,4vw,56px); background:var(--blue-500); }
+    .concepta-close__offer .eyebrow { display:block; margin-bottom:28px; color:rgba(255,255,255,.72); }
+    .concepta-close__offer h3 { max-width:14ch; margin:0 0 20px; color:#fff; font:500 clamp(2.2rem,4vw,4rem)/.98 var(--feature-serif); letter-spacing:-.04em; }
+    .concepta-close__offer p { max-width:49ch; margin:0; color:rgba(255,255,255,.82); font-size:1rem; line-height:1.65; }
+    .concepta-close__offer a { display:inline-block; margin-top:32px; padding:14px 20px; background:var(--aqua-300); color:var(--navy-950); font-weight:750; text-decoration:none; }
+    .concepta-close__offer a:hover, .concepta-close__offer a:focus-visible { background:#fff; outline:2px solid #fff; outline-offset:3px; }
+    .concepta-close__capabilities { display:grid; grid-template-rows:repeat(2,1fr); background:rgba(255,255,255,.025); }
+    .concepta-close__capability { display:flex; flex-direction:column; justify-content:center; padding:32px 34px; }
+    .concepta-close__capability + .concepta-close__capability { border-top:1px solid rgba(255,255,255,.18); }
+    .concepta-close__capability span { margin-bottom:10px; color:var(--aqua-300); font:650 .75rem/1.4 var(--type-utility); letter-spacing:.055em; text-transform:uppercase; }
+    .concepta-close__capability strong { display:block; margin-bottom:8px; color:#fff; font-size:1.05rem; }
+    .concepta-close__capability p { margin:0; color:rgba(255,255,255,.62); font-size:.88rem; line-height:1.55; }
+    .concepta-close__proof { padding:clamp(64px,7vw,92px) 0; }
+    .concepta-close__proof > .eyebrow { display:block; margin-bottom:26px; color:var(--aqua-300); }
+    .concepta-close__proof-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+    .concepta-close__proof-item { padding:0 34px 0 0; }
+    .concepta-close__proof-item + .concepta-close__proof-item { padding-left:34px; border-left:1px solid rgba(255,255,255,.18); }
+    .concepta-close__proof-value { display:block; margin-bottom:14px; color:var(--aqua-300); font:700 clamp(2.9rem,5vw,5.2rem)/.85 var(--font-mono); letter-spacing:-.07em; }
+    .concepta-close__proof-item strong { display:block; margin-bottom:8px; color:#fff; font-size:1rem; }
+    .concepta-close__proof-item p { max-width:32ch; margin:0; color:rgba(255,255,255,.6); font-size:.86rem; line-height:1.55; }
+    .concepta-close__final { display:flex; align-items:center; justify-content:space-between; gap:40px; padding:36px 0 44px; border-top:1px solid rgba(255,255,255,.22); }
+    .concepta-close__final p { max-width:22ch; margin:0; color:#fff; font:500 clamp(1.65rem,3vw,3rem)/1.02 var(--feature-serif); letter-spacing:-.035em; }
+    .concepta-close__final p span { color:var(--aqua-300); }
+    .concepta-close__final small { max-width:42ch; color:rgba(255,255,255,.58); font-size:.82rem; line-height:1.55; }
+    .concepta-close__end-rule { height:8px; background:linear-gradient(90deg,var(--blue-500) 0 76%,var(--aqua-400) 76%); }
+
+    /* Part 08: principle on the left, ordered operating moves on the right. */
+    .operating-model { padding:clamp(88px,7vw,116px) 0 clamp(82px,7vw,112px); }
+    .operating-model__inner { width:min(100% - 56px,1240px); margin:0 auto; }
+    .operating-model__folio { display:flex; align-items:center; justify-content:space-between; gap:24px; padding-top:16px; border-top:1px solid var(--ink); }
+    .operating-model__hero { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr); gap:clamp(52px,7vw,104px); align-items:end; padding:clamp(48px,5vw,72px) 0 clamp(62px,6vw,88px); }
+    .operating-model__hero h2 { max-width:12ch; margin:0; font:500 clamp(3.5rem,6.4vw,6.4rem)/.91 var(--feature-serif); letter-spacing:-.05em; text-wrap:balance; }
+    .operating-model__intro { margin:0; color:var(--fg2); font:500 clamp(1.08rem,1.45vw,1.28rem)/1.6 var(--type-reading); letter-spacing:-.01em; }
+    .operating-model__layout { display:grid; grid-template-columns:minmax(270px,.68fr) minmax(0,1.32fr); gap:clamp(54px,7vw,112px); align-items:start; }
+    .operating-model__principle { position:sticky; top:90px; padding-top:20px; border-top:3px solid var(--blue-500); }
+    .operating-model__principle > .eyebrow { display:block; margin-bottom:28px; color:var(--blue-500); }
+    .operating-model__principle h3 { max-width:13ch; margin:0 0 24px; font:500 clamp(2rem,3.4vw,3.3rem)/1 var(--feature-serif); letter-spacing:-.04em; }
+    .operating-model__principle p { max-width:34ch; margin:0; color:var(--fg2); font-size:.96rem; line-height:1.62; }
+    .operating-model__promise { margin-top:34px; padding:22px 24px; background:var(--blue-50); border-left:3px solid var(--blue-500); }
+    .operating-model__promise strong { display:block; margin-bottom:8px; color:var(--ink); }
+    .operating-model__promise span { color:var(--fg2); font-size:.87rem; line-height:1.55; }
+    .operating-model__moves { border-top:1px solid var(--ink); }
+    .operating-model__move { display:grid; grid-template-columns:62px minmax(150px,.75fr) minmax(0,1.25fr); gap:clamp(20px,3vw,38px); align-items:start; padding:28px 0 30px; border-bottom:1px solid var(--feature-line); }
+    .operating-model__move:last-child { border-bottom-color:var(--ink); }
+    .operating-model__number { color:var(--blue-500); font:700 1.65rem/1 var(--font-mono); letter-spacing:-.045em; }
+    .operating-model__move:last-child .operating-model__number { color:var(--aqua-500); }
+    .operating-model__move h3 { margin:0; font:650 1.05rem/1.25 var(--type-reading); letter-spacing:-.015em; }
+    .operating-model__move p { margin:0; color:var(--fg2); font-size:.9rem; line-height:1.58; }
+
+    @media (max-width:860px) {
+      .operating-model__hero { grid-template-columns:1fr; gap:32px; align-items:start; }
+      .operating-model__intro { max-width:42ch; }
+      .operating-model__layout { grid-template-columns:1fr; gap:54px; }
+      .operating-model__principle { position:static; display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.8fr); column-gap:40px; }
+      .operating-model__principle > .eyebrow { grid-column:1 / -1; }
+      .operating-model__principle h3 { grid-column:1; }
+      .operating-model__principle > p { grid-column:1; }
+      .operating-model__promise { grid-column:2; grid-row:2 / span 2; margin-top:0; }
+    }
+
+    @media (max-width:820px) {
+      .concepta-close__hero { grid-template-columns:1fr; gap:38px; align-items:start; }
+      .concepta-close__hero h2 { max-width:8ch; }
+      .concepta-close__thesis { max-width:38ch; }
+      .concepta-close__start { grid-template-columns:1fr; }
+      .concepta-close__capabilities { grid-template-rows:auto; grid-template-columns:repeat(2,1fr); }
+      .concepta-close__capability + .concepta-close__capability { border-top:0; border-left:1px solid rgba(255,255,255,.18); }
+    }
+
+    @media (max-width:620px) {
+      .operating-model { padding-top:72px; }
+      .operating-model__inner { width:min(100% - 44px,1240px); }
+      .operating-model__folio { align-items:flex-start; }
+      .operating-model__folio .chapter-source { max-width:15ch; text-align:right; }
+      .operating-model__hero { padding:42px 0 54px; }
+      .operating-model__hero h2 { font-size:clamp(3.15rem,15vw,4.6rem); }
+      .operating-model__principle { display:block; }
+      .operating-model__principle > .eyebrow { margin-bottom:22px; }
+      .operating-model__promise { margin-top:28px; }
+      .operating-model__move { grid-template-columns:46px minmax(0,1fr); gap:12px 18px; padding:24px 0 26px; }
+      .operating-model__move p { grid-column:2; }
+      .workflow-edit { margin-top:48px !important; }
+      .concepta-close__inner { width:min(100% - 44px,1240px); }
+      .concepta-close__folio { align-items:flex-start; }
+      .concepta-close__folio .chapter-source { max-width:17ch; }
+      .concepta-close__hero { padding:46px 0 58px; }
+      .concepta-close__hero h2 { font-size:clamp(3.6rem,18vw,5.2rem); }
+      .concepta-close__thesis { padding-left:20px; font-size:1.08rem; }
+      .concepta-close__record { grid-template-columns:1fr; }
+      .concepta-close__record > div { padding:18px 0; }
+      .concepta-close__record > div + div { padding-left:0; border-left:0; border-top:1px solid rgba(255,255,255,.18); }
+      .concepta-close__start { margin-top:58px; }
+      .concepta-close__offer { padding:32px 24px 36px; }
+      .concepta-close__capabilities { grid-template-columns:1fr; }
+      .concepta-close__capability { padding:26px 24px; }
+      .concepta-close__capability + .concepta-close__capability { border-left:0; border-top:1px solid rgba(255,255,255,.18); }
+      .concepta-close__proof-grid { grid-template-columns:1fr; }
+      .concepta-close__proof-item { padding:24px 0; }
+      .concepta-close__proof-item + .concepta-close__proof-item { padding-left:0; border-left:0; border-top:1px solid rgba(255,255,255,.18); }
+      .concepta-close__final { display:grid; gap:20px; }
+      section[data-screen-label].chapter h2 {
+        max-width:12ch !important;
+        font-size:clamp(2.75rem,13vw,3.375rem) !important;
+        line-height:.98 !important;
+        letter-spacing:-.032em !important;
+      }
+      section[data-screen-label].chapter .body-lg {
+        max-width:none;
+        font-size:1.0625rem !important;
+        line-height:1.64 !important;
+      }
+      .figure-intro__title,
+      .workflow-edit__title,
+      .causal-card h3 { font-size:clamp(1.6875rem,8vw,2.125rem) !important; }
+      section[data-screen-label] .body,
+      section[data-screen-label] .body-sm,
+      .workflow-edit__table td,
+      .adoption-support p { font-size:.875rem !important; }
+      .process-story__constraint .body-sm {
+        display:block;
+        margin-top:.75rem;
+      }
+    }
+  </style>
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#02092D"/><rect x="30" y="30" width="40" height="40" fill="#0C31FF"/><rect x="42" y="42" width="16" height="16" fill="#00D29A"/></svg>
+  </template>
+</helmet>
+
+<div style="background:var(--paper); color:var(--ink); font-family:var(--font-sans); overflow-x:clip;">
+
+  <!-- ============ STICKY MASTHEAD ============ -->
+  <header data-screen-label="Masthead" style="position:sticky; top:0; z-index:50; background:var(--navy-950); display:flex; flex-direction:column;">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 28px;">
+      <img src="assets/concepta-logo-white.svg" alt="Concepta" style="height:16px; display:block;">
+      <span class="label" style="color:rgba(255,255,255,0.55); text-align:center;">The Production Gap &middot; A Concepta Research Feature</span>
+      <span class="label" style="color:rgba(255,255,255,0.55);">July 2026</span>
+    </div>
+    <div style="height:3px; background:rgba(255,255,255,0.12);">
+      <div id="pg-progress" style="height:3px; width:0%; background:var(--aqua-400);"></div>
+    </div>
+  </header>
+
+  <nav class="story-rail" aria-label="Feature chapters">
+    <button type="button" data-chapter="01 Adoption" aria-label="Go to part 1: Adoption">01</button>
+    <button type="button" data-chapter="02 The gap defined" aria-label="Go to part 2: The gap defined">02</button>
+    <button type="button" data-chapter="03 Where speed is real" aria-label="Go to part 3: Where speed is real">03</button>
+    <button type="button" data-chapter="04 Where speed is overstated" aria-label="Go to part 4: Where speed is overstated">04</button>
+    <button type="button" data-chapter="05 The review bottleneck" aria-label="Go to part 5: The review bottleneck">05</button>
+    <button type="button" data-chapter="06 Quality and security debt" aria-label="Go to part 6: Quality and security debt">06</button>
+    <button type="button" data-chapter="07 Felt vs measured speed" aria-label="Go to part 7: Felt versus measured speed">07</button>
+    <button type="button" data-chapter="08 Operating model" aria-label="Go to part 8: Operating model">08</button>
+    <button type="button" data-chapter="09 Metrics" aria-label="Go to part 9: Metrics">09</button>
+    <button type="button" data-chapter="10 How Concepta helps" aria-label="Go to part 10: How Concepta helps">10</button>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="feature-hero" data-screen-label="Hero" style="background:var(--navy-950); position:relative; overflow:hidden;">
+    <div class="feature-hero__grid" style="max-width:1160px; margin:0 auto; padding:96px 28px 88px; display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:48px; align-items:center; position:relative;">
+      <div class="feature-hero__copy">
+        <span class="eyebrow" style="color:var(--aqua-300); display:block; margin-bottom:28px;">Research Feature &middot; AI &amp; Delivery</span>
+        <h1 style="color:#fff; margin:0 0 28px; text-wrap:balance;">The production <em>gap</em></h1>
+        <p style="font-size:clamp(1.15rem,1.8vw,1.45rem); line-height:1.5; color:rgba(255,255,255,0.75); margin:0; max-width:34ch; font-weight:500;">Why AI makes building faster and shipping harder &mdash; and what technology leaders do about it.</p>
+      </div>
+      <figure class="feature-hero__art" data-om-raster style="margin:0;">
+        <img src="assets/production-gap-editorial-hero-retina-v2.webp" alt="A torrent of blue work artifacts passing through a narrow review gate and emerging as a few precise production-ready forms.">
+        <figcaption class="feature-hero__caption">Creation expands. Review stays narrow. Production is what makes it through.</figcaption>
+      </figure>
+    </div>
+    <div class="feature-hero__meta" style="max-width:1160px; margin:0 auto; padding:0 28px 56px;">
+      <div style="border-top:1px solid rgba(255,255,255,0.18); padding-top:20px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px 32px;">
+        <div>
+          <span class="label" style="color:rgba(255,255,255,0.45); display:block; margin-bottom:6px;">By</span>
+          <span class="body-sm" style="color:rgba(255,255,255,0.85);">Concepta &mdash; production partner for business-critical systems</span>
+        </div>
+        <div>
+          <span class="label" style="color:rgba(255,255,255,0.45); display:block; margin-bottom:6px;">For</span>
+          <span class="body-sm" style="color:rgba(255,255,255,0.85);">CTOs, CIOs, VPs of Engineering in reliability-sensitive environments</span>
+        </div>
+        <div>
+          <span class="label" style="color:rgba(255,255,255,0.45); display:block; margin-bottom:6px;">Reading time</span>
+          <span class="body-sm" style="color:rgba(255,255,255,0.85);">18 minutes &middot; 12 primary sources</span>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute; left:0; right:0; bottom:0; height:8px; display:flex;">
+      <div style="flex:3; background:var(--blue-500);"></div>
+      <div style="flex:1; background:var(--aqua-400);"></div>
+    </div>
+  </section>
+
+  <!-- ============ STANDFIRST / THE BRIEF ============ -->
+  <section data-screen-label="The Brief" style="padding:88px 0 0;">
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p style="font-size:clamp(1.2rem,1.9vw,1.5rem); line-height:1.55; color:var(--ink); margin:0 0 24px; font-weight:500;">
+        AI has made writing software faster. Shipping it safely to production hasn&rsquo;t gotten easier. That space &mdash; between code that&rsquo;s written and a system that&rsquo;s live, reliable, and trusted &mdash; is where most enterprise AI value is won or lost. We call it <b>the production gap</b>.</p>
+      <p class="body-lg" style="margin:0 0 24px; color:var(--fg1);">Adoption is no longer the question. Tools are everywhere; agents are entering the conversation. And yet the value keeps failing to arrive at the enterprise level. Most teams measure AI by how fast a person produces a draft, a code change, or an analysis. That&rsquo;s a useful local signal &mdash; but it isn&rsquo;t enterprise speed. Enterprise speed is the time from need to a change that is <b>approved, deployed, adopted, and producing value</b>. Across every serious study of the last three years, the research points to one consistent pattern.</p>
+    </div>
+
+    <div style="max-width:1060px; margin:56px auto 0; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:16px; margin-bottom:28px; display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+        <span class="eyebrow">What the evidence says</span>
+        <span class="label">Five findings, one pattern</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1px; background:var(--border-subtle); border:1px solid var(--border-subtle);">
+        <div style="background:var(--bg-elevated); padding:22px 20px;">
+          <span style="font-family:var(--font-mono); font-weight:700; font-size:1rem; color:var(--primary); display:block; margin-bottom:12px;">1</span>
+          <p class="body-sm" style="margin:0; color:var(--fg1);"><b>AI accelerates bounded, pattern-shaped work.</b> Drafting, summarizing, test scaffolding, routine implementation.</p>
+        </div>
+        <div style="background:var(--bg-elevated); padding:22px 20px;">
+          <span style="font-family:var(--font-mono); font-weight:700; font-size:1rem; color:var(--primary); display:block; margin-bottom:12px;">2</span>
+          <p class="body-sm" style="margin:0; color:var(--fg1);"><b>It does not uniformly accelerate complex delivery.</b> Mature systems still run on context, judgment, integration, review.</p>
+        </div>
+        <div style="background:var(--bg-elevated); padding:22px 20px;">
+          <span style="font-family:var(--font-mono); font-weight:700; font-size:1rem; color:var(--primary); display:block; margin-bottom:12px;">3</span>
+          <p class="body-sm" style="margin:0; color:var(--fg1);"><b>The bottleneck moves downstream.</b> When creation gets cheaper, review, validation, and rework become the constraint.</p>
+        </div>
+        <div style="background:var(--bg-elevated); padding:22px 20px;">
+          <span style="font-family:var(--font-mono); font-weight:700; font-size:1rem; color:var(--primary); display:block; margin-bottom:12px;">4</span>
+          <p class="body-sm" style="margin:0; color:var(--fg1);"><b>Self-reported speed is inflated.</b> People feel faster than the delivery data supports.</p>
+        </div>
+        <div style="background:var(--bg-elevated); padding:22px 20px;">
+          <span style="font-family:var(--font-mono); font-weight:700; font-size:1rem; color:var(--primary); display:block; margin-bottom:12px;">5</span>
+          <p class="body-sm" style="margin:0; color:var(--fg1);"><b>The winners redesign the workflow, not just the tooling.</b> Value shows up when review, decisions, and release are rebuilt around the new speed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:1060px; margin:64px auto 0; padding:0 28px;">
+      <blockquote style="margin:0; background:var(--navy-900); padding:44px 48px; position:relative; overflow:hidden;">
+        <div style="position:absolute; left:0; top:0; bottom:0; width:8px; background:var(--aqua-400);"></div>
+        <span class="eyebrow" style="color:var(--aqua-300); display:block; margin-bottom:16px;">The practical rule</span>
+        <p style="font-family:var(--font-display); font-weight:700; font-size:clamp(1.4rem,2.6vw,1.9rem); line-height:1.35; letter-spacing:-0.015em; color:#fff; margin:0; max-width:56ch;">Don&rsquo;t buy AI for speed. Build the operating model that turns faster creation into faster, safer releases. AI accelerates the work &mdash; it doesn&rsquo;t sign off on the release.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ 01 ADOPTION ============ -->
+  <section class="chapter chapter--light chapter--adoption" data-screen-label="01 Adoption" style="padding:104px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">01</span><span class="chapter-folio__label">The state of play</span></span>
+          <span class="label chapter-source">McKinsey 2025 &middot; BCG 2025</span>
+        </div>
+        <h2>Adoption is broad. Scaled value is not.</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0;">Enterprise AI has passed the awareness phase. McKinsey reports that 88% of organizations use AI in at least one function, yet BCG finds only 5% consistently generating substantial value. <b>Adoption is not transformation.</b></p>
+    </div>
+
+    <!-- FIG 01: the value staircase -->
+    <figure data-om-raster style="max-width:1060px; margin:48px auto 0; padding:0 28px;">
+      <div class="value-drop value-drop--editorial">
+        <div class="adoption-contrast">
+          <section class="adoption-contrast__lead" aria-label="McKinsey AI adoption finding">
+            <span class="adoption-contrast__source">McKinsey</span><strong>88%</strong><p>use AI in at least one function</p><span class="label">Up from 78% a year earlier</span>
+          </section>
+          <section class="adoption-contrast__lead adoption-contrast__lead--value" aria-label="BCG substantial value finding">
+            <span class="adoption-contrast__source">BCG</span><strong>5%</strong><p>consistently generate substantial value</p><span class="label">BCG&rsquo;s &ldquo;future-built&rdquo; companies</span>
+          </section>
+          <aside class="adoption-contrast__takeaway">
+            <span class="eyebrow">&rarr;&ensp;What this means for you</span>
+            <p class="body">Scattered tool use won&rsquo;t move EBIT. Governed, measured workflows will. Pick the workflows where faster iteration creates business value, and rebuild them end to end.</p>
+          </aside>
+        </div>
+        <div class="adoption-support" aria-label="Supporting evidence from McKinsey and BCG">
+          <div><span class="adoption-support__source">McKinsey</span><b>62%</b><p>experiment with agents: 23% scaling in at least one function and 39% experimenting.</p></div>
+          <div><span class="adoption-support__source">McKinsey</span><b>~33%</b><p>have begun scaling AI enterprise-wide; 39% report any EBIT impact, mostly below 5%.</p></div>
+          <div><span class="adoption-support__source">McKinsey</span><b>6%</b><p>qualify as &ldquo;AI high performers&rdquo; seeing significant value.</p></div>
+          <div><span class="adoption-support__source">BCG</span><b>35% / 60%</b><p>are scaling and seeing returns / report minimal revenue and cost gains.</p></div>
+        </div>
+      </div>
+    </figure>
+  </section>
+
+  <!-- ============ 02 THE GAP DEFINED ============ -->
+  <section class="chapter chapter--light chapter--gap" data-screen-label="02 The gap defined" style="padding:104px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">02</span><span class="chapter-folio__label">The mechanism</span></span>
+          <span class="label chapter-source">Theory of constraints</span>
+        </div>
+        <h2>The production gap, defined</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 22px;">Enterprise speed isn&rsquo;t set by the fastest step. It&rsquo;s set by the slowest constraint on the path to production. AI compresses one step &mdash; the draft or the build. It does not automatically compress the rest of the path.</p>
+    </div>
+
+    <!-- FIG 02: the path -->
+    <figure class="production-spread production-spread--steps" data-om-raster style="max-width:1060px; margin:40px auto 0; padding:0 28px;">
+      <div class="process-story">
+        <figcaption class="process-story__intro"><h3>AI makes one step faster&mdash;not the system.</h3></figcaption>
+        <div class="process-story__path" aria-label="AI speeds creation while review becomes the constraint">
+          <section class="process-story__stage">
+            <span class="process-story__kicker">01 &middot; Work enters</span>
+            <div class="process-story__simple-steps">
+              <span class="process-story__pill">Request defined</span>
+              <span class="process-story__pill">Context supplied</span>
+            </div>
+          </section>
+          <section class="process-story__stage process-story__stage--ai">
+            <span class="process-story__kicker">02 &middot; AI drafts faster</span>
+            <strong class="process-story__speed">70%</strong>
+            <p>more output reaches the same review gate</p>
+          </section>
+          <section class="process-story__stage process-story__queue">
+            <span class="process-story__kicker">03 &middot; The review queue grows</span>
+            <p class="process-story__queue-note">New work arrives faster than the organization can check and release it.</p>
+            <div class="process-story__queue-stack" aria-label="Review, revision, and approval become the tallest queue before release">
+              <span class="process-story__queue-block">review</span>
+              <span class="process-story__queue-block">revision</span>
+              <span class="process-story__queue-block">approval</span>
+              <span class="process-story__queue-block">release</span>
+              <span class="process-story__queue-block">adopt</span>
+              <span class="process-story__queue-block">measure</span>
+            </div>
+          </section>
+        </div>
+        <div class="process-story__constraint"><strong>The system moves only as fast as review clears.</strong><span class="body-sm">If review, approval, and release capacity stay fixed, faster creation becomes waiting work&mdash;and the 70% gain is absorbed before production.</span></div>
+      </div>
+    </figure>
+
+    <!-- FIG 03: the funnel -->
+    <figure class="production-spread production-spread--image" data-om-raster style="max-width:1060px; margin:40px auto 0; padding:0 28px;">
+      <div style="border:1px solid var(--border-subtle); background:var(--bg-elevated);">
+        <figcaption class="figure-intro">
+          <h3 class="figure-intro__title">Where the speed gets absorbed</h3>
+          <p class="figure-intro__deck">Creation expands immediately. Review and release capacity do not&mdash;so more output becomes more work waiting.</p>
+        </figcaption>
+        <img class="editorial-figure__image" src="assets/speed-absorbed-light-panorama-retina-v4.webp" alt="Blue work artifacts cross a pale paper field, gather through centered review screens and a narrow coral checkpoint, then emerge as three mint-green finished objects.">
+        <div class="editorial-figure__note" aria-label="How to read the illustration">
+          <span><b>Creation</b>Output volume expands</span>
+          <span><b>Review</b>Capacity stays narrow</span>
+          <span><b>Production</b>Only trusted work ships</span>
+        </div>
+      </div>
+    </figure>
+
+    <div style="max-width:760px; margin:44px auto 0; padding:0 28px;">
+      <p class="body-lg" style="margin:0;">If AI cuts drafting time by 70% but review time doubles, delivery barely moves. Measure the whole path&mdash;including review, rework, coordination, governance, and adoption&mdash;then find the new constraint before it becomes a quality, cost, or trust problem.</p>
+    </div>
+  </section>
+
+  <!-- ============ 03 WHERE SPEED IS REAL ============ -->
+  <section class="chapter chapter--light chapter--causal" data-screen-label="03 Where speed is real" style="padding:104px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">03</span><span class="chapter-folio__label">The upside</span></span>
+          <span class="label chapter-source">Brynjolfsson et al. &middot; Peng et al.</span>
+        </div>
+        <h2>Where AI speed is real</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 22px;">The strongest gains show up when work is bounded, repetitive, pattern-shaped, and easy to verify. Two randomized studies carry the causal weight.</p>
+    </div>
+
+    <!-- FIG 04: causal evidence -->
+    <figure data-om-raster style="max-width:1060px; margin:40px auto 0; padding:0 28px;">
+      <div class="causal-cards">
+        <article class="causal-card">
+          <span class="causal-card__context">Customer support &middot; 5,172 agents</span>
+          <strong class="causal-card__metric">15% more</strong>
+          <h3>issues resolved per hour</h3>
+          <p class="body">The least experienced agents improved by 34%, suggesting the assistant helped most where patterns were learnable and answers were easy to check.</p>
+          <footer><span>Brynjolfsson, Li &amp; Raymond</span><span>Staggered rollout</span></footer>
+        </article>
+        <article class="causal-card causal-card--coding">
+          <span class="causal-card__context">Scoped coding &middot; controlled trial</span>
+          <strong class="causal-card__metric">56% less</strong>
+          <h3>time to complete the task</h3>
+          <p class="body">Developers using Copilot completed the same HTTP-server task in 55.8% less time than the control group.</p>
+          <footer><span>Peng, Kalliamvakou, Cihon &amp; Demirer</span><span>Randomized trial</span></footer>
+        </article>
+      </div>
+    </figure>
+
+    <div class="workflow-edit" style="max-width:1160px; margin:44px auto 0; padding:0 28px;">
+      <div class="workflow-edit__main">
+      <h3 class="workflow-edit__title">The shared shape: clear inputs, checkable outputs, low ambiguity.</h3>
+      <table class="workflow-edit__table">
+        <thead><tr>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 14px 10px 0; border-bottom:2px solid var(--ink);">Workflow</th>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 14px; border-bottom:2px solid var(--ink);">Why AI helps</th>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 0 10px 14px; border-bottom:2px solid var(--ink);">What stays human-owned</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><b>Content and research drafts</b><small>Documents, synthesis, comparisons</small></td><td>Learnable patterns and text-based inputs</td><td>Voice, source quality, claims, recency and citations</td></tr>
+          <tr><td><b>Support assist</b><small>Suggested responses and knowledge retrieval</small></td><td>Repeated questions and established policy</td><td>Escalation, empathy and exceptions</td></tr>
+          <tr><td><b>Engineering scaffolding</b><small>Tests, documentation, routine scoped implementation</small></td><td>Repetition and reusable knowledge</td><td>Coverage, edge cases, integration, review and acceptance</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <aside class="workflow-edit__takeaway">
+        <span class="eyebrow">&rarr;&ensp;What this means for you</span>
+        <p class="body" style="margin:0;">Start where the work is bounded and reviewable. Don&rsquo;t start with vague enterprise-wide automation &mdash; start where you can check the output and prove the gain.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ 04 OVERSTATED — DARK ACT ============ -->
+  <aside class="task-lab" aria-labelledby="task-lab-title">
+    <div class="task-lab__shell">
+      <div class="task-lab__intro">
+        <span class="eyebrow" style="color:var(--aqua-300);">Interactive field test</span>
+        <h3 id="task-lab-title">Where does speed survive?</h3>
+        <p class="task-lab__answer">Choose a recognizable task. See how ambiguity, context, and verification change the likely net gain.</p>
+      </div>
+      <div class="task-lab__choices" role="group" aria-label="Choose a task profile">
+        <button class="task-lab__choice" type="button" data-task="bounded" aria-pressed="true"><b>Draft a standard support reply</b><span>Bounded &middot; checkable</span></button>
+        <button class="task-lab__choice" type="button" data-task="mixed" aria-pressed="false"><b>Modernize a legacy service</b><span>Context-heavy &middot; mixed</span></button>
+        <button class="task-lab__choice" type="button" data-task="complex" aria-pressed="false"><b>Approve a regulated release</b><span>High-risk &middot; consequential</span></button>
+      </div>
+      <div class="task-lab__result" aria-live="polite">
+        <p class="task-lab__answer" id="task-lab-answer"><b style="color:#fff;">Speed is likely to survive.</b> The input is clear, the answer can be checked quickly, and policy defines the boundary.</p>
+        <div>
+          <div class="task-lab__score" id="task-lab-label">Net speed after review &middot; high</div>
+          <div class="task-lab__meter" aria-hidden="true"><span id="task-lab-meter"></span></div>
+          <div class="task-lab__score">Creation gain minus context, review and rework</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section class="chapter chapter--dark chapter--reversal" data-screen-label="04 Where speed is overstated" style="margin-top:104px; background:var(--navy-950); padding:88px 0 88px;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid rgba(255,255,255,0.9); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">04</span><span class="chapter-folio__label">The reversal</span></span>
+          <span class="label chapter-source">METR randomized trial, 2025</span>
+        </div>
+        <h2 style="color:#fff;">Where AI speed is overstated</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 22px; color:rgba(255,255,255,0.82);">Speed is least reliable where work is complex, ambiguous, high-risk, or context-heavy. The most important lesson comes from a setting that looks like it should favor AI: 16 experienced open-source maintainers, working on 246 real issues, in codebases they knew deeply.</p>
+    </div>
+
+    <div class="cinematic-stage">
+      <img class="cinematic-stage__art" src="assets/expectation-reality-cinematic-bg-retina-v2.webp" alt="Blue paper fragments rise above a measurement plane while coral fragments fall below it, visualizing the gap between expected and measured AI speed.">
+      <div class="cinematic-stage__content">
+        <div class="cinematic-stage__numbers" aria-label="Expectation versus measured results">
+          <div class="cinematic-stage__metric"><span class="cinematic-stage__value">+24%</span><span class="label">Expected before the trial</span></div>
+          <div class="cinematic-stage__metric"><span class="cinematic-stage__value">+20%</span><span class="label">Believed after the trial</span></div>
+          <div class="cinematic-stage__metric"><span class="cinematic-stage__value">−19%</span><span class="label">Measured completion speed</span></div>
+        </div>
+        <aside class="cinematic-stage__note">
+          <span class="eyebrow">Expectation ran ahead of reality</span>
+          <p class="body" style="margin:0;">The tool felt fast. The complete task was slower. The difference is the cost of context, checking, and correction.</p>
+        </aside>
+      </div>
+    </div>
+
+    <!-- FIG 05: METR diverging bars -->
+    <figure data-om-raster style="max-width:1060px; margin:48px auto 0; padding:0 28px;">
+      <div style="border:1px solid rgba(255,255,255,0.18); padding:32px 36px 36px;">
+        <figcaption style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:8px;">
+          <span class="eyebrow" style="color:var(--aqua-300);">Expectation vs. reality</span>
+          <span class="label" style="color:rgba(255,255,255,0.5);">Change in task completion speed with AI</span>
+        </figcaption>
+        <svg viewBox="0 0 680 330" width="100%" style="display:block; font-family:var(--font-mono);" role="img" aria-label="Developers expected a 24 percent speed-up, believed a 20 percent speed-up, but were measured 19 percent slower">
+          <line x1="40" y1="180" x2="640" y2="180" stroke="rgba(255,255,255,0.45)" stroke-width="2"></line>
+          <text x="40" y="172" fill="rgba(255,255,255,0.45)" font-size="11" letter-spacing="0.06em">0</text>
+          <rect x="80" y="66" width="120" height="114" fill="#2A50FF"></rect>
+          <text x="140" y="48" fill="#fff" font-size="26" font-weight="700" text-anchor="middle">+24%</text>
+          <text x="140" y="204" fill="rgba(255,255,255,0.75)" font-size="12" text-anchor="middle" letter-spacing="0.05em">EXPECTED</text>
+          <text x="140" y="222" fill="rgba(255,255,255,0.45)" font-size="11" text-anchor="middle">before the trial</text>
+          <rect x="280" y="85" width="120" height="95" fill="#2A50FF"></rect>
+          <text x="340" y="67" fill="#fff" font-size="26" font-weight="700" text-anchor="middle">+20%</text>
+          <text x="340" y="204" fill="rgba(255,255,255,0.75)" font-size="12" text-anchor="middle" letter-spacing="0.05em">BELIEVED</text>
+          <text x="340" y="222" fill="rgba(255,255,255,0.45)" font-size="11" text-anchor="middle">after working with AI</text>
+          <rect x="480" y="180" width="120" height="90" fill="#FF6B6B"></rect>
+          <text x="540" y="304" fill="#FF6B6B" font-size="26" font-weight="700" text-anchor="middle">&minus;19%</text>
+          <text x="540" y="204" fill="#050D3A" font-size="1" text-anchor="middle">.</text>
+          <text x="540" y="160" fill="rgba(255,255,255,0.75)" font-size="12" text-anchor="middle" letter-spacing="0.05em">MEASURED</text>
+          <text x="540" y="142" fill="rgba(255,255,255,0.45)" font-size="11" text-anchor="middle">actual completion time</text>
+        </svg>
+      </div>
+    </figure>
+
+    <div style="max-width:760px; margin:48px auto 0; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 22px; color:rgba(255,255,255,0.82);">They expected AI to make them 24% faster. Afterward they believed it had made them 20% faster. Measured, they were <b style="color:#FF6B6B;">19% slower</b> with AI allowed.</p>
+      <p class="body-lg" style="margin:0; color:rgba(255,255,255,0.82);">The same tool that speeds up boilerplate can slow down work in a mature codebase. Task type decides the outcome &mdash; not the model.</p>
+    </div>
+  </section>
+
+  <!-- 04b: light continuation -->
+  <section class="chapter-continuation" data-screen-label="04b Task types" style="padding:72px 0 0;">
+    <div class="evidence-split evidence-split--table" style="margin-top:0;">
+      <div class="evidence-table-wrap">
+      <table style="width:100%; border-collapse:collapse; margin:0;">
+        <thead><tr>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 14px 10px 0; border-bottom:2px solid var(--ink);">Workflow</th>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 14px; border-bottom:2px solid var(--ink);">Why speed is unreliable</th>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 0 10px 14px; border-bottom:2px solid var(--ink);">Better role for AI</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:13px 14px 13px 0; border-bottom:1px solid var(--border-subtle); font-size:14.5px; font-weight:600;">Complex debugging</td><td style="padding:13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Root cause is unknown and context-heavy</td><td style="padding:13px 0 13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Hypothesis generation, log analysis</td></tr>
+          <tr><td style="padding:13px 14px 13px 0; border-bottom:1px solid var(--border-subtle); font-size:14.5px; font-weight:600;">Legacy modernization</td><td style="padding:13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Deep context, hidden business rules</td><td style="padding:13px 0 13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Code explanation, inventory, test generation</td></tr>
+          <tr><td style="padding:13px 14px 13px 0; border-bottom:1px solid var(--border-subtle); font-size:14.5px; font-weight:600;">Security-sensitive code</td><td style="padding:13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Working code can still be unsafe</td><td style="padding:13px 0 13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Secure-coding checks, threat modeling</td></tr>
+          <tr><td style="padding:13px 14px 13px 0; border-bottom:1px solid var(--border-subtle); font-size:14.5px; font-weight:600;">Enterprise integrations</td><td style="padding:13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Contracts between systems, sequencing</td><td style="padding:13px 0 13px 14px; border-bottom:1px solid var(--border-subtle); font-size:14.5px; color:var(--fg2);">Dependency mapping, decision records</td></tr>
+          <tr><td style="padding:13px 14px 13px 0; font-size:14.5px; font-weight:600;">Strategy and architecture</td><td style="padding:13px 14px; font-size:14.5px; color:var(--fg2);">Requires owned trade-offs</td><td style="padding:13px 0 13px 14px; font-size:14.5px; color:var(--fg2);">Scenario generation, evidence gathering</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <aside class="evidence-sidebar__takeaway">
+        <span class="eyebrow">&rarr;&ensp;What this means for you</span>
+        <p class="body" style="margin:0;">Never estimate AI as a uniform multiplier. Every workflow needs its own speed, quality, risk, and review profile. &ldquo;10x the whole team&rdquo; is a claim to distrust; &ldquo;55% faster on this bounded task, no change on that mature one&rdquo; is how it actually behaves.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ 05 REVIEW BOTTLENECK ============ -->
+  <section class="chapter chapter--light chapter--review" data-screen-label="05 The review bottleneck" style="padding:104px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">05</span><span class="chapter-folio__label">The constraint</span></span>
+          <span class="label chapter-source">DORA &middot; Faros AI &middot; LinearB</span>
+        </div>
+        <h2>The bottleneck moves to review</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 22px;">The best-supported finding in the field is not that AI makes organizations faster. It&rsquo;s that AI moves the constraint from creation to review and control.</p>
+    </div>
+
+    <!-- FIG 06: telemetry multipliers -->
+    <figure data-om-raster style="max-width:1060px; margin:40px auto 0; padding:0 28px;">
+      <div style="border:1px solid var(--border-subtle); background:var(--bg-elevated); padding:32px 36px 36px;">
+        <figcaption style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:26px;">
+          <span class="eyebrow">What the telemetry shows</span>
+          <span class="label">Faros AI: 22,000 devs &middot; LinearB: 8.1M+ PRs</span>
+        </figcaption>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px; background:var(--border-subtle); border:1px solid var(--border-subtle); margin-bottom:32px;">
+          <div style="background:var(--paper); padding:22px 18px;">
+            <div style="font-family:var(--font-mono); font-weight:700; font-size:2.4rem; line-height:1; color:var(--primary);">+51%</div>
+            <span class="label" style="display:block; margin-top:10px;">Pull-request size</span>
+          </div>
+          <div style="background:var(--paper); padding:22px 18px;">
+            <div style="font-family:var(--font-mono); font-weight:700; font-size:2.4rem; line-height:1; color:var(--primary);">5&times;</div>
+            <span class="label" style="display:block; margin-top:10px;">Median review time</span>
+          </div>
+          <div style="background:var(--paper); padding:22px 18px;">
+            <div style="font-family:var(--font-mono); font-weight:700; font-size:2.4rem; line-height:1; color:var(--primary);">+54%</div>
+            <span class="label" style="display:block; margin-top:10px;">Bugs per developer</span>
+          </div>
+          <div style="background:var(--navy-900); padding:22px 18px;">
+            <div style="font-family:var(--font-mono); font-weight:700; font-size:2.4rem; line-height:1; color:var(--aqua-300);">4.6&times;</div>
+            <span class="label" style="display:block; margin-top:10px; color:rgba(255,255,255,0.55);">Longer wait before review</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <span class="label">PR acceptance rate &mdash; LinearB, 4,800+ organizations</span>
+          <div style="display:grid; grid-template-columns:150px 1fr 70px; gap:14px; align-items:center;">
+            <span class="label" style="color:var(--fg1);">Human-authored</span>
+            <div style="height:26px; background:var(--blue-100);"><div data-grow style="height:26px; width:84.4%; background:var(--blue-500);"></div></div>
+            <span style="font-family:var(--font-mono); font-weight:700; font-size:1.1rem; color:var(--ink);">84.4%</span>
+          </div>
+          <div style="display:grid; grid-template-columns:150px 1fr 70px; gap:14px; align-items:center;">
+            <span class="label" style="color:var(--fg1);">AI-assisted</span>
+            <div style="height:26px; background:var(--blue-100);"><div data-grow style="height:26px; width:32.7%; background:var(--navy-900);"></div></div>
+            <span style="font-family:var(--font-mono); font-weight:700; font-size:1.1rem; color:var(--ink);">32.7%</span>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <div class="evidence-split">
+      <div class="evidence-list" aria-label="Evidence behind the review bottleneck">
+        <div class="evidence-list__item">
+          <span class="label">DORA 2024</span>
+          <p class="body" style="margin:0;">As AI adoption rose, delivery throughput dropped about 1.5% and delivery stability about 7.2% &mdash; even as individual productivity and job satisfaction improved. The cause it points to: bigger batches and weaker testing discipline.</p>
+        </div>
+        <div class="evidence-list__item">
+          <span class="label">DORA 2025</span>
+          <p class="body" style="margin:0;">Throughput&rsquo;s relationship with AI turned positive &mdash; but AI still shows a negative relationship with delivery stability. Without strong testing, mature version control, and fast feedback loops, more change volume means more instability.</p>
+        </div>
+        <div class="evidence-list__item">
+          <span class="label">Faros 2026</span>
+          <p class="body" style="margin:0;">Telemetry from 22,000 developers across 4,000 teams: PR size up ~51%, median review time up ~5&times;, bugs per developer up ~54%, and the incidents-to-PR ratio more than tripled.</p>
+        </div>
+        <div class="evidence-list__item">
+          <span class="label">LinearB 2026</span>
+          <p class="body" style="margin:0;">Across 8.1M+ pull requests from 4,800+ organizations, AI-assisted PRs waited about 4.6&times; longer before review and were accepted far less often than human PRs &mdash; 32.7% versus 84.4%.</p>
+        </div>
+      </div>
+      <aside class="evidence-sidebar">
+        <p class="body-lg evidence-sidebar__note">Outside software, the same dynamic appears as drafts piling up for legal or brand review, analyses waiting on fact-checking, and more recommendations than leaders can decide on. More output, same decision capacity, longer queue.</p>
+        <div class="evidence-sidebar__takeaway">
+        <span class="eyebrow">&rarr;&ensp;What this means for you</span>
+        <p class="body" style="margin:0;">Every AI initiative needs a review-capacity plan. If you don&rsquo;t design the review layer, speed turns into queueing, rework, or quality leakage &mdash; and the gain you measured at the draft disappears before production.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ 06 QUALITY DEBT ============ -->
+  <section class="chapter chapter--light chapter--risk" data-screen-label="06 Quality and security debt" style="padding:104px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">06</span><span class="chapter-folio__label">The debt</span></span>
+          <span class="label chapter-source">GitClear &middot; Veracode &middot; Stack Overflow</span>
+        </div>
+        <h2>Quality and security debt</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 22px;">AI can raise output volume before an organization has improved its quality system. The result is delivery debt: the growing backlog of checking, correcting, integrating, and maintaining AI-assisted work.</p>
+    </div>
+
+    <!-- FIG 07: code-quality slope -->
+    <figure data-om-raster style="max-width:1060px; margin:40px auto 0; padding:0 28px;">
+      <div style="display:grid; grid-template-columns:minmax(0,3fr) minmax(0,2fr); gap:1px; background:var(--border-subtle); border:1px solid var(--border-subtle);">
+        <div style="background:var(--bg-elevated); padding:30px 32px;">
+          <figcaption style="margin-bottom:20px;">
+            <span class="eyebrow" style="display:block; margin-bottom:6px;">The maintainability slide</span>
+            <span class="label">% of changed lines &middot; GitClear, 211M lines, 2020&ndash;2024</span>
+          </figcaption>
+          <svg viewBox="0 0 460 250" width="100%" style="display:block; font-family:var(--font-mono);" role="img" aria-label="Refactoring fell from 25 percent to under 10 percent while copy-pasted code rose from 8.3 to 12.3 percent">
+            <line x1="70" y1="30" x2="70" y2="210" stroke="var(--border-subtle)" stroke-width="1"></line>
+            <line x1="390" y1="30" x2="390" y2="210" stroke="var(--border-subtle)" stroke-width="1"></line>
+            <text x="70" y="232" fill="var(--fg2)" font-size="12" text-anchor="middle">2021</text>
+            <text x="390" y="232" fill="var(--fg2)" font-size="12" text-anchor="middle">2024</text>
+            <line x1="70" y1="55" x2="390" y2="160" stroke="var(--blue-500)" stroke-width="6" stroke-linecap="square"></line>
+            <rect x="64" y="49" width="12" height="12" fill="var(--blue-500)"></rect>
+            <rect x="384" y="154" width="12" height="12" fill="var(--blue-500)"></rect>
+            <text x="86" y="50" fill="var(--blue-500)" font-size="14" font-weight="700">25% refactored</text>
+            <text x="378" y="186" fill="var(--blue-500)" font-size="14" font-weight="700" text-anchor="end">&lt;10%</text>
+            <line x1="70" y1="185" x2="390" y2="140" stroke="var(--navy-900)" stroke-width="6" stroke-linecap="square"></line>
+            <rect x="64" y="179" width="12" height="12" fill="var(--navy-900)"></rect>
+            <rect x="384" y="134" width="12" height="12" fill="var(--navy-900)"></rect>
+            <text x="86" y="205" fill="var(--navy-900)" font-size="14" font-weight="700">8.3% copy/pasted</text>
+            <text x="378" y="128" fill="var(--navy-900)" font-size="14" font-weight="700" text-anchor="end">12.3%</text>
+          </svg>
+          <p class="body-sm" style="margin:16px 0 0;">In 2024, duplicated code overtook reused code for the first time in the dataset&rsquo;s history.</p>
+        </div>
+        <div style="background:var(--bg-elevated); display:flex; flex-direction:column;">
+          <div style="padding:26px 28px; border-bottom:1px solid var(--border-subtle); flex:1;">
+            <div style="font-family:var(--font-mono); font-weight:700; font-size:2.6rem; line-height:1; color:var(--error);">45%</div>
+            <span class="label" style="display:block; margin:10px 0 6px;">of AI code samples introduced a vulnerability</span>
+            <p class="body-sm" style="margin:0;">Veracode, 100+ models. For cross-site scripting, models failed to defend in 86% of relevant cases.</p>
+          </div>
+          <div style="padding:26px 28px; flex:1;">
+            <div style="font-family:var(--font-mono); font-weight:700; font-size:2.6rem; line-height:1; color:var(--primary);">66%</div>
+            <span class="label" style="display:block; margin:10px 0 6px;">of developers frustrated by &ldquo;almost right&rdquo; answers</span>
+            <p class="body-sm" style="margin:0;">Stack Overflow 2025. 46% distrust AI accuracy; 33% trust it. 45% say debugging AI code takes longer.</p>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <div style="max-width:760px; margin:44px auto 0; padding:0 28px;">
+      <aside style="border-left:3px solid var(--primary); background:var(--bg-elevated); padding:22px 26px; margin:0;">
+        <span class="eyebrow" style="display:block; margin-bottom:10px;">&rarr;&ensp;What this means for you</span>
+        <p class="body" style="margin:0;">Pair speed with quality gates. If AI raises output without raising verification, it raises operational risk. Polished and wrong is more dangerous than obviously unfinished.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ 07 FEEL FASTER ============ -->
+  <section class="chapter chapter--light chapter--perception" data-screen-label="07 Felt vs measured speed" style="padding:104px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">07</span><span class="chapter-folio__label">The perception trap</span></span>
+          <span class="label chapter-source">METR &middot; Stack Overflow</span>
+        </div>
+        <h2>Why teams feel faster before they are faster</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 22px;">AI changes how work feels. Blank pages disappear, search feels conversational, drafts arrive fast. That momentum is real &mdash; but felt speed and measured speed are different things. In the METR trial, developers believed AI sped them up by 20% while it was slowing them down by 19%. Stack Overflow&rsquo;s data shows the same split: high usage, falling trust.</p>
+    </div>
+    <div class="perception-stage">
+      <img class="perception-stage__art" src="assets/felt-vs-measured-light-bg-retina-v2.webp" alt="Cobalt paper fragments surge above a calibration line while coral fragments drift below it, contrasting felt acceleration with measured slowdown.">
+      <div class="perception-stage__numbers" aria-label="Felt versus measured speed">
+        <div class="perception-stage__measure"><span class="perception-stage__kicker">Perception</span><span class="perception-stage__number">+20%</span><span class="perception-stage__label">Developers believed they worked faster</span></div>
+        <div class="perception-stage__measure"><span class="perception-stage__kicker">Reality</span><span class="perception-stage__number">−19%</span><span class="perception-stage__label">Measured task completion was slower</span></div>
+      </div>
+    </div>
+    <div style="max-width:1060px; margin:48px auto 0; padding:0 28px;">
+      <blockquote style="margin:0; border-top:3px solid var(--ink); border-bottom:3px solid var(--ink); padding:40px 8px;">
+        <p style="font-family:var(--font-display); font-weight:800; font-size:clamp(1.7rem,3.4vw,2.5rem); line-height:1.18; letter-spacing:-0.02em; color:var(--ink); margin:0 0 18px; max-width:30ch;">Adoption tells you people will use the system. Only measured workflow data tells you it <span style="color:var(--primary);">paid off</span>.</p>
+        <cite class="label" style="font-style:normal;">Treat enthusiasm as an adoption signal, not an ROI signal</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ 08 OPERATING MODEL ============ -->
+  <section class="operating-model" data-screen-label="08 Operating model">
+    <div class="operating-model__inner">
+      <div class="operating-model__folio">
+        <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">08</span><span class="chapter-folio__label">The playbook</span></span>
+        <span class="label chapter-source">Five moves &middot; in order</span>
+      </div>
+
+      <div class="operating-model__hero">
+        <h2>Ship at AI speed without losing control.</h2>
+        <p class="operating-model__intro">The answer isn&rsquo;t less AI. It is a deliberate operating model: aim AI at the right work, preserve human decision rights, and measure the entire path to production.</p>
+      </div>
+
+      <div class="operating-model__layout">
+        <aside class="operating-model__principle">
+          <span class="eyebrow">The operating principle</span>
+          <h3>Compress the work. Keep the controls.</h3>
+          <p>Local speed becomes delivery speed only when review capacity, ownership, and evidence move with it.</p>
+          <div class="operating-model__promise">
+            <strong>A safer promise than &ldquo;50% faster&rdquo;</strong>
+            <span>Identify what can be compressed, what must stay human-owned, and where AI reduces cycle time without adding risk.</span>
+          </div>
+        </aside>
+
+        <div class="operating-model__moves" aria-label="Five operating model moves">
+          <article class="operating-model__move">
+            <span class="operating-model__number">01</span>
+            <h3>Map the real path</h3>
+            <p>Find where work waits, where quality fails, and where the same judgment repeats from request to production.</p>
+          </article>
+          <article class="operating-model__move">
+            <span class="operating-model__number">02</span>
+            <h3>Set the AI boundary</h3>
+            <p>Choose what AI drafts or builds and what remains human-owned based on risk and verification cost.</p>
+          </article>
+          <article class="operating-model__move">
+            <span class="operating-model__number">03</span>
+            <h3>Name decision owners</h3>
+            <p>Make review, approval, and the evidence required for sign-off explicit before volume increases.</p>
+          </article>
+          <article class="operating-model__move">
+            <span class="operating-model__number">04</span>
+            <h3>Build the review system</h3>
+            <p>Pair the assisted workflow with a review rubric, approval path, and enough capacity to run at real volume.</p>
+          </article>
+          <article class="operating-model__move">
+            <span class="operating-model__number">05</span>
+            <h3>Measure the release</h3>
+            <p>Track cycle time after review and rework. Scale only workflows that show a net gain and have a named owner.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 METRICS ============ -->
+  <section class="chapter chapter--light chapter--metrics" data-screen-label="09 Metrics" style="padding:104px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">09</span><span class="chapter-folio__label">The scoreboard</span></span>
+          <span class="label chapter-source">Measure the path, not the draft</span>
+        </div>
+        <h2>Metrics that matter</h2>
+      </div>
+    </div>
+    <div style="max-width:760px; margin:0 auto; padding:0 28px;">
+      <p class="body-lg" style="margin:0 0 32px;">Vanity metrics make AI look successful while the business sees nothing: prompts run, tools purchased, lines generated, drafts produced, self-reported time saved. Measure the path instead.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1px; background:var(--border-subtle); border:1px solid var(--border-subtle);">
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">Request-to-approved-output cycle time</span><span class="body-sm">The actual speed of the workflow</span></div>
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">First-pass creation time</span><span class="body-sm">Where AI helps locally</span></div>
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">Review time</span><span class="body-sm">Where speed gets absorbed</span></div>
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">Rework rate</span><span class="body-sm">The hidden quality cost</span></div>
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">Defect / incident rate</span><span class="body-sm">Keeps speed from masking quality loss</span></div>
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">Change stability</span><span class="body-sm">Whether faster change breaks production</span></div>
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">Adoption by workflow</span><span class="body-sm">Whether teams actually use the system</span></div>
+        <div style="background:var(--bg-elevated); padding:18px 22px;"><span class="body" style="font-weight:700; display:block;">Business outcome</span><span class="body-sm">The tie to revenue, cost, risk, or CX</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 CONCEPTA — CLOSE ============ -->
+  <section class="concepta-close" data-screen-label="10 How Concepta helps">
+    <div class="concepta-close__inner">
+      <div class="concepta-close__folio">
+        <span class="eyebrow chapter-folio"><span class="chapter-folio__part">Part</span><span class="chapter-folio__number">10</span><span class="chapter-folio__label">The close</span></span>
+        <span class="label chapter-source">Concepta &middot; governed delivery</span>
+      </div>
+
+      <div class="concepta-close__hero">
+        <h2>Production confidence.</h2>
+        <p class="concepta-close__thesis"><strong>How Concepta helps</strong>We own the path from delivery risk to reliable release. AI speeds the work; senior technical leaders keep the system controlled, stable, and shippable.</p>
+      </div>
+
+      <div class="concepta-close__record" aria-label="Concepta track record">
+        <div><b>20 years</b><span>Owning critical systems</span></div>
+        <div><b>600+</b><span>Projects delivered</span></div>
+        <div><b>98%</b><span>Delivery satisfaction</span></div>
+      </div>
+
+      <div class="concepta-close__start">
+        <div class="concepta-close__offer">
+          <span class="eyebrow">Start here &middot; 2&ndash;3 weeks &middot; fixed scope</span>
+          <h3>Delivery Risk Assessment</h3>
+          <p>We map the request-to-production path, identify the delivery and release risks, and give you a clear ship, hold, or fix-first decision&mdash;with a sequenced stabilization plan.</p>
+          <a href="#task-lab-title">Assess the release path &rarr;</a>
+        </div>
+        <div class="concepta-close__capabilities">
+          <div class="concepta-close__capability">
+            <span>When ownership is the gap</span>
+            <strong>Technical delivery stewardship</strong>
+            <p>Senior technical ownership through decisions, stabilization, and release.</p>
+          </div>
+          <div class="concepta-close__capability">
+            <span>When the system is the work</span>
+            <strong>Business-critical delivery</strong>
+            <p>Modernization, custom platforms, workflows, and integrations built to hold after launch.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="concepta-close__proof">
+        <span class="eyebrow">Selected outcomes</span>
+        <div class="concepta-close__proof-grid">
+          <article class="concepta-close__proof-item">
+            <span class="concepta-close__proof-value">+27%</span>
+            <strong>Truist &middot; fintech</strong>
+            <p>More new applications after rebuilding the virtual-loan experience.</p>
+          </article>
+          <article class="concepta-close__proof-item">
+            <span class="concepta-close__proof-value">4.7&#9733;</span>
+            <strong>AdventHealth &middot; healthcare</strong>
+            <p>Touchless care scaled in five months and earned 16,000 reviews.</p>
+          </article>
+          <article class="concepta-close__proof-item">
+            <span class="concepta-close__proof-value">$3M+</span>
+            <strong>FEMA &middot; public sector</strong>
+            <p>Savings from a unified emergency-response supply chain.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="concepta-close__final">
+        <p>AI accelerates the work. <span>We own the release.</span></p>
+        <small>Build faster without losing control. That is the promise of governed delivery.</small>
+      </div>
+    </div>
+    <div class="concepta-close__end-rule"></div>
+  </section>
+
+  <!-- ============ APPENDIX ============ -->
+  <sc-if value="{{ showAppendix }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Appendix" style="padding:88px 0 0;">
+    <div style="max-width:1060px; margin:0 auto; padding:0 28px;">
+      <div style="border-top:3px solid var(--ink); padding-top:20px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;">
+          <span class="eyebrow">Appendix</span>
+          <span class="label">12 primary sources</span>
+        </div>
+        <h2 style="font-size:clamp(2rem,4vw,3rem); line-height:1.05; letter-spacing:-0.03em; margin:0 0 40px;">Evidence at a glance</h2>
+      </div>
+
+      <table style="width:100%; border-collapse:collapse; margin-bottom:48px;">
+        <thead><tr>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 14px 10px 0; border-bottom:2px solid var(--ink);">Finding</th>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 14px; border-bottom:2px solid var(--ink);">What the evidence shows</th>
+          <th style="text-align:left; text-transform:uppercase; color:var(--fg2); padding:10px 0 10px 14px; border-bottom:2px solid var(--ink);">Sources</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:12px 14px 12px 0; border-bottom:1px solid var(--border-subtle); font-size:14px; font-weight:600;">Adoption vs. value</td><td style="padding:12px 14px; border-bottom:1px solid var(--border-subtle); font-size:14px; color:var(--fg2);">AI is widely used but rarely scaled to real impact</td><td style="padding:12px 0 12px 14px; border-bottom:1px solid var(--border-subtle); font-size:12.5px; color:var(--fg2); font-family:var(--font-mono);">McKinsey 2025, BCG 2025</td></tr>
+          <tr><td style="padding:12px 14px 12px 0; border-bottom:1px solid var(--border-subtle); font-size:14px; font-weight:600;">Speed on bounded work</td><td style="padding:12px 14px; border-bottom:1px solid var(--border-subtle); font-size:14px; color:var(--fg2);">Real gains on support and scoped coding tasks</td><td style="padding:12px 0 12px 14px; border-bottom:1px solid var(--border-subtle); font-size:12.5px; color:var(--fg2); font-family:var(--font-mono);">Brynjolfsson et al. 2023, Peng et al. 2023</td></tr>
+          <tr><td style="padding:12px 14px 12px 0; border-bottom:1px solid var(--border-subtle); font-size:14px; font-weight:600;">Speed on complex work</td><td style="padding:12px 14px; border-bottom:1px solid var(--border-subtle); font-size:14px; color:var(--fg2);">Can slow experienced devs in mature codebases</td><td style="padding:12px 0 12px 14px; border-bottom:1px solid var(--border-subtle); font-size:12.5px; color:var(--fg2); font-family:var(--font-mono);">METR 2025</td></tr>
+          <tr><td style="padding:12px 14px 12px 0; border-bottom:1px solid var(--border-subtle); font-size:14px; font-weight:600;">Review bottleneck</td><td style="padding:12px 14px; border-bottom:1px solid var(--border-subtle); font-size:14px; color:var(--fg2);">Constraint shifts to review, stability, and control</td><td style="padding:12px 0 12px 14px; border-bottom:1px solid var(--border-subtle); font-size:12.5px; color:var(--fg2); font-family:var(--font-mono);">DORA 2024/2025, Faros 2026, LinearB 2026</td></tr>
+          <tr><td style="padding:12px 14px 12px 0; border-bottom:1px solid var(--border-subtle); font-size:14px; font-weight:600;">Quality and security</td><td style="padding:12px 14px; border-bottom:1px solid var(--border-subtle); font-size:14px; color:var(--fg2);">More output can mean more debt and vulnerabilities</td><td style="padding:12px 0 12px 14px; border-bottom:1px solid var(--border-subtle); font-size:12.5px; color:var(--fg2); font-family:var(--font-mono);">GitClear 2025, Veracode 2025/26, Stack Overflow 2025</td></tr>
+          <tr><td style="padding:12px 14px 12px 0; font-size:14px; font-weight:600;">Perception gap</td><td style="padding:12px 14px; font-size:14px; color:var(--fg2);">People feel faster than the data supports</td><td style="padding:12px 0 12px 14px; font-size:12.5px; color:var(--fg2); font-family:var(--font-mono);">METR 2025, Stack Overflow 2025</td></tr>
+        </tbody>
+      </table>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:32px 48px; margin-bottom:48px;">
+        <div>
+          <h3 class="h4" style="margin:0 0 14px;">How to read this evidence</h3>
+          <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:10px;">
+            <li class="body-sm"><b style="color:var(--fg1);">Not all evidence is equal.</b> Randomized trials support causal claims; telemetry and surveys describe patterns and perception. Where a number moved between a working paper and a published version, we use the published one.</li>
+            <li class="body-sm"><b style="color:var(--fg1);">Software evidence doesn&rsquo;t transfer perfectly &mdash; but the pattern does.</b> When creation speeds up, validation and governance become the constraint.</li>
+            <li class="body-sm"><b style="color:var(--fg1);">Capability keeps moving.</b> Capability gains don&rsquo;t automatically become delivery gains &mdash; the operating model has to absorb them.</li>
+            <li class="body-sm"><b style="color:var(--fg1);">Local speed can be real even when enterprise speed is flat.</b> A team writing faster without shipping faster hasn&rsquo;t failed. It has found the next bottleneck.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="h4" style="margin:0 0 14px;">Sources</h3>
+          <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px;">
+            <li class="body-sm">McKinsey &amp; Company. <i>The state of AI in 2025: Agents, innovation, and transformation.</i> Nov. 2025.</li>
+            <li class="body-sm">Boston Consulting Group. <i>Are You Generating Value from AI? The Widening Gap.</i> Sept. 2025.</li>
+            <li class="body-sm">Brynjolfsson, Li &amp; Raymond. <i>Generative AI at Work.</i> QJE, 2025.</li>
+            <li class="body-sm">Peng, Kalliamvakou, Cihon &amp; Demirer. <i>The Impact of AI on Developer Productivity.</i> 2023.</li>
+            <li class="body-sm">METR. <i>Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity.</i> 2025.</li>
+            <li class="body-sm">DORA / Google Cloud. <i>Accelerate State of DevOps Report 2024</i> and <i>State of AI-assisted Software Development 2025.</i></li>
+            <li class="body-sm">Faros AI. <i>AI Engineering Report 2026: The Acceleration Whiplash.</i></li>
+            <li class="body-sm">LinearB. <i>2026 Software Engineering Benchmarks Report.</i></li>
+            <li class="body-sm">GitClear. <i>AI Copilot Code Quality: 2025 Research.</i></li>
+            <li class="body-sm">Veracode. <i>2025 GenAI Code Security Report</i> and Spring 2026 update.</li>
+            <li class="body-sm">Stack Overflow. <i>2025 Developer Survey: AI.</i></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="max-width:1060px; margin:0 auto; padding:40px 28px 56px;">
+    <div style="border-top:1px solid var(--border-subtle); padding-top:24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+      <img src="assets/concepta-logo-color.svg" alt="Concepta" style="height:18px; display:block;">
+      <span class="label">Production partner for business-critical systems &middot; July 2026</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;animations&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot; },
+  &quot;showProgressBar&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot; },
+  &quot;showAppendix&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Content&quot; }
+}">
+class Component extends DCLogic {
+  componentDidMount() {
+    // Reading progress bar — direct DOM writes, no setState, no re-renders.
+    if (this.props.showProgressBar ?? true) {
+      const bar = document.getElementById('pg-progress');
+      if (bar) {
+        this._onScroll = () => {
+          const doc = document.documentElement;
+          const max = doc.scrollHeight - doc.clientHeight;
+          const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+          bar.style.width = pct.toFixed(2) + '%';
+        };
+        window.addEventListener('scroll', this._onScroll, { passive: true });
+        this._onScroll();
+      }
+    } else {
+      const bar = document.getElementById('pg-progress');
+      if (bar && bar.parentElement) bar.parentElement.style.display = 'none';
+    }
+
+    // Grow-in bar animations on scroll into view.
+    if (this.props.animations ?? true) {
+      const els = Array.from(document.querySelectorAll('[data-grow]'));
+      els.forEach((el) => {
+        el.dataset.targetWidth = el.style.width;
+        el.style.width = '0%';
+        el.style.transition = 'width 1100ms cubic-bezier(0.22, 1, 0.36, 1)';
+      });
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.style.width = e.target.dataset.targetWidth;
+            this._io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      els.forEach((el) => this._io.observe(el));
+    }
+
+    // A single, calm reveal cadence gives the long-form page editorial rhythm.
+    const revealEls = Array.from(document.querySelectorAll('section[data-screen-label]:not([data-screen-label="Hero"]) h2, section[data-screen-label] figure, section[data-screen-label] blockquote, .task-lab__shell'));
+    revealEls.forEach((el) => el.setAttribute('data-reveal', ''));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealEls.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      this._revealIO = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            this._revealIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      revealEls.forEach((el) => this._revealIO.observe(el));
+    }
+
+    // Chapter rail: direct navigation plus active-section feedback.
+    const chapterButtons = Array.from(document.querySelectorAll('.story-rail button[data-chapter]'));
+    this._chapterListeners = chapterButtons.map((button) => {
+      const handler = () => {
+        const target = Array.from(document.querySelectorAll('section[data-screen-label]')).find((section) => section.dataset.screenLabel === button.dataset.chapter);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      button.addEventListener('click', handler);
+      return { button, handler };
+    });
+    const chapterSections = chapterButtons.map((button) => Array.from(document.querySelectorAll('section[data-screen-label]')).find((section) => section.dataset.screenLabel === button.dataset.chapter)).filter(Boolean);
+    this._chapterIO = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        chapterButtons.forEach((button) => button.setAttribute('aria-current', String(button.dataset.chapter === entry.target.dataset.screenLabel)));
+      });
+    }, { rootMargin: '-28% 0px -58% 0px', threshold: 0 });
+    chapterSections.forEach((section) => this._chapterIO.observe(section));
+
+    // Task-shape explorer: the report's central claim made tangible.
+    const taskProfiles = {
+      bounded: {
+        answer: '<b style="color:#fff;">Speed is likely to survive.</b> The input is clear, the answer can be checked quickly, and policy defines the boundary.',
+        label: 'Net speed after review · high', width: '78%', color: '#00EBBC'
+      },
+      mixed: {
+        answer: '<b style="color:#fff;">The gain becomes conditional.</b> AI can accelerate inventory, explanation and routine changes, but hidden dependencies and expert review absorb part of the gain.',
+        label: 'Net speed after review · mixed', width: '48%', color: '#FFB020'
+      },
+      complex: {
+        answer: '<b style="color:#fff;">Speed is least likely to survive.</b> Verification is expensive, the consequences are high, and accountability cannot be delegated to the model.',
+        label: 'Net speed after review · low', width: '19%', color: '#FF7657'
+      }
+    };
+    const taskButtons = Array.from(document.querySelectorAll('.task-lab__choice'));
+    const taskAnswer = document.getElementById('task-lab-answer');
+    const taskLabel = document.getElementById('task-lab-label');
+    const taskMeter = document.getElementById('task-lab-meter');
+    this._taskListeners = taskButtons.map((button) => {
+      const handler = () => {
+        const profile = taskProfiles[button.dataset.task];
+        taskButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        if (taskAnswer) taskAnswer.innerHTML = profile.answer;
+        if (taskLabel) taskLabel.textContent = profile.label;
+        if (taskMeter) { taskMeter.style.width = profile.width; taskMeter.style.background = profile.color; }
+      };
+      button.addEventListener('click', handler);
+      return { button, handler };
+    });
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+    if (this._revealIO) this._revealIO.disconnect();
+    if (this._chapterIO) this._chapterIO.disconnect();
+    if (this._chapterListeners) this._chapterListeners.forEach(({ button, handler }) => button.removeEventListener('click', handler));
+    if (this._taskListeners) this._taskListeners.forEach(({ button, handler }) => button.removeEventListener('click', handler));
+  }
+  renderVals() {
+    return { showAppendix: this.props.showAppendix ?? true };
+  }
+}
+</script>
+</body>
+</html>

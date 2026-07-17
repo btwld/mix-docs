@@ -110,7 +110,7 @@ const FAQ: LandingContent["faq"] = [
   },
   {
     q: "How is this different from hiring a consultant to review our code?",
-    a: "A consultant hands you opinions; you then defend them in meetings. The assessment runs on the Code Analysis pipeline: deterministic scores, evidence-backed findings, and disclosed blind spots. Rerun it after remediation and the numbers move because your code changed — not because someone changed their mind.",
+    a: "Expert review provides context and judgment. The assessment adds deterministic scoring, evidence-backed findings, and disclosed blind spots, giving you a repeatable baseline you can rerun after remediation to measure what changed.",
   },
   {
     q: "What do you need from us?",
@@ -252,13 +252,13 @@ export function ReadinessLanding() {
             <div className="lp-cta-links">
               <Link href="/code-analysis">Powered by Code Analysis</Link>
               <span aria-hidden="true">·</span>
-              <a
-                href="https://conceptatech.com"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/"
+                className="lp-cta-concepta"
+                aria-label="Concepta home"
               >
-                Concepta ↗
-              </a>
+                <img src="/assets/logo_concepta.svg" alt="Concepta" />
+              </Link>
               <span aria-hidden="true">·</span>
               <span className="lp-cta-fine">© 2026 · a Concepta engagement</span>
             </div>

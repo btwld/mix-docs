@@ -41,6 +41,10 @@ export const METHODOLOGY_JSON = `{
     "notCovered": ["dart", "kotlin", "swift"],
     "note": "absence of findings ≠ absence of issues"
   },
+  "aiReview": {
+    "coverage": "disclosed per run",
+    "note": "reported separately from SAST"
+  },
   "policy": { "hardCeilings": ["unrotated secret"] },
   "scores": { "confidence": "medium" },
   "deterministic": true

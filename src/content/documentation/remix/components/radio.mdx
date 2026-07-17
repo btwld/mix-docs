@@ -6,6 +6,7 @@ keywords: [flutter, remix, radio, radio-button, selection, form, input, single-s
 
 A radio button component for selecting a single option from a group.
 
+
 ## Interactive preview
 
 <FlutterPreview
@@ -85,7 +86,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
         )
         .onHovered(
-          RemixRadioStyler().shadow(
+          .shadow(
             BoxShadowMix()
                 .color(Colors.blueGrey.shade50.withValues(alpha: 0.7))
                 .blurRadius(0)
@@ -93,7 +94,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
         )
         .onPressed(
-          RemixRadioStyler().border(
+          .border(
             BoxBorderMix.all(
               BorderSideMix()
                   .color(Colors.blueGrey.shade100)
@@ -103,7 +104,7 @@ class _RadioExampleState extends State<RadioExample> {
           ),
         )
         .onSelected(
-          RemixRadioStyler().border(
+          .border(
             BoxBorderMix.all(
               BorderSideMix()
                   .color(Colors.blueAccent.shade700)
@@ -117,11 +118,11 @@ class _RadioExampleState extends State<RadioExample> {
 ```
 </CodeGroup>
 
-## Generated Fortal component
+## Fortal widgets
 
-Remix includes a generated Fortal component with prebuilt variants:
+Remix includes a generated Fortal-themed widget for this component:
 
-<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -143,8 +144,24 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
       onChanged: (value) => setState(() => _selected = value),
       child: Column(
         children: [
-          FortalRadio.soft(value: 'soft'),
-          FortalRadio.surface(value: 'surface'),
+          Row(
+            children: [
+              FortalRadio.surface(
+                value: 'surface',
+              ),
+              const SizedBox(width: 8),
+              const Text('Surface'),
+            ],
+          ),
+          Row(
+            children: [
+              FortalRadio.soft(
+                value: 'soft',
+              ),
+              const SizedBox(width: 8),
+              const Text('Soft'),
+            ],
+          ),
         ],
       ),
     );
@@ -154,7 +171,7 @@ class _FortalRadioExampleState extends State<FortalRadioExample> {
 </CodeGroup>
 
 <Info>
-  See the [fortalRadioStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/radio/fortal_radio_styles.dart) for all available options.
+  See the [fortalRadioStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/radio/fortal_radio_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -187,32 +204,103 @@ const RemixRadio({
 ## Properties
 ### Widget Properties
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `style` | `RemixRadioStyler` | Optional. The style configuration for the radio button. Customize colors, borders, and state-based styling. |
-| `styleSpec` | `RemixRadioSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
-| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
-| `value` | `T` | **Required**. The value represented by this radio button. |
-| `autofocus` | `bool` | Optional. Whether the radio button should automatically request focus when it is created. |
-| `enabled` | `bool` | Optional. Whether this radio button is enabled. |
-| `toggleable` | `bool` | Optional. Whether the radio button is toggleable (can be unselected). |
-| `focusNode` | `FocusNode?` | Optional. The focus node for the radio button. |
-| `mouseCursor` | `MouseCursor?` | Optional. The mouse cursor to use when hovering over the radio button. |
+#### `groupValue` → `T?`
 
-### Style Methods
+**Required**. The currently selected value for the radio group.
 
-| Method | Description |
-|--------|-------------|
-| `indicator(BoxStyler value)` | Sets indicator styling (selected fill). |
-| `alignment(Alignment value)` | Sets container alignment. |
-| `padding(EdgeInsetsGeometryMix value)` | Convenience for applying padding around the control. |
-| `margin(EdgeInsetsGeometryMix value)` | Convenience for applying margin around the control. |
-| `color(Color value)` | Sets background color on the container. |
-| `size(double width, double height)` | Sets container size using explicit constraints. |
-| `borderRadius(BorderRadiusGeometryMix radius)` | Sets border radius on the outer container. |
-| `animate(AnimationConfig animation)` | Sets animation configuration. |
-| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
-| `constraints(BoxConstraintsMix value)` | Sets size constraints on the component. |
-| `decoration(DecorationMix value)` | Sets the container decoration. |
-| `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
-| `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
+#### `onChanged` → `ValueChanged<T?>?`
+
+Optional. Called when a radio button in the group is selected. When omitted, the radio group is disabled.
+
+#### `child` → `Widget`
+
+**Required**. The child widget that contains the radio buttons.
+
+#### `style` → `RemixRadioStyler`
+
+Optional. The style configuration for the radio button. Customize colors, borders, and state-based styling.
+
+#### `styleSpec` → `RemixRadioSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `value` → `T`
+
+**Required**. The value represented by this radio button.
+
+#### `autofocus` → `bool`
+
+Optional. Whether the radio button should automatically request focus when it is created.
+
+#### `enabled` → `bool`
+
+Optional. Whether this radio button is enabled.
+
+#### `toggleable` → `bool`
+
+Optional. Whether the radio button is toggleable (can be unselected).
+
+#### `focusNode` → `FocusNode?`
+
+Optional. The focus node for the radio button.
+
+#### `mouseCursor` → `MouseCursor?`
+
+Optional. The mouse cursor to use when hovering over the radio button.
+
+
+#### `indicator(BoxStyler value)`
+
+Sets indicator styling (selected fill).
+
+#### `alignment(Alignment value)`
+
+Sets container alignment.
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Convenience for applying padding around the control.
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Convenience for applying margin around the control.
+
+#### `size(double width, double height)`
+
+Sets container size using explicit constraints.
+
+#### `borderRadius(BorderRadiusGeometryMix radius)`
+
+Sets border radius on the outer container.
+
+#### `animate(AnimationConfig value)`
+
+Sets animation configuration.
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `decoration(DecorationMix value)`
+
+Sets the container decoration.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, {Alignment alignment = .center})`
+
+Applies a matrix transformation to the component.
+
+#### `call<T>({required T value, bool enabled = true, bool autofocus = false, bool toggleable = false, FocusNode? focusNode, MouseCursor? mouseCursor})`
+
+Creates a `RemixRadio<T>` widget with this style applied.

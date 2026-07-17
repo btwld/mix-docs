@@ -55,7 +55,10 @@ test('migrates every Ack documentation page into its product namespace', () => {
   for (const path of pages) {
     const source = readFileSync(path, 'utf8')
     assert.doesNotMatch(source, /\/documentation\/(?!ack\/)/)
-    assert.match(source, /^---\ntitle: [^\n]+\n---\n\n# /)
+    const frontmatter = source.match(/^---\n([\s\S]*?)\n---\n\n# /)
+    assert.ok(frontmatter, `${relative(root, path)} has valid frontmatter followed by an H1`)
+    assert.match(frontmatter[1], /^title: [^\n]+$/m)
+    assert.match(frontmatter[1], /^description: [^\n]+$/m)
   }
 })
 

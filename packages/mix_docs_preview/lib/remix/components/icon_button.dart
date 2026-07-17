@@ -17,7 +17,11 @@ class Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FortalScope(accent: .green, brightness: .dark, child: const IconButtonPreview());
+    return FortalScope(
+      accent: .green,
+      brightness: .dark,
+      child: const IconButtonPreview(),
+    );
   }
 }
 

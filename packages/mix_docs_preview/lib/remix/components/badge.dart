@@ -34,11 +34,11 @@ class BadgePreview extends StatelessWidget {
       mainAxisAlignment: .center,
       mainAxisSize: .min,
       spacing: 16,
-      children: [
-        const FortalBadge.solid(label: 'Solid'),
-        const FortalBadge.soft(label: 'Soft'),
-        const FortalBadge.surface(label: 'Surface'),
-        const FortalBadge.outline(label: 'Outline'),
+      children: const [
+        FortalBadge.solid(label: 'Solid'),
+        FortalBadge.soft(label: 'Soft'),
+        FortalBadge.surface(label: 'Surface'),
+        FortalBadge.outline(label: 'Outline'),
       ],
     );
   }

@@ -45,9 +45,11 @@ import 'remix/components/button.dart' as remix_button;
 import 'remix/components/callout.dart' as remix_callout;
 import 'remix/components/card.dart' as remix_card;
 import 'remix/components/checkbox.dart' as remix_checkbox;
+import 'remix/components/dialog.dart' as remix_dialog;
 import 'remix/components/divider.dart' as remix_divider;
 import 'remix/components/icon_button.dart' as remix_icon_button;
 import 'remix/components/menu.dart' as remix_menu;
+import 'remix/components/popover.dart' as remix_popover;
 import 'remix/components/progress.dart' as remix_progress;
 import 'remix/components/radio.dart' as remix_radio;
 import 'remix/components/select.dart' as remix_select;
@@ -56,6 +58,8 @@ import 'remix/components/spinner.dart' as remix_spinner;
 import 'remix/components/switch.dart' as remix_switch;
 import 'remix/components/tabs.dart' as remix_tabs;
 import 'remix/components/textfield.dart' as remix_textfield;
+import 'remix/components/toggle.dart' as remix_toggle;
+import 'remix/components/toggle_group.dart' as remix_toggle_group;
 import 'remix/components/tooltip.dart' as remix_tooltip;
 import 'overview/introduction/simple_red_box.dart' as simple_red_box;
 import 'overview/getting_started/hello_mix.dart' as getting_started_hello_mix;
@@ -403,36 +407,31 @@ class PreviewRegistry {
     ),
     PreviewEntry(
       previewId: 'components/avatar.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/avatar.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/avatar.dart',
       category: _remixComponents,
       builder: (_) => const remix_avatar.Example(),
     ),
     PreviewEntry(
       previewId: 'components/badge.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/badge.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/badge.dart',
       category: _remixComponents,
       builder: (_) => const remix_badge.Example(),
     ),
     PreviewEntry(
       previewId: 'components/button.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/button.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/button.dart',
       category: _remixComponents,
       builder: (_) => const remix_button.Example(),
     ),
     PreviewEntry(
       previewId: 'components/callout.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/callout.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/callout.dart',
       category: _remixComponents,
       builder: (_) => const remix_callout.Example(),
     ),
     PreviewEntry(
       previewId: 'components/card.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/card.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/card.dart',
       category: _remixComponents,
       builder: (_) => const remix_card.Example(),
     ),
@@ -444,9 +443,14 @@ class PreviewRegistry {
       builder: (_) => const remix_checkbox.Example(),
     ),
     PreviewEntry(
+      previewId: 'components/dialog.0',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/dialog.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_dialog.Example(),
+    ),
+    PreviewEntry(
       previewId: 'components/divider.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/divider.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/divider.dart',
       category: _remixComponents,
       builder: (_) => const remix_divider.Example(),
     ),
@@ -459,10 +463,15 @@ class PreviewRegistry {
     ),
     PreviewEntry(
       previewId: 'components/menu.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/menu.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/menu.dart',
       category: _remixComponents,
       builder: (_) => const remix_menu.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/popover.0',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/popover.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_popover.Example(),
     ),
     PreviewEntry(
       previewId: 'components/progress.0',
@@ -473,43 +482,37 @@ class PreviewRegistry {
     ),
     PreviewEntry(
       previewId: 'components/radio.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/radio.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/radio.dart',
       category: _remixComponents,
       builder: (_) => const remix_radio.Example(),
     ),
     PreviewEntry(
       previewId: 'components/select.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/select.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/select.dart',
       category: _remixComponents,
       builder: (_) => const remix_select.Example(),
     ),
     PreviewEntry(
       previewId: 'components/slider.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/slider.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/slider.dart',
       category: _remixComponents,
       builder: (_) => const remix_slider.Example(),
     ),
     PreviewEntry(
       previewId: 'components/spinner.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/spinner.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/spinner.dart',
       category: _remixComponents,
       builder: (_) => const remix_spinner.Example(),
     ),
     PreviewEntry(
       previewId: 'components/switch.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/switch.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/switch.dart',
       category: _remixComponents,
       builder: (_) => const remix_switch.Example(),
     ),
     PreviewEntry(
       previewId: 'components/tabs.0',
-      sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/tabs.dart',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/tabs.dart',
       category: _remixComponents,
       builder: (_) => const remix_tabs.Example(),
     ),
@@ -521,9 +524,21 @@ class PreviewRegistry {
       builder: (_) => const remix_textfield.Example(),
     ),
     PreviewEntry(
-      previewId: 'components/tooltip.0',
+      previewId: 'components/toggle.0',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/toggle.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_toggle.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/toggle_group.0',
       sourcePath:
-          'packages/mix_docs_preview/lib/remix/components/tooltip.dart',
+          'packages/mix_docs_preview/lib/remix/components/toggle_group.dart',
+      category: _remixComponents,
+      builder: (_) => const remix_toggle_group.Example(),
+    ),
+    PreviewEntry(
+      previewId: 'components/tooltip.0',
+      sourcePath: 'packages/mix_docs_preview/lib/remix/components/tooltip.dart',
       category: _remixComponents,
       builder: (_) => const remix_tooltip.Example(),
     ),

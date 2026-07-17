@@ -87,7 +87,7 @@ Mix provides token types for common styling needs:
 
 ## Using Tokens in Styles
 
-Mix offers two ways to reference a token. Both resolve to the same value — the difference is ergonomics.
+Mix offers two general ways to reference a token. Both resolve to the same value — the difference is ergonomics. A few style and shadow tokens also provide Mix-compatible references, covered below.
 
 ### Call syntax (recommended)
 
@@ -113,6 +113,26 @@ final style = BoxStyler.create(
 <Callout type="info">
   For most styles, use the call syntax. Reach for `Prop.token()` only when you need directives like `.multiply()`, `.add()`, or `.clamp()`.
 </Callout>
+
+### Mix-compatible token references (`.mix()`)
+
+Most tokens only need the call syntax shown above. Three built-in tokens also expose `.mix()` for APIs that expect Mix representations instead of Flutter values:
+
+| Token | `token()` returns | `token.mix()` returns |
+| --- | --- | --- |
+| `TextStyleToken` | Flutter-compatible `TextStyle` reference | Mix-compatible `TextStyleMix` reference |
+| `ShadowToken` | Flutter-compatible `List<Shadow>` reference | Mix-compatible `ShadowListMix` reference |
+| `BoxShadowToken` | Flutter-compatible `List<BoxShadow>` reference | Mix-compatible `BoxShadowListMix` reference |
+
+For example, `TextStyler.style()` expects a Mix text style, so pass the token's `.mix()` reference:
+
+```dart
+const $heading = TextStyleToken('heading');
+
+final text = TextStyler()
+    .style($heading.mix())
+    .color($primary());
+```
 
 ## Theme Switching
 

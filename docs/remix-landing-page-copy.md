@@ -58,12 +58,12 @@ Accessible, themeable Flutter components with hover, focus, press, keyboard navi
 Make it yours without starting from scratch. Define a look once with Mix's fluent API, then reuse and adapt it across your whole app — no deep widget trees, no copy-pasted variants that drift out of sync.
 
 ```dart
-final button = RemixButtonStyle()
+final button = RemixButtonStyler()
   .paddingX(16)
   .paddingY(10)
   .color(Colors.blue)
   .borderRadiusAll(const Radius.circular(8))
-  .onHovered(RemixButtonStyle().color(Colors.blue.shade700))
+  .onHovered(.color(Colors.blue.shade700))
   .animate(AnimationConfig.spring(300.ms));
 ```
 

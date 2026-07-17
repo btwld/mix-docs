@@ -15,9 +15,9 @@ Remix is a Flutter component library built on top of [Mix](https://github.com/bt
 
 ## Why Remix?
 
-Building custom UI in Flutter usually means choosing between two painful paths: dropping down to raw widgets and rewriting hover, focus, and press handling every time — or fighting Material to make it look like something it isn't. Common friction points:
+Building fully custom UI in Flutter usually means starting from raw widgets — reimplementing hover, focus, and press handling for every component — or adapting a design language like Material to a look it wasn't designed for. Common friction points:
 
-- **Verbose styling**: deep widget trees make styles hard to read and harder to maintain.
+- **Scattered styling**: without a dedicated styling layer, visual decisions spread across build methods and are hard to keep consistent.
 - **Interaction state boilerplate**: hover, focus, and press require handlers, controllers, and state management for every component.
 - **Duplication**: reusable, themeable components tend to drift into copy-pasted variations.
 - **Animation overhead**: smooth transitions between states need explicit controllers and tweens.
@@ -26,31 +26,23 @@ Remix pairs headless components (inspired by Naked UI) with Mix's styling system
 
 ## The Remix Approach
 
-Define a top-level style with a fluent chain and annotate it with `@MixWidget`. Mix's generator turns that style into a named Flutter component, so your UI uses a regular widget constructor instead of invoking the styler:
+Define a style with a fluent chain, then call it or pass it to a component:
 
 ```dart
-@MixWidget()
-final primaryButtonStyle = RemixButtonStyler()
-    .padding(.horizontal(16).vertical(10))
-    .color(Colors.blue)
-    .borderRadius(.circular(8))
-    .onHovered(.new().color(Colors.blue.shade700))
-    .animate(.spring(300.ms));
+final button = RemixButtonStyler()
+  .paddingX(16)
+  .paddingY(10)
+  .color(Colors.blue)
+  .borderRadiusAll(const Radius.circular(8))
+  .onHovered(.color(Colors.blue.shade700))
+  .animate(AnimationConfig.spring(300.ms));
 
-Widget buildCallToAction() {
-  return PrimaryButton(
-    label: 'Click me',
-    onPressed: () {},
-  );
-}
+button(label: 'Click me', onPressed: () {});
 ```
-
-`PrimaryButton` is generated from `primaryButtonStyle`. The styler remains the source of truth for appearance, while the generated widget becomes the component API used throughout the app.
 
 With Remix, you get:
 
 - **Ready-to-use components** with interaction behavior, accessibility, and keyboard navigation built in
-- **Generated component APIs** that turn reusable styles into named Flutter widgets
 - **Complete styling freedom** using Mix's chainable styling API
 - **State-aware styling** with built-in support for hover, focus, press, and custom states
 - **Smooth animations** that plug directly into your style definitions
@@ -61,8 +53,8 @@ With Remix, you get:
 
 Before installing Remix, ensure you have:
 
-- **Dart SDK**: 3.11.0 or higher
-- **Flutter**: 3.41.0 or higher
+- **Dart SDK**: 3.12.0 or higher
+- **Flutter**: 3.44.0 or higher
 
 <Steps>
 
@@ -72,8 +64,6 @@ Install the latest version:
 
 ```bash
 flutter pub add remix
-dart pub add mix_annotations
-dart pub add dev:build_runner dev:mix_generator
 ```
 
 Or pin explicitly in `pubspec.yaml`:
@@ -86,52 +76,30 @@ dependencies:
 Import it where you use it:
 
 ```dart
-import 'package:mix_annotations/mix_annotations.dart';
 import 'package:remix/remix.dart';
 ```
 
-### Define your first Remix component
+### Your first Remix component
 
-Create a Dart file such as `primary_button.dart`. The `part` directive gives `mix_generator` a destination for the generated widget:
+Build a blue button labeled "Click Me". The `RemixButtonStyler` class defines styles with a fluent API, and calling it directly produces the widget:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:mix_annotations/mix_annotations.dart';
 import 'package:remix/remix.dart';
 
-part 'primary_button.g.dart';
-
-@MixWidget()
-final primaryButtonStyle = RemixButtonStyler()
-    .padding(.horizontal(16).vertical(10))
-    .color(Colors.blue)
-    .borderRadius(.circular(8))
-    .label(.color(Colors.white));
-```
-
-The variable name ends in `Style`, so the generator derives the component name `PrimaryButton`.
-
-### Run code generation
-
-Generate the widget class after defining or changing an annotated style:
-
-```bash
-dart run build_runner build
-```
-
-The generated `primary_button.g.dart` file contains the `PrimaryButton` widget. Do not edit that file by hand.
-
-### Use the generated component
-
-Instantiate `PrimaryButton` like any other Flutter widget:
-
-```dart
 class Example extends StatelessWidget {
   const Example({super.key});
 
+  RemixButtonStyler get _button => RemixButtonStyler()
+      .paddingX(16)
+      .paddingY(10)
+      .color(Colors.blue)
+      .borderRadiusAll(const Radius.circular(8))
+      .label(TextStyler().color(Colors.white));
+
   @override
   Widget build(BuildContext context) {
-    return PrimaryButton(
+    return _button(
       label: 'Click Me',
       onPressed: () {},
     );
@@ -151,11 +119,12 @@ Define how a component should look in hover, pressed, focused, and other states 
 
 ```dart
 final style = RemixButtonStyler()
-    .padding(.horizontal(16).vertical(10))
-    .color(Colors.blue)
-    .borderRadius(.circular(8))
-    .onHovered(.new().color(Colors.blue.shade700))
-    .onPressed(.new().scale(0.95));
+  .paddingX(16)
+  .paddingY(10)
+  .color(Colors.blue)
+  .borderRadiusAll(const Radius.circular(8))
+  .onHovered(.color(Colors.blue.shade700))
+  .onPressed(.scale(0.95));
 ```
 
 Remix tracks the interaction internally, so you don't wire up hover detectors, focus nodes, or gesture recognizers yourself.
@@ -166,12 +135,13 @@ Attach animation directly to a style with `.animate()`. State-specific styles in
 
 ```dart
 final style = RemixButtonStyler()
-    .padding(.horizontal(16).vertical(10))
-    .color(Colors.blue)
-    .borderRadius(.circular(8))
-    .animate(.spring(300.ms))
-    .onHovered(.new().color(Colors.blue.shade700))
-    .onPressed(.new().scale(0.95));
+  .paddingX(16)
+  .paddingY(10)
+  .color(Colors.blue)
+  .borderRadiusAll(const Radius.circular(8))
+  .animate(AnimationConfig.spring(300.ms))
+  .onHovered(.color(Colors.blue.shade700))
+  .onPressed(.scale(0.95));
 ```
 
 Both the color on hover and the scale on press animate through a single spring curve.
@@ -186,16 +156,17 @@ Build a base style once, then extend it for variants:
 
 ```dart
 final baseButton = RemixButtonStyler()
-    .padding(.horizontal(16).vertical(10))
-    .borderRadius(.circular(8));
+    .paddingX(16)
+    .paddingY(10)
+    .borderRadiusAll(const Radius.circular(8));
 
 final primaryButton = baseButton
     .color(Colors.blue)
-    .label(.color(Colors.white));
+    .label(TextStyler().color(Colors.white));
 
 final destructiveButton = baseButton
     .color(Colors.red)
-    .label(.color(Colors.white));
+    .label(TextStyler().color(Colors.white));
 ```
 
 Each chain call returns a new style, so `baseButton` stays unchanged and every variant is independently mergeable.
@@ -206,8 +177,8 @@ Remix gives you the freedom to build any design system from scratch, but you don
 
 ```dart
 FortalButton.solid(
-  label: 'Fortal Button',
   onPressed: () {},
+  label: 'Fortal Button',
 );
 ```
 

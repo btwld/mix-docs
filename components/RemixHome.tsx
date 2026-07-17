@@ -67,12 +67,11 @@ const THEMES = [
     previewId: "homepage/hero-classic",
     code: `final style = RemixButtonStyler()
     .color(const Color(0xFF00EB03))
-    .label(.color(const Color(0xFF05040A)))
-    .padding(.horizontal(22).vertical(11))
-    .borderRadius(.circular(10))
-    .onHovered(.new().color(const Color(0xFF33FF36)))
-    .onPressed(.new().scale(0.97))
-    .animate(.spring(180.ms));`,
+    .labelColor(const Color(0xFF05040A))
+    .paddingX(22)
+    .paddingY(11)
+    .borderRadiusAll(const Radius.circular(10))
+    .onHovered(.color(const Color(0xFF33FF36)));`,
   },
   {
     key: "gradient",
@@ -80,20 +79,16 @@ const THEMES = [
     previewId: "homepage/hero-gradient",
     code: `final style = RemixButtonStyler()
     .gradient(
-      .linear(
-        .begin(.topLeft)
-            .end(.bottomRight)
-            .colors(const [
-              Color(0xFF00EB03),
-              Color(0xFF8B5CF6),
-            ]),
+      LinearGradientMix(
+        begin: .topLeft,
+        end: .bottomRight,
+        colors: const [Color(0xFF00EB03), Color(0xFF8B5CF6)],
       ),
     )
-    .label(.color(const Color(0xFF05040A)))
-    .padding(.horizontal(22).vertical(11))
-    .borderRadius(.circular(12))
-    .onPressed(.new().scale(0.97))
-    .animate(.spring(180.ms));`,
+    .labelColor(const Color(0xFF05040A))
+    .paddingX(22)
+    .paddingY(11)
+    .borderRadiusAll(const Radius.circular(12));`,
   },
   {
     key: "neon",
@@ -101,13 +96,12 @@ const THEMES = [
     previewId: "homepage/hero-neon",
     code: `final style = RemixButtonStyler()
     .color(const Color(0xFF0A0014))
-    .label(.color(const Color(0xFF00F0FF)))
-    .padding(.horizontal(24).vertical(11))
-    .borderRadius(.circular(2))
-    .border(.all(.color(const Color(0xFF00F0FF)).width(1)))
-    .shadow(.color(const Color(0xFFFF00E5)).blurRadius(22))
-    .onPressed(.new().scale(0.97))
-    .animate(.spring(180.ms));`,
+    .labelColor(const Color(0xFF00F0FF))
+    .paddingX(24)
+    .paddingY(11)
+    .borderRadiusAll(const Radius.circular(2))
+    .borderAll(color: const Color(0xFF00F0FF), width: 1)
+    .shadowOnly(color: const Color(0xFFFF00E5), blurRadius: 22);`,
   },
 ];
 
@@ -115,7 +109,7 @@ const THEMES = [
 const STATS = [
   { value: "20+", label: "Live components" },
   { value: "100%", label: "Headless & yours" },
-  { value: "0", label: "Override wars" },
+  { value: "0", label: "Style opinions" },
   { value: "BSD-3", label: "Free forever" },
 ];
 
@@ -161,8 +155,9 @@ const BENTO = [
 
 const COMPONENTS = [
   "Accordion", "Avatar", "Badge", "Button", "Callout", "Card", "Checkbox",
-  "Divider", "IconButton", "Menu", "Progress", "Radio", "Select", "Slider",
-  "Spinner", "Switch", "Tabs", "TextField", "Tooltip",
+  "Dialog", "Divider", "IconButton", "Menu", "Popover", "Progress", "Radio",
+  "Select", "Slider", "Spinner", "Switch", "Tabs", "TextField", "Toggle",
+  "Toggle Group", "Tooltip",
 ];
 
 const FAQ = [
@@ -172,7 +167,7 @@ const FAQ = [
   },
   {
     q: "How is it different from Material or Cupertino?",
-    a: "Material and Cupertino give you a look you then have to fight. Remix gives you behavior with no opinionated look, so you style every pixel with Mix. Full control, no override wars.",
+    a: "Material and Cupertino ship with a design language built in. Remix ships behavior with no opinionated look, so you style every pixel with Mix. Full control from the first line.",
   },
   {
     q: "Do I need to know Mix first?",
@@ -248,7 +243,7 @@ export const RemixHome = () => {
             custom={0.08}
             variants={fadeUp}
           >
-            Stop fighting the framework.
+            The behavior is built in.
             <br />
             <span className="rx-gradient-text">Style Flutter your way.</span>
           </motion.h1>
@@ -285,7 +280,7 @@ export const RemixHome = () => {
             </RemixButton>
           </motion.div>
 
-          {/* Interactive product window: one component, three Mix styles */}
+          {/* Interactive product window: one component, four Mix styles */}
           <motion.div
             className="rx-window-wrap"
             initial={{ opacity: 0, y: 40, scale: 0.97 }}
@@ -398,7 +393,7 @@ export const RemixHome = () => {
         {/* ══ Editorial statement ══════════════════════════════════ */}
         <section className="rx-shell rx-gap">
           <motion.p className="rx-statement" {...reveal}>
-            Material hands you a look you then spend weeks overriding.{" "}
+            Material and Cupertino come with a look of their own.{" "}
             <span className="rx-gradient-text">
               Remix hands you behavior and gets out of the way
             </span>
@@ -410,7 +405,7 @@ export const RemixHome = () => {
         <section className="rx-shell rx-gap">
           <SectionHead
             eyebrow="Why Remix"
-            title="Everything you need. Nothing you have to fight."
+            title="Everything you need. Nothing in your way."
             lead="A foundation that handles the hard parts — behavior, focus, accessibility — and then disappears so your design can take over."
           />
 

@@ -6,6 +6,7 @@ keywords: [flutter, remix, progress, progress-bar, indicator, loading, completio
 
 A progress indicator component for showing task completion status.
 
+
 ## Interactive preview
 
 <FlutterPreview
@@ -40,7 +41,7 @@ class ProgressExample extends StatelessWidget {
 
   RemixProgressStyler get style {
     return RemixProgressStyler()
-        .wrapClipRRect(borderRadius: BorderRadius.circular(10))
+        .wrap(.clipRRect(borderRadius: BorderRadiusGeometryMix.circular(10)))
         .trackColor(Colors.grey.shade300)
         .indicatorColor(Colors.grey.shade900)
         .width(300)
@@ -50,11 +51,11 @@ class ProgressExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Generated Fortal component
+## Fortal widgets
 
-Remix includes a generated Fortal component with prebuilt variants:
+Remix includes a generated Fortal-themed widget for this component:
 
-<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -81,7 +82,7 @@ class FortalProgressExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [fortalProgressStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/progress/fortal_progress_styles.dart) for all available options.
+  See the [fortalProgressStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/progress/fortal_progress_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -100,30 +101,90 @@ const RemixProgress({
 ## Properties
 ### Widget Properties
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `style` | `RemixProgressStyler` | Optional. The style configuration for the progress indicator. Customize colors, sizing, and track appearance. |
-| `styleSpec` | `RemixProgressSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
-| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
-| `value` | `double` | **Required**. The progress value between 0 and 1. This value determines how much of the progress bar is filled. A value of 0 means empty, while 1 means completely filled. |
+#### `style` → `RemixProgressStyler`
+
+Optional. The style configuration for the progress indicator. Customize colors, sizing, and track appearance.
+
+#### `styleSpec` → `RemixProgressSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `value` → `double`
+
+**Required**. The progress value between 0 and 1.  This value determines how much of the progress bar is filled. A value of 0 means empty, while 1 means completely filled.
+
 
 ### Style Methods
 
-| Method | Description |
-|--------|-------------|
-| `height(double value)` | Sets progress height |
-| `trackColor(Color value)` | Sets track color |
-| `width(double value)` | Sets progress width |
-| `indicatorColor(Color value)` | Sets fill color |
-| `track(BoxStyler value)` | Sets track styling |
-| `indicator(BoxStyler value)` | Sets fill styling |
-| `trackContainer(BoxStyler value)` | Sets outer container styling |
-| `alignment(Alignment value)` | Sets container alignment |
-| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
-| `animate(AnimationConfig config)` | Configures implicit animation for style transitions. |
-| `constraints(BoxConstraintsMix value)` | Sets size constraints on the component. |
-| `decoration(DecorationMix value)` | Sets the container decoration. |
-| `margin(EdgeInsetsGeometryMix value)` | Sets the container margin. |
-| `padding(EdgeInsetsGeometryMix value)` | Sets the container padding. |
-| `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
-| `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
+#### `height(double value)`
+
+Sets progress height
+
+#### `trackColor(Color value)`
+
+Sets track color
+
+#### `width(double value)`
+
+Sets progress width
+
+#### `indicatorColor(Color value)`
+
+Sets fill color
+
+#### `track(BoxStyler value)`
+
+Sets track styling
+
+#### `indicator(BoxStyler value)`
+
+Sets fill styling
+
+#### `trackContainer(BoxStyler value)`
+
+Sets outer container styling
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `animate(AnimationConfig value)`
+
+Configures implicit animation for style transitions.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `decoration(DecorationMix value)`
+
+Sets the container decoration.
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets the container margin.
+
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets the container padding.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, {Alignment alignment = .center})`
+
+Applies a matrix transformation to the component.
+
+#### `call({Key? key, required double value})`
+
+Creates a `RemixProgress` widget with this style applied.
+

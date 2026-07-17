@@ -16,6 +16,7 @@ export default withNextra({
         return [
             { source: '/docs', destination: '/documentation', permanent: true },
             { source: '/docs/:path*', destination: '/documentation/:path*', permanent: true },
+            { source: '/naked_ui', destination: '/naked-ui', permanent: true },
             { source: '/documentation', destination: '/documentation/mix/overview/introduction', permanent: true },
             { source: '/documentation/ack', destination: '/documentation/ack/getting-started/overview', permanent: true },
             { source: '/documentation/ack/getting-started', destination: '/documentation/ack/getting-started/overview', permanent: true },

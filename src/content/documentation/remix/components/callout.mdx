@@ -6,6 +6,7 @@ keywords: [flutter, remix, callout, alert, message, notification, info, warning]
 
 A component for displaying important information or messages with optional icons.
 
+
 ## Interactive preview
 
 <FlutterPreview
@@ -46,10 +47,17 @@ class CalloutExample extends StatelessWidget {
         .height(60)
         .paddingRight(12)
         .icon(
-          IconStyler().size(24).color(Colors.white).wrapBox(BoxStyler()
-              .color(Colors.blue.shade900)
-              .paddingX(12)
-              .height(double.infinity)),
+          IconStyler()
+              .size(24)
+              .color(Colors.white)
+              .wrap(
+                .box(
+                  BoxStyler()
+                      .color(Colors.blue.shade900)
+                      .paddingX(12)
+                      .height(double.infinity),
+                ),
+              ),
         )
         .mainAxisSize(MainAxisSize.min);
   }
@@ -57,11 +65,11 @@ class CalloutExample extends StatelessWidget {
 ```
 </CodeGroup>
 
-## Generated Fortal component
+## Fortal widgets
 
-Remix includes a generated Fortal component with prebuilt variants:
+Remix includes a generated Fortal-themed widget for this component:
 
-<CodeGroup title="Generated Fortal variants" defaultLanguage="dart">
+<CodeGroup title="Fortal variants" defaultLanguage="dart">
 ```dart
 import 'package:flutter/material.dart';
 import 'package:remix/remix.dart';
@@ -74,20 +82,17 @@ class FortalCalloutExample extends StatelessWidget {
     return Column(
       spacing: 16,
       children: [
-        // Surface variant - Subtle background with border
         FortalCallout.surface(
           text: 'Surface callout',
-          icon: Icons.info,
+          icon: Icons.info_outline,
         ),
-        // Soft variant - Tinted background
         FortalCallout.soft(
           text: 'Soft callout',
-          icon: Icons.info,
+          icon: Icons.lightbulb_outline,
         ),
-        // Outline variant - Border only
         FortalCallout.outline(
           text: 'Outline callout',
-          icon: Icons.info,
+          icon: Icons.border_outer,
         ),
       ],
     );
@@ -97,7 +102,7 @@ class FortalCalloutExample extends StatelessWidget {
 </CodeGroup>
 
 <Info>
-  See the [fortalCalloutStyler source code](https://github.com/btwld/remix/blob/main/lib/src/components/callout/fortal_callout_styles.dart) for all available options.
+  See the [fortalCalloutStyler source code](https://github.com/btwld/remix/blob/main/packages/remix/lib/src/components/callout/fortal_callout_styles.dart) for all available options.
 </Info>
 
 ## Constructor
@@ -105,9 +110,9 @@ class FortalCalloutExample extends StatelessWidget {
 ```dart
 const RemixCallout({
   Key? key,
-  Widget? child,
   String? text,
   IconData? icon,
+  Widget? child,
   RemixCalloutStyler style = const RemixCalloutStyler.create(),
   RemixCalloutSpec? styleSpec,
 })
@@ -118,45 +123,149 @@ const RemixCallout({
 ## Properties
 ### Widget Properties
 
-| Prop | Type | Required / Default Value |
-|------|------|--------------------------|
-| `style` | `RemixCalloutStyler` | Optional. The style configuration for the callout. Customize colors, sizing, spacing, and state-based styling. |
-| `styleSpec` | `RemixCalloutSpec?` | Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances. |
-| `key` | `Key?` | Optional. Controls how one widget replaces another widget in the tree. |
-| `text` | `String?` | Optional. The text to display in the callout. |
-| `icon` | `IconData?` | Optional. The icon to display in the callout. |
-| `child` | `Widget?` | Optional. Optional custom child content for the callout body. |
+#### `style` → `RemixCalloutStyler`
+
+Optional. The style configuration for the callout. Customize colors, sizing, spacing, and state-based styling.
+
+#### `styleSpec` → `RemixCalloutSpec?`
+
+Optional. A pre-resolved style spec that bypasses style resolution. Useful for performance when sharing resolved styles across multiple instances.
+
+#### `key` → `Key?`
+
+Optional. Controls how one widget replaces another widget in the tree.
+
+#### `text` → `String?`
+
+Optional. The text to display in the callout.
+
+#### `icon` → `IconData?`
+
+Optional. The icon to display in the callout.
+
+#### `child` → `Widget?`
+
+Optional. Optional custom child content for the callout body.
 
 ### Style Methods
 
-| Method | Description |
-|--------|-------------|
-| `padding(EdgeInsetsGeometryMix value)` | Sets container padding |
-| `margin(EdgeInsetsGeometryMix value)` | Sets container margin |
-| `backgroundColor(Color value)` | Sets container background color |
-| `foregroundColor(Color value)` | Sets the foreground color (icon and text) of the callout |
-| `shape(ShapeBorderMix value)` | Sets the shape of the callout |
-| `borderRadius(BorderRadiusGeometryMix radius)` | Sets container border radius |
-| `decoration(DecorationMix value)` | Sets container decoration |
-| `alignment(Alignment value)` | Sets container alignment |
-| `spacing(double value)` | Sets flex spacing |
-| `iconColor(Color value)` | Sets icon color |
-| `textColor(Color value)` | Sets text color |
-| `wrap(WidgetModifierConfig value)` | Applies widget modifiers such as clipping, opacity, or scaling. |
-| `animate(AnimationConfig config)` | Configures implicit animation for style transitions. |
-| `constraints(BoxConstraintsMix value)` | Sets size constraints on the component. |
-| `foregroundDecoration(DecorationMix value)` | Sets a foreground decoration painted on top of the component. |
-| `transform(Matrix4 value, AlignmentGeometry alignment = Alignment.center)` | Applies a matrix transformation to the component. |
-| `flex(FlexStyler value)` | Configures the flex layout properties. |
-| `icon(IconStyler value)` | Configures the icon style using an IconStyler. |
-| `text(TextStyler value)` | Configures the text style using a TextStyler. |
-| `iconSize(double value)` | Sets icon size |
-| `iconOpacity(double value)` | Sets icon opacity |
-| `iconWeight(double value)` | Sets icon weight (useful for variable icons like Material Symbols) |
-| `iconGrade(double value)` | Sets icon grade (useful for Material Icons) |
-| `iconFill(double value)` | Sets icon fill (useful for Material Icons filled variants) |
-| `iconOpticalSize(double value)` | Sets icon optical size (useful for Material Icons) |
-| `iconBlendMode(BlendMode value)` | Sets icon blend mode |
-| `iconTextDirection(TextDirection value)` | Sets icon text direction |
-| `iconShadows(List<ShadowMix> value)` | Sets icon shadows |
-| `iconShadow(ShadowMix value)` | Sets single icon shadow |
+#### `padding(EdgeInsetsGeometryMix value)`
+
+Sets container padding
+
+#### `margin(EdgeInsetsGeometryMix value)`
+
+Sets container margin
+
+#### `backgroundColor(Color value)`
+
+Sets container background color
+
+#### `foregroundColor(Color value)`
+
+Sets the foreground color (icon and text) of the callout
+
+#### `shape(ShapeBorderMix value)`
+
+Sets the shape of the callout
+
+#### `borderRadius(BorderRadiusGeometryMix radius)`
+
+Sets container border radius
+
+#### `decoration(DecorationMix value)`
+
+Sets container decoration
+
+#### `alignment(Alignment value)`
+
+Sets container alignment
+
+#### `spacing(double value)`
+
+Sets flex spacing
+
+#### `iconColor(Color value)`
+
+Sets icon color
+
+#### `textColor(Color value)`
+
+Sets text color
+
+#### `wrap(WidgetModifierConfig value)`
+
+Applies widget modifiers such as clipping, opacity, or scaling.
+
+#### `animate(AnimationConfig value)`
+
+Configures implicit animation for style transitions.
+
+#### `constraints(BoxConstraintsMix value)`
+
+Sets size constraints on the component.
+
+#### `foregroundDecoration(DecorationMix value)`
+
+Sets a foreground decoration painted on top of the component.
+
+#### `transform(Matrix4 value, {Alignment alignment = .center})`
+
+Applies a matrix transformation to the component.
+
+#### `flex(FlexStyler value)`
+
+Configures the flex layout properties.
+
+#### `icon(IconStyler value)`
+
+Configures the icon style using an IconStyler.
+
+#### `text(TextStyler value)`
+
+Configures the text style using a TextStyler.
+
+#### `iconSize(double value)`
+
+Sets icon size
+
+#### `iconOpacity(double value)`
+
+Sets icon opacity
+
+#### `iconWeight(double value)`
+
+Sets icon weight (useful for variable icons like Material Symbols)
+
+#### `iconGrade(double value)`
+
+Sets icon grade (useful for Material Icons)
+
+#### `iconFill(double value)`
+
+Sets icon fill (useful for Material Icons filled variants)
+
+#### `iconOpticalSize(double value)`
+
+Sets icon optical size (useful for Material Icons)
+
+#### `iconBlendMode(BlendMode value)`
+
+Sets icon blend mode
+
+#### `iconTextDirection(TextDirection value)`
+
+Sets icon text direction
+
+#### `iconShadows(List<ShadowMix> value)`
+
+Sets icon shadows
+
+#### `iconShadow(ShadowMix value)`
+
+Sets single icon shadow
+
+#### `call({Key? key, String? text, IconData? icon, Widget? child})`
+
+Creates a `RemixCallout` widget with this style applied.
+

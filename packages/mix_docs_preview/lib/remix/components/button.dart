@@ -30,11 +30,10 @@ class ButtonPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      alignment: .center,
-      runAlignment: .center,
+    return Row(
+      mainAxisAlignment: .center,
+      mainAxisSize: .min,
       spacing: 12,
-      runSpacing: 12,
       children: [
         FortalButton.solid(onPressed: () {}, label: 'Solid'),
         FortalButton.soft(onPressed: () {}, label: 'Soft'),
