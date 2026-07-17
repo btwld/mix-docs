@@ -69,8 +69,8 @@ export function MixWidgetShowcase() {
           </div>
         </div>
 
-        <div className="grid divide-y divide-[var(--mix-border-card)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:divide-x lg:divide-y-0">
-          <article className="min-w-0">
+        <div className="grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:grid-rows-[auto_1fr]">
+          <article className="min-w-0 border-b border-[var(--mix-border-card)] lg:col-start-1 lg:row-start-1">
             <EditorFileHeader filename="app_card.dart" label="You write" />
             <div className="px-6 py-7 sm:px-7 sm:py-8">
               <HighlightedCode
@@ -80,7 +80,7 @@ export function MixWidgetShowcase() {
             </div>
           </article>
 
-          <article className="flex min-w-0 flex-col">
+          <article className="flex min-w-0 flex-col border-b border-[var(--mix-border-card)] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:border-b-0 lg:border-l">
             <EditorFileHeader filename="app_card.g.dart" label="Generated" />
             <div className="flex-1 px-6 py-7 sm:px-7 sm:py-8">
               <HighlightedCode
@@ -88,22 +88,22 @@ export function MixWidgetShowcase() {
                 className="overflow-x-auto font-mono text-[13px] leading-[1.65]"
               />
             </div>
-
-            <div className="grid gap-4 border-t border-[var(--mix-border-card)] bg-[var(--mix-surface)] px-6 py-5 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:px-7">
-              <div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--mix-accent)]">
-                  03 / Use it
-                </span>
-                <h3 className="mt-1.5 text-sm font-semibold tracking-[-0.01em] text-white">
-                  Compose it anywhere.
-                </h3>
-              </div>
-              <HighlightedCode
-                code={WIDGET_USAGE}
-                className="min-w-0 overflow-x-auto font-mono text-[12px] leading-[1.65]"
-              />
-            </div>
           </article>
+
+          <div className="grid gap-4 bg-[var(--mix-surface)] px-6 py-5 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:px-7 lg:col-start-1 lg:row-start-2">
+            <div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--mix-accent)]">
+                03 / Use it
+              </span>
+              <h3 className="mt-1.5 text-sm font-semibold tracking-[-0.01em] text-white">
+                Compose it anywhere.
+              </h3>
+            </div>
+            <HighlightedCode
+              code={WIDGET_USAGE}
+              className="min-w-0 overflow-x-auto font-mono text-[12px] leading-[1.65]"
+            />
+          </div>
         </div>
       </div>
 
