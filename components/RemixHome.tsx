@@ -65,7 +65,7 @@ const THEMES = [
     key: "default",
     name: "Classic",
     previewId: "homepage/hero-classic",
-    code: `final style = RemixButtonStyler()
+    code: `final style = ButtonStyler()
     .color(const Color(0xFF00EB03))
     .labelColor(const Color(0xFF05040A))
     .paddingX(22)
@@ -77,7 +77,7 @@ const THEMES = [
     key: "gradient",
     name: "Gradient",
     previewId: "homepage/hero-gradient",
-    code: `final style = RemixButtonStyler()
+    code: `final style = ButtonStyler()
     .linearGradient(
       begin: .topLeft,
       end: .bottomRight,
@@ -92,7 +92,7 @@ const THEMES = [
     key: "neon",
     name: "Neon",
     previewId: "homepage/hero-neon",
-    code: `final style = RemixButtonStyler()
+    code: `final style = ButtonStyler()
     .color(const Color(0xFF0A0014))
     .labelColor(const Color(0xFF00F0FF))
     .paddingX(24)

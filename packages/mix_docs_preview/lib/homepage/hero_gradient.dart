@@ -24,7 +24,7 @@ class _HeroButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // #docregion style
-    final style = RemixButtonStyler()
+    final style = ButtonStyler()
         .linearGradient(
           begin: .topLeft,
           end: .bottomRight,

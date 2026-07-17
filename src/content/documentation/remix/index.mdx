@@ -29,7 +29,7 @@ Remix pairs headless components (inspired by Naked UI) with Mix's styling system
 Define a style with a fluent chain, then call it or pass it to a component:
 
 ```dart
-final button = RemixButtonStyler()
+final button = ButtonStyler()
     .paddingX(16)
     .paddingY(10)
     .color(Colors.blue)
@@ -81,7 +81,7 @@ import 'package:remix/remix.dart';
 
 ### Your first Remix component
 
-Build a blue button labeled "Click Me". The `RemixButtonStyler` class defines styles with a fluent API, and calling it directly produces the widget:
+Build a blue button labeled "Click Me". The `ButtonStyler` class defines styles with a fluent API, and calling it directly produces the widget:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -90,7 +90,7 @@ import 'package:remix/remix.dart';
 class Example extends StatelessWidget {
   const Example({super.key});
 
-  RemixButtonStyler get _button => RemixButtonStyler()
+  ButtonStyler get _button => ButtonStyler()
       .paddingX(16)
       .paddingY(10)
       .color(Colors.blue)
@@ -108,14 +108,14 @@ class Example extends StatelessWidget {
 
 ## Styling Components
 
-Remix components are styled through the same fluent, composable API you use everywhere else in Mix. A *component styler* — such as `RemixButtonStyler` — provides small, chainable utilities that combine into the style you need, and respond to interaction state without extra wiring.
+Remix components are styled through the same fluent, composable API you use everywhere else in Mix. A *component styler* — such as `ButtonStyler` — provides small, chainable utilities that combine into the style you need, and respond to interaction state without extra wiring.
 
 ### Adding Interaction States
 
 Define how a component should look in hover, pressed, focused, and other states by chaining state-specific styles onto the base:
 
 ```dart
-final style = RemixButtonStyler()
+final style = ButtonStyler()
     .paddingX(16)
     .paddingY(10)
     .color(Colors.blue)
@@ -131,7 +131,7 @@ Remix tracks the interaction internally, so you don't wire up hover detectors, f
 Attach animation directly to a style with `.animate()`. State-specific styles interpolate smoothly — no controllers, no tweens:
 
 ```dart
-final style = RemixButtonStyler()
+final style = ButtonStyler()
     .paddingX(16)
     .paddingY(10)
     .color(Colors.blue)
@@ -152,7 +152,7 @@ Both the color on hover and the scale on press animate through a single spring c
 Build a base style once, then extend it for variants:
 
 ```dart
-final baseButton = RemixButtonStyler()
+final baseButton = ButtonStyler()
     .paddingX(16)
     .paddingY(10)
     .borderRadius(.circular(8));

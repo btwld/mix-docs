@@ -17,7 +17,7 @@ dependencies:
     git:
       url: https://github.com/btwld/remix.git
       path: packages/remix
-      ref: fbfc069509ca955a459fcdc6b7de083201cbf2ca
+      ref: bc95c45d5e5ddd269c83c3ede2c30a900882bf0e
 
 dev_dependencies:
   flutter_test:

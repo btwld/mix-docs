@@ -90,7 +90,7 @@ Fortal is built on a scale-based token system that mirrors Radix's conventions:
 Each token is a function on the `FortalTokens` class. Call it from any style:
 
 ```dart
-final style = RemixButtonStyler()
+final style = ButtonStyler()
     .color(FortalTokens.accent9())
     .paddingAll(FortalTokens.space4())
     .borderRadius(.all(FortalTokens.radius3()))
@@ -128,7 +128,7 @@ The chain above starts from Fortal's `solid` button, overrides the border radius
 You can also mix Fortal tokens into a completely custom style:
 
 ```dart
-final style = RemixButtonStyler()
+final style = ButtonStyler()
     .color(FortalTokens.accent9())
     .paddingAll(FortalTokens.space4())
     .borderRadius(.all(FortalTokens.radius3()))
