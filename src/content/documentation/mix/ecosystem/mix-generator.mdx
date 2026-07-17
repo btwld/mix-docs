@@ -16,7 +16,7 @@ The package registers **six builders** (see [`build.yaml` in the Mix repo](https
 | Builder | Triggers on | Generated part (suffix) | Output |
 |---------|-------------|-------------------------|-------------------|
 | `mix_generator` | `@MixableSpec` | `.mix_generator.g.part` | Completes the immutable Spec contract |
-| `spec_styler_generator` | `@MixableSpec(target: …)` | `.spec_styler_generator.g.part` | Creates a full fluent Styler class |
+| `spec_styler_generator` (opt-in) | `@MixableSpec(target: …)` | `.spec_styler_generator.g.part` | Creates a full fluent Styler class |
 | `styler_generator` | `@MixableStyler` | `.styler_generator.g.part` | Supports legacy handwritten Stylers |
 | `mixable_generator` | `@Mixable` | `.mixable_generator.g.part` | Implements a compound Mix property |
 | `mix_widget_generator` | `@MixWidget` | `.mix_widget_generator.g.part` | Creates a `StatelessWidget` around a Styler |
@@ -163,6 +163,16 @@ Flags let you skip generation you do not need, for example:
 
 Add `target: YourWidget.new` when the generator should also create the matching Styler class from the Spec.
 
+The `spec_styler_generator` builder does not apply automatically. Enable it explicitly in your package's `build.yaml`:
+
+```yaml filename="build.yaml"
+targets:
+  $default:
+    builders:
+      mix_generator:spec_styler_generator:
+        enabled: true
+```
+
 ### `@MixableStyler` (legacy)
 
 `@MixableStyler` remains available for handwritten Styler classes created before spec-driven generation. New Stylers should normally come from `@MixableSpec(target: YourWidget.new)`, which generates the fields, constructors, fluent methods, `call()`, merge, resolve, diagnostics, and props together.
@@ -200,7 +210,7 @@ After a successful build, `box_spec.g.dart` contains the `part of` directive and
 
 - **No output / stale errors:** Run `build_runner` with `--delete-conflicting-outputs` if a previous run left incompatible `*.g.dart` files.
 - **Builder not running:** Ensure `mix_generator` is in `dev_dependencies` and that your package (or app) imports files that carry the annotations; builders only visit included sources.
-- **Monorepo `build.yaml`:** The Mix framework repo narrows `generate_for` globs for its own layout. **Your app** typically relies on the builders’ `auto_apply: dependents` behavior unless you add a custom `build.yaml`.
+- **Monorepo `build.yaml`:** The Mix framework repo narrows `generate_for` globs for its own layout. **Your app** typically relies on `auto_apply: dependents` for the standard builders; `spec_styler_generator` remains opt-in as shown above.
 
 ## Debugging the generator
 
