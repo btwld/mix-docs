@@ -15,15 +15,6 @@ export function AckHome() {
         <div className="ack-hero-copy">
           <div className="ack-kicker-row">
             <p className="ack-product-kicker">Dart schemas for apps &amp; structured AI</p>
-            <a
-              className="ack-byline"
-              href="https://conceptatech.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              by
-              <img src="/assets/logo_concepta.svg" alt="Concepta" />
-            </a>
           </div>
 
           <h1 id="ack-hero-title">
