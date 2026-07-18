@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, MotionConfig, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Button } from "./Button";
-import { CONCEPTA_GITHUB_URL } from "./constants";
+import {
+  CONCEPTA_ADDRESS_DISPLAY,
+  CONCEPTA_GITHUB_URL,
+  CONCEPTA_LEGAL_NAME,
+  CONCEPTA_MAP_URL,
+  CONCEPTA_PHONE_DISPLAY,
+  CONCEPTA_PHONE_HREF,
+} from "./constants";
 import { HeroBackground } from "./HeroBackground";
 import { HighlightedCode } from "./HighlightedCode";
 import Layout from "./Layout";
@@ -32,14 +39,9 @@ const sectionReveal = {
 
 /* ── Agency proof (from the published conceptatech.com copy) ────────── */
 
-const PROOF_TICKER = ["20 years", "600+ projects shipped", "98% delivery satisfaction"];
+const PROOF_TICKER = ["Since 2006", "600+ projects", "98% happy clients"];
 
 const TRUSTED_BY = [
-  {
-    name: "Truist",
-    className: "trust-logo-truist",
-    src: "/assets/client-logos/truist.svg",
-  },
   {
     name: "AdventHealth",
     className: "trust-logo-adventhealth",
@@ -60,34 +62,23 @@ const TRUSTED_BY = [
     className: "trust-logo-warner-music-group",
     src: "/assets/client-logos/warner-music-group.svg",
   },
-  {
-    name: "Google",
-    className: "trust-logo-google",
-    src: "/assets/client-logos/google.svg",
-  },
 ] as const;
-
-const TRUST_OUTCOMES = [
-  "27% more loan applications at Truist",
-  "$3M+ saved for FEMA",
-  "4.7★ across 16k reviews at AdventHealth",
-];
 
 const PILLARS = [
   {
-    stat: "35+",
-    title: "Small by design.",
-    body: "A 35-person firm — small enough that our leadership stays in the actual work: in the decisions, through the release, not just the pitch.",
+    label: "Senior-led",
+    title: "The people you meet stay in the work.",
+    body: "Concepta leadership stays involved through the decisions, release, and outcome.",
   },
   {
-    stat: "+27%",
-    title: "We ship what a business depends on.",
-    body: "Truist: 27% more loan applications. AdventHealth: 4.7 stars across 16,000 reviews. Proven in fintech, healthcare, and government.",
+    label: "Release-owned",
+    title: "One team owns the hard parts.",
+    body: "We assess, stabilize, build, and release without passing critical decisions between vendors.",
   },
   {
-    stat: "20yr",
-    title: "We don't start from scratch.",
-    body: "Two decades of building our own delivery foundation — the tools below — so every release starts from proven blocks, not a blank page.",
+    label: "Field-tested",
+    title: "Our tools start in delivery work.",
+    body: "We turn recurring delivery problems into reusable foundations for the next release.",
   },
 ];
 
@@ -295,7 +286,7 @@ const PROJECTS: Project[] = [
     name: "Mix",
     tagline: "Expressive styling for Flutter.",
     description:
-      "Fluent, chainable styles, reactive variants, and design tokens. Build design systems in Flutter without the boilerplate.",
+      "Chainable styles, variants, and tokens for Flutter design systems—without boilerplate.",
     href: "/mix",
     accent: "#8B5CF6",
     status: "Open source",
@@ -306,7 +297,7 @@ const PROJECTS: Project[] = [
     name: "Remix",
     tagline: "Flutter components, headless by design.",
     description:
-      "20+ accessible components built on Mix — completely styleable, from primitives to a full theme, with complete visual control.",
+      "20+ accessible, fully styleable Flutter components built on Mix.",
     href: "/remix",
     accent: "#00EB03",
     status: "Open source",
@@ -317,7 +308,7 @@ const PROJECTS: Project[] = [
     name: "Naked UI",
     tagline: "Behavior-first Flutter primitives.",
     description:
-      "Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state — without imposed styling.",
+      "Fourteen headless controls with semantics, keyboard support, focus, overlays, and observable state.",
     href: "/naked-ui",
     accent: "#60A5FA",
     status: "Open source",
@@ -328,9 +319,9 @@ const PROJECTS: Project[] = [
     name: "Ack",
     tagline: "Trust the boundary. Keep the types.",
     description:
-      "Dart schemas for apps and structured AI — define the shape once, validate every response at runtime, and keep your types.",
+      "Define Dart schemas once, validate data and AI responses at runtime, and keep static types.",
     href: "/ack",
-    accent: "#315CFF",
+    accent: "#6E8BFF",
     status: "Open source",
     windowLabel: "user_schema.dart",
     Visual: AckVisual,
@@ -339,7 +330,7 @@ const PROJECTS: Project[] = [
     name: "FVM",
     tagline: "Simple Flutter version management.",
     description:
-      "Pin Flutter SDKs per project, switch versions without reinstalling, and keep local development and CI on the same toolchain.",
+      "Pin Flutter SDKs per project and keep local development and CI on the same version.",
     href: "https://fvm.app",
     accent: "#38BDF8",
     status: "Open source",
@@ -351,7 +342,7 @@ const PROJECTS: Project[] = [
     name: "Rockets",
     tagline: "Describe the backend. Ship the domain.",
     description:
-      "One typed backend definition wires identity, storage, resources, access, hooks, and OpenAPI at runtime.",
+      "One typed definition wires identity, storage, resources, access policies, hooks, and OpenAPI at runtime.",
     href: "/rockets",
     accent: "#FF5906",
     status: "Open source",
@@ -362,7 +353,7 @@ const PROJECTS: Project[] = [
     name: "Stargate",
     tagline: "Complex workflows for the enterprise.",
     description:
-      "Turns APIs, workflows, and business rules into reusable capabilities with controls built in — permissions, approvals, human review, and audit. Agents act through approved capabilities, not broad system access.",
+      "Turn APIs, workflows, and rules into governed capabilities with permissions, approvals, human review, and audit trails.",
     href: "/stargate",
     accent: "#3EB8C9",
     status: "Waitlist",
@@ -373,7 +364,7 @@ const PROJECTS: Project[] = [
     name: "Code Analysis",
     tagline: "Deterministic, evidence-backed code audits.",
     description:
-      "Ten static analyzers and a 7-phase AI pipeline over any repo — a four-dimension scorecard and a report you can put in front of a client.",
+      "Run deterministic analyzers and an AI review pipeline across a repository to produce an evidence-backed scorecard.",
     href: "/code-analysis",
     accent: "#00D3FF",
     status: "Waitlist",
@@ -386,6 +377,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { Visual } = project;
   return (
     <motion.div
+      className="motion-reveal"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -404,7 +396,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       >
         <div className="project-card-copy">
           <div className="flex items-center justify-between">
-            <span className="project-name">{project.name}</span>
+            <h3 className="project-name">{project.name}</h3>
             <span className="project-status">{project.status}</span>
           </div>
           <p className="project-tagline">{project.tagline}</p>
@@ -434,15 +426,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export const ConceptaHome = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="concepta-home">
-      <HeroBackground />
+    <MotionConfig
+      reducedMotion="user"
+      skipAnimations={shouldReduceMotion === true}
+    >
+      <div className="concepta-home">
+        <HeroBackground />
 
       <Layout>
         <div className="relative z-10">
           {/* Hero — the agency stance, with the foundation below */}
           <div className="hero-section">
             <motion.div
+              className="motion-reveal"
               initial="hidden"
               animate="visible"
               custom={0}
@@ -456,6 +455,7 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.div
+              className="motion-reveal"
               initial="hidden"
               animate="visible"
               custom={0.1}
@@ -473,20 +473,21 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.div
+              className="motion-reveal"
               initial="hidden"
               animate="visible"
               custom={0.2}
               variants={fadeUp}
             >
               <p className="subtitle">
-                Between code that&apos;s written and a system that&apos;s safely
-                live, there&apos;s a gap. We own it — the decisions, the
-                release, the outcome. And we build our own tools to do it.
+                Code is only the start. We own the decisions, release, and
+                outcome required to put critical systems safely into
+                production.
               </p>
             </motion.div>
 
             <motion.div
-              className="not-prose mt-10 flex flex-col sm:flex-row gap-4"
+              className="motion-reveal not-prose mt-10 flex flex-col sm:flex-row gap-4"
               initial="hidden"
               animate="visible"
               custom={0.3}
@@ -497,7 +498,7 @@ export const ConceptaHome = () => {
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
-                <>Get a Delivery Readiness Assessment</>
+                <>Assess delivery readiness</>
               </Button>
               <Button
                 href="#projects"
@@ -509,7 +510,7 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.p
-              className="hero-ticker"
+              className="motion-reveal hero-ticker"
               initial="hidden"
               animate="visible"
               custom={0.4}
@@ -525,8 +526,8 @@ export const ConceptaHome = () => {
           </div>
 
           {/* Trust bar */}
-          <motion.section className="trust-bar" {...sectionReveal}>
-            <p className="trust-label">Trusted with critical systems at</p>
+          <motion.section className="motion-reveal trust-bar" {...sectionReveal}>
+            <p className="trust-label">Selected clients</p>
             <div
               className="trust-logos"
               role="list"
@@ -548,40 +549,29 @@ export const ConceptaHome = () => {
                 </div>
               ))}
             </div>
-            <p className="trust-outcomes">
-              {TRUST_OUTCOMES.map((line, i) => (
-                <span key={line}>
-                  {i > 0 && <span className="hero-ticker-sep"> / </span>}
-                  {line}
-                </span>
-              ))}
-            </p>
           </motion.section>
 
           {/* What Concepta does */}
           <section className="section-gap">
-            <motion.div className="section-header" {...sectionReveal}>
+            <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">What Concepta does</span>
               <h2 className="section-title">
-                We don&apos;t advise from the sideline. We own the outcome.
+                We own the path to production.
               </h2>
               <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
-                One owner, from the first readiness call to the live release.
-                We make the hard technical decisions, stabilize or build, and
-                stand behind what ships.{" "}
-                <span className="text-white">
-                  Advice doesn&apos;t ship. We do.
-                </span>
+                One senior team from readiness through release. We make the
+                hard technical decisions, stabilize or build, and stand behind
+                what ships.
               </p>
             </motion.div>
 
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              className="motion-reveal grid grid-cols-1 md:grid-cols-3 gap-4"
               {...sectionReveal}
             >
               {PILLARS.map((pillar) => (
                 <div key={pillar.title} className="pillar">
-                  <span className="pillar-stat">{pillar.stat}</span>
+                  <span className="pillar-label">{pillar.label}</span>
                   <p className="pillar-title">{pillar.title}</p>
                   <p className="pillar-body">{pillar.body}</p>
                 </div>
@@ -591,36 +581,34 @@ export const ConceptaHome = () => {
 
           {/* Research — evidence behind the agency stance */}
           <section id="research" className="section-gap">
-            <motion.div className="section-header" {...sectionReveal}>
+            <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">Concepta research</span>
               <h2 className="section-title">
-                The evidence behind governed delivery.
+                The evidence behind safer delivery.
               </h2>
               <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
-                Building is accelerating. The controls around review, release,
-                and production are not. Our latest report maps the gap — and
-                the operating model that closes it.
+                AI accelerates building faster than most teams can strengthen
+                review, release, and production controls. Our latest report
+                maps the gap and how to close it.
               </p>
             </motion.div>
 
-            <motion.div {...sectionReveal}>
+            <motion.div className="motion-reveal" {...sectionReveal}>
               <ProductionGapCard href="/reports" external={false} compact />
             </motion.div>
           </section>
 
           {/* Projects — the delivery foundation */}
           <section id="projects" className="section-gap">
-            <motion.div className="section-header" {...sectionReveal}>
+            <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">The delivery foundation</span>
               <h2 className="section-title">
                 Build faster without losing control.
               </h2>
               <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
-                Every project here started inside real delivery work — then got
-                extracted, hardened, and shipped. Our open-source code already
-                runs inside products at Google, Toyota, and Nubank. Open source
-                where the community builds with us, product where the problem
-                demands more.
+                These tools began in real delivery work. We extracted and
+                hardened the patterns teams need repeatedly—from Flutter UI and
+                validation to backend foundations and code analysis.
               </p>
             </motion.div>
 
@@ -633,14 +621,13 @@ export const ConceptaHome = () => {
 
           {/* Bottom CTA */}
           <motion.section
-            className="not-prose cta-section section-gap"
+            className="motion-reveal not-prose cta-section section-gap"
             {...sectionReveal}
           >
-            <h2 className="section-title">Know whether it&apos;s safe to ship.</h2>
+            <h2 className="section-title">Know whether your release is ready.</h2>
             <p className="mt-4 text-[var(--mix-text-muted)] max-w-[480px] text-base leading-relaxed">
-              Start with a Delivery Readiness Assessment — in two to three
-              weeks you&apos;ll know exactly where your release stands, and
-              what to do next.
+              In two to three weeks, a Delivery Readiness Assessment shows
+              where delivery is exposed and what to fix first.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Button
@@ -648,7 +635,7 @@ export const ConceptaHome = () => {
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
-                <>Get a Delivery Readiness Assessment</>
+                <>Assess delivery readiness</>
               </Button>
               <Button
                 href="https://discord.com/invite/Ycn6GV3m2k"
@@ -669,6 +656,28 @@ export const ConceptaHome = () => {
                 GitHub →
               </a>
             </p>
+
+            <address className="contact-card" aria-label="Concepta contact information">
+              <span className="contact-identity">
+                <strong>{CONCEPTA_LEGAL_NAME}</strong>
+                <span>Orlando, Florida</span>
+              </span>
+              <span className="contact-links">
+                <a className="contact-link" href={CONCEPTA_PHONE_HREF}>
+                  {CONCEPTA_PHONE_DISPLAY}
+                </a>
+                <a
+                  className="contact-link contact-address"
+                  href={CONCEPTA_MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${CONCEPTA_ADDRESS_DISPLAY} in Google Maps`}
+                >
+                  {CONCEPTA_ADDRESS_DISPLAY}
+                  <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
+                </a>
+              </span>
+            </address>
           </motion.section>
         </div>
       </Layout>
@@ -706,7 +715,7 @@ export const ConceptaHome = () => {
         }
 
         .concepta-btn:hover {
-          background: #5570ff !important;
+          background: #4963ff !important;
           box-shadow: 0 6px 25px rgba(58, 91, 255, 0.4) !important;
         }
 
@@ -776,7 +785,7 @@ export const ConceptaHome = () => {
 
         .trust-logos {
           display: grid;
-          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 12px;
           margin-top: 18px;
         }
@@ -810,21 +819,9 @@ export const ConceptaHome = () => {
           max-height: 44px;
         }
 
-        .trust-logo-google .trust-logo-image {
-          max-width: 100px;
-          max-height: 34px;
-        }
-
-        .trust-outcomes {
-          margin-top: 18px;
-          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 12.5px;
-          color: var(--mix-text-muted);
-        }
-
         @media (max-width: 1023px) {
           .trust-logos {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 
@@ -871,12 +868,13 @@ export const ConceptaHome = () => {
           border: 1px solid var(--mix-border-card);
         }
 
-        .pillar-stat {
+        .pillar-label {
           font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: var(--mix-accent);
-          letter-spacing: -0.02em;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #00ebbc;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
         }
 
         .pillar-title {
@@ -1375,7 +1373,123 @@ export const ConceptaHome = () => {
         .cta-handoff a:hover {
           color: var(--mix-accent);
         }
+
+        .contact-card {
+          width: 100%;
+          max-width: 760px;
+          margin-top: 32px;
+          padding: 20px 22px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
+          border: 1px solid var(--mix-border-card);
+          border-radius: 14px;
+          background: color-mix(in srgb, var(--mix-surface) 82%, transparent);
+          font-style: normal;
+          text-align: left;
+        }
+
+        .contact-identity,
+        .contact-links {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .contact-identity {
+          flex-shrink: 0;
+          gap: 3px;
+        }
+
+        .contact-identity strong {
+          color: var(--mix-text-main);
+          font-size: 0.875rem;
+          font-weight: 600;
+        }
+
+        .contact-identity span {
+          color: var(--mix-text-muted);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 0.6875rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .contact-links {
+          align-items: flex-end;
+          gap: 5px;
+          min-width: 0;
+        }
+
+        .contact-link {
+          color: var(--mix-text-muted);
+          font-size: 0.8125rem;
+          line-height: 1.5;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+
+        .contact-link:hover {
+          color: #fff;
+        }
+
+        .contact-link:focus-visible {
+          border-radius: 4px;
+          outline: 2px solid #00ebbc;
+          outline-offset: 3px;
+        }
+
+        .contact-address {
+          display: inline-flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 5px;
+          text-align: right;
+        }
+
+        .contact-address svg {
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 639px) {
+          .contact-card {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 16px;
+          }
+
+          .contact-links {
+            align-items: flex-start;
+          }
+
+          .contact-address {
+            justify-content: flex-start;
+            text-align: left;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .motion-reveal {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+
+          .project-card {
+            transition: none;
+          }
+
+          .project-card:hover {
+            transform: none;
+          }
+
+          .project-card .project-link svg {
+            transform: none !important;
+            transition: none !important;
+          }
+        }
       `}</style>
-    </div>
+      </div>
+    </MotionConfig>
   );
 };

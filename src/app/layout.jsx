@@ -20,14 +20,14 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 const description =
-    'Concepta ships the systems your business runs on — and builds the open-source delivery foundation behind them: Mix, Remix, Naked UI, Ack, FVM, Rockets, Stargate, and Code Analysis.'
+    'Concepta takes software from working code through production and builds open-source tools for reliable delivery.'
 
 export const viewport = {
     themeColor: '#111111',
 }
 
 export const metadata = {
-    metadataBase: new URL('https://fluttermix.com'),
+    metadataBase: new URL('https://concepta.dev'),
     title: 'Concepta',
     description,
     applicationName: 'Concepta',

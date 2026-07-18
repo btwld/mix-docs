@@ -23,7 +23,6 @@ test('wires Rockets into the shared product shell', () => {
   assert.match(route, /<RocketsLanding\s*\/>/)
   assert.match(route, /Rockets — Your backend should be a spec\./)
   assert.match(layout, /p==='\/rockets'/)
-  assert.match(layout, /FVM, Rockets, Stargate/)
   assert.match(navbar, /id: 'rockets'/)
   assert.match(navbar, /ROCKETS_GITHUB_URL/)
   assert.match(constants, /ROCKETS_GITHUB_URL = 'https:\/\/github\.com\/btwld\/rockets'/)
