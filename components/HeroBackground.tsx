@@ -1,12 +1,11 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
 import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { pauseWhenReducedMotion } from "./heroBackgroundMotion.mjs";
 
 export const HeroBackground = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const shouldReduceMotion = useReducedMotion();
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -14,9 +13,15 @@ export const HeroBackground = () => {
 
     if (!video) return;
 
-    if (shouldReduceMotion) video.pause();
+    const stopWatchingReducedMotion = pauseWhenReducedMotion(
+      window.matchMedia("(prefers-reduced-motion: reduce)"),
+      () => video.pause(),
+    );
+
     setIsPlaying(!video.paused);
-  }, [shouldReduceMotion]);
+
+    return stopWatchingReducedMotion;
+  }, []);
 
   const toggleVideoPlayback = async () => {
     const video = videoRef.current;
