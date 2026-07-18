@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ReportsHome } from "../../../components/reports/ReportsHome";
 
 const description =
-  "Concepta research on governed delivery, production risk, and the work between faster building and reliable release.";
+  "Concepta field guides for technology leaders adopting AI without losing control of delivery, interface, or consequential decisions.";
 
 export const metadata: Metadata = {
   title: "Reports | Concepta",

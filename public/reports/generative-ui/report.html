@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#02092D">
+  <meta name="description" content="A Concepta research feature on governed generative interfaces for enterprise systems.">
+  <title>Generative UI for the Enterprise — Concepta</title>
+  <link rel="stylesheet" href="_ds/concepta-design-system-bdff11cd-f579-4d0b-bcf7-0ff8bb87ffb2/colors_and_type.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;family=Newsreader:ital,opsz,wght@6..72,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      /* Report semantics consume the Concepta foundation without overriding it. */
+      --report-paper: var(--bg, #f5f6ff);
+      --report-paper-2: #eef0f6;
+      --report-ink: var(--fg1, #0b0f1a);
+      --report-muted: var(--fg2, #737786);
+      --report-line: var(--border-subtle, rgba(5, 13, 58, .16));
+      --report-navy: var(--navy-950, #02092d);
+      --report-navy-2: var(--navy-900, #050d3a);
+      --report-blue: var(--blue-500, #0c31ff);
+      --report-blue-soft: var(--blue-100, #dce2ff);
+      --report-accent: var(--aqua-400, #00d29a);
+      --report-accent-bright: var(--aqua-300, #00ebbc);
+      --report-white: var(--white, #fff);
+      --report-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --report-sans: var(--font-sans, 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+      --report-mono: var(--font-mono, 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace);
+      --report-content: min(1160px, calc(100vw - 112px));
+      --report-reading: 64ch;
+      --report-section-space: clamp(92px, 6.5vw, 124px);
+      --report-section-space-compact: clamp(68px, 5.25vw, 94px);
+      --report-module-space: clamp(48px, 4.75vw, 72px);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      margin: 0;
+      background: var(--report-paper);
+      color: var(--report-ink);
+      font-family: var(--report-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    img { display: block; max-width: 100%; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    a { color: inherit; }
+    ::selection { background: var(--report-accent); color: var(--report-navy); }
+    :focus-visible { outline: 3px solid var(--report-accent); outline-offset: 4px; }
+
+    .progress {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 4px;
+      background: rgba(255,255,255,.12);
+      z-index: 100;
+    }
+    .progress__bar { width: 0; height: 100%; background: var(--report-accent); }
+
+    .rail {
+      position: fixed;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: grid;
+      gap: 6px;
+      padding: 10px 6px;
+      background: rgba(245,246,255,.92);
+      border: 1px solid var(--report-line);
+      backdrop-filter: blur(16px);
+    }
+    .rail a {
+      width: 26px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      color: var(--report-muted);
+      font: 600 .62rem/1 var(--report-mono);
+      text-decoration: none;
+      transition: color 180ms, background 180ms;
+    }
+    .rail a[aria-current="true"] { background: var(--report-navy); color: var(--report-accent); }
+
+    .wrap { width: var(--report-content); margin-inline: auto; }
+    .section { padding: var(--report-section-space) 0; scroll-margin-top: 24px; }
+    .section--compact { padding-block: var(--report-section-space-compact); }
+    .section--dark { background: var(--report-navy); color: var(--report-white); }
+    .section--blue { background: var(--report-blue); color: var(--report-white); }
+    .section--paper-2 { background: var(--report-paper-2); }
+    .section-rule { border-top: 1px solid var(--report-line); }
+
+    .kicker,
+    .part,
+    .mono-label {
+      font: 600 .72rem/1.45 var(--report-mono);
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .part { display: flex; gap: 10px; align-items: center; color: var(--report-muted); }
+    .part b { color: var(--report-blue); font-weight: 700; }
+    .section--dark .part { color: rgba(255,255,255,.5); }
+    .section--dark .part b { color: var(--report-accent-bright); }
+    .kicker { color: var(--report-blue); }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, .serif { font-family: var(--report-serif); font-weight: 500; }
+    h1 {
+      margin: 22px 0 28px;
+      max-width: 8.15ch;
+      font-size: clamp(4.5rem, 8vw, 9.2rem);
+      line-height: .86;
+      letter-spacing: -.057em;
+    }
+    h1 em { color: var(--report-accent-bright); font-weight: 400; }
+    h2 {
+      margin: 18px 0 30px;
+      max-width: 16ch;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: .96;
+      letter-spacing: -.046em;
+      text-wrap: balance;
+    }
+    h3 { font-size: clamp(1.25rem, 1.7vw, 1.6rem); line-height: 1.15; letter-spacing: -.025em; }
+    .dek { max-width: 42ch; font-size: clamp(1.18rem, 1.7vw, 1.55rem); line-height: 1.45; letter-spacing: -.015em; }
+    .lead { max-width: var(--report-reading); font-size: clamp(1.15rem, 1.5vw, 1.35rem); line-height: 1.65; }
+    .muted { color: var(--report-muted); }
+    .section--dark .muted { color: rgba(255,255,255,.64); }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      position: relative;
+      overflow: hidden;
+      background: var(--report-navy);
+      color: var(--report-white);
+    }
+    .hero__image {
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: 62%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 56% center;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 20%, #000 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 20%, #000 100%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, var(--report-navy) 0 38%, rgba(2,9,45,.94) 48%, rgba(2,9,45,.24) 66%, transparent 78%),
+        linear-gradient(0deg, rgba(2,9,45,.82), transparent 30%);
+      pointer-events: none;
+    }
+    .masthead, .hero__content, .hero__meta { position: relative; z-index: 2; }
+    .masthead {
+      width: var(--report-content);
+      margin: 0 auto;
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      font: 600 .67rem/1 var(--report-mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .masthead span:last-child { color: rgba(255,255,255,.55); }
+    .hero__content {
+      width: var(--report-content);
+      margin: auto;
+      padding-block: clamp(84px, 10vh, 160px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: clamp(56px, 7vw, 120px);
+    }
+    .hero__content > * { grid-column: 1; }
+    .hero h1 { max-width: none; font-size: clamp(4.5rem, 7vw, 7.75rem); }
+    .hero h1 > span,
+    .hero h1 > em { display: block; }
+    .hero__content .kicker { color: var(--report-accent-bright); }
+    .hero__thesis {
+      margin: 0 0 38px;
+      max-width: 35ch;
+      font-size: clamp(1.15rem, 1.35vw, 1.4rem);
+      line-height: 1.5;
+      color: rgba(255,255,255,.78);
+    }
+    .hero__thesis strong { color: var(--report-white); }
+    .hero__jump {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--report-white);
+      font: 600 .72rem/1 var(--report-mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .hero__jump i {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: var(--report-accent);
+      color: var(--report-navy);
+      border-radius: 50%;
+      font-style: normal;
+    }
+    .hero__meta {
+      width: var(--report-content);
+      margin: 0 auto 26px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr .8fr;
+      border-top: 1px solid rgba(255,255,255,.2);
+    }
+    .hero__meta div { padding: 18px 20px 0 0; }
+    .hero__meta .mono-label { display: block; margin-bottom: 5px; color: rgba(255,255,255,.45); }
+    .hero__meta p { margin: 0; max-width: 35ch; font-size: .82rem; line-height: 1.45; }
+
+    .split-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .68fr); gap: clamp(48px, 6vw, 96px); align-items: start; }
+    .thesis-card { padding-left: 28px; border-left: 4px solid var(--report-accent); }
+    .thesis-card p { margin: 0; font-family: var(--report-serif); font-size: clamp(1.65rem, 2.5vw, 2.55rem); line-height: 1.15; letter-spacing: -.035em; }
+
+    .mode-grid { margin-top: var(--report-module-space); display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--report-line); }
+    .mode { min-height: 260px; padding: 28px; border-right: 1px solid var(--report-line); display: flex; flex-direction: column; }
+    .mode:last-child { border-right: 0; }
+    .mode--active { background: var(--report-blue); color: var(--report-white); transform: translateY(-18px); box-shadow: 0 18px 0 var(--report-accent); }
+    .mode__num { color: var(--report-muted); font: 600 .68rem/1 var(--report-mono); }
+    .mode--active .mode__num { color: rgba(255,255,255,.65); }
+    .mode h3 { margin: auto 0 16px; max-width: 13ch; }
+    .mode p { margin: 0; font-size: .95rem; line-height: 1.5; color: var(--report-muted); }
+    .mode--active p { color: rgba(255,255,255,.76); }
+    .definition-note { max-width: 66ch; margin: 42px 0 0; padding-top: 20px; border-top: 1px solid var(--report-line); color: var(--report-muted); font-size: .94rem; }
+    .definition-note strong { color: var(--report-ink); }
+
+    .fit-layout { display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(290px, .68fr); gap: clamp(48px, 6vw, 88px); margin-top: var(--report-module-space); }
+    .fit-test { border-top: 2px solid var(--report-ink); }
+    .fit-button {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px 0;
+      border: 0;
+      border-bottom: 1px solid var(--report-line);
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .fit-button__mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--report-ink);
+      color: transparent;
+      font-weight: 700;
+      transition: background 180ms, color 180ms;
+    }
+    .fit-button[aria-pressed="true"] .fit-button__mark { background: var(--report-accent); color: var(--report-navy); border-color: var(--report-accent); }
+    .fit-button strong { display: block; font-size: 1.05rem; }
+    .fit-button small { display: block; margin-top: 3px; color: var(--report-muted); font-size: .84rem; line-height: 1.4; }
+    .fit-button__state { color: var(--report-muted); font: 600 .64rem/1 var(--report-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .fit-result { position: sticky; top: 40px; align-self: start; padding: 32px; background: var(--report-navy); color: var(--report-white); }
+    .fit-result__score { display: block; margin: 24px 0 8px; color: var(--report-accent); font-size: clamp(4.4rem, 7vw, 7rem); font-weight: 700; line-height: .8; letter-spacing: -.07em; }
+    .fit-result h3 { margin: 26px 0 12px; color: var(--report-white); }
+    .fit-result p { margin: 0; color: rgba(255,255,255,.68); font-size: .92rem; }
+    .fit-result__bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 30px; }
+    .fit-result__bar i { height: 5px; background: rgba(255,255,255,.18); }
+    .fit-result__bar i.is-on { background: var(--report-accent); }
+
+    .candidate-list { margin-top: 52px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--report-line); border: 1px solid var(--report-line); }
+    .candidate-list article { padding: 24px; background: var(--report-paper); }
+    .candidate-list h3 { margin-bottom: 10px; font-size: 1rem; }
+    .candidate-list p { margin: 0; color: var(--report-muted); font-size: .86rem; }
+
+    .panorama { margin: 0; background: #f4f4f6; overflow: hidden; }
+    .panorama img { width: 100%; max-height: 560px; object-fit: cover; }
+    .panorama figcaption { width: var(--report-content); margin: 0 auto; padding: 12px 0 18px; color: var(--report-muted); font: 500 .65rem/1.4 var(--report-mono); letter-spacing: .06em; text-transform: uppercase; }
+
+    .operating { margin-top: var(--report-module-space); display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid rgba(255,255,255,.25); }
+    .operating article { min-height: 310px; padding: 30px; border-right: 1px solid rgba(255,255,255,.2); display: flex; flex-direction: column; }
+    .operating article:last-child { border-right: 0; }
+    .operating__index { color: var(--report-accent); font: 600 .67rem/1 var(--report-mono); }
+    .operating h3 { margin: auto 0 16px; color: var(--report-white); font-family: var(--report-serif); font-size: clamp(2rem, 3vw, 3.2rem); font-weight: 400; }
+    .operating p { margin: 0; color: rgba(255,255,255,.64); font-size: .94rem; }
+    .operating__line { margin-top: 42px; display: grid; grid-template-columns: repeat(8, auto); gap: 8px; align-items: center; color: rgba(255,255,255,.68); font: 500 .64rem/1.35 var(--report-mono); text-transform: uppercase; letter-spacing: .05em; }
+    .operating__line b { color: var(--report-accent); }
+    .operating__line i { height: 1px; min-width: 10px; background: rgba(255,255,255,.28); }
+    .pullquote { margin: clamp(72px, 7vw, 108px) auto 0; max-width: 20ch; text-align: center; font: 400 clamp(2.8rem, 4.6vw, 5rem)/.98 var(--report-serif); letter-spacing: -.05em; }
+    .pullquote em { color: var(--report-accent); }
+
+    .clocks { margin-top: var(--report-module-space); display: grid; grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); gap: clamp(44px, 6vw, 88px); }
+    .clock-tabs { border-top: 2px solid var(--report-ink); }
+    .clock-tab {
+      width: 100%;
+      padding: 24px 0;
+      display: grid;
+      grid-template-columns: 38px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border: 0;
+      border-bottom: 1px solid var(--report-line);
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+    .clock-tab b { font: 600 .68rem/1 var(--report-mono); color: var(--report-muted); }
+    .clock-tab strong { font-size: 1.05rem; }
+    .clock-tab span:last-child { color: transparent; }
+    .clock-tab.is-active { color: var(--report-blue); }
+    .clock-tab.is-active span:last-child { color: var(--report-accent); }
+    .clock-stage { position: sticky; top: 40px; min-height: 420px; padding: clamp(32px, 4vw, 54px); background: var(--report-white); border: 1px solid var(--report-line); }
+    .clock-stage__dial { width: 132px; aspect-ratio: 1; margin-bottom: 54px; border: 1px solid var(--report-line); border-radius: 50%; position: relative; }
+    .clock-stage__dial::before, .clock-stage__dial::after { content: ''; position: absolute; left: 50%; bottom: 50%; width: 2px; background: var(--report-blue); transform-origin: 50% 100%; }
+    .clock-stage__dial::before { height: 46px; transform: rotate(38deg); }
+    .clock-stage__dial::after { height: 32px; background: var(--report-accent); transform: rotate(115deg); }
+    .clock-stage h3 { margin: 0 0 14px; font-family: var(--report-serif); font-size: clamp(2rem, 3vw, 3.4rem); font-weight: 400; }
+    .clock-stage p { max-width: 45ch; margin: 0; color: var(--report-muted); }
+    .clock-stage__status { margin-top: 42px; padding-top: 16px; border-top: 1px solid var(--report-line); display: flex; justify-content: space-between; gap: 20px; font: 500 .67rem/1.4 var(--report-mono); letter-spacing: .06em; text-transform: uppercase; }
+    .clock-stage__status span:last-child { color: var(--report-blue); }
+
+    .rights { margin-top: var(--report-module-space); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--report-line); border: 1px solid var(--report-line); }
+    .right-card { min-height: 340px; padding: 30px; background: var(--report-paper); display: flex; flex-direction: column; }
+    .right-card--system { background: var(--report-blue); color: var(--report-white); }
+    .right-card__symbol { font: 400 4.8rem/1 var(--report-serif); color: var(--report-blue); }
+    .right-card--system .right-card__symbol { color: var(--report-accent); }
+    .right-card h3 { margin: auto 0 14px; font-size: 1.5rem; }
+    .right-card p { margin: 0; color: var(--report-muted); font-size: .92rem; }
+    .right-card--system p { color: rgba(255,255,255,.74); }
+    .pause-strip { margin-top: 42px; padding: 28px; display: grid; grid-template-columns: .5fr 1.5fr; gap: 36px; border: 1px solid var(--report-line); }
+    .pause-strip h3 { margin: 0; }
+    .pause-strip ul { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 36px; }
+    .pause-strip li { break-inside: avoid; margin: 0 0 10px; padding-left: 18px; position: relative; color: var(--report-muted); font-size: .88rem; }
+    .pause-strip li::before { content: ''; position: absolute; left: 0; top: .65em; width: 6px; height: 6px; background: var(--report-blue); }
+
+    .review-shell { margin-top: var(--report-module-space); display: grid; grid-template-columns: 280px minmax(0, 1fr); border: 1px solid rgba(255,255,255,.2); background: var(--report-navy-2); }
+    .review-side { min-width: 0; padding: 28px; border-right: 1px solid rgba(255,255,255,.18); }
+    .review-side__status { display: inline-flex; align-items: center; gap: 8px; color: var(--report-accent); font: 600 .66rem/1 var(--report-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .review-side__status::before { content: ''; width: 8px; height: 8px; background: var(--report-accent); border-radius: 50%; }
+    .review-side h3 { margin: 44px 0 12px; font-family: var(--report-serif); font-size: 2rem; font-weight: 400; }
+    .review-side p { color: rgba(255,255,255,.64); font-size: .87rem; }
+    .review-side dl { margin: 42px 0 0; }
+    .review-side dt { margin-top: 18px; color: rgba(255,255,255,.42); font: 500 .62rem/1.4 var(--report-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .review-side dd { margin: 3px 0 0; font-size: .88rem; }
+    .review-main { min-width: 0; padding: clamp(28px, 4vw, 54px); }
+    .review-main__head { display: flex; align-items: start; justify-content: space-between; gap: 28px; }
+    .review-main h3 { margin: 0; max-width: 22ch; color: var(--report-white); font-size: clamp(1.6rem, 2.3vw, 2.35rem); }
+    .review-confidence { flex: none; padding: 8px 10px; border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.68); font: 500 .62rem/1 var(--report-mono); letter-spacing: .06em; text-transform: uppercase; }
+    .evidence-tabs { margin-top: 40px; display: flex; border-bottom: 1px solid rgba(255,255,255,.18); }
+    .evidence-tab { padding: 12px 16px; border: 0; border-bottom: 3px solid transparent; background: transparent; color: rgba(255,255,255,.54); font: 600 .65rem/1 var(--report-mono); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+    .evidence-tab.is-active { color: var(--report-white); border-color: var(--report-accent); }
+    .evidence-panel { min-height: 205px; padding: 26px 0; }
+    .evidence-panel h4 { margin: 0 0 12px; font-size: 1rem; }
+    .evidence-panel p { max-width: 68ch; color: rgba(255,255,255,.68); font-size: .9rem; }
+    .evidence-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
+    .evidence-facts div { padding: 16px; border: 1px solid rgba(255,255,255,.16); }
+    .evidence-facts b { display: block; color: var(--report-accent); font-size: 1.3rem; }
+    .evidence-facts span { color: rgba(255,255,255,.5); font-size: .76rem; }
+    .review-actions { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); }
+    .action {
+      padding: 12px 18px;
+      border: 1px solid rgba(255,255,255,.3);
+      background: transparent;
+      color: var(--report-white);
+      font: 600 .68rem/1 var(--report-mono);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .action--primary { border-color: var(--report-accent); background: var(--report-accent); color: var(--report-navy); }
+    .audit-event { margin-top: 16px; color: rgba(255,255,255,.5); font: 500 .63rem/1.5 var(--report-mono); }
+
+    .architecture { margin-top: var(--report-module-space); border-top: 2px solid var(--report-ink); }
+    .architecture article { display: grid; grid-template-columns: 80px .6fr 1.2fr; gap: 28px; align-items: start; padding: 25px 0; border-bottom: 1px solid var(--report-line); }
+    .architecture article:nth-child(3) { background: var(--report-blue-soft); margin-inline: -24px; padding-inline: 24px; }
+    .architecture__num { color: var(--report-blue); font: 600 .68rem/1.4 var(--report-mono); }
+    .architecture h3 { margin: 0; font-size: 1.05rem; }
+    .architecture p { margin: 0; max-width: 58ch; color: var(--report-muted); font-size: .9rem; }
+    .boundaries { margin-top: 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--report-line); border: 1px solid var(--report-line); }
+    .boundary { padding: 30px; background: var(--report-white); }
+    .boundary b { color: var(--report-blue); font: 600 .67rem/1 var(--report-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .boundary h3 { margin: 18px 0 12px; }
+    .boundary p { margin: 0; color: var(--report-muted); font-size: .9rem; }
+
+    .portfolio { margin-top: var(--report-module-space); display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .case { min-height: 230px; padding: 26px; border: 1px solid rgba(255,255,255,.2); display: flex; flex-direction: column; }
+    .case:nth-child(1), .case:nth-child(2) { grid-column: span 6; }
+    .case:nth-child(n+3) { grid-column: span 4; }
+    .case__tag { color: var(--report-accent); font: 600 .64rem/1 var(--report-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .case h3 { margin: auto 0 14px; color: var(--report-white); font-family: var(--report-serif); font-size: clamp(1.8rem, 2.4vw, 2.6rem); font-weight: 400; }
+    .case p { margin: 0; color: rgba(255,255,255,.62); font-size: .86rem; }
+    .case p strong { color: var(--report-white); }
+
+    .adoption-grid { margin-top: var(--report-module-space); display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--report-line); border: 1px solid var(--report-line); }
+    .gate { min-height: 370px; padding: 26px; background: var(--report-paper); display: flex; flex-direction: column; }
+    .gate__id { color: var(--report-blue); font: 600 .67rem/1 var(--report-mono); letter-spacing: .08em; }
+    .gate h3 { margin: 52px 0 18px; font-family: var(--report-serif); font-size: 2rem; font-weight: 400; }
+    .gate ol { margin: 0; padding: 0; list-style: none; counter-reset: steps; }
+    .gate li { counter-increment: steps; margin: 0 0 15px; padding-left: 28px; position: relative; color: var(--report-muted); font-size: .85rem; }
+    .gate li::before { content: counter(steps, decimal-leading-zero); position: absolute; left: 0; top: 2px; color: var(--report-ink); font: 600 .6rem/1.5 var(--report-mono); }
+    .gate__exit { margin: auto 0 0; padding-top: 18px; border-top: 1px solid var(--report-line); font: 600 .64rem/1.5 var(--report-mono); letter-spacing: .04em; text-transform: uppercase; }
+    .gate:nth-child(3) { background: var(--report-blue); color: var(--report-white); }
+    .gate:nth-child(3) .gate__id { color: var(--report-accent-bright); }
+    .gate:nth-child(3) li { color: rgba(255,255,255,.7); }
+    .gate:nth-child(3) li::before { color: var(--report-white); }
+    .gate:nth-child(3) .gate__exit { border-color: rgba(255,255,255,.25); }
+
+    .measure { margin-top: var(--report-module-space); display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(48px, 6vw, 88px); align-items: start; }
+    .measure__intro { position: sticky; top: 40px; }
+    .measure__intro h3 { font-family: var(--report-serif); font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 400; }
+    .measure-list { border-top: 2px solid var(--report-ink); }
+    .measure-row { display: grid; grid-template-columns: 120px 1fr; gap: 26px; padding: 21px 0; border-bottom: 1px solid var(--report-line); }
+    .measure-row b { font: 600 .67rem/1.4 var(--report-mono); letter-spacing: .06em; text-transform: uppercase; }
+    .measure-row p { margin: 0; color: var(--report-muted); font-size: .9rem; }
+
+    .close { min-height: 82svh; display: grid; align-items: center; position: relative; overflow: hidden; }
+    .close::before {
+      content: '';
+      position: absolute;
+      width: min(48vw, 720px);
+      aspect-ratio: 1;
+      right: -8vw;
+      top: 10%;
+      border: 1px solid rgba(255,255,255,.15);
+      transform: rotate(12deg);
+      box-shadow: inset 0 0 0 9vw var(--report-navy), inset 0 0 0 calc(9vw + 1px) rgba(255,255,255,.12);
+    }
+    .close .wrap { position: relative; z-index: 1; }
+    .close h2 { max-width: 10ch; color: var(--report-white); }
+    .close h2 em { color: var(--report-accent); font-weight: 400; }
+    .close__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(48px, 8vw, 120px); align-items: end; }
+    .close__principles { border-top: 1px solid rgba(255,255,255,.22); }
+    .close__principles p { margin: 0; padding: 17px 0; border-bottom: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.72); }
+    .close__principles strong { color: var(--report-white); }
+    .close__cta { margin-top: 48px; padding: 26px; border-left: 4px solid var(--report-accent); background: rgba(255,255,255,.05); }
+    .close__cta b { color: var(--report-accent); font: 600 .67rem/1 var(--report-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .close__cta p { margin: 12px 0 0; color: rgba(255,255,255,.74); }
+
+    .sources { padding: 54px 0; background: #01051c; color: rgba(255,255,255,.68); }
+    .sources__grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: 48px; }
+    .sources h3 { color: var(--report-white); }
+    .sources p, .sources li { font-size: .77rem; line-height: 1.55; }
+    .sources ul { margin: 0; padding-left: 18px; columns: 2; column-gap: 36px; }
+    .sources li { break-inside: avoid; margin-bottom: 7px; }
+    .sources a { text-decoration-color: rgba(255,255,255,.3); text-underline-offset: 3px; }
+
+    @media (min-width: 1600px) {
+      :root { --report-content: min(1240px, calc(100vw - 180px)); }
+      .section { padding-block: 116px; }
+      .hero__content { padding-left: clamp(54px, 4.5vw, 88px); }
+      .rail { left: max(24px, calc((100vw - var(--report-content)) / 2 - 72px)); }
+    }
+
+    @media (max-width: 980px) {
+      :root { --report-content: min(calc(100% - 48px), 860px); }
+      .rail { display: none; }
+      .hero__image { width: 100%; opacity: .48; object-position: 66% center; }
+      .hero::after { background: linear-gradient(90deg, rgba(2,9,45,.98) 0 24%, rgba(2,9,45,.84) 62%, rgba(2,9,45,.38)), linear-gradient(0deg, rgba(2,9,45,.9), transparent 44%); }
+      .hero__content { grid-template-columns: 1fr; column-gap: 0; }
+      .hero h1 { font-size: clamp(4rem, 12vw, 6rem); }
+      .split-intro, .fit-layout, .clocks, .measure, .close__grid, .sources__grid { grid-template-columns: 1fr; }
+      .thesis-card { max-width: 650px; }
+      .fit-result, .clock-stage, .measure__intro { position: static; }
+      .mode-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .mode { min-height: 240px; }
+      .mode--active { transform: none; box-shadow: inset 0 -5px var(--report-accent); }
+      .candidate-list { grid-template-columns: 1fr 1fr; }
+      .operating article { min-height: 290px; }
+      .rights { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .right-card { min-height: 310px; padding: 24px; }
+      .pause-strip { grid-template-columns: 1fr; }
+      .review-shell { grid-template-columns: 1fr; }
+      .review-side { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+      .architecture article { grid-template-columns: 58px .75fr 1.25fr; }
+      .case:nth-child(n) { grid-column: span 6; }
+      .adoption-grid { grid-template-columns: 1fr 1fr; }
+      .gate { min-height: 350px; }
+      .close::before { opacity: .4; }
+    }
+
+    @media (max-width: 640px) {
+      :root { --report-content: calc(100% - 40px); }
+      body { font-size: 16px; }
+      .masthead span:last-child { display: none; }
+      .section { padding-block: 72px; }
+      .section--compact { padding-block: 60px; }
+      .hero { min-height: max(760px, 100svh); }
+      .hero__image { object-position: 63% 50%; opacity: .4; -webkit-mask-image: none; mask-image: none; }
+      .hero::after { background: linear-gradient(90deg, rgba(2,9,45,.97) 0 16%, rgba(2,9,45,.78) 58%, rgba(2,9,45,.3)), linear-gradient(0deg, rgba(2,9,45,.92), transparent 48%); }
+      .hero__content { padding-block: 64px 38px; align-self: end; }
+      h1 { max-width: 7.6ch; font-size: clamp(3.75rem, 18vw, 5.1rem); line-height: .9; letter-spacing: -.052em; }
+      .hero h1 { max-width: none; font-size: clamp(3.7rem, 17vw, 4.8rem); }
+      h2 { margin: 16px 0 24px; max-width: 15ch; font-size: clamp(2.25rem, 10vw, 2.85rem); line-height: 1.02; letter-spacing: -.04em; }
+      .dek { font-size: 1.08rem; line-height: 1.48; }
+      .hero__meta { grid-template-columns: 1fr; margin-bottom: 16px; }
+      .hero__meta div { padding-top: 13px; }
+      .hero__meta div:not(:first-child) { display: none; }
+      .split-intro { gap: 36px; }
+      .thesis-card { padding-left: 20px; }
+      .mode-grid { margin-top: 48px; grid-template-columns: 1fr; }
+      .mode { min-height: 0; padding: 22px; border-right: 0; border-bottom: 1px solid var(--report-line); }
+      .mode h3 { margin: 38px 0 10px; }
+      .mode--active { box-shadow: inset 5px 0 var(--report-accent); }
+      .definition-note { margin-top: 30px; }
+      .fit-layout { margin-top: 44px; gap: 30px; }
+      .fit-button { grid-template-columns: 34px 1fr; gap: 12px; padding: 18px 0; }
+      .fit-button small { font-size: .9rem; }
+      .fit-button__state { display: none; }
+      .fit-result { padding: 24px; }
+      .fit-result__score { margin-top: 18px; font-size: 4.25rem; }
+      .candidate-list { margin-top: 40px; grid-template-columns: 1fr; }
+      .candidate-list article { padding: 18px; }
+      .candidate-list p, .architecture p, .gate li, .measure-row p, .case p, .review-side p, .evidence-panel p, .boundary p { font-size: .94rem; }
+      .panorama img { height: 300px; min-height: 0; object-fit: cover; object-position: 45% center; }
+      .panorama figcaption { padding-bottom: 14px; }
+      .operating { margin-top: 48px; grid-template-columns: 1fr; }
+      .operating article { min-height: 0; padding: 24px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.2); }
+      .operating h3 { margin: 42px 0 12px; }
+      .operating__line { margin-top: 34px; grid-template-columns: 1fr; gap: 0; }
+      .operating__line span, .operating__line b { padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+      .operating__line i { display: none; }
+      .pullquote { margin-top: 62px; font-size: 2.75rem; }
+      .clocks { margin-top: 46px; gap: 28px; }
+      .clock-tab { padding: 18px 0; }
+      .clock-stage { min-height: 0; padding: 26px 22px; }
+      .clock-stage__dial { width: 96px; margin-bottom: 34px; }
+      .clock-stage__dial::before { height: 34px; }
+      .clock-stage__dial::after { height: 24px; }
+      .clock-stage__status { margin-top: 30px; }
+      .rights { margin-top: 46px; grid-template-columns: 1fr; }
+      .right-card { min-height: 0; padding: 22px; display: grid; grid-template-columns: 58px 1fr; column-gap: 16px; }
+      .right-card__symbol { grid-row: 1 / span 2; font-size: 3.7rem; }
+      .right-card h3 { margin: 4px 0 9px; }
+      .right-card p { grid-column: 2; }
+      .pause-strip { margin-top: 30px; padding: 22px; gap: 18px; }
+      .pause-strip ul { columns: 1; }
+      .review-shell { margin-top: 46px; }
+      .review-side { padding: 22px; }
+      .review-side h3 { margin-top: 30px; }
+      .review-side dl { margin-top: 28px; display: grid; grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 8px; }
+      .review-side dt { margin: 0; }
+      .review-side dd { margin: 0; }
+      .review-main { padding: 24px 22px; }
+      .review-main__head { display: block; }
+      .review-confidence { display: inline-block; margin-top: 14px; }
+      .evidence-tabs { margin-top: 28px; overflow-x: auto; }
+      .evidence-tab { padding-inline: 11px; white-space: nowrap; }
+      .evidence-panel { min-height: 0; padding-block: 22px; }
+      .evidence-facts { grid-template-columns: 1fr; gap: 6px; margin-top: 20px; }
+      .evidence-facts div { padding: 11px 12px; display: flex; align-items: baseline; gap: 10px; }
+      .evidence-facts span { font-size: .67rem; line-height: 1.25; }
+      .review-actions .action { flex: 1 1 calc(50% - 8px); padding-inline: 10px; }
+      .architecture { margin-top: 46px; }
+      .architecture article { grid-template-columns: 46px 1fr; gap: 12px; }
+      .architecture article p { grid-column: 2; }
+      .architecture article:nth-child(3) { margin-inline: -12px; padding-inline: 12px; }
+      .boundaries { margin-top: 34px; grid-template-columns: 1fr; }
+      .boundary { padding: 22px; }
+      .case:nth-child(n) { grid-column: span 12; }
+      .portfolio { margin-top: 44px; gap: 10px; }
+      .case { min-height: 0; padding: 22px; }
+      .case h3 { margin: 38px 0 10px; font-size: 2rem; }
+      .adoption-grid { grid-template-columns: 1fr; }
+      .adoption-grid { margin-top: 46px; }
+      .gate { min-height: 0; padding: 22px; }
+      .gate h3 { margin: 26px 0 15px; }
+      .gate__exit { margin-top: 24px; }
+      .measure { margin-top: 60px; gap: 34px; }
+      .measure__intro h3 { font-size: 2.55rem; }
+      .measure-row { grid-template-columns: 1fr; gap: 7px; padding: 16px 0; }
+      .close { min-height: 0; }
+      .close__cta { margin-top: 34px; padding: 22px; }
+      .sources { padding-block: 44px; }
+      .sources ul { columns: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><div class="progress__bar"></div></div>
+
+  <nav class="rail" aria-label="Report sections">
+    <a href="#part-1">01</a><a href="#part-2">02</a><a href="#part-3">03</a><a href="#part-4">04</a><a href="#part-5">05</a>
+    <a href="#part-6">06</a><a href="#part-7">07</a><a href="#part-8">08</a><a href="#part-9">09</a><a href="#part-10">10</a>
+  </nav>
+
+  <header class="hero" id="top">
+    <img class="hero__image" src="assets/genui-enterprise/genui-contract-hero-teal.webp" width="1672" height="941" alt="A stable white frame containing composed blue interface modules and a teal approval control.">
+    <div class="masthead"><span>Concepta / Research feature</span><span>Enterprise AI · Interaction · Governance</span></div>
+    <div class="hero__content">
+      <span class="kicker">Adaptive interfaces. Governed actions.</span>
+      <h1><span>Generative</span><span>UI <em>for the</em></span><em>enterprise</em></h1>
+      <p class="hero__thesis"><strong>The interface can change. Authority cannot.</strong> Enterprise GenUI assembles approved components around the task while the application keeps control of state, policy and action.</p>
+      <a class="hero__jump" href="#part-1"><i>↓</i> Read the feature</a>
+    </div>
+    <div class="hero__meta">
+      <div><span class="mono-label">By</span><p>Concepta — product and delivery research</p></div>
+      <div><span class="mono-label">For</span><p>CTOs, CIOs, product leaders and enterprise design teams</p></div>
+      <div><span class="mono-label">Reading time</span><p>14 minutes · 12 primary references</p></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="part-1" data-section="01">
+      <div class="wrap">
+        <div class="split-intro">
+          <div>
+            <div class="part">Part <b>01</b> / What it is</div>
+            <h2>Software can adapt without giving up control.</h2>
+          </div>
+          <div class="thesis-card">
+            <span class="mono-label">Concepta thesis</span>
+            <p>Generative UI composes an approved interface for the task at hand. The application still owns the truth.</p>
+          </div>
+        </div>
+        <p class="lead">Fixed software is reliable but cannot anticipate every case. Chat is flexible but often hides state, evidence and available action. Generative UI keeps the flexibility while restoring a visible, checkable interface.</p>
+
+        <div class="mode-grid" aria-label="Three enterprise interface modes">
+          <article class="mode"><span class="mode__num">01 / FIXED</span><h3>Designed software</h3><p>Stable screens for known paths. Best when the work repeats.</p></article>
+          <article class="mode"><span class="mode__num">02 / FLUID</span><h3>Conversational AI</h3><p>Flexible input, but state, evidence and possible actions can disappear inside the answer.</p></article>
+          <article class="mode mode--active"><span class="mode__num">03 / BOUNDED</span><h3>Generative UI</h3><p>Approved components adapt to the task. The application retains authority.</p></article>
+        </div>
+
+        <p class="definition-note"><strong>What it is not:</strong> arbitrary code generation, a chatbot with cards, or a replacement for the design system, permission model or product architecture.</p>
+      </div>
+    </section>
+
+    <section class="section section--paper-2" id="part-2" data-section="02">
+      <div class="wrap">
+        <div class="part">Part <b>02</b> / Where it fits</div>
+        <h2>Start where variation helps.</h2>
+        <p class="dek">Choose a workflow where cases genuinely differ, actions are bounded, and a person or system can verify the outcome.</p>
+
+        <div class="fit-layout">
+          <div class="fit-test" aria-label="GenUI candidate fit test">
+            <button class="fit-button" type="button" aria-pressed="false"><span class="fit-button__mark">✓</span><span><strong>The task is bounded</strong><small>The outcome and allowed actions can be named.</small></span><span class="fit-button__state">Select</span></button>
+            <button class="fit-button" type="button" aria-pressed="false"><span class="fit-button__mark">✓</span><span><strong>The context is rich</strong><small>Relevant data, policy, history and evidence already exist.</small></span><span class="fit-button__state">Select</span></button>
+            <button class="fit-button" type="button" aria-pressed="false"><span class="fit-button__mark">✓</span><span><strong>The decision varies</strong><small>Different cases require different emphasis or evidence.</small></span><span class="fit-button__state">Select</span></button>
+            <button class="fit-button" type="button" aria-pressed="false"><span class="fit-button__mark">✓</span><span><strong>The output is checkable</strong><small>A person or deterministic system can verify the result.</small></span><span class="fit-button__state">Select</span></button>
+            <button class="fit-button" type="button" aria-pressed="false"><span class="fit-button__mark">✓</span><span><strong>Direct manipulation helps</strong><small>Compare, filter, edit or approve beats another prompt.</small></span><span class="fit-button__state">Select</span></button>
+          </div>
+          <aside class="fit-result" aria-live="polite">
+            <span class="mono-label">Candidate signal</span>
+            <strong class="fit-result__score"><span id="fit-score">0</span>/5</strong>
+            <div class="fit-result__bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <h3 id="fit-title">Start with the workflow.</h3>
+            <p id="fit-copy">Select only what is true of the real workflow—not what a polished prototype makes possible.</p>
+          </aside>
+        </div>
+
+        <div class="candidate-list">
+          <article><h3>Review + approval</h3><p>Contracts, escalations, policy exceptions, release risk and security findings.</p></article>
+          <article><h3>Triage + investigation</h3><p>Incidents, claims, requests, anomalies and operational exceptions.</p></article>
+          <article><h3>Decision support</h3><p>Scenario comparison, assumption changes, evidence inspection and rationale.</p></article>
+          <article><h3>Configuration</h3><p>Deployment, onboarding, entitlement, service options and workflow setup.</p></article>
+          <article><h3>Role-specific reporting</h3><p>One governed result, composed for executive, operator, auditor or client.</p></article>
+          <article><h3>Complex data exploration</h3><p>Charts, filters, drill-downs, annotations and follow-up actions.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <figure class="panorama">
+      <img src="assets/genui-enterprise/governed-composition-panorama-teal.webp" width="1942" height="809" alt="Blue interface fragments pass through a stable boundary and reach a teal approval point before becoming reviewable evidence cards.">
+      <figcaption>The request may vary. The contract sets the boundary. A person authorizes the consequential action.</figcaption>
+    </figure>
+
+    <section class="section section--dark" id="part-3" data-section="03">
+      <div class="wrap">
+        <div class="part">Part <b>03</b> / How it works</div>
+        <h2>The interface can change. The contract cannot.</h2>
+        <p class="dek muted">Do not generate a new application for every request. Compose a focused surface over one governed capability.</p>
+
+        <div class="operating">
+          <article><span class="operating__index">01 / DURABLE</span><h3>Governed capability</h3><p>Workflow, tools, permissions, policy, review and audit stay stable.</p></article>
+          <article><span class="operating__index">02 / DECLARED</span><h3>Intent contract</h3><p>Approved components, context, actions and limits define what may be composed.</p></article>
+          <article><span class="operating__index">03 / ADAPTIVE</span><h3>Bounded surface</h3><p>The interface changes emphasis for the task. The shell preserves orientation and control.</p></article>
+        </div>
+        <div class="operating__line" aria-label="Governed composition sequence"><span>Request</span><i></i><span>Contract</span><i></i><span>Surface</span><i></i><b>Declared action</b><i></i><span>Capability</span><i></i><span>Policy + eval</span><i></i><span>Review / execute</span><i></i><span>Audit</span></div>
+        <blockquote class="pullquote">The surface proposes. <em>The app makes the change.</em></blockquote>
+      </div>
+    </section>
+
+    <section class="section" id="part-4" data-section="04">
+      <div class="wrap">
+        <div class="part">Part <b>04</b> / How it responds</div>
+        <h2>Not every interaction needs the model.</h2>
+        <p class="dek">The layout may regenerate when the job changes. Ordinary interaction should remain immediate, and the workflow must continue even if the surface disappears.</p>
+        <div class="clocks">
+          <div class="clock-tabs" role="tablist" aria-label="Three system clocks">
+            <button class="clock-tab is-active" type="button" role="tab" aria-selected="true" data-clock="composition"><b>01</b><strong>Composition clock</strong><span>●</span></button>
+            <button class="clock-tab" type="button" role="tab" aria-selected="false" data-clock="interaction"><b>02</b><strong>Interaction clock</strong><span>●</span></button>
+            <button class="clock-tab" type="button" role="tab" aria-selected="false" data-clock="workflow"><b>03</b><strong>Workflow clock</strong><span>●</span></button>
+          </div>
+          <div class="clock-stage" role="tabpanel" aria-live="polite">
+            <div class="clock-stage__dial" aria-hidden="true"></div>
+            <span class="mono-label" id="clock-kicker">When the job changes</span>
+            <h3 id="clock-title">Recompose deliberately.</h3>
+            <p id="clock-copy">Structure and emphasis may regenerate when the intent, phase or material context changes enough to justify a new arrangement.</p>
+            <div class="clock-stage__status"><span>Expected behavior</span><span id="clock-status">Validated generation latency</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--paper-2" id="part-5" data-section="05">
+      <div class="wrap">
+        <div class="part">Part <b>05</b> / Who decides</div>
+        <h2>Put human judgment where the risk is.</h2>
+        <p class="dek">Require review when the action is consequential, hard to reverse or uncertain. Approval everywhere only creates another queue.</p>
+        <div class="rights">
+          <article class="right-card"><span class="right-card__symbol">A</span><h3>AI may propose</h3><p>Summarize, draft, compare, rank, surface missing context, arrange evidence and recommend a next step.</p></article>
+          <article class="right-card right-card--system"><span class="right-card__symbol">S</span><h3>The system must govern</h3><p>Identity, permission, app state, deterministic rules, policy checks, evaluation, tool execution, logging and rollback.</p></article>
+          <article class="right-card"><span class="right-card__symbol">H</span><h3>People retain judgment</h3><p>Set goals, correct context, decide exceptions, approve high-impact action, override, reject, escalate and record rationale.</p></article>
+        </div>
+        <div class="pause-strip">
+          <h3>Pause when it matters.</h3>
+          <ul><li>A named approver is required</li><li>The action is irreversible or client-visible</li><li>Evidence is incomplete or contradictory</li><li>An evaluation enters a review band</li><li>Novelty exceeds an operational threshold</li><li>Sensitive data, money or privilege is involved</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="part-6" data-section="06">
+      <div class="wrap">
+        <div class="part">Part <b>06</b> / What review needs</div>
+        <h2>Show the evidence, not just the request.</h2>
+        <p class="dek muted">A reviewer should immediately see why the workflow paused, what is proposed, what supports it and which actions are available.</p>
+
+        <div class="review-shell" aria-label="Interactive example of a governed review surface">
+          <aside class="review-side">
+            <span class="review-side__status" id="review-state">Review required</span>
+            <h3>Release risk: payment service</h3>
+            <p>Deployment is ready, but two signals cross the policy threshold for an automatic release.</p>
+            <dl><dt>Run</dt><dd>#REL-240718-031</dd><dt>Capability</dt><dd>Release readiness v4.2</dd><dt>Owner</dt><dd>Platform delivery</dd><dt>Fallback</dt><dd>Hold current version</dd></dl>
+          </aside>
+          <div class="review-main">
+            <div class="review-main__head"><h3>Approve a 10% canary or hold for remediation.</h3><span class="review-confidence">Policy: review band</span></div>
+            <div class="evidence-tabs" role="tablist" aria-label="Review evidence">
+              <button class="evidence-tab is-active" type="button" data-evidence="evidence">Evidence</button>
+              <button class="evidence-tab" type="button" data-evidence="policy">Policy + evals</button>
+              <button class="evidence-tab" type="button" data-evidence="impact">Expected impact</button>
+            </div>
+            <div class="evidence-panel" id="evidence-panel">
+              <h4>Two checks need judgment</h4><p>Test coverage is complete. The change introduces a new payment-provider dependency, and rollback rehearsal finished above the preferred recovery-time threshold.</p>
+              <div class="evidence-facts"><div><b>100%</b><span>required tests passed</span></div><div><b>+1</b><span>external dependency</span></div><div><b>14m</b><span>rollback rehearsal</span></div></div>
+            </div>
+            <div class="review-actions"><button class="action action--primary" type="button" data-decision="Approved 10% canary">Approve canary</button><button class="action" type="button" data-decision="Edit requested">Request edit</button><button class="action" type="button" data-decision="Escalated to release owner">Escalate</button><button class="action" type="button" data-decision="Release held">Hold</button></div>
+            <div class="audit-event" id="audit-event" aria-live="polite">AUDIT / Awaiting a named decision and rationale.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="part-7" data-section="07">
+      <div class="wrap">
+        <div class="part">Part <b>07</b> / What stays stable</div>
+        <h2>Five layers keep the surface safe.</h2>
+        <p class="dek">The generated surface is only the visible layer. Identity, contracts, action control, audit and recovery remain application-owned.</p>
+        <div class="architecture">
+          <article><span class="architecture__num">01</span><h3>Stable application shell</h3><p>Identity, navigation, history, global settings, help, recovery and the deterministic fallback preserve orientation.</p></article>
+          <article><span class="architecture__num">02</span><h3>Intent router + contracts</h3><p>Select a supported job, then declare its approved components, context, state references, actions, rules, semantics and limits.</p></article>
+          <article><span class="architecture__num">03</span><h3>Composition + state projection</h3><p>Propose and validate a surface against the contract. Resolve app-owned state while keeping ordinary interaction local.</p></article>
+          <article><span class="architecture__num">04</span><h3>Action + capability runtime</h3><p>Map controls to declared actions. Recheck authorization, policy and evaluations at execution—not when the control is rendered.</p></article>
+          <article><span class="architecture__num">05</span><h3>Audit, observability + recovery</h3><p>Record request, evidence, versions, decisions, action and outcome. Support retry, cancel, rollback and safe stop.</p></article>
+        </div>
+        <div class="boundaries">
+          <article class="boundary"><b>Security boundary</b><h3>Declarative is safer only when it is restricted.</h3><p>Every action must be pre-registered, authorized at execution and audited. A schema does not remove privacy, isolation or data-minimization risk.</p></article>
+          <article class="boundary"><b>Accessibility boundary</b><h3>Schema validity is not accessibility.</h3><p>Use semantic primitives, deterministic fallbacks, keyboard and assistive-technology testing, responsive validation, recovery and representative users.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="part-8" data-section="08">
+      <div class="wrap">
+        <div class="part">Part <b>08</b> / Where to start</div>
+        <h2>Five workflows to test first.</h2>
+        <p class="dek muted">Each candidate has a variable case, a named human decision and a measurable outcome. Each also keeps a deterministic fallback.</p>
+        <div class="portfolio">
+          <article class="case"><span class="case__tag">Customer escalation</span><h3>Compose the evidence for this case.</h3><p><strong>Human decision:</strong> approve, edit, reject or escalate client-visible communication.</p></article>
+          <article class="case"><span class="case__tag">Release risk</span><h3>Adapt the controls to the evidence.</h3><p><strong>Human decision:</strong> ship, hold, narrow rollout or require remediation.</p></article>
+          <article class="case"><span class="case__tag">Contract exception</span><h3>Expose clauses, precedent and missing context.</h3><p><strong>Human decision:</strong> accept, request revision or escalate to legal.</p></article>
+          <article class="case"><span class="case__tag">Operations triage</span><h3>Change priority with impact and SLA.</h3><p><strong>Human decision:</strong> assign, reprioritize, merge or trigger response.</p></article>
+          <article class="case"><span class="case__tag">Scenario review</span><h3>Make assumptions visible and editable.</h3><p><strong>Human decision:</strong> select a scenario, accept a trade-off or request analysis.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="part-9" data-section="09">
+      <div class="wrap">
+        <div class="part">Part <b>09</b> / How to adopt it</div>
+        <h2>Prove value before you scale.</h2>
+        <p class="dek">Baseline the real workflow, define authority, keep the deterministic path, then test bounded composition on production volume.</p>
+        <div class="adoption-grid">
+          <article class="gate"><span class="gate__id">GATE 01 / BASELINE</span><h3>Understand the work</h3><ol><li>Observe queues, handoffs, workarounds and decisions.</li><li>Choose one bounded, repeatable decision.</li></ol><p class="gate__exit">Exit: the normal path supports the complete task and recovery.</p></article>
+          <article class="gate"><span class="gate__id">GATE 02 / CONTRACT</span><h3>Define authority</h3><ol><li>Package the governed capability.</li><li>Declare components, context, actions and limits.</li></ol><p class="gate__exit">Exit: every action rechecks authorization and a fallback exists.</p></article>
+          <article class="gate"><span class="gate__id">GATE 03 / PILOT</span><h3>Add composition</h3><ol><li>Vary hierarchy and emphasis inside the contract.</li><li>Pilot on real volume in shadow or recommendation mode.</li></ol><p class="gate__exit">Exit: outcome, burden, error, accessibility, latency and cost beat the comparator.</p></article>
+          <article class="gate"><span class="gate__id">GATE 04 / EXPAND</span><h3>Reuse the capability</h3><ol><li>Operate policy, evaluation, audit and rollback.</li><li>Publish into micro-apps, APIs and agent actions.</li></ol><p class="gate__exit">Exit: ownership and version lifecycle work in production.</p></article>
+        </div>
+
+        <div class="measure">
+          <div class="measure__intro"><span class="mono-label">Measurement rule</span><h3>Measure the whole workflow—not the novelty of the screen.</h3><p class="muted">Define the unit, baseline, comparator, success threshold and stop condition before the pilot begins.</p></div>
+          <div class="measure-list">
+            <div class="measure-row"><b>Outcome</b><p>Completion, decision quality, business result, downstream error and rework.</p></div>
+            <div class="measure-row"><b>Flow</b><p>Time to useful outcome, total cycle time, queue time, review SLA and handoffs.</p></div>
+            <div class="measure-row"><b>Human burden</b><p>Review rate, time per review, evidence requests, override and escalation.</p></div>
+            <div class="measure-row"><b>Interaction</b><p>Correction, abandonment, predictability, explanation use and fallback use.</p></div>
+            <div class="measure-row"><b>Governance</b><p>Policy/eval pass rate, unauthorized attempts, audit completeness and rollback.</p></div>
+            <div class="measure-row"><b>Accessibility</b><p>Semantic review, keyboard and screen-reader completion, zoom, reflow and testing.</p></div>
+            <div class="measure-row"><b>Runtime</b><p>Composition and local latency, cost, failure, schema rejection and fallback rate.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark close" id="part-10" data-section="10">
+      <div class="wrap">
+        <div class="part">Part <b>10</b> / Concepta point of view</div>
+        <div class="close__grid">
+          <div><h2>The interface changes. <em>Accountability stays.</em></h2></div>
+          <div>
+            <div class="close__principles">
+              <p><strong>Capabilities first.</strong> Delivery forms second. Governance always.</p>
+              <p><strong>Stable shell, bounded surface.</strong> Predictability and adaptation can coexist.</p>
+              <p><strong>Verification beside generation.</strong> Model quality is only one part of production quality.</p>
+            </div>
+            <div class="close__cta"><b>The next move</b><p>Choose one review-heavy workflow. Define the approved actions and the human decision. Keep the existing path. Then test whether an adaptive surface improves the production outcome.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sources">
+    <div class="wrap sources__grid">
+      <div><span class="mono-label">Research note</span><h3>Supported, early, and deliberately bounded.</h3><p>This feature synthesizes Concepta’s operating model with external evidence. Architecture and selection rules remain recommendations that require workflow-specific product, security, accessibility and legal review.</p></div>
+      <ul>
+        <li><a href="https://generativeui.github.io/static/pdfs/paper.pdf">Google Research — Generative UI paper</a></li>
+        <li><a href="https://machinelearning.apple.com/research/biscuit-scaffolding-llm">Apple Machine Learning — BISCUIT</a></li>
+        <li><a href="https://arxiv.org/abs/2412.02357">Dynamic Prompt Middleware</a></li>
+        <li><a href="https://a2ui.org/concepts/overview/">A2UI — declarative UI protocol</a></li>
+        <li><a href="https://docs.flutter.dev/ai/genui">Flutter GenUI</a></li>
+        <li><a href="https://modelcontextprotocol.io/extensions/apps/overview">MCP Apps</a></li>
+        <li><a href="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/">NIST AI RMF Core</a></li>
+        <li><a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const progress = document.querySelector('.progress__bar');
+      const railLinks = [...document.querySelectorAll('.rail a')];
+      const sections = [...document.querySelectorAll('[data-section]')];
+
+      const updateProgress = () => {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        progress.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
+      };
+      addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        railLinks.forEach(link => link.setAttribute('aria-current', String(link.getAttribute('href') === `#${visible.target.id}`)));
+      }, { rootMargin: '-25% 0px -60%', threshold: [0, .25, .5] });
+      sections.forEach(section => observer.observe(section));
+
+      const fitButtons = [...document.querySelectorAll('.fit-button')];
+      const fitScore = document.getElementById('fit-score');
+      const fitTitle = document.getElementById('fit-title');
+      const fitCopy = document.getElementById('fit-copy');
+      const fitBars = [...document.querySelectorAll('.fit-result__bar i')];
+      const updateFit = () => {
+        const score = fitButtons.filter(button => button.getAttribute('aria-pressed') === 'true').length;
+        fitScore.textContent = score;
+        fitBars.forEach((bar, index) => bar.classList.toggle('is-on', index < score));
+        if (score <= 1) {
+          fitTitle.textContent = 'Keep the interface fixed.';
+          fitCopy.textContent = 'Clarify the workflow, decision owner and source data before adding a variable interface.';
+        } else if (score <= 3) {
+          fitTitle.textContent = 'Define the boundary first.';
+          fitCopy.textContent = 'There may be value here, but the existing path and the human decision must be explicit first.';
+        } else {
+          fitTitle.textContent = 'Ready for a bounded pilot.';
+          fitCopy.textContent = 'Define the approved actions, fallback and production comparator before building the adaptive surface.';
+        }
+      };
+      fitButtons.forEach(button => button.addEventListener('click', () => {
+        const next = button.getAttribute('aria-pressed') !== 'true';
+        button.setAttribute('aria-pressed', String(next));
+        button.querySelector('.fit-button__state').textContent = next ? 'Included' : 'Select';
+        updateFit();
+      }));
+
+      const clockContent = {
+        composition: { kicker: 'When the job changes', title: 'Recompose the view.', copy: 'Change the structure only when the task, phase or material context changes enough to require a new arrangement.', status: 'Measured generation time' },
+        interaction: { kicker: 'For ordinary gestures', title: 'Respond immediately.', copy: 'Typing, selecting, filtering and expanding should stay local. A model round-trip should not sit behind every click.', status: 'Immediate local response' },
+        workflow: { kicker: 'Across the full operation', title: 'Continue reliably.', copy: 'Policy checks, tools, approvals and audit must resume even when the current surface changes or disappears.', status: 'Durable and recoverable' }
+      };
+      document.querySelectorAll('.clock-tab').forEach(tab => tab.addEventListener('click', () => {
+        document.querySelectorAll('.clock-tab').forEach(item => { item.classList.remove('is-active'); item.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('is-active'); tab.setAttribute('aria-selected', 'true');
+        const content = clockContent[tab.dataset.clock];
+        document.getElementById('clock-kicker').textContent = content.kicker;
+        document.getElementById('clock-title').textContent = content.title;
+        document.getElementById('clock-copy').textContent = content.copy;
+        document.getElementById('clock-status').textContent = content.status;
+      }));
+
+      const evidence = {
+        evidence: '<h4>Two checks need judgment</h4><p>Test coverage is complete. The change introduces a new payment-provider dependency, and rollback rehearsal finished above the preferred recovery-time threshold.</p><div class="evidence-facts"><div><b>100%</b><span>required tests passed</span></div><div><b>+1</b><span>external dependency</span></div><div><b>14m</b><span>rollback rehearsal</span></div></div>',
+        policy: '<h4>Automatic release is blocked</h4><p>Policy allows a canary when required tests pass, blast radius is limited, rollback is available, and a named release owner accepts a review-band result.</p><div class="evidence-facts"><div><b>PASS</b><span>test policy</span></div><div><b>REVIEW</b><span>dependency risk</span></div><div><b>PASS</b><span>rollback available</span></div></div>',
+        impact: '<h4>Canary limits the first decision</h4><p>A 10% rollout exposes the new integration to production volume while preserving a defined rollback path and stopping expansion if error or latency exceeds threshold.</p><div class="evidence-facts"><div><b>10%</b><span>initial traffic</span></div><div><b>30m</b><span>observation window</span></div><div><b>AUTO</b><span>stop on threshold</span></div></div>'
+      };
+      document.querySelectorAll('.evidence-tab').forEach(tab => tab.addEventListener('click', () => {
+        document.querySelectorAll('.evidence-tab').forEach(item => item.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        document.getElementById('evidence-panel').innerHTML = evidence[tab.dataset.evidence];
+      }));
+
+      document.querySelectorAll('[data-decision]').forEach(button => button.addEventListener('click', () => {
+        const decision = button.dataset.decision;
+        document.getElementById('review-state').textContent = decision;
+        document.getElementById('audit-event').textContent = `AUDIT / ${decision} · example interaction recorded locally · no production action executed.`;
+      }));
+    })();
+  </script>
+</body>
+</html>
