@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-18
 
-**Status:** Approved design; awaiting written-spec confirmation
+**Status:** Implemented and verified
 
 **Page:** `/`
 

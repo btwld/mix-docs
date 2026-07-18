@@ -1,6 +1,12 @@
 # Concepta Home Surgical Review Implementation Plan
 
-**Status:** Implemented and verified
+**Status:** Implemented; proof decisions partially superseded
+
+> **Historical plan:** The proof-restoration design at
+> `docs/superpowers/specs/2026-07-18-concepta-home-proof-restoration-design.md`
+> supersedes the client exclusions, open-source adoption exclusions, shortened
+> product descriptions, four-logo grid, and 650-word target in this plan. Do
+> not reuse those instructions for future homepage work.
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 

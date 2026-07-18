@@ -43,6 +43,11 @@ const PROOF_TICKER = ["Since 2006", "600+ projects", "98% happy clients"];
 
 const TRUSTED_BY = [
   {
+    name: "Truist",
+    className: "trust-logo-truist",
+    src: "/assets/client-logos/truist.svg",
+  },
+  {
     name: "AdventHealth",
     className: "trust-logo-adventhealth",
     src: "/assets/client-logos/adventhealth.svg",
@@ -62,7 +67,16 @@ const TRUSTED_BY = [
     className: "trust-logo-warner-music-group",
     src: "/assets/client-logos/warner-music-group.svg",
   },
+  {
+    name: "Google",
+    className: "trust-logo-google",
+    src: "/assets/client-logos/google.svg",
+  },
 ] as const;
+
+const PROJECTS_INTRO =
+  "These tools began in real delivery work, then were extracted and hardened. " +
+  "Our open-source work is used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others.";
 
 const PILLARS = [
   {
@@ -286,7 +300,7 @@ const PROJECTS: Project[] = [
     name: "Mix",
     tagline: "Expressive styling for Flutter.",
     description:
-      "Chainable styles, variants, and tokens for Flutter design systems—without boilerplate.",
+      "Fluent, chainable styles, reactive variants, and design tokens for Flutter design systems—without boilerplate.",
     href: "/mix",
     accent: "#8B5CF6",
     status: "Open source",
@@ -297,7 +311,7 @@ const PROJECTS: Project[] = [
     name: "Remix",
     tagline: "Flutter components, headless by design.",
     description:
-      "20+ accessible, fully styleable Flutter components built on Mix.",
+      "20+ accessible, fully styleable Flutter components built on Mix, from primitives through a complete theme.",
     href: "/remix",
     accent: "#00EB03",
     status: "Open source",
@@ -308,7 +322,7 @@ const PROJECTS: Project[] = [
     name: "Naked UI",
     tagline: "Behavior-first Flutter primitives.",
     description:
-      "Fourteen headless controls with semantics, keyboard support, focus, overlays, and observable state.",
+      "Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state—without imposed styling.",
     href: "/naked-ui",
     accent: "#60A5FA",
     status: "Open source",
@@ -330,7 +344,7 @@ const PROJECTS: Project[] = [
     name: "FVM",
     tagline: "Simple Flutter version management.",
     description:
-      "Pin Flutter SDKs per project and keep local development and CI on the same version.",
+      "Pin Flutter SDKs per project, switch versions deliberately, and keep local development and CI on the same version.",
     href: "https://fvm.app",
     accent: "#38BDF8",
     status: "Open source",
@@ -353,7 +367,7 @@ const PROJECTS: Project[] = [
     name: "Stargate",
     tagline: "Complex workflows for the enterprise.",
     description:
-      "Turn APIs, workflows, and rules into governed capabilities with permissions, approvals, human review, and audit trails.",
+      "Turn APIs, workflows, agents, and rules into governed capabilities with schema contracts, validation, human review, and audit trails.",
     href: "/stargate",
     accent: "#3EB8C9",
     status: "Waitlist",
@@ -364,7 +378,7 @@ const PROJECTS: Project[] = [
     name: "Code Analysis",
     tagline: "Deterministic, evidence-backed code audits.",
     description:
-      "Run deterministic analyzers and an AI review pipeline across a repository to produce an evidence-backed scorecard.",
+      "Ten static analyzers and a 7-phase AI audit pipeline produce a four-dimension scorecard and client-ready report.",
     href: "/code-analysis",
     accent: "#00D3FF",
     status: "Waitlist",
@@ -527,7 +541,7 @@ export const ConceptaHome = () => {
 
           {/* Trust bar */}
           <motion.section className="motion-reveal trust-bar" {...sectionReveal}>
-            <p className="trust-label">Selected clients</p>
+            <p className="trust-label">Selected Concepta clients</p>
             <div
               className="trust-logos"
               role="list"
@@ -606,9 +620,7 @@ export const ConceptaHome = () => {
                 Build faster without losing control.
               </h2>
               <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
-                These tools began in real delivery work. We extracted and
-                hardened the patterns teams need repeatedly—from Flutter UI and
-                validation to backend foundations and code analysis.
+                {PROJECTS_INTRO}
               </p>
             </motion.div>
 
@@ -785,7 +797,7 @@ export const ConceptaHome = () => {
 
         .trust-logos {
           display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-template-columns: repeat(6, minmax(0, 1fr));
           gap: 12px;
           margin-top: 18px;
         }
@@ -819,9 +831,14 @@ export const ConceptaHome = () => {
           max-height: 44px;
         }
 
+        .trust-logo-google .trust-logo-image {
+          max-width: 100px;
+          max-height: 34px;
+        }
+
         @media (max-width: 1023px) {
           .trust-logos {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
           }
         }
 

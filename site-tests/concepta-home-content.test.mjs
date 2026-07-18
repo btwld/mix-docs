@@ -42,17 +42,25 @@ function contrast(first, second) {
   return (light + 0.05) / (dark + 0.05)
 }
 
-test('uses concise, supported Concepta proof and copy', () => {
+test('shows the approved Concepta client proof in a responsive logo grid', () => {
   assert.match(home, /"Since 2006"/)
   assert.match(home, /"600\+ projects"/)
   assert.match(home, /"98% happy clients"/)
   assert.deepEqual(trustedClientNames(home), [
+    'Truist',
     'AdventHealth',
     'FEMA',
     'Red Lobster',
     'Warner Music Group',
+    'Google',
   ])
+  assert.match(home, />Selected Concepta clients</)
+  assert.match(home, /grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/)
+  assert.match(home, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/)
+  assert.match(home, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/)
+})
 
+test('keeps unsupported outcome metrics off the homepage', () => {
   for (const unsupported of [
     /27% more loan applications/,
     /\+27%/,
@@ -60,7 +68,6 @@ test('uses concise, supported Concepta proof and copy', () => {
     /16(?:k|,000) reviews/,
     /35(?:\+|-person)/,
     /\$3M\+ saved/,
-    /runs inside products at Google/,
     /98% delivery satisfaction/,
     /600\+ projects shipped/,
     /Trusted with critical systems at/,
@@ -68,11 +75,35 @@ test('uses concise, supported Concepta proof and copy', () => {
     assert.doesNotMatch(home, unsupported)
   }
 
+  assert.doesNotMatch(home, /TRUST_OUTCOMES|trust-outcomes/)
+})
+
+test('separates open-source adoption from Concepta client proof', () => {
+  assert.ok(home.includes(
+    'Our open-source work is used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others.',
+  ))
+  assert.doesNotMatch(home, /runs inside products at/)
+  assert.doesNotMatch(home, /(?:clients|partners) at Universal/)
+})
+
+test('keeps the delivery-readiness conversion path and supported project detail', () => {
   assert.match(home, /Code is only the start\./)
   assert.match(home, /We own the path to production\./)
-  assert.match(home, /These tools began in real delivery work\./)
+  assert.match(home, /These tools began in real delivery work, then were extracted and hardened\./)
   assert.match(home, /Assess delivery readiness/)
-  assert.doesNotMatch(home, /TRUST_OUTCOMES|trust-outcomes/)
+
+  for (const description of [
+    'Fluent, chainable styles, reactive variants, and design tokens for Flutter design systems—without boilerplate.',
+    '20+ accessible, fully styleable Flutter components built on Mix, from primitives through a complete theme.',
+    'Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state—without imposed styling.',
+    'Define Dart schemas once, validate data and AI responses at runtime, and keep static types.',
+    'Pin Flutter SDKs per project, switch versions deliberately, and keep local development and CI on the same version.',
+    'One typed definition wires identity, storage, resources, access policies, hooks, and OpenAPI at runtime.',
+    'Turn APIs, workflows, agents, and rules into governed capabilities with schema contracts, validation, human review, and audit trails.',
+    'Ten static analyzers and a 7-phase AI audit pipeline produce a four-dimension scorecard and client-ready report.',
+  ]) {
+    assert.ok(home.includes(description), `missing project description: ${description}`)
+  }
 
   const conciseDescription =
     'Concepta takes software from working code through production and builds open-source tools for reliable delivery.'

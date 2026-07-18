@@ -1,8 +1,15 @@
 # Concepta Home Surgical Review
 
 **Date:** 2026-07-18
-**Status:** Implemented and verified
+**Status:** Implemented; proof decisions partially superseded
 **Page:** `/`
+
+> **Correction:** `2026-07-18-concepta-home-proof-restoration-design.md`
+> supersedes this document wherever it excludes Truist or Google from the
+> client band, excludes user-confirmed open-source adoption, shortens supported
+> product detail, or treats 650 rendered words as a hard target. The contact,
+> SEO, accessibility, metadata, motion, and unsupported outcome-metric
+> decisions below remain in force.
 
 ## 1. Product Decision
 
