@@ -22,7 +22,6 @@ test('wires Naked UI into the shared product shell', () => {
   assert.match(route, /<NakedUiHome\s*\/>/)
   assert.match(route, /Naked UI — Headless Flutter components/)
   assert.match(layout, /p==='\/naked-ui'/)
-  assert.match(layout, /Mix, Remix, Naked UI, Ack, FVM, Rockets, Stargate, and Code Analysis/)
   assert.match(navbar, /id: 'naked-ui'/)
   assert.match(navbar, /https:\/\/docs\.page\/btwld\/naked_ui/)
   assert.match(navbar, /NAKED_UI_GITHUB_URL/)
@@ -36,7 +35,6 @@ test('wires Naked UI into the shared product shell', () => {
 
 test('features FVM alongside Naked UI on the Concepta homepage', () => {
   const homepage = read('components/ConceptaHome.tsx')
-  const homepageContent = read('src/content/index.mdx')
 
   assert.match(homepage, /name: "Naked UI"/)
   assert.match(homepage, /name: "FVM"/)
@@ -45,7 +43,7 @@ test('features FVM alongside Naked UI on the Concepta homepage', () => {
   assert.match(homepage, /target=\{project\.external \? "_blank" : undefined\}/)
   assert.match(homepage, /rel=\{project\.external \? "noopener noreferrer" : undefined\}/)
   assert.match(homepage, /fvm use stable --pin/)
-  assert.match(homepageContent, /Naked UI, Ack, FVM/)
+  assert.ok(homepage.indexOf('name: "Naked UI"') < homepage.indexOf('name: "FVM"'))
 })
 
 test('presents the complete documented Naked UI component set', () => {

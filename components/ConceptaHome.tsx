@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, MotionConfig, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Button } from "./Button";
-import { CONCEPTA_GITHUB_URL } from "./constants";
+import {
+  CONCEPTA_ADDRESS_DISPLAY,
+  CONCEPTA_GITHUB_URL,
+  CONCEPTA_LEGAL_NAME,
+  CONCEPTA_MAP_URL,
+  CONCEPTA_PHONE_DISPLAY,
+  CONCEPTA_PHONE_HREF,
+} from "./constants";
 import { HeroBackground } from "./HeroBackground";
 import { HighlightedCode } from "./HighlightedCode";
 import Layout from "./Layout";
@@ -32,7 +39,11 @@ const sectionReveal = {
 
 /* ── Agency proof (from the published conceptatech.com copy) ────────── */
 
-const PROOF_TICKER = ["20 years", "600+ projects shipped", "98% delivery satisfaction"];
+const PROOF_TICKER = [
+  "Since 2006",
+  "600+ projects delivered",
+  "98% delivery satisfaction",
+];
 
 const TRUSTED_BY = [
   {
@@ -69,9 +80,11 @@ const TRUSTED_BY = [
 
 const TRUST_OUTCOMES = [
   "27% more loan applications at Truist",
-  "$3M+ saved for FEMA",
+  "Up to $3M saved in a two-day FEMA activation",
   "4.7★ across 16k reviews at AdventHealth",
 ];
+
+const PROJECTS_INTRO = "Every project here started inside real delivery work — then got extracted, hardened, and shipped. Our open-source work is used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others. Open source where the community builds with us, product where the problem demands more.";
 
 const PILLARS = [
   {
@@ -330,7 +343,7 @@ const PROJECTS: Project[] = [
     description:
       "Dart schemas for apps and structured AI — define the shape once, validate every response at runtime, and keep your types.",
     href: "/ack",
-    accent: "#315CFF",
+    accent: "#6E8BFF",
     status: "Open source",
     windowLabel: "user_schema.dart",
     Visual: AckVisual,
@@ -386,6 +399,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { Visual } = project;
   return (
     <motion.div
+      className="motion-reveal"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -404,7 +418,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       >
         <div className="project-card-copy">
           <div className="flex items-center justify-between">
-            <span className="project-name">{project.name}</span>
+            <h3 className="project-name">{project.name}</h3>
             <span className="project-status">{project.status}</span>
           </div>
           <p className="project-tagline">{project.tagline}</p>
@@ -434,15 +448,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export const ConceptaHome = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="concepta-home">
-      <HeroBackground />
+    <MotionConfig
+      reducedMotion="user"
+      skipAnimations={shouldReduceMotion === true}
+    >
+      <div className="concepta-home">
+        <HeroBackground />
 
       <Layout>
         <div className="relative z-10">
           {/* Hero — the agency stance, with the foundation below */}
           <div className="hero-section">
             <motion.div
+              className="motion-reveal"
               initial="hidden"
               animate="visible"
               custom={0}
@@ -456,6 +477,7 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.div
+              className="motion-reveal"
               initial="hidden"
               animate="visible"
               custom={0.1}
@@ -473,6 +495,7 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.div
+              className="motion-reveal"
               initial="hidden"
               animate="visible"
               custom={0.2}
@@ -486,7 +509,7 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.div
-              className="not-prose mt-10 flex flex-col sm:flex-row gap-4"
+              className="motion-reveal not-prose mt-10 flex flex-col sm:flex-row gap-4"
               initial="hidden"
               animate="visible"
               custom={0.3}
@@ -509,7 +532,7 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.p
-              className="hero-ticker"
+              className="motion-reveal hero-ticker"
               initial="hidden"
               animate="visible"
               custom={0.4}
@@ -525,8 +548,8 @@ export const ConceptaHome = () => {
           </div>
 
           {/* Trust bar */}
-          <motion.section className="trust-bar" {...sectionReveal}>
-            <p className="trust-label">Trusted with critical systems at</p>
+          <motion.section className="motion-reveal trust-bar" {...sectionReveal}>
+            <p className="trust-label">Selected Concepta clients</p>
             <div
               className="trust-logos"
               role="list"
@@ -560,7 +583,7 @@ export const ConceptaHome = () => {
 
           {/* What Concepta does */}
           <section className="section-gap">
-            <motion.div className="section-header" {...sectionReveal}>
+            <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">What Concepta does</span>
               <h2 className="section-title">
                 We don&apos;t advise from the sideline. We own the outcome.
@@ -576,7 +599,7 @@ export const ConceptaHome = () => {
             </motion.div>
 
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              className="motion-reveal grid grid-cols-1 md:grid-cols-3 gap-4"
               {...sectionReveal}
             >
               {PILLARS.map((pillar) => (
@@ -591,7 +614,7 @@ export const ConceptaHome = () => {
 
           {/* Research — evidence behind the agency stance */}
           <section id="research" className="section-gap">
-            <motion.div className="section-header" {...sectionReveal}>
+            <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">Concepta research</span>
               <h2 className="section-title">
                 The evidence behind governed delivery.
@@ -603,24 +626,20 @@ export const ConceptaHome = () => {
               </p>
             </motion.div>
 
-            <motion.div {...sectionReveal}>
+            <motion.div className="motion-reveal" {...sectionReveal}>
               <ProductionGapCard href="/reports" external={false} compact />
             </motion.div>
           </section>
 
           {/* Projects — the delivery foundation */}
           <section id="projects" className="section-gap">
-            <motion.div className="section-header" {...sectionReveal}>
+            <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">The delivery foundation</span>
               <h2 className="section-title">
                 Build faster without losing control.
               </h2>
               <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
-                Every project here started inside real delivery work — then got
-                extracted, hardened, and shipped. Our open-source code already
-                runs inside products at Google, Toyota, and Nubank. Open source
-                where the community builds with us, product where the problem
-                demands more.
+                {PROJECTS_INTRO}
               </p>
             </motion.div>
 
@@ -633,7 +652,7 @@ export const ConceptaHome = () => {
 
           {/* Bottom CTA */}
           <motion.section
-            className="not-prose cta-section section-gap"
+            className="motion-reveal not-prose cta-section section-gap"
             {...sectionReveal}
           >
             <h2 className="section-title">Know whether it&apos;s safe to ship.</h2>
@@ -669,6 +688,28 @@ export const ConceptaHome = () => {
                 GitHub →
               </a>
             </p>
+
+            <address className="contact-card" aria-label="Concepta contact information">
+              <span className="contact-identity">
+                <strong>{CONCEPTA_LEGAL_NAME}</strong>
+                <span>Orlando, Florida</span>
+              </span>
+              <span className="contact-links">
+                <a className="contact-link" href={CONCEPTA_PHONE_HREF}>
+                  {CONCEPTA_PHONE_DISPLAY}
+                </a>
+                <a
+                  className="contact-link contact-address"
+                  href={CONCEPTA_MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${CONCEPTA_ADDRESS_DISPLAY} in Google Maps`}
+                >
+                  {CONCEPTA_ADDRESS_DISPLAY}
+                  <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
+                </a>
+              </span>
+            </address>
           </motion.section>
         </div>
       </Layout>
@@ -706,7 +747,7 @@ export const ConceptaHome = () => {
         }
 
         .concepta-btn:hover {
-          background: #5570ff !important;
+          background: #4963ff !important;
           box-shadow: 0 6px 25px rgba(58, 91, 255, 0.4) !important;
         }
 
@@ -1375,7 +1416,123 @@ export const ConceptaHome = () => {
         .cta-handoff a:hover {
           color: var(--mix-accent);
         }
+
+        .contact-card {
+          width: 100%;
+          max-width: 760px;
+          margin-top: 32px;
+          padding: 20px 22px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
+          border: 1px solid var(--mix-border-card);
+          border-radius: 14px;
+          background: color-mix(in srgb, var(--mix-surface) 82%, transparent);
+          font-style: normal;
+          text-align: left;
+        }
+
+        .contact-identity,
+        .contact-links {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .contact-identity {
+          flex-shrink: 0;
+          gap: 3px;
+        }
+
+        .contact-identity strong {
+          color: var(--mix-text-main);
+          font-size: 0.875rem;
+          font-weight: 600;
+        }
+
+        .contact-identity span {
+          color: var(--mix-text-muted);
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 0.6875rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .contact-links {
+          align-items: flex-end;
+          gap: 5px;
+          min-width: 0;
+        }
+
+        .contact-link {
+          color: var(--mix-text-muted);
+          font-size: 0.8125rem;
+          line-height: 1.5;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+
+        .contact-link:hover {
+          color: #fff;
+        }
+
+        .contact-link:focus-visible {
+          border-radius: 4px;
+          outline: 2px solid #00ebbc;
+          outline-offset: 3px;
+        }
+
+        .contact-address {
+          display: inline-flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 5px;
+          text-align: right;
+        }
+
+        .contact-address svg {
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 639px) {
+          .contact-card {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 16px;
+          }
+
+          .contact-links {
+            align-items: flex-start;
+          }
+
+          .contact-address {
+            justify-content: flex-start;
+            text-align: left;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .motion-reveal {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+
+          .project-card {
+            transition: none;
+          }
+
+          .project-card:hover {
+            transform: none;
+          }
+
+          .project-card .project-link svg {
+            transform: none !important;
+            transition: none !important;
+          }
+        }
       `}</style>
-    </div>
+      </div>
+    </MotionConfig>
   );
 };

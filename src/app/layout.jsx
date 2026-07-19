@@ -27,7 +27,7 @@ export const viewport = {
 }
 
 export const metadata = {
-    metadataBase: new URL('https://fluttermix.com'),
+    metadataBase: new URL('https://concepta.dev'),
     title: 'Concepta',
     description,
     applicationName: 'Concepta',
