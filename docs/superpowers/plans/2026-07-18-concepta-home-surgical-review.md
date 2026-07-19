@@ -1,25 +1,30 @@
 # Concepta Home Surgical Review Implementation Plan
 
-**Status:** Implemented; proof decisions partially superseded
+**Status:** Implemented; marketing-proof and copy steps superseded
 
 > **Historical plan:** The proof-restoration design at
 > `docs/superpowers/specs/2026-07-18-concepta-home-proof-restoration-design.md`
-> supersedes the client exclusions, open-source adoption exclusions, shortened
-> product descriptions, four-logo grid, and 650-word target in this plan. Do
-> not reuse those instructions for future homepage work.
+> supersedes the exclusions of approved outcomes and clients, open-source
+> adoption exclusions, qualitative replacement of numeric evidence cards,
+> shortened section and product copy, CTA and metadata rewrites, four-logo
+> grid, and 650-word target in this plan. Do not reuse those instructions for
+> future homepage work.
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **Historical execution note:** The original plan required
+> superpowers:subagent-driven-development or superpowers:executing-plans. Do
+> not execute the superseded steps below; they remain only as historical
+> context. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Make the Concepta home page shorter, evidence-backed, contactable, correctly canonicalized, and respectful of reduced-motion preferences without redesigning it.
+**Historical goal (marketing portion superseded):** Make the Concepta home page shorter, evidence-backed, contactable, correctly canonicalized, and respectful of reduced-motion preferences without redesigning it.
 
-**Architecture:** Keep `ConceptaHome.tsx` as the existing page composition and project-visual owner, but replace its marketing constants and section copy surgically. Add a small server component for root-only Organization JSON-LD, attach it from the root MDX entry, and express the root-only canonical in that entry's frontmatter. Source-contract tests lead each behavior change.
+**Architecture:** Keep `ConceptaHome.tsx` as the existing page composition and project-visual owner. The proposal to replace its marketing constants and section copy is superseded; the structured-data, root-only canonical, and source-contract-test architecture remains active.
 
 **Tech Stack:** Next.js App Router, Nextra MDX, React, TypeScript/JSX, Framer Motion, Node's built-in test runner, CSS-in-JSX
 
 ## Global Constraints
 
 - Preserve the existing hero, research card, eight-project catalog, project windows, dark Concepta identity, and CTA destinations.
-- Publish only the facts and clients approved in `docs/superpowers/specs/2026-07-18-concepta-home-surgical-review-design.md`.
+- ~~Publish only the facts and clients approved in `docs/superpowers/specs/2026-07-18-concepta-home-surgical-review-design.md`.~~ **Superseded:** marketing content follows `docs/superpowers/specs/2026-07-18-concepta-home-proof-restoration-design.md`.
 - Root canonical is `/`; documentation and standalone product routes must not inherit `/` as their canonical.
 - Verified contact is `Concepta Technologies, LLC`, `+1 (407) 720-4711`, at `111 N Orange Ave, Suite 800, Orlando, FL 32801`. The March 24, 2026 Florida filing supersedes the former address still present in Google-derived listings.
 - Do not add dependencies, an unverified email address, or legacy URL redirects in this pass.
@@ -36,9 +41,9 @@
 - Consumes: source files for the Concepta page, root route, root layout, root MDX entry, and structured-data component
 - Produces: a focused source contract used by Tasks 2–5
 
-- [ ] **Step 1: Write failing tests for supported and excluded proof**
+- [ ] **Step 1: Write failing tests for supported and excluded proof — superseded**
 
-Add assertions that require `Since 2006`, `600+ projects`, and `98% happy clients`, while excluding the Truist/Google client objects, `27% more loan applications`, `4.7★`, `16k reviews`, `35+`, and the Google/Toyota/Nubank product-use sentence.
+~~Add assertions that require `Since 2006`, `600+ projects`, and `98% happy clients`, while excluding the Truist/Google client objects, `27% more loan applications`, `4.7★`, `16k reviews`, `35+`, and the Google/Toyota/Nubank product-use sentence.~~ The preservation contract instead requires the approved ticker, outcome row, numeric evidence cards, six clients, and open-source adoption sentence.
 
 - [ ] **Step 2: Write failing tests for semantic contact and JSON-LD**
 
@@ -55,6 +60,11 @@ Run: `node --test site-tests/concepta-home-content.test.mjs`
 Expected: content, contact, structured-data, metadata, and reduced-motion tests fail because the revised behavior is not implemented.
 
 ### Task 2: Replace unsupported proof and tighten page copy
+
+> **Superseded task:** Do not execute or reuse any step in this task. The
+> preservation-first design restores the approved proof, copy, numeric evidence
+> cards, six-client layout, CTA wording, product detail, and metadata
+> description. This task remains only as a record of the original proposal.
 
 **Files:**
 - Modify: `components/ConceptaHome.tsx`
@@ -212,14 +222,14 @@ Expected: Next.js build and Pagefind postbuild complete successfully.
 
 - [ ] **Step 3: Verify desktop rendering**
 
-At 1440 × 900, inspect hierarchy, all sections, client logos, contact links, canonical metadata, JSON-LD, application console, and primary/secondary CTA destinations. Confirm rendered main copy is at most 650 words.
+At 1440 × 900, inspect hierarchy, all sections, client logos, contact links, canonical metadata, JSON-LD, application console, and primary/secondary CTA destinations. ~~Confirm rendered main copy is at most 650 words.~~ The preservation-first design removes this hard word-count target.
 
 - [ ] **Step 4: Verify mobile rendering**
 
 At 390 × 844, inspect the hero CTA label, two-column client grid, delivery cards, project cards, contact wrapping, keyboard focus, reduced motion, and document width. Confirm `scrollWidth <= clientWidth`.
 
-- [ ] **Step 5: Review the final diff against the approved evidence boundary**
+- [ ] **Step 5: Review the final diff against the preservation-first evidence boundary**
 
 Run: `git diff --stat && git diff -- components/ConceptaHome.tsx components/HeroBackground.tsx components/ConceptaStructuredData.tsx components/constants.ts src/content/index.mdx src/app/layout.jsx site-tests/concepta-home-content.test.mjs site-tests/concepta-home-video.test.mjs`
 
-Expected: only the approved page, metadata, schema, tests, spec, and plan are changed; no unsupported claims or unrelated product behavior are introduced.
+Expected: only the approved page, metadata, schema, tests, spec, and plan are changed; no unrelated product behavior is introduced. Marketing claims and copy follow `docs/superpowers/specs/2026-07-18-concepta-home-proof-restoration-design.md`.

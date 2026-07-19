@@ -1,21 +1,26 @@
 # Concepta Home Surgical Review
 
 **Date:** 2026-07-18
-**Status:** Implemented; proof decisions partially superseded
+**Status:** Implemented; marketing-proof and copy decisions superseded
 **Page:** `/`
 
 > **Correction:** `2026-07-18-concepta-home-proof-restoration-design.md`
-> supersedes this document wherever it excludes Truist or Google from the
-> client band, excludes user-confirmed open-source adoption, shortens supported
-> product detail, or treats 650 rendered words as a hard target. The contact,
-> SEO, accessibility, metadata, motion, and unsupported outcome-metric
-> decisions below remain in force.
+> supersedes this document's marketing-proof and copy decisions, including its
+> outcome exclusions, Truist and Google client exclusions, open-source adoption
+> exclusions, qualitative replacement of the numeric evidence cards, shortened
+> section and product copy, CTA and metadata rewrites, four-logo layout, and
+> 650-word target. The contact, root-only canonical and structured-data,
+> accessibility, metadata-domain, and motion decisions below remain in force.
 
 ## 1. Product Decision
 
 The Concepta home page remains a delivery-company page, not a general agency brochure or a catalog-first open-source page. Its single job is to give a technical or business decision-maker enough clarity and confidence to start a Delivery Readiness Assessment.
 
 The existing visual direction is strong and stays intact: a direct hero thesis, dark production-oriented identity, one credibility band, the research report, and product-specific project windows. This pass removes unsupported proof and repetition, adds an operational contact path, and repairs the metadata and motion gaps without expanding into a redesign.
+
+> **Superseded policy:** The preservation-first design replaces this pass's
+> proof-removal and copy-subtraction objective. This paragraph is retained only
+> as historical context.
 
 ### Core promise
 
@@ -24,10 +29,10 @@ The existing visual direction is strong and stays intact: a direct hero thesis, 
 ### Explicit exclusions
 
 - Do not invent or infer case-study outcomes from client logos.
-- Do not publish the Truist `27%` outcome without internal evidence.
-- Do not attribute `4.7★ across 16k reviews` to AdventHealth; the public source for that statistic concerns AMN Passport.
-- Do not claim that Concepta open-source code runs inside products at Google, Toyota, or Nubank without direct evidence.
-- Do not display Truist or Google as Concepta clients without an internal source that can be reviewed.
+- ~~Do not publish the Truist `27%` outcome without internal evidence.~~ **Superseded:** the company-approved outcome is preserved by the preservation-first design.
+- **Corrected record:** No durable historical source for the AdventHealth 4.7★ / 16k figure was captured during this review; that absence does not disprove the company-approved claim.
+- ~~Do not claim that Concepta open-source code runs inside products at Google, Toyota, or Nubank without direct evidence.~~ **Superseded:** use the approved “used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others” wording; Google remains client proof, not adoption proof.
+- ~~Do not display Truist or Google as Concepta clients without an internal source that can be reviewed.~~ **Superseded:** both remain in the approved six-client band.
 - Do not add an email address that has not been verified as an inbound contact channel.
 - Do not publish the former `201 S Orange Ave` location as current; Google-derived listings lag the March 2026 Florida filing.
 - Do not repair the separate legacy case-study URL migration in this page pass.
@@ -35,10 +40,14 @@ The existing visual direction is strong and stays intact: a direct hero thesis, 
 
 ## 2. Evidence Boundary
 
-The implementation may publish only facts supported by current public records, Concepta's own published history, or current repository behavior.
+> **Superseded policy:** Public-source availability is not the sole publication
+> boundary for company-approved homepage claims. Missing provenance is recorded
+> as follow-up work rather than treated as disproof.
 
-- Company history: `Since 2006`, `600+ projects`, and `98% happy clients` are retained from Concepta's published company history.
-- Selected clients: AdventHealth, FEMA, Red Lobster, and Warner Music Group have public Concepta case-study or company-page support.
+The original review proposed publishing only facts supported by current public records, Concepta's own published history, or current repository behavior.
+
+- Company history: `Since 2006`, `600+ projects`, and `98% happy clients` were retained from Concepta's published company history. **Copy correction:** the approved rendered ticker is `Since 2006`, `600+ projects delivered`, and `98% delivery satisfaction`.
+- ~~Selected clients: AdventHealth, FEMA, Red Lobster, and Warner Music Group have public Concepta case-study or company-page support.~~ **Superseded:** the approved band also retains Truist and Google.
 - Legal entity: `Concepta Technologies, LLC`, supported by the current site copyright and active Florida corporate record.
 - Address: `111 N Orange Ave, Suite 800, Orlando, FL 32801`, supported by the LLC's March 24, 2026 Florida annual report. Google-derived listings still show the former `201 S Orange Ave` location, so the newer official filing takes precedence.
 - Phone: `+1 (407) 720-4711`, supported by current business listings and matching legacy Concepta properties.
@@ -46,9 +55,16 @@ The implementation may publish only facts supported by current public records, C
 - GitHub: `https://github.com/conceptadev` is already the repository's Concepta organization URL.
 - LinkedIn: `https://www.linkedin.com/company/concepta-tech` is the current company profile.
 
-No Notion connector or local Notion export is available in this workspace. Claims requiring internal substantiation remain excluded rather than treated as true.
+No Notion connector or local Notion export was available in this workspace during the original review. That tooling limitation did not justify excluding company-approved claims; the preservation-first design records missing provenance as follow-up work.
 
 ## 3. Narrative and Exact Copy
+
+> **Superseded copy policy:** Where the hero, credibility-band, delivery-model,
+> research, project, and closing-action proposals in this section differ from
+> the preservation-first design, they are historical and must not be reused.
+> The same applies to the metadata-description rewrite in section 5. Section 3 of
+> `2026-07-18-concepta-home-proof-restoration-design.md` is authoritative.
+> The verified contact instructions and unchanged keep-instructions remain active.
 
 ### Hero
 
@@ -113,7 +129,7 @@ No Notion connector or local Notion export is available in this workspace. Claim
 
 The subject is production delivery ownership; the audience is a decision-maker responsible for a consequential software release. The existing project-window system remains the visual signature because it makes Concepta's delivery foundation tangible rather than presenting a generic services grid.
 
-The intentional design risk is subtraction: remove two high-status logos, every unsupported outcome, and the large numeric card labels. The quieter proof system should feel more credible precisely because it is specific and restrained.
+~~The intentional design risk is subtraction: remove two high-status logos, every unsupported outcome, and the large numeric card labels. The quieter proof system should feel more credible precisely because it is specific and restrained.~~ **Superseded:** the approved six-logo band, outcome row, and numeric evidence cards are preserved.
 
 ### Token system
 
@@ -128,6 +144,8 @@ Preserve the existing Concepta roles:
 Preserve Inter for display/reading and JetBrains Mono for proof, labels, and operational data. Do not introduce another typeface or decorative motif.
 
 ### Layout
+
+The following layout sketch is superseded where it omits the outcome row and replaces numeric evidence cards with qualitative cards:
 
 ```text
 HERO THESIS + ACTIONS + ONE PROOF LINE
@@ -145,7 +163,7 @@ On mobile, retain the same narrative order, two-column client-logo grid, single-
 
 - Change the global `metadataBase` from `https://fluttermix.com` to `https://concepta.dev` so relative Concepta social assets resolve to the live primary domain.
 - Add an `/` canonical only in `src/content/index.mdx` frontmatter. Documentation pages must continue to use their own metadata and must not inherit `/` as canonical.
-- Tighten both the root frontmatter and shared Concepta description to: **Concepta takes software from working code through production and builds open-source tools for reliable delivery.**
+- ~~Tighten both the root frontmatter and shared Concepta description to: **Concepta takes software from working code through production and builds open-source tools for reliable delivery.**~~ **Superseded:** use the approved descriptive sentence in the preservation-first design.
 - Render one server-side `Organization` JSON-LD object on the root page with `name`, `legalName`, `url`, `logo`, `telephone`, `PostalAddress`, GitHub, and LinkedIn.
 - Use the square 256 × 256 `apple-icon.png` as the structured-data logo so the mark remains legible on white search surfaces.
 - Escape `<` in serialized JSON-LD before placing it in `dangerouslySetInnerHTML`.
@@ -164,9 +182,9 @@ On mobile, retain the same narrative order, two-column client-logo grid, single-
 
 ## 7. Acceptance Criteria
 
-- The root page contains none of the excluded proof claims or unsupported client entries.
-- The supported proof line and four selected clients render once.
-- Main-page copy is materially shorter than the 766-word audited baseline, with a target of no more than 650 rendered words.
+- ~~The root page contains none of the excluded proof claims or unsupported client entries.~~ **Superseded:** the preservation contract requires the approved outcome row, six-client band, and open-source adoption proof.
+- ~~The supported proof line and four selected clients render once.~~ **Superseded:** all six approved clients render once.
+- ~~Main-page copy is materially shorter than the 766-word audited baseline, with a target of no more than 650 rendered words.~~ **Superseded:** word count is not a hard acceptance target.
 - The verified phone and full address are visible, actionable, and represented in Organization JSON-LD.
 - Root metadata resolves against `https://concepta.dev` and emits canonical `/`; docs routes do not receive the root canonical.
 - Reduced-motion preferences immediately complete Framer reveals, stop CSS hover movement, hide and pause the background video, and leave all content visible.
