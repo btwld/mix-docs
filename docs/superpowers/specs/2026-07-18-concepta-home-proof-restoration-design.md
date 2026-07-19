@@ -1,118 +1,190 @@
-# Concepta Home Proof Restoration
+# Concepta Home Preservation-First Restoration
 
 **Date:** 2026-07-18
 
-**Status:** Implemented and verified
+**Status:** Approved for implementation
 
 **Page:** `/`
 
 ## 1. Decision
 
-Use a balanced restoration. Keep the Delivery Readiness positioning and the technical improvements from the surgical review, while restoring credible client proof, user-confirmed open-source adoption, and useful product detail that was removed only because public evidence was incomplete.
+Restore the complete marketing substance that existed on `origin/main`, then
+apply only narrow improvements that preserve the same positioning, offer,
+proof, and product meaning.
 
-The homepage remains a delivery-company page whose primary conversion is the Delivery Readiness Assessment. Open-source work remains the second act and demonstrates that Concepta turns recurring delivery problems into reusable foundations.
+The homepage remains a delivery-company page. Its primary conversion is a
+Delivery Readiness Assessment, and its open-source work is the evidence that
+Concepta turns recurring delivery problems into reusable foundations.
 
-This document supersedes the client and open-source exclusions in `2026-07-18-concepta-home-surgical-review-design.md`. Its accessibility, contact, SEO, metadata, and motion decisions remain in force.
+Missing public provenance is not evidence that an approved company claim is
+false. Tests and documentation must not classify a claim as false or
+misattributed unless contradictory evidence exists. The linked Production Gap
+report already publishes the Truist, FEMA, and AdventHealth outcomes, so the
+homepage and report must not contradict one another merely because the source
+trail is incomplete.
 
-## 2. Proof Categories
+This document supersedes the copy-removal and claim-exclusion decisions in
+`2026-07-18-concepta-home-surgical-review-design.md`. Its accessibility,
+contact, root SEO, metadata, and motion decisions remain in force.
 
-Client relationships and open-source adoption are different claims and must not be combined.
+## 2. Marketing Constraints
 
-### Selected Concepta clients
+- Preserve the original core thesis: Concepta owns the gap between written
+  code and a safely live system.
+- Preserve the defined offer name: **Delivery Readiness Assessment**.
+- Preserve concrete proof instead of replacing it with generic process labels.
+- Keep Concepta clients separate from organizations using Concepta's
+  open-source work.
+- Keep all six approved client logos: Truist, AdventHealth, FEMA, Red Lobster,
+  Warner Music Group, and Google.
+- Keep Universal, Disney, BMW, Toyota, LG, and Nubank as user-confirmed
+  open-source adoption proof, not client proof.
+- Do not remove or rewrite a factual company claim merely because it lacks a
+  public URL. Capture provenance as follow-up work instead.
+- Make wording changes only when they are more precise, more durable, or more
+  defensible without weakening the original meaning.
 
-Restore the six-client logo band:
+## 3. Approved Surgical Copy
 
-- Truist
-- AdventHealth
-- FEMA
-- Red Lobster
-- Warner Music Group
-- Google
+### Hero and proof
 
-Label the band **Selected Concepta clients**. Use the existing logo assets and restore the responsive six-column desktop, three-column tablet, and two-column mobile grid.
+Keep the original stance and headline.
 
-Do not restore the previous outcome row or numeric delivery cards. The following claims remain excluded unless separate internal evidence is approved:
+Use the original lead:
+
+> Between code that's written and a system that's safely live, there's a gap.
+> We own it — the decisions, the release, the outcome. And we build our own
+> tools to do it.
+
+Use **Get a Delivery Readiness Assessment** for both primary buttons.
+
+Use this durable proof ticker:
+
+- `Since 2006`
+- `600+ projects delivered`
+- `98% delivery satisfaction`
+
+Keep the label **Selected Concepta clients** and the complete six-logo band.
+Restore the outcome row with the approved results:
 
 - `27% more loan applications at Truist`
-- `$3M+ saved for FEMA`
+- `Up to $3M saved in a two-day FEMA activation`
 - `4.7★ across 16k reviews at AdventHealth`
-- `35+` as a current company-size claim
 
-### Open-source adoption
+The FEMA wording is the only factual correction to the old row. Concepta's
+public FEMA case study says savings reached **up to $3 million in two days**;
+`$3M+` reverses that bound.
 
-Place adoption proof in the Projects section, not in the client band. Use this copy:
+### Delivery model
 
-> These tools began in real delivery work, then were extracted and hardened. Our open-source work is used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others.
+Restore the original heading and lead:
 
-Use text rather than a second logo wall. Do not label these companies as clients, partners, or endorsers, and do not claim that the code runs inside a named product.
+> We don't advise from the sideline. We own the outcome.
 
-Google remains in the client band rather than being repeated in the adoption sentence.
+> One owner, from the first readiness call to the live release. We make the
+> hard technical decisions, stabilize or build, and stand behind what ships.
+> Advice doesn't ship. We do.
 
-## 3. Content to Preserve
+Restore the three original evidence cards:
 
-Keep the current versions of:
+1. `35+` — **Small by design.** A 35-person firm — small enough that our
+   leadership stays in the actual work: in the decisions, through the release,
+   not just the pitch.
+2. `+27%` — **We ship what a business depends on.** Truist: 27% more loan
+   applications. AdventHealth: 4.7 stars across 16,000 reviews. Proven in
+   fintech, healthcare, and government.
+3. `20yr` — **We don't start from scratch.** Two decades of building our own
+   delivery foundation — the tools below — so every release starts from proven
+   blocks, not a blank page.
 
-- Hero stance and headline
-- Hero lead about owning decisions, release, and outcome
-- **Assess delivery readiness** primary action and its destination
-- `Since 2006 / 600+ projects / 98% happy clients` proof line
-- Senior-led, Release-owned, and Field-tested delivery cards
-- Research section and report destination
-- Delivery Readiness closing section
-- Verified legal name, phone, address, and links
-- Root canonical, `concepta.dev` metadata base, and Organization JSON-LD
-- Reduced-motion behavior, video control, heading semantics, and contrast fixes
+Do not retain the new vendor-handoff promise; it was introduced by the rewrite
+and is not part of the established positioning.
 
-The page must not restore the earlier generic or repetitive delivery copy merely to make the page longer.
+### Research
 
-## 4. Product Detail to Restore
+Restore:
 
-Retain all eight project names, order, statuses, links, taglines, and visual windows. Use descriptions that restore concrete, currently supported capabilities:
+> The evidence behind governed delivery.
 
-- **Mix:** Fluent, chainable styles, reactive variants, and design tokens for Flutter design systems—without boilerplate.
-- **Remix:** 20+ accessible, fully styleable Flutter components built on Mix, from primitives through a complete theme.
-- **Naked UI:** Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state—without imposed styling.
-- **Ack:** Define Dart schemas once, validate data and AI responses at runtime, and keep static types.
-- **FVM:** Pin Flutter SDKs per project, switch versions deliberately, and keep local development and CI on the same version.
-- **Rockets:** One typed definition wires identity, storage, resources, access policies, hooks, and OpenAPI at runtime.
-- **Stargate:** Turn APIs, workflows, agents, and rules into governed capabilities with schema contracts, validation, human review, and audit trails.
-- **Code Analysis:** Ten static analyzers and a 7-phase AI audit pipeline produce a four-dimension scorecard and client-ready report.
+> Building is accelerating. The controls around review, release, and
+> production are not. Our latest report maps the gap — and the operating model
+> that closes it.
 
-The descriptions above were cross-checked against the current product pages and have priority over older homepage copy. If implementation uncovers a direct contradiction, stop and resolve it explicitly rather than silently restoring the older phrase.
+This keeps the research applicable beyond a single implementation technology.
 
-## 5. CRO and Visual Hierarchy
+### Delivery foundation
 
-The hierarchy remains:
+Preserve the original three-part explanation while using the confirmed,
+better-separated adoption proof:
 
-1. Delivery ownership and assessment action
-2. Selected client proof
-3. How Concepta owns delivery
-4. Research evidence
-5. Open-source adoption and project evidence
-6. Closing assessment action and contact
+> Every project here started inside real delivery work — then got extracted,
+> hardened, and shipped. Our open-source work is used by teams at Universal,
+> Disney, BMW, Toyota, LG, Nubank, and others. Open source where the community
+> builds with us, product where the problem demands more.
 
-Client logos answer whether Concepta can be trusted with consequential delivery. Open-source adoption answers whether its foundations are proven beyond its own engagements. Keeping the categories apart prevents an adopter from being presented as a commercial client.
+Restore the eight original product descriptions. They contain useful benefits
+and scope that the shorter rewrite removed, including FVM's no-reinstall
+benefit, Stargate's approved-capability boundary, and Code Analysis support for
+any repository.
 
-The former 650-word target is no longer a hard acceptance criterion. Prefer concise, specific copy and avoid repetition, but do not remove meaningful proof or product capability solely to hit an arbitrary count.
+### Closing assessment
 
-## 6. Implementation Boundary
+Restore:
 
-Expected implementation changes are limited to:
+> Know whether it's safe to ship.
 
-- Homepage proof arrays, project descriptions, and Projects introduction
-- Client-grid styling restored for six logos
-- Homepage source-contract tests
-- Existing surgical-review documentation where it conflicts with this correction
+> Start with a Delivery Readiness Assessment — in two to three weeks you'll
+> know exactly where your release stands, and what to do next.
 
-No new dependencies, adopter-logo assets, routes, forms, or unrelated product-page changes are included.
+Use **Get a Delivery Readiness Assessment** as the primary action.
 
-## 7. Verification
+### Metadata
 
-- Source tests require the six clients exactly once.
-- Source tests require Universal, Disney, BMW, Toyota, LG, and Nubank in the open-source adoption sentence.
-- Source tests continue to exclude the unsupported outcome and company-size claims.
-- Client and adopter labels cannot be conflated.
-- All project descriptions match this specification and their current product pages.
-- Desktop and mobile checks confirm the six/three/two client grid, readable adoption copy, working CTAs, and no horizontal overflow.
-- Reduced motion still pauses and hides the hero video immediately.
-- The full site tests, TypeScript check, preview-manifest check, production build, and `git diff --check` pass.
+Restore the original descriptive sentence in both metadata locations:
+
+> Concepta ships the systems your business runs on — and builds the open-source
+> delivery foundation behind them: Mix, Remix, Naked UI, Ack, FVM, Rockets,
+> Stargate, and Code Analysis.
+
+Keep the verified `concepta.dev` metadata base, root-only canonical, and
+Organization structured data.
+
+## 4. Technical Improvements to Preserve
+
+- Reduced-motion behavior and immediately visible reveal content
+- Accessible hero-video motion control and listener cleanup
+- Semantic `h3` project headings
+- AA-safe Ack accent and primary-button hover colors
+- Verified contact card and centralized identity/contact constants
+- Root-scoped Organization JSON-LD
+- `concepta.dev` metadata base and root-only canonical
+- Six/three/two-column responsive client grid
+
+These changes improve accessibility, trust, or discoverability without
+changing the marketing narrative.
+
+## 5. Test and Documentation Policy
+
+Homepage tests should protect structure and approved content, not adjudicate
+marketing truth from public-search availability.
+
+- Require the complete client list and its separation from open-source users.
+- Require the restored ticker, outcome row, delivery cards, CTA, project
+  benefits, and metadata description.
+- Remove the test that labels the approved outcomes `unsupported` and bans
+  them.
+- Preserve tests for contact, canonical metadata, structured data, semantics,
+  contrast, and reduced motion.
+- Correct the surgical-review statement that assigns the AdventHealth figure
+  to AMN Passport. The accurate note is that no durable historical source was
+  captured during the review; the claim was not disproven.
+
+## 6. Verification
+
+- Focused homepage source tests pass.
+- All site tests and TypeScript checks pass.
+- Production build passes.
+- Desktop and mobile inspection confirms the restored outcome row, six client
+  logos, complete adoption sentence, working CTAs, readable contact details,
+  and no horizontal overflow.
+- The final diff contains no unrelated product-page or infrastructure changes.
