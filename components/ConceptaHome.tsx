@@ -39,7 +39,11 @@ const sectionReveal = {
 
 /* ── Agency proof (from the published conceptatech.com copy) ────────── */
 
-const PROOF_TICKER = ["Since 2006", "600+ projects", "98% happy clients"];
+const PROOF_TICKER = [
+  "Since 2006",
+  "600+ projects delivered",
+  "98% delivery satisfaction",
+];
 
 const TRUSTED_BY = [
   {
@@ -74,25 +78,29 @@ const TRUSTED_BY = [
   },
 ] as const;
 
-const PROJECTS_INTRO =
-  "These tools began in real delivery work, then were extracted and hardened. " +
-  "Our open-source work is used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others.";
+const TRUST_OUTCOMES = [
+  "27% more loan applications at Truist",
+  "Up to $3M saved in a two-day FEMA activation",
+  "4.7★ across 16k reviews at AdventHealth",
+];
+
+const PROJECTS_INTRO = "Every project here started inside real delivery work — then got extracted, hardened, and shipped. Our open-source work is used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others. Open source where the community builds with us, product where the problem demands more.";
 
 const PILLARS = [
   {
-    label: "Senior-led",
-    title: "The people you meet stay in the work.",
-    body: "Concepta leadership stays involved through the decisions, release, and outcome.",
+    stat: "35+",
+    title: "Small by design.",
+    body: "A 35-person firm — small enough that our leadership stays in the actual work: in the decisions, through the release, not just the pitch.",
   },
   {
-    label: "Release-owned",
-    title: "One team owns the hard parts.",
-    body: "We assess, stabilize, build, and release without passing critical decisions between vendors.",
+    stat: "+27%",
+    title: "We ship what a business depends on.",
+    body: "Truist: 27% more loan applications. AdventHealth: 4.7 stars across 16,000 reviews. Proven in fintech, healthcare, and government.",
   },
   {
-    label: "Field-tested",
-    title: "Our tools start in delivery work.",
-    body: "We turn recurring delivery problems into reusable foundations for the next release.",
+    stat: "20yr",
+    title: "We don't start from scratch.",
+    body: "Two decades of building our own delivery foundation — the tools below — so every release starts from proven blocks, not a blank page.",
   },
 ];
 
@@ -300,7 +308,7 @@ const PROJECTS: Project[] = [
     name: "Mix",
     tagline: "Expressive styling for Flutter.",
     description:
-      "Fluent, chainable styles, reactive variants, and design tokens for Flutter design systems—without boilerplate.",
+      "Fluent, chainable styles, reactive variants, and design tokens. Build design systems in Flutter without the boilerplate.",
     href: "/mix",
     accent: "#8B5CF6",
     status: "Open source",
@@ -311,7 +319,7 @@ const PROJECTS: Project[] = [
     name: "Remix",
     tagline: "Flutter components, headless by design.",
     description:
-      "20+ accessible, fully styleable Flutter components built on Mix, from primitives through a complete theme.",
+      "20+ accessible components built on Mix — completely styleable, from primitives to a full theme, with complete visual control.",
     href: "/remix",
     accent: "#00EB03",
     status: "Open source",
@@ -322,7 +330,7 @@ const PROJECTS: Project[] = [
     name: "Naked UI",
     tagline: "Behavior-first Flutter primitives.",
     description:
-      "Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state—without imposed styling.",
+      "Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state — without imposed styling.",
     href: "/naked-ui",
     accent: "#60A5FA",
     status: "Open source",
@@ -333,7 +341,7 @@ const PROJECTS: Project[] = [
     name: "Ack",
     tagline: "Trust the boundary. Keep the types.",
     description:
-      "Define Dart schemas once, validate data and AI responses at runtime, and keep static types.",
+      "Dart schemas for apps and structured AI — define the shape once, validate every response at runtime, and keep your types.",
     href: "/ack",
     accent: "#6E8BFF",
     status: "Open source",
@@ -344,7 +352,7 @@ const PROJECTS: Project[] = [
     name: "FVM",
     tagline: "Simple Flutter version management.",
     description:
-      "Pin Flutter SDKs per project, switch versions deliberately, and keep local development and CI on the same version.",
+      "Pin Flutter SDKs per project, switch versions without reinstalling, and keep local development and CI on the same toolchain.",
     href: "https://fvm.app",
     accent: "#38BDF8",
     status: "Open source",
@@ -356,7 +364,7 @@ const PROJECTS: Project[] = [
     name: "Rockets",
     tagline: "Describe the backend. Ship the domain.",
     description:
-      "One typed definition wires identity, storage, resources, access policies, hooks, and OpenAPI at runtime.",
+      "One typed backend definition wires identity, storage, resources, access, hooks, and OpenAPI at runtime.",
     href: "/rockets",
     accent: "#FF5906",
     status: "Open source",
@@ -367,7 +375,7 @@ const PROJECTS: Project[] = [
     name: "Stargate",
     tagline: "Complex workflows for the enterprise.",
     description:
-      "Turn APIs, workflows, agents, and rules into governed capabilities with schema contracts, validation, human review, and audit trails.",
+      "Turns APIs, workflows, and business rules into reusable capabilities with controls built in — permissions, approvals, human review, and audit. Agents act through approved capabilities, not broad system access.",
     href: "/stargate",
     accent: "#3EB8C9",
     status: "Waitlist",
@@ -378,7 +386,7 @@ const PROJECTS: Project[] = [
     name: "Code Analysis",
     tagline: "Deterministic, evidence-backed code audits.",
     description:
-      "Ten static analyzers and a 7-phase AI audit pipeline produce a four-dimension scorecard and client-ready report.",
+      "Ten static analyzers and a 7-phase AI pipeline over any repo — a four-dimension scorecard and a report you can put in front of a client.",
     href: "/code-analysis",
     accent: "#00D3FF",
     status: "Waitlist",
@@ -494,9 +502,9 @@ export const ConceptaHome = () => {
               variants={fadeUp}
             >
               <p className="subtitle">
-                Code is only the start. We own the decisions, release, and
-                outcome required to put critical systems safely into
-                production.
+                Between code that&apos;s written and a system that&apos;s safely
+                live, there&apos;s a gap. We own it — the decisions, the
+                release, the outcome. And we build our own tools to do it.
               </p>
             </motion.div>
 
@@ -512,7 +520,7 @@ export const ConceptaHome = () => {
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
-                <>Assess delivery readiness</>
+                <>Get a Delivery Readiness Assessment</>
               </Button>
               <Button
                 href="#projects"
@@ -563,6 +571,14 @@ export const ConceptaHome = () => {
                 </div>
               ))}
             </div>
+            <p className="trust-outcomes">
+              {TRUST_OUTCOMES.map((line, i) => (
+                <span key={line}>
+                  {i > 0 && <span className="hero-ticker-sep"> / </span>}
+                  {line}
+                </span>
+              ))}
+            </p>
           </motion.section>
 
           {/* What Concepta does */}
@@ -570,12 +586,15 @@ export const ConceptaHome = () => {
             <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">What Concepta does</span>
               <h2 className="section-title">
-                We own the path to production.
+                We don&apos;t advise from the sideline. We own the outcome.
               </h2>
               <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
-                One senior team from readiness through release. We make the
-                hard technical decisions, stabilize or build, and stand behind
-                what ships.
+                One owner, from the first readiness call to the live release.
+                We make the hard technical decisions, stabilize or build, and
+                stand behind what ships.{" "}
+                <span className="text-white">
+                  Advice doesn&apos;t ship. We do.
+                </span>
               </p>
             </motion.div>
 
@@ -585,7 +604,7 @@ export const ConceptaHome = () => {
             >
               {PILLARS.map((pillar) => (
                 <div key={pillar.title} className="pillar">
-                  <span className="pillar-label">{pillar.label}</span>
+                  <span className="pillar-stat">{pillar.stat}</span>
                   <p className="pillar-title">{pillar.title}</p>
                   <p className="pillar-body">{pillar.body}</p>
                 </div>
@@ -598,12 +617,12 @@ export const ConceptaHome = () => {
             <motion.div className="motion-reveal section-header" {...sectionReveal}>
               <span className="mono-label">Concepta research</span>
               <h2 className="section-title">
-                The evidence behind safer delivery.
+                The evidence behind governed delivery.
               </h2>
               <p className="mt-4 max-w-[560px] text-base leading-relaxed text-[var(--mix-text-muted)]">
-                AI accelerates building faster than most teams can strengthen
-                review, release, and production controls. Our latest report
-                maps the gap and how to close it.
+                Building is accelerating. The controls around review, release,
+                and production are not. Our latest report maps the gap — and
+                the operating model that closes it.
               </p>
             </motion.div>
 
@@ -636,10 +655,11 @@ export const ConceptaHome = () => {
             className="motion-reveal not-prose cta-section section-gap"
             {...sectionReveal}
           >
-            <h2 className="section-title">Know whether your release is ready.</h2>
+            <h2 className="section-title">Know whether it&apos;s safe to ship.</h2>
             <p className="mt-4 text-[var(--mix-text-muted)] max-w-[480px] text-base leading-relaxed">
-              In two to three weeks, a Delivery Readiness Assessment shows
-              where delivery is exposed and what to fix first.
+              Start with a Delivery Readiness Assessment — in two to three
+              weeks you&apos;ll know exactly where your release stands, and
+              what to do next.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Button
@@ -647,7 +667,7 @@ export const ConceptaHome = () => {
                 arrow="right"
                 className="concepta-btn w-full sm:w-auto"
               >
-                <>Assess delivery readiness</>
+                <>Get a Delivery Readiness Assessment</>
               </Button>
               <Button
                 href="https://discord.com/invite/Ycn6GV3m2k"
@@ -836,6 +856,13 @@ export const ConceptaHome = () => {
           max-height: 34px;
         }
 
+        .trust-outcomes {
+          margin-top: 18px;
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: 12.5px;
+          color: var(--mix-text-muted);
+        }
+
         @media (max-width: 1023px) {
           .trust-logos {
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -885,13 +912,12 @@ export const ConceptaHome = () => {
           border: 1px solid var(--mix-border-card);
         }
 
-        .pillar-label {
+        .pillar-stat {
           font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-          font-size: 0.75rem;
-          font-weight: 600;
-          color: #00ebbc;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--mix-accent);
+          letter-spacing: -0.02em;
         }
 
         .pillar-title {

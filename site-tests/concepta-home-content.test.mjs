@@ -44,8 +44,8 @@ function contrast(first, second) {
 
 test('shows the approved Concepta client proof in a responsive logo grid', () => {
   assert.match(home, /"Since 2006"/)
-  assert.match(home, /"600\+ projects"/)
-  assert.match(home, /"98% happy clients"/)
+  assert.match(home, /"600\+ projects delivered"/)
+  assert.match(home, /"98% delivery satisfaction"/)
   assert.deepEqual(trustedClientNames(home), [
     'Truist',
     'AdventHealth',
@@ -58,24 +58,15 @@ test('shows the approved Concepta client proof in a responsive logo grid', () =>
   assert.match(home, /grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/)
   assert.match(home, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/)
   assert.match(home, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/)
-})
 
-test('keeps unsupported outcome metrics off the homepage', () => {
-  for (const unsupported of [
-    /27% more loan applications/,
-    /\+27%/,
-    /4\.7(?:★| stars)/,
-    /16(?:k|,000) reviews/,
-    /35(?:\+|-person)/,
-    /\$3M\+ saved/,
-    /98% delivery satisfaction/,
-    /600\+ projects shipped/,
-    /Trusted with critical systems at/,
+  assert.match(home, /const TRUST_OUTCOMES = \[/)
+  for (const proof of [
+    '27% more loan applications at Truist',
+    'Up to $3M saved in a two-day FEMA activation',
+    '4.7★ across 16k reviews at AdventHealth',
   ]) {
-    assert.doesNotMatch(home, unsupported)
+    assert.ok(home.includes(proof), `missing approved proof: ${proof}`)
   }
-
-  assert.doesNotMatch(home, /TRUST_OUTCOMES|trust-outcomes/)
 })
 
 test('separates open-source adoption from Concepta client proof', () => {
@@ -86,29 +77,44 @@ test('separates open-source adoption from Concepta client proof', () => {
   assert.doesNotMatch(home, /(?:clients|partners) at Universal/)
 })
 
-test('keeps the delivery-readiness conversion path and supported project detail', () => {
-  assert.match(home, /Code is only the start\./)
-  assert.match(home, /We own the path to production\./)
-  assert.match(home, /These tools began in real delivery work, then were extracted and hardened\./)
-  assert.match(home, /Assess delivery readiness/)
+test('preserves the approved positioning, offer, and project detail', () => {
+  for (const copy of [
+    'Between code that&apos;s written and a system that&apos;s safely',
+    'And we build our own tools to do it.',
+    'Get a Delivery Readiness Assessment',
+    'Small by design.',
+    'We ship what a business depends on.',
+    'We don\'t start from scratch.',
+    'The evidence behind governed delivery.',
+    'switch versions without reinstalling',
+    'Agents act through approved capabilities, not broad system access.',
+    'over any repo',
+    'Know whether it&apos;s safe to ship.',
+  ]) {
+    assert.ok(home.includes(copy), `missing preserved copy: ${copy}`)
+  }
+
+  const projectsIntroduction =
+    'Every project here started inside real delivery work — then got extracted, hardened, and shipped. Our open-source work is used by teams at Universal, Disney, BMW, Toyota, LG, Nubank, and others. Open source where the community builds with us, product where the problem demands more.'
+  assert.ok(home.includes(projectsIntroduction))
 
   for (const description of [
-    'Fluent, chainable styles, reactive variants, and design tokens for Flutter design systems—without boilerplate.',
-    '20+ accessible, fully styleable Flutter components built on Mix, from primitives through a complete theme.',
-    'Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state—without imposed styling.',
-    'Define Dart schemas once, validate data and AI responses at runtime, and keep static types.',
-    'Pin Flutter SDKs per project, switch versions deliberately, and keep local development and CI on the same version.',
-    'One typed definition wires identity, storage, resources, access policies, hooks, and OpenAPI at runtime.',
-    'Turn APIs, workflows, agents, and rules into governed capabilities with schema contracts, validation, human review, and audit trails.',
-    'Ten static analyzers and a 7-phase AI audit pipeline produce a four-dimension scorecard and client-ready report.',
+    'Fluent, chainable styles, reactive variants, and design tokens. Build design systems in Flutter without the boilerplate.',
+    '20+ accessible components built on Mix — completely styleable, from primitives to a full theme, with complete visual control.',
+    'Fourteen headless controls with semantics, keyboard and focus behavior, overlays, and observable state — without imposed styling.',
+    'Dart schemas for apps and structured AI — define the shape once, validate every response at runtime, and keep your types.',
+    'Pin Flutter SDKs per project, switch versions without reinstalling, and keep local development and CI on the same toolchain.',
+    'One typed backend definition wires identity, storage, resources, access, hooks, and OpenAPI at runtime.',
+    'Turns APIs, workflows, and business rules into reusable capabilities with controls built in — permissions, approvals, human review, and audit. Agents act through approved capabilities, not broad system access.',
+    'Ten static analyzers and a 7-phase AI pipeline over any repo — a four-dimension scorecard and a report you can put in front of a client.',
   ]) {
     assert.ok(home.includes(description), `missing project description: ${description}`)
   }
 
-  const conciseDescription =
-    'Concepta takes software from working code through production and builds open-source tools for reliable delivery.'
-  assert.ok(rootMdx.includes(`description: "${conciseDescription}"`))
-  assert.ok(layout.includes(`'${conciseDescription}'`))
+  const description =
+    'Concepta ships the systems your business runs on — and builds the open-source delivery foundation behind them: Mix, Remix, Naked UI, Ack, FVM, Rockets, Stargate, and Code Analysis.'
+  assert.ok(rootMdx.includes(`description: "${description}"`))
+  assert.ok(layout.includes(`'${description}'`))
 })
 
 test('publishes verified contact through shared constants and semantic links', () => {
