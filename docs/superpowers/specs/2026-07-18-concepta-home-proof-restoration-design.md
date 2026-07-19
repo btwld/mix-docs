@@ -1,8 +1,8 @@
-# Concepta Home Preservation-First Restoration
+# Concepta Home Content and Proof Design
 
 **Date:** 2026-07-18
 
-**Status:** Approved for implementation
+**Status:** Implemented and verified
 
 **Page:** `/`
 
@@ -23,9 +23,9 @@ report already publishes the Truist, FEMA, and AdventHealth outcomes, so the
 homepage and report must not contradict one another merely because the source
 trail is incomplete.
 
-This document supersedes the copy-removal and claim-exclusion decisions in
-`2026-07-18-concepta-home-surgical-review-design.md`. Its accessibility,
-contact, root SEO, metadata, and motion decisions remain in force.
+This is the final decision record for the homepage's marketing content,
+proof categories, accessibility, contact, root SEO, metadata, and motion
+behavior.
 
 ## 2. Marketing Constraints
 
@@ -171,13 +171,13 @@ marketing truth from public-search availability.
 - Require the complete client list and its separation from open-source users.
 - Require the restored ticker, outcome row, delivery cards, CTA, project
   benefits, and metadata description.
-- Remove the test that labels the approved outcomes `unsupported` and bans
-  them.
+- Do not label the approved outcomes `unsupported` or ban them in source
+  tests.
 - Preserve tests for contact, canonical metadata, structured data, semantics,
   contrast, and reduced motion.
-- Correct the surgical-review statement that assigns the AdventHealth figure
-  to AMN Passport. The accurate note is that no durable historical source was
-  captured during the review; the claim was not disproven.
+- Record the AdventHealth provenance accurately: no durable historical source
+  was captured during the review, and that absence did not disprove the
+  company-approved claim.
 
 ## 6. Verification
 
