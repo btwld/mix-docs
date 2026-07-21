@@ -262,6 +262,9 @@ export const RemixHome = () => {
             custom={0.18}
             variants={fadeUp}
           >
+            <span className="rx-hero-genui">
+              Built for a generative UI future.
+            </span>
             Headless, accessible Flutter components with the behavior already
             handled. Style every pixel with Mix — the look is entirely yours.
           </motion.p>
@@ -735,6 +738,15 @@ export const RemixHome = () => {
           line-height: 1;
           color: #fff;
           text-wrap: balance;
+        }
+        .rx-hero-genui {
+          display: block;
+          margin-bottom: 1rem;
+          font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+          font-size: clamp(0.78rem, 1.4vw, 0.9rem);
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          color: var(--mix-accent);
         }
         .rx-hero-sub {
           margin-top: 1.5rem;
