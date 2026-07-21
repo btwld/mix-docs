@@ -6,6 +6,7 @@ import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import FloatingNavbar from '../../components/FloatingNavbar'
 import ProductFooter from '../../components/ProductFooter'
+import '../../components/hubs/hubs.css'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -72,7 +73,7 @@ export default async function RootLayout({ children }) {
             <body>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p==='/'||p==='/reports'||p.startsWith('/reports/')||p==='/fluttercon2026'||p.startsWith('/fluttercon2026/'))d='concepta';else if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p.startsWith('/documentation/ack')||p==='/ack'||p.startsWith('/ack/'))d='ack';else if(p==='/naked-ui'||p.startsWith('/naked-ui/'))d='naked-ui';else if(p==='/rockets'||p.startsWith('/rockets/'))d='rockets';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';else if(p==='/voyager'||p.startsWith('/voyager/'))d='voyager';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
+                        __html: `(()=>{try{var p=location.pathname;var d='mix';if(p==='/'||p==='/reports'||p.startsWith('/reports/')||p==='/hubs'||p.startsWith('/hubs/')||p==='/fluttercon2026'||p.startsWith('/fluttercon2026/'))d='concepta';else if(p.startsWith('/documentation/remix')||p==='/remix'||p.startsWith('/remix/'))d='remix';else if(p.startsWith('/documentation/ack')||p==='/ack'||p.startsWith('/ack/'))d='ack';else if(p==='/naked-ui'||p.startsWith('/naked-ui/'))d='naked-ui';else if(p==='/rockets'||p.startsWith('/rockets/'))d='rockets';else if(p==='/stargate'||p.startsWith('/stargate/'))d='stargate';else if(p==='/code-analysis'||p.startsWith('/code-analysis/'))d='code-analysis';else if(p==='/voyager'||p.startsWith('/voyager/'))d='voyager';document.documentElement.setAttribute('data-product',d)}catch(e){}})();`,
                     }}
                 />
                 <Layout

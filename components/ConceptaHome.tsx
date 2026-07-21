@@ -9,6 +9,7 @@ import { HeroBackground } from "./HeroBackground";
 import { HighlightedCode } from "./HighlightedCode";
 import Layout from "./Layout";
 import { ProductionGapCard } from "./reports/ProductionGapCard";
+import { HubsPreview } from "./hubs/HubsPreview";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -588,6 +589,8 @@ export const ConceptaHome = () => {
               ))}
             </motion.div>
           </section>
+
+          <HubsPreview />
 
           {/* Research — evidence behind the agency stance */}
           <section id="research" className="section-gap">
