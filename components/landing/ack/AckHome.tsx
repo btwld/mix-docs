@@ -64,8 +64,10 @@ export function AckHome() {
                 {'  '}decode: <span className="tok-call">User.fromMap</span>,{`\n`}
                 {'  '}encode: (user) =&gt; user.<span className="tok-call">toMap</span>(),{`\n`}
                 );{`\n\n`}
-                <span className="tok-keyword">final</span> user = userCodec.<span className="tok-call">parse</span>(wireData); <span className="tok-comment">// User</span>{`\n`}
-                <span className="tok-keyword">final</span> json = userCodec.<span className="tok-call">encode</span>(user);    <span className="tok-comment">// JSON-safe</span>
+                <span className="tok-comment">// User</span>{`\n`}
+                <span className="tok-keyword">final</span> user = userCodec.<span className="tok-call">parse</span>(wireData);{`\n`}
+                <span className="tok-comment">// JSON-safe</span>{`\n`}
+                <span className="tok-keyword">final</span> json = userCodec.<span className="tok-call">encode</span>(user);
               </code></pre>
             </div>
           </div>
