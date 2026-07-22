@@ -120,3 +120,26 @@ test('features codecs and code generation on Ack entry pages', () => {
     assert.match(source, /\/documentation\/ack\/advanced\/typesafe-schemas/)
   }
 })
+
+test('showcases a User codec round trip across the Ack landing page', () => {
+  const landing = readFileSync(ackLanding, 'utf8')
+
+  assert.match(landing, /role="group" aria-label="Ack User codec round trip"/)
+  assert.doesNotMatch(landing, /ack-roundtrip-panel/)
+  assert.doesNotMatch(landing, /ack-proof-strip/)
+  assert.match(landing, /className="tok-call">codec<\/span>&lt;<span className="tok-type">User/)
+  assert.match(landing, /User\.fromMap/)
+  assert.match(landing, /className="tok-call">datetime<\/span>\(\)/)
+  assert.match(landing, /userCodec[\s\S]*?className="tok-call">parse<\/span>/)
+  assert.match(landing, /userCodec[\s\S]*?className="tok-call">encode<\/span>/)
+  assert.match(landing, /01 \/ DEFINE/)
+  assert.match(landing, /02 \/ VALIDATE \+ DECODE/)
+  assert.match(landing, /03 \/ ENCODE/)
+  assert.match(landing, /className="ack-workflow-list"/)
+  assert.doesNotMatch(landing, /ack-boundary-trace/)
+  assert.doesNotMatch(landing, /ack-example-meta/)
+  assert.match(landing, /aria-label="Ack built-in and custom codec catalogue"/)
+  assert.match(landing, /<dl className="ack-codec-catalogue"/)
+  assert.match(landing, /Ack\.codec\(\.\.\.\)/)
+  assert.match(landing, /\/documentation\/ack\/advanced\/codecs/)
+})
